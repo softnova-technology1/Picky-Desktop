@@ -28,7 +28,7 @@ export const CartProvider = ({ children }) => {
     setCartItems(prevItems => {
       const existingItem = prevItems.find(item => item.id === product.id);
       if (existingItem) {
-        return prevItems.map(item => 
+        return prevItems.map(item =>
           item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
         );
       }
@@ -41,8 +41,8 @@ export const CartProvider = ({ children }) => {
   };
 
   const updateQuantity = (productId, quantity) => {
-    setCartItems(prevItems => 
-      prevItems.map(item => 
+    setCartItems(prevItems =>
+      prevItems.map(item =>
         item.id === productId ? { ...item, quantity: Math.max(1, quantity) } : item
       )
     );
@@ -54,11 +54,11 @@ export const CartProvider = ({ children }) => {
   const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
-    <CartContext.Provider value={{ 
-      cartItems, 
-      addToCart, 
-      removeFromCart, 
-      updateQuantity, 
+    <CartContext.Provider value={{
+      cartItems,
+      addToCart,
+      removeFromCart,
+      updateQuantity,
       clearCart,
       subtotal,
       totalItems

@@ -10,13 +10,12 @@ import {
   Apple
 } from "lucide-react";
 import watch from "@/images/home/hero-watch.png"
-import fashion from "@/images/home/clothing.png"
-import chair from "@/images/home/chair.png"
 import appMockup from "@/images/home/app-mockup.png"
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
 import ProductCard from "@/Components/ProductCard";
-import { products, categories as mockCategories } from "@/utils/mockData";
+import CategoryCard from "@/Components/CategoryCard";
+import { products, categories } from "@/lib/data";
 import Link from 'next/link';
 
 export default function Home() {
@@ -40,7 +39,7 @@ export default function Home() {
 
         <div className={styles.heroMain}>
           <div className={styles.contentSide}>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -67,7 +66,7 @@ export default function Home() {
           <div className={styles.visualSide}>
             <div className={styles.stage}>
               {/* Main Card */}
-              <motion.div 
+              <motion.div
                 className={`${styles.floatingCard} ${styles.mainDisplay} ${styles.parallaxItem}`}
                 style={{ y: y1, "--rot": "-3deg" }}
               >
@@ -81,7 +80,7 @@ export default function Home() {
               </motion.div>
 
               {/* Secondary Card */}
-              <motion.div 
+              <motion.div
                 className={`${styles.floatingCard} ${styles.secondaryDisplay} ${styles.parallaxItem}`}
                 style={{ y: y2, "--rot": "6deg" }}
               >
@@ -91,7 +90,7 @@ export default function Home() {
               </motion.div>
 
               {/* Tertiary Card */}
-              <motion.div 
+              <motion.div
                 className={`${styles.floatingCard} ${styles.tertiaryDisplay} ${styles.parallaxItem}`}
                 style={{ y: y3, "--rot": "-10deg" }}
               >
@@ -101,7 +100,7 @@ export default function Home() {
               </motion.div>
 
               {/* Stat Badge */}
-              <motion.div 
+              <motion.div
                 className={styles.statBadge}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -118,28 +117,16 @@ export default function Home() {
       {/* Categories Section */}
       <section className={styles.categories}>
         <div className="container">
-          <div className={styles.sectionHeader}>
+          <div className={`${styles.categoryHeader} flex-between`}>
             <div>
               <span className={styles.topLabel}>DEPARTMENTS</span>
               <h2 className={styles.sectionTitle}>Curated Categories</h2>
             </div>
-            <a href="#" className={styles.viewAll}>VIEW ALL (120+)</a>
+            <Link href="/categories" className={styles.viewAll}>VIEW ALL (120+)</Link>
           </div>
           <div className={styles.categoryGrid}>
-            {mockCategories.map((cat) => (
-              <Link key={cat.id} href={`/categories/${cat.id}`} className={styles.categoryCard}>
-                <Image 
-                  src={cat.image} 
-                  alt={cat.name} 
-                  fill 
-                  style={{ objectFit: 'cover' }}
-                  className={styles.catImg}
-                  sizes="(max-width: 768px) 50vw, 16vw"
-                />
-                <div className={styles.catOverlay}>
-                  <span className={styles.catName}>{cat.name}</span>
-                </div>
-              </Link>
+            {categories.map((cat) => (
+              <CategoryCard key={cat.id} category={cat} />
             ))}
           </div>
         </div>

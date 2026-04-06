@@ -2,153 +2,122 @@
 
 import Image from "next/image";
 import styles from "./categories.module.css";
-import { 
-  ChevronLeft,
-  ChevronRight,
-  Heart,
-  Eye,
-  Star
-} from "lucide-react";
+import { ChevronRight, ArrowRight } from "lucide-react";
 import Link from 'next/link';
-import { products, categories as mockCategories } from "@/utils/mockData";
+import { products, categories } from "@/lib/data";
 import ProductCard from "@/Components/ProductCard";
-import { useCart } from "@/context/CartContext";
 
 export default function CategoriesPage() {
-  const { addToCart } = useCart();
-  
-  // Best selling products - pick first 6
-  const featuredProducts = products.slice(0, 6);
+  const featuredProducts = products.slice(0, 4);
 
   return (
     <div className={styles.main}>
-      {/* Hero Section */}
+      {/* Luxury Hero */}
       <section className={styles.hero}>
         <div className={styles.container}>
-          <h1 className={styles.heroTitle}>Explore Our <span>Curated</span> Collections</h1>
+          <h1 className={styles.heroTitle}>
+            CURATED<span>DEPARTMENTS</span>
+          </h1>
           <p className={styles.heroSubtitle}>
-            Thoughtfully selected items that blend timeless quality with modern vibrancy.<br />
-            Your journey to a more inspired lifestyle starts here.
+            A curated narrative of style, technology, and living. Explore our hand-picked departments designed for the modern lifestyle.
           </p>
-          <div className={styles.heroSearch}>
-            <input type="text" className={styles.heroInput} placeholder="Find exactly what you're looking for..." />
-            <button className={styles.heroButton}>Search</button>
-          </div>
         </div>
       </section>
 
-      {/* Quick Categories Navigation */}
-      <section className={styles.quickNav}>
+      {/* Sticky Department Bar */}
+      <div className={styles.departmentBar}>
         <div className={styles.container}>
-          <div className={styles.quickNavFlex}>
-            {mockCategories.map((cat, idx) => (
-              <Link key={idx} href={`/categories/${cat.id}`} className={styles.quickNavItem}>
-                <div className={styles.quickNavImage}>
-                  <Image src={cat.image} alt={cat.name} fill style={{ objectFit: "cover" }} />
-                </div>
-                <span className={styles.quickNavName}>{cat.name}</span>
+          <div className={styles.navInner}>
+            {categories.map((cat) => (
+              <Link 
+                key={cat.id} 
+                href={`/categories/${cat.id}`} 
+                className={styles.navItem}
+              >
+                {cat.name.toUpperCase()}
               </Link>
             ))}
           </div>
         </div>
+      </div>
+
+      {/* Magazine Discovery Grid */}
+      <section className={styles.container}>
+        <div className={styles.magazineSection}>
+          <div className={styles.magGrid}>
+            
+            {/* 1. Large Feature Card */}
+            <Link href={`/categories/${categories[0].id}`} className={`${styles.magCard} ${styles.magCardLarge}`}>
+              <Image src={categories[0].image} alt={categories[0].name} fill style={{ objectFit: "cover" }} className={styles.magImage} />
+              <div className={styles.magOverlay}>
+                <span className={styles.magLabel}>THE FUTURE OF DESIGN</span>
+                <h3 className={styles.magTitle}>{categories[0].name}</h3>
+                <p className={styles.magDesc}>{categories[0].description}</p>
+                <div className={styles.exploreLink}>EXPLORE THE EDIT <ArrowRight size={16} /></div>
+              </div>
+            </Link>
+
+            {/* 2. Side Feature Card */}
+            <Link href={`/categories/${categories[1].id}`} className={`${styles.magCard} ${styles.magCardSmall}`}>
+              <Image src={categories[1].image} alt={categories[1].name} fill style={{ objectFit: "cover" }} className={styles.magImage} />
+              <div className={styles.magOverlay}>
+                <span className={styles.magLabel}>SEASONAL PICKS</span>
+                <h3 className={styles.magTitle}>{categories[1].name}</h3>
+                <div className={styles.exploreLink}>SHOP THE LOOK</div>
+              </div>
+            </Link>
+
+            {/* 3. Wide Feature Card */}
+            <Link href={`/categories/${categories[2].id}`} className={`${styles.magCard} ${styles.magCardWide}`}>
+              <Image src={categories[2].image} alt={categories[2].name} fill style={{ objectFit: "cover" }} className={styles.magImage} />
+              <div className={styles.magOverlay}>
+                <span className={styles.magLabel}>LIFESTYLE & INTERIORS</span>
+                <h3 className={styles.magTitle}>{categories[2].name}</h3>
+                <p className={styles.magDesc}>{categories[2].description}</p>
+              </div>
+            </Link>
+
+          </div>
+        </div>
       </section>
 
-      {/* Product Section with Filters */}
-      <section className={styles.container} style={{ margin: '80px auto' }}>
-        <div className={styles.shopSection}>
-          <h2 style={{ fontSize: "2rem", fontWeight: "700", marginBottom: "3rem", textAlign: 'center' }}>Best Selling Picks</h2> 
+      {/* Best Sellers Section - Dark Theme */}
+      <section className={styles.collectionSection}>
+        <div className={styles.container}>
+          <div className={styles.sectionHeader}>
+            <div>
+              <h2>The Edit</h2>
+              <p style={{ opacity: 0.6 }}>Bestselling items from all departments.</p>
+            </div>
+            <Link href="/products" style={{ color: "white", fontSize: "0.8rem", fontWeight: "800", letterSpacing: "0.2em" }}>VIEW ALL COLLECTIONS</Link>
+          </div>
+
           <div className={styles.productGrid}>
-            {featuredProducts.map((prod) => (
-              <div key={prod.id} className={styles.productCard}>
-                <div className={styles.productImage}>
-                  <Image src={prod.image} alt={prod.name} fill style={{ objectFit: "cover" }} />
-                  <div className={styles.productOverlay}>
-                    <button className={styles.addToCartBtn} onClick={() => addToCart(prod)}>Add to Cart</button>
-                    <Link href={`/product/${prod.id}`} className={styles.buyNowBtn}>Explore Detail</Link>
-                    <div className={styles.cardActions}>
-                      <button className={styles.actionIcon}><Heart size={18} /></button>
-                      <button className={styles.actionIcon}><Eye size={18} /></button>
-                    </div>
-                  </div>
-                </div>
-                <h4 className={styles.productName}>{prod.name}</h4>
-                <div className={styles.productRating}>
-                   {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="#FFD700" color="#FFD700" />)}
-                </div>
-                <span className={styles.productPrice}>${prod.price}</span>
-              </div>
+            {featuredProducts.map((p) => (
+              <ProductCard key={p.id} product={p} invert={true} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Categories Gallery Banners */}
-      <section className={styles.topCategories}>
-        <div className={styles.container}>
-          <div className="flex-between" style={{ marginBottom: "2.5rem" }}>
-            <h2 style={{ fontSize: "2rem", fontWeight: "700" }}>Curated Departments</h2>
+      {/* Seasonal Promotion Banners */}
+      <section className={styles.container}>
+        <div className={styles.featureGrid}>
+          <div className={styles.promoCard}>
+             <span style={{ fontSize: "0.7rem", fontWeight: "900", letterSpacing: "0.4em", marginBottom: "30px", display: "block" }}>DISCOVERY</span>
+             <h2 className={styles.promoTitle}>New Season Essentials</h2>
+             <p style={{ fontSize: "1.1rem", opacity: 0.6 }}>Thoughtfully selected items for the transition ahead. Discover the latest textures and tones.</p>
+             <Link href="/products" className={styles.promoBtn}>DISCOVER MORE</Link>
           </div>
-          <div className={styles.catGrid}>
-            {mockCategories.slice(0, 3).map((cat, index) => (
-               <Link 
-                key={cat.id} 
-                href={`/categories/${cat.id}`} 
-                className={index === 0 ? styles.mainCat : styles.sideCat}
-                style={{ position: 'relative' }}
-               >
-                 <Image src={cat.image} alt={cat.name} fill style={{ objectFit: "cover" }} />
-                 <div className={styles.catOverlay}>
-                    <span className={styles.catTag}>EXPLORE COLLECTION</span>
-                    <h3 className={styles.catTitle}>{cat.name}</h3>
-                 </div>
-               </Link>
-            ))}
+          <div className={`${styles.promoCard} ${styles.magCard}`} style={{ padding: 0 }}>
+             <Image src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop" fill style={{ objectFit: "cover" }} alt="Lifestyle" />
+             <div className={styles.magOverlay} style={{ padding: "60px" }}>
+                <h2 className={styles.magTitle}>Artistic <br />Living</h2>
+             </div>
           </div>
         </div>
       </section>
 
-      {/* Seasonal Must-Haves */}
-      <section className={styles.seasonal}>
-        <div className={styles.container}>
-          <h2 style={{ fontSize: "1.5rem", fontWeight: "700", marginBottom: "2rem" }}>Seasonal Promotions</h2>
-          <div className={styles.seasonalFlex}>
-            <div className={styles.promoCard}>
-              <h2>Save 20% Today</h2>
-              <p style={{ marginBottom: "2rem", fontSize: "0.875rem", opacity: "0.9" }}>Join our newsletter to receive an exclusive welcome discount.</p>
-              <button style={{ padding: "0.75rem 2.5rem", borderRadius: "99px", background: "white", border: "none", color: "var(--primary)", fontWeight: "700", cursor: "pointer" }}>Join Now</button>
-            </div>
-            <div className={styles.seasonalCards}>
-              <div className={styles.summerVibe} style={{ background: '#f0f9ff' }}>
-                <div>
-                  <h2 style={{ color: "#0369A1" }}>Summer Launch</h2>
-                  <p style={{ color: "#0369A1", fontSize: "0.875rem", opacity: "0.8" }}>Brighten your days with our latest textures.</p>
-                </div>
-                <button style={{ padding: "0.5rem 1.5rem", borderRadius: "8px", background: "#0369A1", color: "white", border: "none", width: "fit-content", fontSize: "0.875rem", fontWeight: "600", cursor: "pointer" }}>Explore Now</button>
-              </div>
-              <div className={styles.seasonalRight}>
-                <div className={styles.smallSeasonal}>
-                  <div style={{ width: "80px", height: "80px", background: "white", borderRadius: "12px", overflow: "hidden", position: "relative" }}>
-                     <Image src={products[0].image} fill style={{ objectFit: "cover" }} alt="Product"/>
-                  </div>
-                  <div>
-                    <h4 style={{ fontSize: "0.9rem" }}>Optic Frame No. 12</h4>
-                    <Link href={`/product/${products[0].id}`} style={{ fontSize: "0.75rem", fontWeight: "700", borderBottom: "1px solid #111827", paddingBottom: "2px", marginTop: "8px", display: "inline-block" }}>Shop Now</Link>
-                  </div>
-                </div>
-                <div className={`${styles.smallSeasonal} ${styles.peach}`}>
-                   <div style={{ width: "80px", height: "80px", background: "white", borderRadius: "12px", overflow: "hidden", position: "relative" }}>
-                     <Image src={products[1].image} fill style={{ objectFit: "cover" }} alt="Product" />
-                  </div>
-                  <div>
-                    <h4 style={{ fontSize: "0.9rem" }}>Micro Tote</h4>
-                    <Link href={`/product/${products[1].id}`} style={{ fontSize: "0.75rem", fontWeight: "700", borderBottom: "1px solid #111827", paddingBottom: "2px", marginTop: "8px", display: "inline-block" }}>Shop Now</Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

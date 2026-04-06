@@ -254,8 +254,15 @@
 }
 
 @keyframes floatInfinite {
-  0%, 100% { transform: translateY(0) rotate(var(--rot)); }
-  50% { transform: translateY(-30px) rotate(calc(var(--rot) + 2deg)); }
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--rot));
+  }
+
+  50% {
+    transform: translateY(-30px) rotate(calc(var(--rot) + 2deg));
+  }
 }
 
 .parallaxItem {

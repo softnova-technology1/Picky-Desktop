@@ -20,7 +20,7 @@ export default function CartPage() {
             </div>
             <h1 className={styles.emptyTitle}>Your cart is empty</h1>
             <p className={styles.emptyText}>
-              Looks like you haven't added anything to your cart yet. 
+              Looks like you haven't added anything to your cart yet.
               Explore our curated collections and find your next favorite pick.
             </p>
             <Link href="/" className={styles.shopBtn}>
@@ -58,8 +58,8 @@ export default function CartPage() {
                       <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
                     </div>
                     <button className={styles.removeBtn} onClick={() => removeFromCart(item.id)}>
-                       <Trash2 size={18} />
-                       <span>Remove</span>
+                      <Trash2 size={18} />
+                      <span>Remove</span>
                     </button>
                   </div>
                 </div>
@@ -94,8 +94,8 @@ export default function CartPage() {
                 SECURE CHECKOUT
               </button>
               <div className={styles.paymentIcons}>
-                 {/* Placeholder icons */}
-                 <span>SSL SECURE ENCRYPTION</span>
+                {/* Placeholder icons */}
+                <span>SSL SECURE ENCRYPTION</span>
               </div>
             </div>
           </aside>
