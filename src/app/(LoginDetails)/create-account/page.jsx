@@ -14,7 +14,7 @@ const CreateAccount = () => {
         // Simulate register success
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userName', e.target[0].value);
-        router.push('/home2');
+        router.push('/hometwo');
     };
 
     return (

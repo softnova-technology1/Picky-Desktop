@@ -11,9 +11,9 @@ import {
   Settings,
   Bell
 } from "lucide-react";
-import watch from "@/images/hero-watch.png"
-import fashion from "@/images/fashion.png"
-import lamp from "@/images/lamp.png"
+import watch from "@/images/home/hero-watch.png"
+import fashion from "@/images/home/fashion.png"
+import lamp from "@/images/home/lamp.png"
 
 export default function Home2() {
   const [userName, setUserName] = useState("Member");
@@ -122,11 +122,6 @@ export default function Home2() {
         </div>
       </section>
 
-      <footer className={styles.footer}>
-        <div className="container">
-            <p>© 2024 Picky Marketplace. Your premium experience continues.</p>
-        </div>
-      </footer>
     </main>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./page.module.css";
 import {
@@ -7,69 +9,108 @@ import {
   Smartphone,
   Apple
 } from "lucide-react";
-import watch from "@/images/hero-watch.png"
-import electronics from "@/images/hero.png"
-import fashion from "@/images/fashion.png"
-import lamp from "@/images/lamp.png"
-import appMockup from "@/images/app-mockup.png"
+import watch from "@/images/home/hero-watch.png"
+import electronics from "@/images/home/hero.png"
+import fashion from "@/images/home/fashion.png"
+import lamp from "@/images/home/lamp.png"
+import appMockup from "@/images/home/app-mockup.png"
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useRef } from "react";
 
 export default function Home() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [0, 50]);
+
   return (
     <main className={styles.main}>
-      {/* Hero Section */}
-      <section className={styles.hero}>
-        <div className="container">
-          <div className={styles.heroFlex}>
-            <div className={styles.heroContent}>
-              <div className={styles.heroBadge}>
-                <Star size={14} fill="var(--primary)" />
+      {/* Ultra Premium Hero Section */}
+      <section ref={containerRef} className={styles.heroWrapper}>
+        <div className={styles.abstractOrb + " " + styles.orb1}></div>
+        <div className={styles.abstractOrb + " " + styles.orb2}></div>
+        <div className={styles.glowSphere}></div>
+
+        <div className={styles.heroMain}>
+          <div className={styles.contentSide}>
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <div className={styles.badgePremium}>
+                <Star size={16} fill="var(--primary)" color="var(--primary)" />
                 <span>TRUSTED BY 50,000+ SHOPPERS</span>
               </div>
-              <h1 className={styles.heroTitle}>
+              <h1 className={styles.titlePremium}>
                 Discover the <br />
-                <span className={styles.italicText}>most exclusive</span> <br />
+                <span className={styles.italicAccent}>most exclusive</span> <br />
                 picks for you
               </h1>
-              <p className={styles.heroSubtitle}>
+              <p className={styles.introText}>
                 A curated marketplace where quality meets authenticity. Shop the world's finest products from verified premium vendors.
               </p>
-              <div className={styles.heroActions}>
-                <button className={styles.primaryBtn}>Explore Market</button>
-                <button className={styles.secondaryBtn}>View Deals</button>
+              <div className={styles.actionRow}>
+                <button className={`${styles.btnModern} ${styles.btnPrimary}`}>Explore Market</button>
+                <button className={`${styles.btnModern} ${styles.btnGhost}`}>View Deals</button>
               </div>
-            </div>
-            
-            <div className={styles.heroVisual}>
-              <div className={styles.collageGrid}>
-                 <div className={`${styles.collageItem} ${styles.mainImg}`}>
-                    <Image 
-                      src={watch} 
-                      alt="Product 1" fill style={{ objectFit: "cover" }} 
-                    />
-                 </div>
-                 <div className={`${styles.collageItem} ${styles.topRight}`}>
-                    <Image 
-                      src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop" 
-                      alt="Product 2" fill style={{ objectFit: "cover" }} 
-                    />
-                 </div>
-                 <div className={`${styles.collageItem} ${styles.bottomRight}`}>
-                    <Image 
-                      src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop" 
-                      alt="Product 3" fill style={{ objectFit: "cover" }} 
-                    />
-                 </div>
-              </div>
-              <div className={styles.floatingStats}>
-                 <div className={styles.statLine}>
-                    <strong>2.4k+</strong>
-                    <span>Exclusive Items</span>
-                 </div>
-              </div>
+            </motion.div>
+          </div>
+
+          <div className={styles.visualSide}>
+            <div className={styles.stage}>
+              {/* Main Card */}
+              <motion.div 
+                className={`${styles.floatingCard} ${styles.mainDisplay} ${styles.parallaxItem}`}
+                style={{ y: y1, "--rot": "-3deg" }}
+              >
+                <div className={styles.cardImage}>
+                  <Image src={watch} alt="Nexus Pro Watch" fill style={{ objectFit: "contain" }} />
+                </div>
+                <div className={styles.cardDetails}>
+                  <div className={styles.itemName}>Nexus Pro Watch</div>
+                  <div className={styles.itemPrice}>$399.00</div>
+                </div>
+              </motion.div>
+
+              {/* Secondary Card */}
+              <motion.div 
+                className={`${styles.floatingCard} ${styles.secondaryDisplay} ${styles.parallaxItem}`}
+                style={{ y: y2, "--rot": "6deg" }}
+              >
+                <div className={styles.cardImage}>
+                  <Image src="/assets/sneaker.png" alt="Cloud X Runners" fill style={{ objectFit: "contain" }} />
+                </div>
+              </motion.div>
+
+              {/* Tertiary Card */}
+              <motion.div 
+                className={`${styles.floatingCard} ${styles.tertiaryDisplay} ${styles.parallaxItem}`}
+                style={{ y: y3, "--rot": "-10deg" }}
+              >
+                <div className={styles.cardImage}>
+                  <Image src="/assets/headphone.png" alt="Pure Audio Max" fill style={{ objectFit: "contain" }} />
+                </div>
+              </motion.div>
+
+              {/* Stat Badge */}
+              <motion.div 
+                className={styles.statBadge}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                <span className={styles.statValue}>2.4k+</span>
+                <span className={styles.statLabel}>Exclusive Items</span>
+              </motion.div>
             </div>
           </div>
         </div>
-        <div className={styles.heroBgPattern}></div>
       </section>
 
       {/* Categories Section */}
@@ -92,13 +133,13 @@ export default function Home() {
               { name: "KIDS", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?q=80&w=2075&auto=format&fit=crop" },
             ].map((cat, idx) => (
               <div key={idx} className={styles.categoryCard}>
-                <Image 
-                  src={cat.image} 
-                  alt={cat.name} 
-                  fill 
-                  style={{ objectFit: "cover" }} 
-                  className={styles.catImg} 
-                  sizes="(max-width: 600px) 50vw, 16vw" 
+                <Image
+                  src={cat.image}
+                  alt={cat.name}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  className={styles.catImg}
+                  sizes="(max-width: 600px) 50vw, 16vw"
                 />
                 <div className={styles.catOverlay}>
                   <span className={styles.catName}>{cat.name}</span>
@@ -115,24 +156,24 @@ export default function Home() {
           <div className={styles.promoGrid}>
             <div className={`${styles.promoCard} ${styles.springPromo}`}>
               <div className={styles.promoContent}>
-                <h2 className={styles.promoLargeTitle}>Spring Collection <br/> 2024</h2>
+                <h2 className={styles.promoLargeTitle}>Spring Collection <br /> 2024</h2>
                 <span className={styles.promoBadge}>UP TO 40% OFF</span>
                 <button className={styles.promoBtn}>EXPLORE NOW</button>
               </div>
-              <Image 
-                src="https://images.unsplash.com/photo-1516762689617-e1cffcef479d?q=80&w=2022&auto=format&fit=crop" 
-                alt="Spring" 
-                fill 
-                style={{ objectFit: "cover", opacity: 0.15 }} 
+              <Image
+                src="https://images.unsplash.com/photo-1516762689617-e1cffcef479d?q=80&w=2022&auto=format&fit=crop"
+                alt="Spring"
+                fill
+                style={{ objectFit: "cover", opacity: 0.15 }}
               />
             </div>
             <div className={`${styles.promoCard} ${styles.futurePromo}`}>
-               <div className={styles.promoContent}>
-                 <h2 className={styles.promoLargeTitle}>The Future is Here</h2>
-                 <span className={styles.promoBadge}>PRE-ORDER NOW</span>
-                 <button className={`${styles.promoBtn} ${styles.btnOutline}`}>LEARN MORE</button>
-               </div>
-               <div className={styles.crossGraphics}></div>
+              <div className={styles.promoContent}>
+                <h2 className={styles.promoLargeTitle}>The Future is Here</h2>
+                <span className={styles.promoBadge}>PRE-ORDER NOW</span>
+                <button className={`${styles.promoBtn} ${styles.btnOutline}`}>LEARN MORE</button>
+              </div>
+              <div className={styles.crossGraphics}></div>
             </div>
           </div>
         </div>
@@ -142,7 +183,7 @@ export default function Home() {
       <section className={styles.trending}>
         <div className="container">
           <div className={styles.trendingHeader}>
-             <h2 className={styles.piecesTitle}>TRENDING PIECES</h2>
+            <h2 className={styles.piecesTitle}>TRENDING PIECES</h2>
           </div>
           <div className={styles.productGrid}>
             {[
@@ -190,26 +231,26 @@ export default function Home() {
       <section className={styles.vendors}>
         <div className="container">
           <div className={styles.vendorHeader}>
-             <span className={styles.topLabel}>TRUSTED VENDORS</span>
-             <h2 className={styles.sectionTitle}>Featured Vendors</h2>
+            <span className={styles.topLabel}>TRUSTED VENDORS</span>
+            <h2 className={styles.sectionTitle}>Featured Vendors</h2>
           </div>
           <div className={styles.vendorFlex}>
-             {[
-               { name: "Lumiera Home", initial: "L", items: "840+ items" },
-               { name: "Urban Tech", initial: "U", items: "1.2k items" },
-               { name: "Eco Bloom", initial: "E", items: "650+ items" },
-             ].map((v, i) => (
-               <div key={i} className={styles.vendorCard}>
-                  <div className={styles.vendorLogo}>{v.initial}</div>
-                  <div className={styles.vendorInfo}>
-                    <div className={styles.vendorNameWrapper}>
-                      <span className={styles.vendorName}>{v.name}</span>
-                      <CheckCircle2 size={16} fill="#3b82f6" color="white" />
-                    </div>
-                    <span className={styles.vendorStats}>{v.items}</span>
+            {[
+              { name: "Lumiera Home", initial: "L", items: "840+ items" },
+              { name: "Urban Tech", initial: "U", items: "1.2k items" },
+              { name: "Eco Bloom", initial: "E", items: "650+ items" },
+            ].map((v, i) => (
+              <div key={i} className={styles.vendorCard}>
+                <div className={styles.vendorLogo}>{v.initial}</div>
+                <div className={styles.vendorInfo}>
+                  <div className={styles.vendorNameWrapper}>
+                    <span className={styles.vendorName}>{v.name}</span>
+                    <CheckCircle2 size={16} fill="#3b82f6" color="white" />
                   </div>
-               </div>
-             ))}
+                  <span className={styles.vendorStats}>{v.items}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -225,7 +266,7 @@ export default function Home() {
             ].map((t, idx) => (
               <div key={idx} className={styles.testimonialCard}>
                 <div className={styles.stars}>
-                   {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="var(--primary)" color="var(--primary)" />)}
+                  {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="var(--primary)" color="var(--primary)" />)}
                 </div>
                 <p className={styles.testimonialQuote}>"{t.quote}"</p>
                 <div className={styles.testimonialUser}>
@@ -246,8 +287,8 @@ export default function Home() {
         <div className={styles.appSection}>
           <div className={styles.appContent}>
             <div className={styles.appBadge}>
-               <Smartphone size={16} />
-               <span>EXPERIENCE THE FREEDOM</span>
+              <Smartphone size={16} />
+              <span>EXPERIENCE THE FREEDOM</span>
             </div>
             <h2 className={styles.appTitle}>
               Shop <span className={styles.whiteItalic}>anywhere</span> <br />
@@ -258,93 +299,30 @@ export default function Home() {
             </p>
             <div className={styles.appStores}>
               <button className={styles.appBtn}>
-                 <Apple size={20} fill="currentColor" />
-                 <div className={styles.btnText}>
-                    <span className={styles.btnSm}>Download on</span>
-                    <span className={styles.btnLg}>App Store</span>
-                 </div>
+                <Apple size={20} fill="currentColor" />
+                <div className={styles.btnText}>
+                  <span className={styles.btnSm}>Download on</span>
+                  <span className={styles.btnLg}>App Store</span>
+                </div>
               </button>
               <button className={styles.appBtn}>
-                 <Star size={20} fill="currentColor" />
-                 <div className={styles.btnText}>
-                    <span className={styles.btnSm}>Get it on</span>
-                    <span className={styles.btnLg}>Play Store</span>
-                 </div>
+                <Star size={20} fill="currentColor" />
+                <div className={styles.btnText}>
+                  <span className={styles.btnSm}>Get it on</span>
+                  <span className={styles.btnLg}>Play Store</span>
+                </div>
               </button>
             </div>
           </div>
           <div className={styles.appMockup}>
-             <div className={styles.mockupContainer}>
-                <Image src={appMockup} alt="Picky App" fill style={{ objectFit: "cover" }} />
-             </div>
-             <div className={styles.mockupBgGlow}></div>
+            <div className={styles.mockupContainer}>
+              <Image src={appMockup} alt="Picky App" fill style={{ objectFit: "cover" }} />
+            </div>
+            <div className={styles.mockupBgGlow}></div>
           </div>
         </div>
       </section>
 
-      <footer className={styles.footer}>
-        <div className="container">
-          <div className={styles.footerGrid}>
-             <div className={styles.footerBrandCol}>
-                <div className={styles.footerLogo}>
-                  <div className={styles.logoIconFooter}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                  </div>
-                  <span>Picky</span>
-                </div>
-                <p className={styles.footerDesc}>
-                  The modern marketplace for premium curated products and verified worldwide vendors. Quality in every pick.
-                </p>
-                <div className={styles.footerSocials}>
-                  <div className={styles.socialIcon}><Star size={18} /></div>
-                  <div className={styles.socialIcon}><CheckCircle2 size={18} /></div>
-                  <div className={styles.socialIcon}><ArrowRight size={18} /></div>
-                </div>
-             </div>
-
-             <div className={styles.footerCol}>
-                <h4 className={styles.footerColTitle}>Shop</h4>
-                <ul className={styles.footerLinksList}>
-                  <li><a href="#">Trending Now</a></li>
-                  <li><a href="#">New Arrivals</a></li>
-                  <li><a href="#">Gift Cards</a></li>
-                  <li><a href="#">Sustainability</a></li>
-                </ul>
-             </div>
-
-             <div className={styles.footerCol}>
-                <h4 className={styles.footerColTitle}>Company</h4>
-                <ul className={styles.footerLinksList}>
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Vendors</a></li>
-                  <li><a href="#">Careers</a></li>
-                  <li><a href="#">Privacy Policy</a></li>
-                </ul>
-             </div>
-
-             <div className={styles.footerNewsletterCol}>
-                <h4 className={styles.footerColTitle}>Newsletter</h4>
-                <p className={styles.newsletterDesc}>Join our newsletter to receive updates on new products and special offers.</p>
-                <div className={styles.newsletterBox}>
-                   <input type="email" placeholder="Your email" className={styles.newsletterInput} />
-                   <button className={styles.newsletterBtn}>
-                      <ArrowRight size={20} />
-                   </button>
-                </div>
-             </div>
-          </div>
-
-          <div className={styles.footerBottom}>
-             <div className={styles.footerBottomContent}>
-                <span className={styles.copyrightText}>© 2024 Picky Marketplace Inc. All rights reserved.</span>
-                <div className={styles.footerBottomLinks}>
-                   <a href="#">Terms of Service</a>
-                   <a href="#">Cookies</a>
-                </div>
-             </div>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }
