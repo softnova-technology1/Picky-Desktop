@@ -1,14 +1,21 @@
 "use client";
-
+import { useState } from 'react';
 import React from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import styles from './cart.module.css';
 import { Trash2, ShoppingBag, ArrowRight } from 'lucide-react';
 
 export default function CartPage() {
-  const { cartItems, removeFromCart, updateQuantity, subtotal, totalItems } = useCart();
+  const { cartItems, removeFromCart, updateQuantity, subtotal, totalItems, setCheckoutItems } = useCart();
+  const router = useRouter();
+
+  const handleCheckout = () => {
+    setCheckoutItems(cartItems);
+    router.push('/checkout');
+  };
 
   if (cartItems.length === 0) {
     return (
@@ -90,7 +97,7 @@ export default function CartPage() {
                 <span>Total</span>
                 <span>${(subtotal * 1.08).toFixed(2)}</span>
               </div>
-              <button className={styles.checkoutBtn}>
+              <button onClick={handleCheckout} className={styles.checkoutBtn}>
                 SECURE CHECKOUT
               </button>
               <div className={styles.paymentIcons}>

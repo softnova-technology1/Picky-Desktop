@@ -7,8 +7,16 @@ import styles from './ProductCard.module.css';
 import { motion } from 'framer-motion';
 import { ShoppingBag, Eye } from 'lucide-react';
 
+import { useRouter } from 'next/navigation';
+
 const ProductCard = ({ product }) => {
-  const { addToCart } = useCart();
+  const { addToCart, setCheckoutItems } = useCart();
+  const router = useRouter();
+
+  const handleBuyNow = () => {
+    setCheckoutItems([{ ...product, quantity: 1 }]);
+    router.push('/checkout');
+  };
 
   return (
     <motion.div

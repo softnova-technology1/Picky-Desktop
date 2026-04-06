@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { products, categories } from "@/lib/data";
 import ProductCard from "@/Components/ProductCard";
 
+import { useRouter } from "next/navigation";
+
 export default function CategoriesPage() {
   const featuredProducts = products.slice(0, 4);
 
