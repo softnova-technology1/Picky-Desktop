@@ -7,7 +7,8 @@
   background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
   color: white;
   padding: 8rem 0 10rem;
-  margin: 70px;
+  margin: auto;
+  margin-top: 50px;
   text-align: center;
   position: relative;
   overflow: hidden;
