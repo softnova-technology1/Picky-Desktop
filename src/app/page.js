@@ -13,6 +13,8 @@ import {
   ChevronRight
 } from "lucide-react";
 
+import Link from "next/link";
+
 export default function Home() {
   return (
     <main className={styles.main}>
@@ -25,7 +27,7 @@ export default function Home() {
             Experience the modern marketplace with premium curated products and verified vendors delivered to your doorstep.
           </p>
           <div className={styles.heroActions}>
-            <button className="btn btn-secondary">Shop Collections</button>
+            <Link href="/categories" className="btn btn-secondary">Shop Collections</Link>
             <button className="btn btn-outline">Daily Deals</button>
           </div>
         </div>

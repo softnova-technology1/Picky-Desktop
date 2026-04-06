@@ -8,8 +8,10 @@ import {
   ChevronRight,
   Share2,
   Heart,
-  Eye
+  Eye,
+  Star
 } from "lucide-react";
+import Link from "next/link";
 import chairImg from "../../img/categories/chair.png";
 import lifestyleImg from "../../img/categories/lifestyle.png";
 import wearImg from "../../img/categories/wear.png";
@@ -112,7 +114,7 @@ export default function CategoriesPage() {
                 </div>
                 <div className={styles.productOverlay}>
                   <button className={styles.addToCartBtn}>Add to Cart</button>
-                  <button className={styles.buyNowBtn}>Buy Now</button>
+                  <Link href="/checkout" className={styles.buyNowBtn}>Buy Now</Link>
                   <div className={styles.cardActions}>
                     <button className={styles.actionIcon}><Heart size={18} /></button>
                     <button className={styles.actionIcon}><Eye size={18} /></button>
@@ -127,7 +129,7 @@ export default function CategoriesPage() {
                 </div>
                 <div className={styles.productOverlay}>
                   <button className={styles.addToCartBtn}>Add to Cart</button>
-                  <button className={styles.buyNowBtn}>Buy Now</button>
+                  <Link href="/checkout" className={styles.buyNowBtn}>Buy Now</Link>
                   <div className={styles.cardActions}>
                     <button className={styles.actionIcon}><Heart size={18} /></button>
                     <button className={styles.actionIcon}><Eye size={18} /></button>
@@ -161,7 +163,7 @@ export default function CategoriesPage() {
                   <Image src={prod.image} alt={prod.name} fill style={{ objectFit: "cover" }} />
                   <div className={styles.productOverlay}>
                     <button className={styles.addToCartBtn}>Add to Cart</button>
-                    <button className={styles.buyNowBtn}>Buy Now</button>
+                    <Link href="/checkout" className={styles.buyNowBtn}>Buy Now</Link>
                     <div className={styles.cardActions}>
                       <button className={styles.actionIcon}><Heart size={18} /></button>
                       <button className={styles.actionIcon}><Eye size={18} /></button>
@@ -244,7 +246,7 @@ export default function CategoriesPage() {
                    <Image src={item.image} fill style={{ objectFit: "cover" }} alt={item.name} />
                    <div className={styles.productOverlay}>
                     <button className={styles.addToCartBtn}>Add to Cart</button>
-                    <button className={styles.buyNowBtn}>Buy Now</button>
+                    <Link href="/checkout" className={styles.buyNowBtn}>Buy Now</Link>
                     <div className={styles.cardActions}>
                       <button className={styles.actionIcon}><Heart size={18} /></button>
                       <button className={styles.actionIcon}><Eye size={18} /></button>
