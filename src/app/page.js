@@ -10,12 +10,14 @@ import {
   Apple
 } from "lucide-react";
 import watch from "@/images/home/hero-watch.png"
-import electronics from "@/images/home/hero.png"
-import fashion from "@/images/home/fashion.png"
-import lamp from "@/images/home/lamp.png"
+import fashion from "@/images/home/clothing.png"
+import chair from "@/images/home/chair.png"
 import appMockup from "@/images/home/app-mockup.png"
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
+import ProductCard from "@/Components/ProductCard";
+import { products, categories as mockCategories } from "@/utils/mockData";
+import Link from 'next/link';
 
 export default function Home() {
   const containerRef = useRef(null);
@@ -124,27 +126,20 @@ export default function Home() {
             <a href="#" className={styles.viewAll}>VIEW ALL (120+)</a>
           </div>
           <div className={styles.categoryGrid}>
-            {[
-              { name: "ELECTRONICS", image: electronics },
-              { name: "FASHION", image: fashion },
-              { name: "HOME & LIVING", image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?q=80&w=2070&auto=format&fit=crop" },
-              { name: "FITNESS", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop" },
-              { name: "BEAUTY", image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=2087&auto=format&fit=crop" },
-              { name: "KIDS", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?q=80&w=2075&auto=format&fit=crop" },
-            ].map((cat, idx) => (
-              <div key={idx} className={styles.categoryCard}>
-                <Image
-                  src={cat.image}
-                  alt={cat.name}
-                  fill
-                  style={{ objectFit: "cover" }}
+            {mockCategories.map((cat) => (
+              <Link key={cat.id} href={`/categories/${cat.id}`} className={styles.categoryCard}>
+                <Image 
+                  src={cat.image} 
+                  alt={cat.name} 
+                  fill 
+                  style={{ objectFit: 'cover' }}
                   className={styles.catImg}
-                  sizes="(max-width: 600px) 50vw, 16vw"
+                  sizes="(max-width: 768px) 50vw, 16vw"
                 />
                 <div className={styles.catOverlay}>
                   <span className={styles.catName}>{cat.name}</span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -186,42 +181,8 @@ export default function Home() {
             <h2 className={styles.piecesTitle}>TRENDING PIECES</h2>
           </div>
           <div className={styles.productGrid}>
-            {[
-              {
-                name: "Nexus Watch Series 5",
-                cat: "PREMIUM TECH",
-                price: "$199",
-                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=2099&auto=format&fit=crop",
-              },
-              {
-                name: "Sonic Headphones Pro",
-                cat: "AUDIO DEVICE",
-                price: "$129",
-                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop"
-              },
-              {
-                name: "Aura Glow Desk Lamp",
-                cat: "HOME LIVING",
-                price: "$89",
-                image: lamp
-              },
-              {
-                name: "RetroShot 2000",
-                cat: "PHOTOGRAPHY",
-                price: "$149",
-                image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1964&auto=format&fit=crop"
-              },
-            ].map((prod, idx) => (
-              <div key={idx} className={styles.productCard}>
-                <div className={styles.productImage}>
-                  <Image src={prod.image} alt={prod.name} fill style={{ objectFit: "cover" }} sizes="(max-width: 768px) 50vw, 25vw" />
-                </div>
-                <div className={styles.productInfo}>
-                  <div className={styles.productCategory}>{prod.cat}</div>
-                  <h3 className={styles.productName}>{prod.name}</h3>
-                  <div className={styles.productPrice}>{prod.price}</div>
-                </div>
-              </div>
+            {products.slice(0, 4).map((prod) => (
+              <ProductCard key={prod.id} product={prod} />
             ))}
           </div>
         </div>

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { User, Heart, ShoppingBag, Search, LogOut, Layout } from 'lucide-react';
 import LoginPopup from './LoginPopup';
+import { useCart } from '@/context/CartContext';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -12,6 +13,7 @@ const Navbar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const pathname = usePathname();
     const router = useRouter();
+    const { totalItems } = useCart();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -88,17 +90,14 @@ const Navbar = () => {
                     <div className={styles.iconButton}>
                         <Heart size={20} strokeWidth={2.5} />
                     </div>
-                    {isLoggedIn ? (
-                        <Link href="/home2" className={styles.cartButton}>
+                    
+                    <Link href="/cart" className={styles.cartButton}>
+                        <div className={styles.cartBadgeWrapper}>
                             <ShoppingBag size={18} />
-                            <span>Dashboard</span>
-                        </Link>
-                    ) : (
-                        <Link href="/login" className={styles.cartButton}>
-                            <ShoppingBag size={18} />
-                            <span>Account</span>
-                        </Link>
-                    )}
+                            {totalItems > 0 && <span className={styles.cartBadge}>{totalItems}</span>}
+                        </div>
+                        <span>Cart</span>
+                    </Link>
                 </div>
             </div>
             {isLoginOpen && <LoginPopup onClose={() => setIsLoginOpen(false)} />}
