@@ -3,8 +3,14 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 
+import { useCart } from '@/context/CartContext';
+
 export default function PaymentPage() {
+  const { checkoutSubtotal } = useCart();
   const [selectedPayment, setSelectedPayment] = useState('credit-card');
+
+  const tax = checkoutSubtotal * 0.08;
+  const finalTotal = checkoutSubtotal + tax;
 
   const methods = [
     { id: 'credit-card', name: 'Credit Card', icon: '💳' },
@@ -74,7 +80,7 @@ export default function PaymentPage() {
             <div style={{ display: 'grid', gap: '1rem', marginBottom: '1.5rem' }}>
               <div className="flex-between">
                 <span style={{ color: 'var(--text-muted)' }}>Order Total</span>
-                <span style={{ fontWeight: '700', fontSize: '1.5rem', color: 'var(--primary)' }}>$172.00</span>
+                <span style={{ fontWeight: '700', fontSize: '1.5rem', color: 'var(--primary)' }}>${finalTotal.toFixed(2)}</span>
               </div>
             </div>
             <div style={{ display: 'grid', gap: '1rem' }}>

@@ -1,0 +1,139 @@
+/* Home 2 (Member Dashboard) Styles */
+.main {
+  background-color: var(--background);
+}
+
+.welcomeSection {
+  padding: 120px 0 60px;
+  background: white;
+  border-radius: 0 0 60px 60px;
+  margin-bottom: 60px;
+}
+
+.welcomeHeader {
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.welcomeMsg {
+  flex: 1;
+}
+
+.userBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(100, 61, 151, 0.05);
+  padding: 8px 16px;
+  border-radius: 99px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 900;
+  color: var(--primary);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.italic {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  font-weight: 500;
+}
+
+.statsBar {
+  display: flex;
+  gap: 40px;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.statValue {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--primary);
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Reusing some components from page.module.css or defining new ones */
+.sectionTitle {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: var(--primary);
+  margin-bottom: 40px;
+}
+
+.curatedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 80px;
+}
+
+.curatedItem {
+    position: relative;
+    height: 400px;
+    border-radius: 32px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.curatedItem:hover .curatedImg {
+    transform: scale(1.05);
+}
+
+.curatedImg {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.curatedOverlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px;
+    background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+    color: white;
+}
+
+.itemCat {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    opacity: 0.8;
+}
+
+.itemName {
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-top: 4px;
+}
+
+.footer {
+  padding: 80px 0;
+  text-align: center;
+  color: var(--text-muted);
+}

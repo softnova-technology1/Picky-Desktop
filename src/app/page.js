@@ -1,34 +1,114 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./page.module.css";
-import { 
-  Laptop, 
-  Shirt, 
-  Home as HomeIcon, 
-  Dumbbell, 
-  Sparkles, 
-  Baby,
-  ShoppingCart,
+import {
   Star,
-  ChevronLeft,
-  ChevronRight
+  ArrowRight,
+  CheckCircle2,
+  Smartphone,
+  Apple
 } from "lucide-react";
-
-import Link from "next/link";
+import watch from "@/images/home/hero-watch.png"
+import appMockup from "@/images/home/app-mockup.png"
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { useRef } from "react";
+import ProductCard from "@/Components/ProductCard";
+import { products, categories as mockCategories } from "@/utils/mockData";
+import Link from 'next/link';
 
 export default function Home() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [0, 50]);
+
   return (
     <main className={styles.main}>
-      {/* Hero Section */}
-      <section className={styles.hero}>
-        <div className={styles.heroContent}>
-          <div className={styles.heroTag}>PREMIUM MARKETPLACE</div>
-          <h1 className={styles.heroTitle}>Find the perfect pick for your lifestyle</h1>
-          <p className={styles.heroSubtitle}>
-            Experience the modern marketplace with premium curated products and verified vendors delivered to your doorstep.
-          </p>
-          <div className={styles.heroActions}>
-            <Link href="/categories" className="btn btn-secondary">Shop Collections</Link>
-            <button className="btn btn-outline">Daily Deals</button>
+      {/* Ultra Premium Hero Section */}
+      <section ref={containerRef} className={styles.heroWrapper}>
+        <div className={styles.abstractOrb + " " + styles.orb1}></div>
+        <div className={styles.abstractOrb + " " + styles.orb2}></div>
+        <div className={styles.glowSphere}></div>
+
+        <div className={styles.heroMain}>
+          <div className={styles.contentSide}>
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <div className={styles.badgePremium}>
+                <Star size={16} fill="var(--primary)" color="var(--primary)" />
+                <span>TRUSTED BY 50,000+ SHOPPERS</span>
+              </div>
+              <h1 className={styles.titlePremium}>
+                Discover the <br />
+                <span className={styles.italicAccent}>most exclusive</span> <br />
+                picks for you
+              </h1>
+              <p className={styles.introText}>
+                A curated marketplace where quality meets authenticity. Shop the world's finest products from verified premium vendors.
+              </p>
+              <div className={styles.actionRow}>
+                <button className={`${styles.btnModern} ${styles.btnPrimary}`}>Explore Market</button>
+                <button className={`${styles.btnModern} ${styles.btnGhost}`}>View Deals</button>
+              </div>
+            </motion.div>
+          </div>
+
+          <div className={styles.visualSide}>
+            <div className={styles.stage}>
+              {/* Main Card */}
+              <motion.div 
+                className={`${styles.floatingCard} ${styles.mainDisplay} ${styles.parallaxItem}`}
+                style={{ y: y1, "--rot": "-3deg" }}
+              >
+                <div className={styles.cardImage}>
+                  <Image src={watch} alt="Nexus Pro Watch" fill style={{ objectFit: "contain" }} />
+                </div>
+                <div className={styles.cardDetails}>
+                  <div className={styles.itemName}>Nexus Pro Watch</div>
+                  <div className={styles.itemPrice}>$399.00</div>
+                </div>
+              </motion.div>
+
+              {/* Secondary Card */}
+              <motion.div 
+                className={`${styles.floatingCard} ${styles.secondaryDisplay} ${styles.parallaxItem}`}
+                style={{ y: y2, "--rot": "6deg" }}
+              >
+                <div className={styles.cardImage}>
+                  <Image src="/assets/sneaker.png" alt="Cloud X Runners" fill style={{ objectFit: "contain" }} />
+                </div>
+              </motion.div>
+
+              {/* Tertiary Card */}
+              <motion.div 
+                className={`${styles.floatingCard} ${styles.tertiaryDisplay} ${styles.parallaxItem}`}
+                style={{ y: y3, "--rot": "-10deg" }}
+              >
+                <div className={styles.cardImage}>
+                  <Image src="/assets/headphone.png" alt="Pure Audio Max" fill style={{ objectFit: "contain" }} />
+                </div>
+              </motion.div>
+
+              {/* Stat Badge */}
+              <motion.div 
+                className={styles.statBadge}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                <span className={styles.statValue}>2.4k+</span>
+                <span className={styles.statLabel}>Exclusive Items</span>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -36,105 +116,72 @@ export default function Home() {
       {/* Categories Section */}
       <section className={styles.categories}>
         <div className="container">
-          <div className="flex-between" style={{ marginBottom: "2rem" }}>
-            <h2 className="section-title">Shop by Category</h2>
-            <a href="#" style={{ color: "var(--primary)", fontWeight: "600" }}>View All →</a>
+          <div className={styles.sectionHeader}>
+            <div>
+              <span className={styles.topLabel}>DEPARTMENTS</span>
+              <h2 className={styles.sectionTitle}>Curated Categories</h2>
+            </div>
+            <a href="#" className={styles.viewAll}>VIEW ALL (120+)</a>
           </div>
           <div className={styles.categoryGrid}>
-            {[
-              { name: "Electronics", icon: <Laptop size={32} /> },
-              { name: "Fashion", icon: <Shirt size={32} /> },
-              { name: "Home & Living", icon: <HomeIcon size={32} /> },
-              { name: "Fitness", icon: <Dumbbell size={32} /> },
-              { name: "Beauty", icon: <Sparkles size={32} /> },
-              { name: "Kids", icon: <Baby size={32} /> },
-            ].map((cat, idx) => (
-              <div key={idx} className={styles.categoryCard}>
-                <div className={styles.categoryIcon}>{cat.icon}</div>
-                <div className={styles.categoryName}>{cat.name}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Trending Products */}
-      <section className={styles.trending}>
-        <div className="container">
-          <div className="flex-between" style={{ marginBottom: "2rem" }}>
-            <h2 className="section-title">Trending Products</h2>
-            <div style={{ display: "flex", gap: "1rem" }}>
-              <button className="btn btn-secondary" style={{ padding: "0.5rem", borderRadius: "50%", width: "40px", height: "40px" }}><ChevronLeft size={20} /></button>
-              <button className="btn btn-secondary" style={{ padding: "0.5rem", borderRadius: "50%", width: "40px", height: "40px" }}><ChevronRight size={20} /></button>
-            </div>
-          </div>
-          <div className={styles.productGrid}>
-            {[
-              { 
-                name: "OmniWatch Series 5", 
-                cat: "TECH", 
-                price: "$199.00", 
-                image: "/images/watch.png",
-                badge: "NEW"
-              },
-              { 
-                name: "Sonic Headphones Pro", 
-                cat: "AUDIO", 
-                price: "$129.00", 
-                image: "/images/headphones.png"
-              },
-              { 
-                name: "Aura Glow Desk Lamp", 
-                cat: "LIFESTYLE", 
-                price: "$89.00", 
-                image: "/images/lamp.png"
-              },
-              { 
-                name: "RetroShot 2000", 
-                cat: "PHOTOGRAPHY", 
-                price: "$149.00", 
-                image: "/images/camera.png"
-              },
-            ].map((prod, idx) => (
-              <div key={idx} className={styles.productCard}>
-                <div className={styles.productImage}>
-                  {prod.badge && <span className={styles.productBadge}>{prod.badge}</span>}
-                  <Image src={prod.image} alt={prod.name} fill style={{ objectFit: "cover" }} />
+            {mockCategories.map((cat) => (
+              <Link key={cat.id} href={`/categories/${cat.id}`} className={styles.categoryCard}>
+                <Image 
+                  src={cat.image} 
+                  alt={cat.name} 
+                  fill 
+                  style={{ objectFit: 'cover' }}
+                  className={styles.catImg}
+                  sizes="(max-width: 768px) 50vw, 16vw"
+                />
+                <div className={styles.catOverlay}>
+                  <span className={styles.catName}>{cat.name}</span>
                 </div>
-                <div className={styles.productInfo}>
-                  <div className={styles.productCategory}>{prod.cat}</div>
-                  <h3 className={styles.productName}>{prod.name}</h3>
-                  <div className={styles.stars}>
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={14} fill={i < 4 ? "#fbbf24" : "none"} color={i < 4 ? "#fbbf24" : "#d1d5db"} />
-                    ))}
-                    <span>(45)</span>
-                  </div>
-                  <div className={styles.productMeta}>
-                    <span className={styles.productPrice}>{prod.price}</span>
-                    <button className={styles.addToCart}><ShoppingCart size={18} /></button>
-                  </div>
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
       {/* Promo Banners */}
-      <section className="container">
-        <div className={styles.promos}>
-          <div className={`${styles.promoBanner} ${styles.spring}`}>
-            <span className={styles.promoSmall}>SPRING COLLECTION 2024</span>
-            <h2 className={styles.promoTitle}>Spring Vibes Only</h2>
-            <p className={styles.promoDesc}>Get up to 40% off on our limited spring collection.</p>
-            <button className="btn btn-secondary" style={{ width: "fit-content" }}>Shop Now</button>
+      <section className={styles.promos}>
+        <div className="container">
+          <div className={styles.promoGrid}>
+            <div className={`${styles.promoCard} ${styles.springPromo}`}>
+              <div className={styles.promoContent}>
+                <h2 className={styles.promoLargeTitle}>Spring Collection <br /> 2024</h2>
+                <span className={styles.promoBadge}>UP TO 40% OFF</span>
+                <button className={styles.promoBtn}>EXPLORE NOW</button>
+              </div>
+              <Image
+                src="https://images.unsplash.com/photo-1516762689617-e1cffcef479d?q=80&w=2022&auto=format&fit=crop"
+                alt="Spring"
+                fill
+                style={{ objectFit: "cover", opacity: 0.15 }}
+              />
+            </div>
+            <div className={`${styles.promoCard} ${styles.futurePromo}`}>
+              <div className={styles.promoContent}>
+                <h2 className={styles.promoLargeTitle}>The Future is Here</h2>
+                <span className={styles.promoBadge}>PRE-ORDER NOW</span>
+                <button className={`${styles.promoBtn} ${styles.btnOutline}`}>LEARN MORE</button>
+              </div>
+              <div className={styles.crossGraphics}></div>
+            </div>
           </div>
-          <div className={`${styles.promoBanner} ${styles.future}`}>
-            <span className={styles.promoSmall}>TECH FRONTIER</span>
-            <h2 className={styles.promoTitle}>The Future is Here</h2>
-            <p className={styles.promoDesc}>Pre-order the latest gadgets and accessories.</p>
-            <button className="btn btn-secondary" style={{ width: "fit-content" }}>Pre-order Now</button>
+        </div>
+      </section>
+
+      {/* Trending Pieces */}
+      <section className={styles.trending}>
+        <div className="container">
+          <div className={styles.trendingHeader}>
+            <h2 className={styles.piecesTitle}>TRENDING PIECES</h2>
+          </div>
+          <div className={styles.productGrid}>
+            {products.slice(0, 4).map((prod) => (
+              <ProductCard key={prod.id} product={prod} />
+            ))}
           </div>
         </div>
       </section>
@@ -142,21 +189,25 @@ export default function Home() {
       {/* Featured Vendors */}
       <section className={styles.vendors}>
         <div className="container">
-          <div className="section-header">
-            <h2 className="section-title">Featured Vendors</h2>
-            <p className="section-subtitle">Discover unique products from hand-picked creators and small businesses worldwide.</p>
+          <div className={styles.vendorHeader}>
+            <span className={styles.topLabel}>TRUSTED VENDORS</span>
+            <h2 className={styles.sectionTitle}>Featured Vendors</h2>
           </div>
-          <div className={styles.vendorGrid}>
+          <div className={styles.vendorFlex}>
             {[
-              { name: "Lumiera Home", desc: "Handcrafted home decor with a modern touch.", initial: "L" },
-              { name: "Urban Tech", desc: "Innovative gadgets for the urban lifestyle.", initial: "U" },
-              { name: "Eco Bloom", desc: "Sustainable skincare products for natural beauty.", initial: "E" },
-            ].map((vendor, idx) => (
-              <div key={idx} className={styles.vendorCard}>
-                <div className={styles.vendorLogo}>{vendor.initial}</div>
-                <h3 className={styles.vendorName}>{vendor.name}</h3>
-                <p className={styles.vendorDesc}>{vendor.desc}</p>
-                <button className="btn btn-outline" style={{ borderColor: "var(--primary)", color: "var(--primary)" }}>Visit Store</button>
+              { name: "Lumiera Home", initial: "L", items: "840+ items" },
+              { name: "Urban Tech", initial: "U", items: "1.2k items" },
+              { name: "Eco Bloom", initial: "E", items: "650+ items" },
+            ].map((v, i) => (
+              <div key={i} className={styles.vendorCard}>
+                <div className={styles.vendorLogo}>{v.initial}</div>
+                <div className={styles.vendorInfo}>
+                  <div className={styles.vendorNameWrapper}>
+                    <span className={styles.vendorName}>{v.name}</span>
+                    <CheckCircle2 size={16} fill="#3b82f6" color="white" />
+                  </div>
+                  <span className={styles.vendorStats}>{v.items}</span>
+                </div>
               </div>
             ))}
           </div>
@@ -166,21 +217,20 @@ export default function Home() {
       {/* Testimonials */}
       <section className={styles.testimonials}>
         <div className="container">
-          <div className="section-header">
-            <h2 className="section-title">What Our Community Says</h2>
-          </div>
           <div className={styles.testimonialGrid}>
             {[
-              { name: "Amber Smith", role: "Verified Buyer", quote: "Picky has completely changed how I shop. The curation is so spot-on that I find things I didn't even know I needed. High-quality products and fast shipping!", initial: "A" },
-              { name: "Sarah Chen", role: "Premium Member", quote: "I love supporting small vendors through Picky. Everything feels so personal and authentic. The app is incredibly smooth and well-designed.", initial: "S" },
-              { name: "Marcus Thorne", role: "Tech Enthusiast", quote: "Finally a marketplace that values quality over quantity. The customer service is excellent and the review process is really transparent.", initial: "M" },
+              { name: "Amber Smith", role: "ARCHITECT", quote: "The selection is so curated. Every piece I've purchased feels like it was selected specifically for my home's aesthetic." },
+              { name: "Sarah Chen", role: "INTERIOR DESIGNER", quote: "Verified vendors make all the difference. I shop with confidence knowing the quality is guaranteed by Picky." },
+              { name: "Marcus Thorne", role: "TECH ENTHUSIAST", quote: "The app is seamless. From discovery to delivery, it's the most premium marketplace experience I've had." },
             ].map((t, idx) => (
               <div key={idx} className={styles.testimonialCard}>
-                <div className={styles.stars}>⭐⭐⭐⭐⭐</div>
-                <p className={styles.quote}>"{t.quote}"</p>
-                <div className={styles.user}>
-                  <div className={styles.userAvatar}>{t.initial}</div>
-                  <div>
+                <div className={styles.stars}>
+                  {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="var(--primary)" color="var(--primary)" />)}
+                </div>
+                <p className={styles.testimonialQuote}>"{t.quote}"</p>
+                <div className={styles.testimonialUser}>
+                  <div className={styles.userAvatar}>{t.name.charAt(0)}</div>
+                  <div className={styles.userInfo}>
                     <div className={styles.userName}>{t.name}</div>
                     <div className={styles.userRole}>{t.role}</div>
                   </div>
@@ -191,53 +241,47 @@ export default function Home() {
         </div>
       </section>
 
-      {/* App Promo */}
-      <section className="container">
-        <div className={styles.appPromo}>
-          <div className={`container ${styles.appFlex}`}>
-            <div className={styles.appContent}>
-              <h2 className={styles.appTitle}>Shop anywhere with the Picky App</h2>
-              <p className={styles.appSubtitle}>
-                Get exclusive early access to drops, personalized recommendations, and instant order tracking with our mobile app.
-              </p>
-              <div className={styles.appStores}>
-                <button className={styles.appStoreBtn}>
-                  <span>📱 App Store</span>
-                </button>
-                <button className={styles.appStoreBtn}>
-                  <span>🤖 Google Play</span>
-                </button>
-              </div>
+      {/* App Section */}
+      <section className="container" style={{ marginBottom: '100px' }}>
+        <div className={styles.appSection}>
+          <div className={styles.appContent}>
+            <div className={styles.appBadge}>
+              <Smartphone size={16} />
+              <span>EXPERIENCE THE FREEDOM</span>
             </div>
-            <div className={styles.appMockup}>
-              <div className={styles.phone}>
-                <div className={styles.phoneScreen}>
-                  <div style={{ padding: "1.5rem", background: "#f3f4f6", height: "100%" }}>
-                    <div style={{ height: "40px", background: "white", borderRadius: "8px", marginBottom: "1rem" }}></div>
-                    <div style={{ height: "200px", background: "var(--primary)", borderRadius: "20px", marginBottom: "1rem" }}></div>
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-                      <div style={{ height: "100px", background: "white", borderRadius: "12px" }}></div>
-                      <div style={{ height: "100px", background: "white", borderRadius: "12px" }}></div>
-                    </div>
-                  </div>
+            <h2 className={styles.appTitle}>
+              Shop <span className={styles.whiteItalic}>anywhere</span> <br />
+              with the Picky App
+            </h2>
+            <p className={styles.appSubtitle}>
+              Take the world's most curated marketplace with you. Experience seamless browsing, instant notifications, and exclusive in-app drops.
+            </p>
+            <div className={styles.appStores}>
+              <button className={styles.appBtn}>
+                <Apple size={20} fill="currentColor" />
+                <div className={styles.btnText}>
+                  <span className={styles.btnSm}>Download on</span>
+                  <span className={styles.btnLg}>App Store</span>
                 </div>
-              </div>
+              </button>
+              <button className={styles.appBtn}>
+                <Star size={20} fill="currentColor" />
+                <div className={styles.btnText}>
+                  <span className={styles.btnSm}>Get it on</span>
+                  <span className={styles.btnLg}>Play Store</span>
+                </div>
+              </button>
             </div>
+          </div>
+          <div className={styles.appMockup}>
+            <div className={styles.mockupContainer}>
+              <Image src={appMockup} alt="Picky App" fill style={{ objectFit: "cover" }} />
+            </div>
+            <div className={styles.mockupBgGlow}></div>
           </div>
         </div>
       </section>
 
-      <footer style={{ padding: "4rem 0", background: "white", borderTop: "1px solid var(--border)", textAlign: "center" }}>
-        <div className="container">
-          <h2 style={{ color: "var(--primary)", marginBottom: "1.5rem" }}>Picky</h2>
-          <p style={{ color: "var(--text-muted)", marginBottom: "2rem" }}>© 2024 Picky Marketplace. All rights reserved.</p>
-          <div style={{ display: "flex", justifyContent: "center", gap: "2rem", color: "var(--text-muted)", fontSize: "0.875rem" }}>
-            <a href="#">Terms</a>
-            <a href="#">Privacy</a>
-            <a href="#">Contact</a>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 }
