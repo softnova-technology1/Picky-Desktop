@@ -1,0 +1,123 @@
+.successPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+  background: radial-gradient(circle at top right, rgba(100, 61, 151, 0.05), transparent),
+              radial-gradient(circle at bottom left, rgba(79, 134, 247, 0.05), transparent);
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  perspective: 1200px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(28px);
+  padding: 5rem;
+  border-radius: 3.5rem;
+  box-shadow: 0 25px 60px rgba(67, 56, 120, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  text-align: center;
+  max-width: 650px;
+  width: 100%;
+  position: relative;
+  z-index: 20;
+}
+
+.iconWrapper {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, var(--primary), #a855f7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 3rem;
+  color: white;
+  box-shadow: 0 15px 35px rgba(100, 61, 151, 0.25);
+  position: relative;
+}
+
+.iconWrapper::after {
+  content: '';
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-light);
+  opacity: 0.3;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+.title {
+  font-size: 3.25rem;
+  font-weight: 950;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.05em;
+  background: linear-gradient(to right, #1a1a1a, #666);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.summary {
+  background: rgba(126, 96, 191, 0.04);
+  padding: 2.5rem;
+  border-radius: 2.5rem;
+  margin-bottom: 3rem;
+  text-align: left;
+  border: 1px solid rgba(126, 96, 191, 0.08);
+}
+
+.summary p {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.ctaButton {
+  width: 100%;
+  padding: 1.4rem;
+  border-radius: 1.75rem;
+  background: var(--primary);
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 15px 30px rgba(100, 61, 151, 0.25);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.ctaButton:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(100, 61, 151, 0.35);
+  background: var(--primary-light);
+}
+
+.confetti {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .card { padding: 2.5rem 1.5rem; }
+  .title { font-size: 2.25rem; }
+}
