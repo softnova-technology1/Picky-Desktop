@@ -63,7 +63,7 @@ const Navbar = () => {
                     {/* Desktop Nav */}
                     <ul className={styles.navLinks}>
                         {navLinks.map((link) => (
-                            <li key={link.path}>
+                            <li key={link.name}>
                                 <Link
                                     href={link.path}
                                     className={`${styles.navLink} ${pathname === link.path ? styles.active : ''}`}
@@ -134,7 +134,7 @@ const Navbar = () => {
                         >
                             {navLinks.map((link) => (
                                 <Link
-                                    key={link.path}
+                                    key={link.name}
                                     href={link.path}
                                     className={styles.mobileLink}
                                 >
