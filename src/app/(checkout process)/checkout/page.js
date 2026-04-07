@@ -3,6 +3,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
+import { motion } from 'framer-motion';
+import { 
+  ShoppingCart, 
+  MapPin, 
+  CreditCard, 
+  ArrowRight, 
+  ChevronLeft,
+  ShoppingBag,
+  Tag,
+  Truck
+} from 'lucide-react';
+import styles from './Checkout.module.css';
 
 export default function CheckoutPage() {
   const { checkoutItems, checkoutSubtotal } = useCart();
@@ -11,126 +23,178 @@ export default function CheckoutPage() {
   const tax = checkoutSubtotal * 0.08;
   const total = checkoutSubtotal + shipping + tax;
 
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.5,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   return (
-    <div className="section section-light" style={{ minHeight: '100vh' }}>
-      <div className="container" style={{ maxWidth: '1200px' }}>
-        <div className="section-header" style={{ textAlign: 'left', marginBottom: '2.5rem' }}>
-          <h1 className="section-title">Checkout</h1>
-          <p className="section-subtitle">Please finalize your shipping details below.</p>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '3rem' }}>
-          {/* Shipping Form */}
-          <div style={{ backgroundColor: 'var(--card-bg)', padding: '2.5rem', borderRadius: '1.5rem', boxShadow: 'var(--shadow)' }}>
-            <h2 style={{ marginBottom: '2rem', fontSize: '1.5rem', fontWeight: '700' }}>Shipping Information</h2>
-            <form style={{ display: 'grid', gap: '1.5rem' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-                <div>
-                  <label style={labelStyle}>First Name</label>
-                  <input type="text" placeholder="John" style={inputStyle} />
-                </div>
-                <div>
-                  <label style={labelStyle}>Last Name</label>
-                  <input type="text" placeholder="Doe" style={inputStyle} />
-                </div>
-              </div>
-              <div>
-                <label style={labelStyle}>Email Address</label>
-                <input type="email" placeholder="john.doe@example.com" style={inputStyle} />
-              </div>
-              <div>
-                <label style={labelStyle}>Phone Number</label>
-                <input type="tel" placeholder="+1 (555) 000-0000" style={inputStyle} />
-              </div>
-              <div>
-                <label style={labelStyle}>Full Address</label>
-                <input type="text" placeholder="123 Street Name, Apt 4" style={inputStyle} />
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
-                <div>
-                  <label style={labelStyle}>City</label>
-                  <input type="text" placeholder="City" style={inputStyle} />
-                </div>
-                <div>
-                  <label style={labelStyle}>State</label>
-                  <input type="text" placeholder="State" style={inputStyle} />
-                </div>
-                <div>
-                  <label style={labelStyle}>Zip Code</label>
-                  <input type="text" placeholder="Zip" style={inputStyle} />
-                </div>
-              </div>
-            </form>
-          </div>
-
-          {/* Order Summary */}
-          <div style={{ alignSelf: 'start', backgroundColor: 'var(--card-bg)', padding: '2.5rem', borderRadius: '1.5rem', boxShadow: 'var(--shadow)', border: '1px solid var(--border)' }}>
-            <h2 style={{ marginBottom: '2rem', fontSize: '1.5rem', fontWeight: '700' }}>Order Summary</h2>
-            
-            {/* Selected Products List */}
-            <div style={{ borderBottom: '1px solid var(--border)', paddingBottom: '1.5rem', marginBottom: '1.5rem', display: 'grid', gap: '1rem' }}>
-              {checkoutItems.map((item) => (
-                <div key={item.id} style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                  <div style={{ position: 'relative', width: '64px', height: '64px', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)', flexShrink: 0 }}>
-                    <Image src={item.image} alt={item.name} fill style={{ objectFit: 'contain', padding: '4px' }} />
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <h4 style={{ fontSize: '0.9rem', fontWeight: '600', marginBottom: '0.25rem' }}>{item.name}</h4>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Qty: {item.quantity}</span>
-                  </div>
-                  <span style={{ fontWeight: '600', fontSize: '0.9rem' }}>${(item.price * item.quantity).toFixed(2)}</span>
-                </div>
-              ))}
-              {checkoutItems.length === 0 && <p style={{ color: 'var(--text-muted)' }}>No items selected for checkout.</p>}
+    <div className={styles.pageWrapper}>
+      <motion.div 
+        className={styles.container}
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
+        
+        {/* Step Progress UI */}
+        <div className={styles.progressContainer}>
+          <div className={styles.stepWrapper}>
+            <div className={`${styles.step} ${styles.stepActive}`}>
+              <div className={styles.stepCircle}>1</div>
+              <span className={styles.stepLabel}>Cart</span>
             </div>
-
-            <div style={{ display: 'grid', gap: '1rem', marginBottom: '2rem' }}>
-              <div className="flex-between">
-                <span style={{ color: 'var(--text-muted)' }}>Subtotal</span>
-                <span style={{ fontWeight: '600' }}>${checkoutSubtotal.toFixed(2)}</span>
-              </div>
-              <div className="flex-between">
-                <span style={{ color: 'var(--text-muted)' }}>Shipping</span>
-                <span style={{ color: '#059669', fontWeight: '600' }}>FREE</span>
-              </div>
-              <div className="flex-between">
-                <span style={{ color: 'var(--text-muted)' }}>Estimated Tax</span>
-                <span style={{ fontWeight: '600' }}>${tax.toFixed(2)}</span>
-              </div>
-              <div style={{ borderTop: '2px solid var(--border)', marginTop: '0.5rem', paddingTop: '1.5rem' }} className="flex-between">
-                <span style={{ fontSize: '1.25rem', fontWeight: '800' }}>Total</span>
-                <span style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--primary)' }}>${total.toFixed(2)}</span>
-              </div>
+            <div className={styles.stepLine}></div>
+            <div className={styles.step}>
+              <div className={styles.stepCircle}>2</div>
+              <span className={styles.stepLabel}>Address</span>
             </div>
-            <Link 
-              href="/checkout/address" 
-              className="btn btn-primary" 
-              style={{ width: '100%', borderRadius: '1rem', padding: '1.25rem', fontSize: '1.1rem' }}
-              disabled={checkoutItems.length === 0}
-            >
-              Continue to Payment
-            </Link>
+            <div className={styles.stepLine}></div>
+            <div className={styles.step}>
+              <div className={styles.stepCircle}>3</div>
+              <span className={styles.stepLabel}>Payment</span>
+            </div>
           </div>
         </div>
-      </div>
+
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
+          <div>
+            <h1 style={{ fontSize: '2.5rem', fontWeight: '900', color: 'var(--foreground)' }}>Checkout Summary</h1>
+            <p style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: '500' }}>Review your items before proceeding</p>
+          </div>
+          <Link href="/" style={{ color: 'var(--primary)', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <ChevronLeft size={20} /> Continue Shopping
+          </Link>
+        </div>
+
+        <div className={styles.layout}>
+          
+          {/* Order Details */}
+          <div style={{ display: 'grid', gap: '2rem' }}>
+            <motion.div className={styles.card} variants={itemVariants}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
+                <div style={{ backgroundColor: 'rgba(100, 61, 151, 0.08)', padding: '12px', borderRadius: '12px', color: 'var(--primary)' }}>
+                  <ShoppingBag size={24} />
+                </div>
+                <h2 style={{ fontSize: '1.5rem', fontWeight: '800' }}>Your Items</h2>
+              </div>
+              
+              <div className={styles.productList}>
+                {checkoutItems.map((item, idx) => (
+                  <motion.div 
+                    key={item.id} 
+                    className={styles.productItem}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3 + (idx * 0.1) }}
+                  >
+                    <div className={styles.imageBox}>
+                      <Image src={item.image} alt={item.name} fill style={{ objectFit: 'contain' }} />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <h4 style={{ fontSize: '1.05rem', fontWeight: '700', marginBottom: '0.25rem' }}>{item.name}</h4>
+                      <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: '600' }}>Category: {item.category}</p>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '0.5rem' }}>
+                        <span style={{ fontSize: '0.9rem', backgroundColor: '#f1f5f9', padding: '2px 8px', borderRadius: '4px', fontWeight: '700' }}>Qty: {item.quantity}</span>
+                        <span style={{ color: 'var(--primary)', fontWeight: '800' }}>${item.price.toFixed(2)} ea</span>
+                      </div>
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                       <span style={{ fontWeight: '900', fontSize: '1.1rem' }}>${(item.price * item.quantity).toFixed(2)}</span>
+                    </div>
+                  </motion.div>
+                ))}
+                {checkoutItems.length === 0 && (
+                  <div style={{ textAlign: 'center', padding: '3rem 0' }}>
+                    <ShoppingCart size={48} style={{ opacity: 0.1, marginBottom: '1rem' }} />
+                    <p style={{ color: 'var(--text-muted)', fontWeight: '600' }}>Your checkout list is empty.</p>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+
+            {/* Delivery Info Mock */}
+            <motion.div className={styles.card} variants={itemVariants}>
+              <div style={{ display: 'flex', gap: '1.5rem' }}>
+                <div style={{ backgroundColor: '#fcf8ff', padding: '1.5rem', borderRadius: '1.25rem', border: '1px solid var(--border)', flex: 1 }}>
+                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                      <Truck size={18} style={{ color: 'var(--primary)' }} />
+                      <span style={{ fontWeight: '800', fontSize: '0.9rem', color: 'var(--primary)' }}>FREE SHIPPING</span>
+                   </div>
+                   <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '500' }}>Standard delivery within 3-5 business days.</p>
+                </div>
+                <div style={{ backgroundColor: '#f8fafc', padding: '1.5rem', borderRadius: '1.25rem', border: '1px solid var(--border)', flex: 1 }}>
+                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                      <Tag size={18} style={{ color: '#059669' }} />
+                      <span style={{ fontWeight: '800', fontSize: '0.9rem', color: '#059669' }}>SECURE PAYMENT</span>
+                   </div>
+                   <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '500' }}>Encryption protocols for your protection.</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Sidebar Summary */}
+          <motion.div variants={itemVariants}>
+            <div className={styles.summaryCard}>
+              <h2 style={{ marginBottom: '2rem', fontSize: '1.5rem', fontWeight: '800' }}>Order Summary</h2>
+              
+              <div style={{ display: 'grid', gap: '1.25rem' }}>
+                <div className={styles.summaryRow}>
+                  <span style={{ color: 'var(--text-muted)', fontWeight: '500' }}>Subtotal ({checkoutItems.length} items)</span>
+                  <span style={{ fontWeight: '700' }}>${checkoutSubtotal.toFixed(2)}</span>
+                </div>
+                <div className={styles.summaryRow}>
+                  <span style={{ color: 'var(--text-muted)', fontWeight: '500' }}>Shipping</span>
+                  <span style={{ color: '#059669', fontWeight: '800' }}>FREE</span>
+                </div>
+                <div className={styles.summaryRow}>
+                  <span style={{ color: 'var(--text-muted)', fontWeight: '500' }}>Tax (8%)</span>
+                  <span style={{ fontWeight: '700' }}>${tax.toFixed(2)}</span>
+                </div>
+                
+                <div className={styles.summaryTotal}>
+                  <div>
+                    <span style={{ fontSize: '1.25rem', fontWeight: '900' }}>Total</span>
+                    <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '600' }}>Inclusive of all taxes</p>
+                  </div>
+                  <span style={{ fontSize: '2rem', fontWeight: '900', color: 'var(--primary)' }}>
+                    ${total.toFixed(2)}
+                  </span>
+                </div>
+              </div>
+
+              <Link href={checkoutItems.length > 0 ? "/checkout/address" : "#"}>
+                <motion.button 
+                  className={styles.checkoutBtn}
+                  disabled={checkoutItems.length === 0}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <span>Continue to Address</span>
+                  <ArrowRight size={20} />
+                </motion.button>
+              </Link>
+              
+              <p style={{ textAlign: 'center', fontSize: '0.85rem', color: 'var(--text-muted)', marginTop: '1.5rem', fontWeight: '500' }}>
+                By proceeding, you agree to our Terms & Conditions.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
     </div>
   );
 }
-
-const labelStyle = {
-  display: 'block',
-  marginBottom: '0.75rem',
-  fontSize: '0.875rem',
-  fontWeight: '600',
-  color: 'var(--foreground)'
-};
-
-const inputStyle = {
-  width: '100%',
-  padding: '0.75rem 1rem',
-  borderRadius: '0.75rem',
-  border: '1px solid var(--border)',
-  fontSize: '1rem',
-  transition: 'border-color 0.2s',
-  outline: 'none',
-};

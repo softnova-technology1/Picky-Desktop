@@ -1,135 +1,29 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { Home, Briefcase, MapPin, Plus, Check, ChevronLeft, Trash2, Edit2 } from 'lucide-react';
-
-// Styling Constants
-const addressCard = {
-  backgroundColor: 'white',
-  padding: '1.5rem',
-  borderRadius: '1.5rem',
-  borderWidth: '2px',
-  borderStyle: 'solid',
-  borderColor: 'var(--border)',
-  transition: 'all 0.3s ease',
-  position: 'relative'
-};
-
-const addressCardActive = {
-  ...addressCard,
-  borderColor: 'var(--primary)',
-  backgroundColor: 'rgba(79, 134, 247, 0.02)',
-  boxShadow: '0 10px 30px rgba(79, 134, 247, 0.08)'
-};
-
-const iconBox = {
-  width: '40px',
-  height: '40px',
-  borderRadius: '10px',
-  backgroundColor: '#f1f5f9',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  color: 'var(--primary)'
-};
-
-const iconBoxActive = {
-  ...iconBox,
-  backgroundColor: 'var(--primary)',
-  color: 'white'
-};
-
-const defaultBadge = {
-  fontSize: '0.7rem',
-  fontWeight: '800',
-  backgroundColor: 'var(--primary)',
-  color: 'white',
-  padding: '4px 10px',
-  borderRadius: '99px',
-  letterSpacing: '0.05em'
-};
-
-const addressText = {
-  fontSize: '0.9rem',
-  color: 'var(--text-muted)',
-  lineHeight: '1.6',
-  marginBottom: '1rem'
-};
-
-const selectBtn = {
-  padding: '0.6rem 1.5rem',
-  borderRadius: '0.75rem',
-  borderWidth: '1px',
-  borderStyle: 'solid',
-  borderColor: 'var(--border)',
-  backgroundColor: 'transparent',
-  fontWeight: '600',
-  fontSize: '0.85rem',
-  cursor: 'pointer',
-  transition: 'all 0.2s'
-};
-
-const selectedBtn = {
-  ...selectBtn,
-  backgroundColor: 'var(--primary)',
-  color: 'white',
-  border: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  gap: '0.5rem'
-};
-
-const actionBtn = {
-  width: '38px',
-  height: '38px',
-  borderRadius: '10px',
-  borderWidth: '1px',
-  borderStyle: 'solid',
-  borderColor: 'var(--border)',
-  backgroundColor: 'white',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  cursor: 'pointer',
-  color: 'var(--text-muted)',
-  transition: 'all 0.2s'
-};
-
-const deleteBtn = {
-  ...actionBtn,
-  color: '#ef4444',
-  borderColor: '#fee2e2'
-};
-
-const labelStyle = {
-  display: 'block',
-  marginBottom: '0.6rem',
-  fontSize: '0.875rem',
-  fontWeight: '600',
-  color: 'var(--foreground)'
-};
-
-const inputStyle = {
-  width: '100%',
-  padding: '0.875rem 1.25rem',
-  borderRadius: '0.75rem',
-  borderWidth: '1px',
-  borderStyle: 'solid',
-  borderColor: 'var(--border)',
-  fontSize: '1rem',
-  outline: 'none',
-  transition: 'border-color 0.2s',
-  backgroundColor: '#f8fafc'
-};
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Home, 
+  Briefcase, 
+  MapPin, 
+  Plus, 
+  Check, 
+  ChevronLeft, 
+  Trash2, 
+  Edit2,
+  ShoppingCart,
+  CreditCard,
+  ArrowRight
+} from 'lucide-react';
+import styles from './Address.module.css';
 
 export default function AddressPage() {
   const router = useRouter();
   const [addresses, setAddresses] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
-  const [isEditing, setIsEditing] = useState(null); // ID of address being edited
+  const [isEditing, setIsEditing] = useState(null);
   const [formData, setFormData] = useState({
     fullName: '',
     mobile: '',
@@ -138,11 +32,28 @@ export default function AddressPage() {
     state: '',
     zip: '',
     country: 'United States',
-    type: 'Home' // Home, Office, etc.
+    type: 'Home'
   });
 
-  // Load from localStorage on mount
-  useState(() => {
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.5,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('picky_addresses');
       if (saved) {
@@ -153,9 +64,10 @@ export default function AddressPage() {
     }
   }, []);
 
-  // Save to localStorage whenever addresses change
-  React.useEffect(() => {
-    localStorage.setItem('picky_addresses', JSON.stringify(addresses));
+  useEffect(() => {
+    if (addresses.length > 0) {
+      localStorage.setItem('picky_addresses', JSON.stringify(addresses));
+    }
   }, [addresses]);
 
   const handleInputChange = (e) => {
@@ -165,35 +77,21 @@ export default function AddressPage() {
 
   const handleSaveAddress = (e) => {
     e.preventDefault();
-    
     if (isEditing !== null) {
-      // Update existing
       setAddresses(prev => prev.map(addr => addr.id === isEditing ? { ...formData, id: isEditing } : addr));
       setIsEditing(null);
     } else {
-      // Add new
       const newAddress = { ...formData, id: Date.now() };
       setAddresses(prev => [...prev, newAddress]);
       if (!selectedId) setSelectedId(newAddress.id);
     }
-
-    // Reset form
-    setFormData({
-      fullName: '',
-      mobile: '',
-      street: '',
-      city: '',
-      state: '',
-      zip: '',
-      country: 'United States',
-      type: 'Home'
-    });
+    setFormData({ fullName: '', mobile: '', street: '', city: '', state: '', zip: '', country: 'United States', type: 'Home' });
   };
 
   const handleEdit = (addr) => {
     setFormData(addr);
     setIsEditing(addr.id);
-    window.scrollTo({ top: 400, behavior: 'smooth' });
+    window.scrollTo({ top: 300, behavior: 'smooth' });
   };
 
   const handleDelete = (id) => {
@@ -203,191 +101,257 @@ export default function AddressPage() {
 
   const handleContinue = () => {
     if (!selectedId) {
-      alert('Please select a delivery address to continue.');
+      alert('Please select or add a delivery address to continue.');
       return;
     }
     const selected = addresses.find(a => a.id === selectedId);
     localStorage.setItem('picky_shipping_address', JSON.stringify(selected));
-    router.push('/checkout/delivery-options');
+    router.push('/checkout/payment'); // Directing to payment for simplicity of this flow
   };
 
   return (
-    <div className="section section-light" style={{ minHeight: '100vh', padding: '2rem 0' }}>
-      <div className="container" style={{ maxWidth: '900px' }}>
+    <div className={styles.pageWrapper}>
+      <motion.div 
+        className={styles.container}
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
         
-        {/* Header & Progress */}
-        <div style={{ marginBottom: '3rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-             <div>
-                <h1 style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--primary)', marginBottom: '0.5rem' }}>Delivery Address</h1>
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Checkout Step 2 of 3</p>
-             </div>
-             <Link href="/checkout" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: '600' }}>
-                <ChevronLeft size={18} /> Back to Shipping
-             </Link>
-          </div>
-          
-          <div style={{ width: '100%', height: '8px', backgroundColor: '#e2e8f0', borderRadius: '4px', overflow: 'hidden' }}>
-            <div style={{ width: '66%', height: '100%', backgroundColor: 'var(--primary)', borderRadius: '4px' }}></div>
+        {/* Step Progress UI */}
+        <div className={styles.progressContainer}>
+          <div className={styles.stepWrapper}>
+            <div className={`${styles.step} ${styles.stepCompleted}`}>
+              <div className={styles.stepCircle}><Check size={18} /></div>
+              <span className={styles.stepLabel}>Cart</span>
+            </div>
+            <div className={`${styles.stepLine} ${styles.stepLineActive}`}></div>
+            <div className={`${styles.step} ${styles.stepActive}`}>
+              <div className={styles.stepCircle}>2</div>
+              <span className={styles.stepLabel}>Address</span>
+            </div>
+            <div className={styles.stepLine}></div>
+            <div className={styles.step}>
+              <div className={styles.stepCircle}>3</div>
+              <span className={styles.stepLabel}>Payment</span>
+            </div>
           </div>
         </div>
 
-        <div style={{ display: 'grid', gap: '2.5rem' }}>
-          
-          {/* Saved Addresses List */}
-          {addresses.length > 0 && (
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
+          <div>
+            <h1 style={{ fontSize: '2.5rem', fontWeight: '900', color: 'var(--foreground)' }}>Shipping Information</h1>
+            <p style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: '500' }}>Where should we send your order?</p>
+          </div>
+          <Link href="/checkout" style={{ color: 'var(--primary)', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <ChevronLeft size={20} /> Back
+          </Link>
+        </div>
+
+        {/* Form Card */}
+        <motion.div className={styles.card} variants={itemVariants}>
+          <div className={styles.sectionHeader}>
+            <div className={styles.iconBox}><MapPin size={24} /></div>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: '800' }}>{isEditing ? 'Edit Shipping Address' : 'Add New Shipping Address'}</h2>
+          </div>
+
+          <form onSubmit={handleSaveAddress} className={styles.formGrid}>
+            <div className={`${styles.grid} ${styles.cols2}`}>
+              <div className={styles.formGroup}>
+                <label className={`${styles.label} ${styles.required}`}>Full Name</label>
+                <input 
+                  name="fullName" 
+                  type="text" 
+                  placeholder="Jane Cooper" 
+                  className={styles.input} 
+                  value={formData.fullName} 
+                  onChange={handleInputChange} 
+                  required 
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <label className={`${styles.label} ${styles.required}`}>Mobile Number</label>
+                <input 
+                  name="mobile" 
+                  type="tel" 
+                  placeholder="+1 (555) 000-0000" 
+                  className={styles.input} 
+                  value={formData.mobile} 
+                  onChange={handleInputChange} 
+                  required 
+                />
+              </div>
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={`${styles.label} ${styles.required}`}>Street Address</label>
+              <input 
+                name="street" 
+                type="text" 
+                placeholder="1234 Applewood Dr" 
+                className={styles.input} 
+                value={formData.street} 
+                onChange={handleInputChange} 
+                required 
+              />
+            </div>
+
+            <div className={`${styles.grid} ${styles.cols3}`}>
+              <div className={styles.formGroup}>
+                <label className={`${styles.label} ${styles.required}`}>City</label>
+                <input name="city" type="text" placeholder="City" className={styles.input} value={formData.city} onChange={handleInputChange} required />
+              </div>
+              <div className={styles.formGroup}>
+                <label className={`${styles.label} ${styles.required}`}>State</label>
+                <input name="state" type="text" placeholder="State" className={styles.input} value={formData.state} onChange={handleInputChange} required />
+              </div>
+              <div className={styles.formGroup}>
+                <label className={`${styles.label} ${styles.required}`}>ZIP Code</label>
+                <input name="zip" type="text" placeholder="ZIP" className={styles.input} value={formData.zip} onChange={handleInputChange} required />
+              </div>
+            </div>
+
+            <div className={`${styles.grid} ${styles.cols2}`}>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>Country</label>
+                <select name="country" className={styles.input} value={formData.country} onChange={handleInputChange}>
+                  <option>United States</option>
+                  <option>Canada</option>
+                  <option>United Kingdom</option>
+                </select>
+              </div>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>Address Type</label>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                   {['Home', 'Office', 'Other'].map(type => (
+                     <button 
+                       key={type}
+                       type="button"
+                       onClick={() => setFormData(p => ({...p, type}))}
+                       style={{
+                         flex: 1,
+                         padding: '0.8rem',
+                         borderRadius: '0.75rem',
+                         border: `2px solid ${formData.type === type ? 'var(--primary)' : 'var(--border)'}`,
+                         backgroundColor: formData.type === type ? 'rgba(100, 61, 151, 0.05)' : 'white',
+                         fontWeight: '700',
+                         color: formData.type === type ? 'var(--primary)' : 'var(--text-muted)',
+                         transition: 'all 0.2s',
+                         cursor: 'pointer'
+                       }}
+                     >
+                        {type === 'Home' && <Home size={16} style={{ marginBottom: '2px' }} />}
+                        {type === 'Office' && <Briefcase size={16} style={{ marginBottom: '2px' }} />}
+                        <div style={{ fontSize: '0.8rem' }}>{type}</div>
+                     </button>
+                   ))}
+                </div>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem' }}>
+              <button 
+                type="submit" 
+                className={styles.continueBtn} 
+                style={{ flex: 2 }}
+              >
+                {isEditing ? 'Update Shipping Address' : 'Save & Continue'}
+              </button>
+              {isEditing && (
+                <button 
+                  type="button" 
+                  onClick={() => { setIsEditing(null); setFormData({ fullName: '', mobile: '', street: '', city: '', state: '', zip: '', country: 'United States', type: 'Home' }); }} 
+                  style={{ flex: 1, padding: '1rem', borderRadius: '1.25rem', border: '1px solid var(--border)', fontWeight: '600', cursor: 'pointer' }}
+                >
+                  Cancel
+                </button>
+              )}
+            </div>
+          </form>
+        </motion.div>
+
+        {/* Saved Addresses Section */}
+        {addresses.length > 0 && (
+          <motion.div variants={itemVariants}>
+            <div className={styles.sectionHeader} style={{ marginBottom: '1.5rem' }}>
+               <h3 style={{ fontSize: '1.25rem', fontWeight: '800' }}>Your Saved Addresses</h3>
+            </div>
+            <div className={styles.addressGrid}>
               {addresses.map((addr) => (
-                <div key={addr.id} style={selectedId === addr.id ? addressCardActive : addressCard}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                    <div style={selectedId === addr.id ? iconBoxActive : iconBox}>
-                      {addr.type === 'Office' ? <Briefcase size={20} /> : <Home size={20} />}
+                <motion.div 
+                  key={addr.id} 
+                  className={`${styles.addressCard} ${selectedId === addr.id ? styles.addressCardActive : ''}`}
+                  onClick={() => setSelectedId(addr.id)}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', alignItems: 'center' }}>
+                    <div style={{ 
+                      backgroundColor: selectedId === addr.id ? 'var(--primary)' : '#f1f5f9', 
+                      color: selectedId === addr.id ? 'white' : 'var(--primary)',
+                      padding: '8px', 
+                      borderRadius: '8px' 
+                    }}>
+                      {addr.type === 'Office' ? <Briefcase size={18} /> : <Home size={18} />}
                     </div>
-                    {selectedId === addr.id && <span style={defaultBadge}>SELECTED</span>}
+                    {selectedId === addr.id && (
+                      <div style={{ backgroundColor: 'var(--primary)', color: 'white', padding: '4px 8px', borderRadius: '12px', fontSize: '0.7rem', fontWeight: '800' }}>
+                        SELECTED
+                      </div>
+                    )}
                   </div>
-                  <h3 style={{ fontWeight: '700', marginBottom: '0.25rem', fontSize: '1.1rem' }}>{addr.fullName}</h3>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.75rem', fontWeight: '600' }}>{addr.mobile}</p>
-                  <p style={addressText}>
-                    {addr.street}<br/>
-                    {addr.city}, {addr.state} {addr.zip}<br/>
-                    {addr.country}
+                  
+                  <h4 style={{ fontWeight: '700', marginBottom: '0.2rem' }}>{addr.fullName}</h4>
+                  <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '0.8rem' }}>{addr.mobile}</p>
+                  
+                  <p style={{ fontSize: '0.85rem', color: 'var(--foreground)', lineHeight: '1.5', opacity: 0.8 }}>
+                    {addr.street}, {addr.city}<br/>
+                    {addr.state} {addr.zip}, {addr.country}
                   </p>
                   
-                  <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1.5rem' }}>
+                  <div style={{ display: 'flex', gap: '0.6rem', marginTop: '1.5rem' }}>
                     <button 
-                      onClick={() => setSelectedId(addr.id)}
-                      style={selectedId === addr.id ? selectedBtn : selectBtn}
+                      onClick={(e) => { e.stopPropagation(); handleEdit(addr); }} 
+                      style={{ padding: '6px', borderRadius: '6px', border: '1px solid var(--border)', background: 'transparent', cursor: 'pointer' }}
                     >
-                      {selectedId === addr.id ? <><Check size={16} /> Current</> : 'Select'}
+                      <Edit2 size={14} />
                     </button>
-                    <button onClick={() => handleEdit(addr)} style={actionBtn}><Edit2 size={16} /></button>
-                    <button onClick={() => handleDelete(addr)} style={deleteBtn}><Trash2 size={16} /></button>
+                    <button 
+                      onClick={(e) => { e.stopPropagation(); handleDelete(addr.id); }} 
+                      style={{ padding: '6px', borderRadius: '6px', border: '1px solid #fee2e2', background: 'transparent', color: '#ef4444', cursor: 'pointer' }}
+                    >
+                      <Trash2 size={14} />
+                    </button>
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
-          )}
-
-          {/* Combined Continue Button */}
-          {addresses.length > 0 && !isEditing && (
-            <div style={{ padding: '1.5rem', backgroundColor: 'rgba(79, 134, 247, 0.05)', borderRadius: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <p style={{ fontWeight: '600', color: 'var(--primary)' }}>Ready to proceed with selected address?</p>
-              <button 
-                onClick={handleContinue}
-                className="btn btn-primary" 
-                style={{ padding: '0.75rem 2rem', borderRadius: '0.75rem' }}
+              
+              <div 
+                className={styles.addressCard} 
+                style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderStyle: 'dashed', gap: '0.5rem' }}
+                onClick={() => { setIsEditing(null); setFormData({ fullName: '', mobile: '', street: '', city: '', state: '', zip: '', country: 'United States', type: 'Home' }); window.scrollTo({ top: 300, behavior: 'smooth' }); }}
               >
-                Continue to Payment
-              </button>
-            </div>
-          )}
-
-          {/* New/Edit Address Form */}
-          <div style={{ backgroundColor: 'white', padding: '2.5rem', borderRadius: '2rem', boxShadow: 'var(--shadow)', borderWidth: '1px', borderStyle: 'solid', borderColor: 'var(--border)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-               <div style={iconBox}><Plus size={20} /></div>
-               <h2 style={{ fontSize: '1.5rem', fontWeight: '800' }}>{isEditing ? 'Edit Address' : 'Add New Address'}</h2>
+                <Plus size={32} style={{ color: 'var(--primary)', opacity: 0.5 }} />
+                <span style={{ fontWeight: '700', color: 'var(--text-muted)' }}>Add Another Address</span>
+              </div>
             </div>
 
-            <form onSubmit={handleSaveAddress} style={{ display: 'grid', gap: '1.5rem' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '1.5rem' }}>
-                <div>
-                  <label style={labelStyle}>Full Name</label>
-                  <input name="fullName" type="text" placeholder="John Doe" style={inputStyle} value={formData.fullName} onChange={handleInputChange} required />
-                </div>
-                <div>
-                  <label style={labelStyle}>Mobile Number</label>
-                  <input name="mobile" type="tel" placeholder="+1 (000) 000-0000" style={inputStyle} value={formData.mobile} onChange={handleInputChange} required />
-                </div>
-              </div>
-
-              <div>
-                <label style={labelStyle}>Street Address</label>
-                <input name="street" type="text" placeholder="123 Street Name" style={inputStyle} value={formData.street} onChange={handleInputChange} required />
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
-                <div>
-                  <label style={labelStyle}>City</label>
-                  <input name="city" type="text" placeholder="City" style={inputStyle} value={formData.city} onChange={handleInputChange} required />
-                </div>
-                <div>
-                  <label style={labelStyle}>State</label>
-                  <input name="state" type="text" placeholder="State" style={inputStyle} value={formData.state} onChange={handleInputChange} required />
-                </div>
-                <div>
-                  <label style={labelStyle}>ZIP</label>
-                  <input name="zip" type="text" placeholder="ZIP" style={inputStyle} value={formData.zip} onChange={handleInputChange} required />
-                </div>
-              </div>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
-                <div>
-                  <label style={labelStyle}>Country</label>
-                  <select name="country" style={inputStyle} value={formData.country} onChange={handleInputChange}>
-                    <option>United States</option>
-                    <option>Canada</option>
-                  </select>
-                </div>
-                <div>
-                  <label style={labelStyle}>Address Type</label>
-                  <select name="type" style={inputStyle} value={formData.type} onChange={handleInputChange}>
-                    <option>Home</option>
-                    <option>Office</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-              </div>
-
-              <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem' }}>
-                <button type="submit" className="btn btn-primary" style={{ flex: 1, padding: '1.25rem', borderRadius: '1rem', fontSize: '1.1rem', fontWeight: '700' }}>
-                  {isEditing ? 'Update Address' : 'Save Address'}
-                </button>
-                {isEditing && (
-                  <button type="button" onClick={() => { setIsEditing(null); setFormData({ fullName: '', mobile: '', street: '', city: '', state: '', zip: '', country: 'United States', type: 'Home' }); }} className="btn" style={{ padding: '1.25rem', borderRadius: '1rem', border: '1px solid var(--border)' }}>
-                    Cancel
-                  </button>
-                )}
-              </div>
-            </form>
-          </div>
-
-          {/* Delivery Area Preview (As per screenshot) */}
-          <div style={{ backgroundColor: 'white', padding: '2.5rem', borderRadius: '2rem', boxShadow: 'var(--shadow)', borderWidth: '1px', borderStyle: 'solid', borderColor: 'var(--border)' }}>
-             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                <MapPin size={24} style={{ color: 'var(--primary)' }} />
-                <h2 style={{ fontSize: '1.3rem', fontWeight: '700' }}>Delivery Area Preview</h2>
-             </div>
-             <div style={{ 
-                height: '300px', 
-                backgroundColor: '#cbd5e1', 
-                borderRadius: '1.5rem', 
-                overflow: 'hidden', 
-                position: 'relative',
-                backgroundImage: 'url("https://www.mapquestapi.com/staticmap/v5/map?key=GvGAuD7V39N5y6M0y0vC3q0J3O0vD6v0&center=Chicago,IL&size=1000,600&zoom=11")' /* Mock map */,
-                backgroundSize: 'cover'
-              }}>
-                <div style={{
-                  position: 'absolute',
-                  bottom: '20px',
-                  left: '20px',
-                  backgroundColor: 'white',
-                  padding: '8px 16px',
-                  borderRadius: '99px',
-                  fontSize: '0.8rem',
-                  fontWeight: '700',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-                }}>
-                  <div style={{ width: '8px', height: '8px', backgroundColor: '#10b981', borderRadius: '50%' }}></div>
-                  Delivery available in your area
-                </div>
-             </div>
-          </div>
-        </div>
-      </div>
+            {!isEditing && (
+              <motion.button 
+                className={styles.continueBtn}
+                onClick={handleContinue}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span>Continue to Payment</span>
+                <ArrowRight size={20} />
+              </motion.button>
+            )}
+          </motion.div>
+        )}
+      </motion.div>
     </div>
   );
 }

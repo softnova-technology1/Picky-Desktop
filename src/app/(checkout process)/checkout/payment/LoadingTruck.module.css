@@ -1,0 +1,156 @@
+.loaderOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-geist-sans), sans-serif;
+}
+
+.scene {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 200px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.truckContainer {
+  position: relative;
+  z-index: 10;
+  animation: bounce 0.6s infinite ease-in-out;
+}
+
+.road {
+  position: absolute;
+  bottom: 40px;
+  width: 200%;
+  height: 4px;
+  background: #e5e7eb;
+  background-image: linear-gradient(90deg, #e5e7eb 50%, transparent 50%);
+  background-size: 60px 100%;
+  animation: roadMove 0.8s linear infinite;
+}
+
+.cloud {
+  position: absolute;
+  background: #e1e3e4;
+  border-radius: 50px;
+  opacity: 0.6;
+}
+
+.cloud1 {
+  width: 60px;
+  height: 20px;
+  top: 40px;
+  right: -100px;
+  animation: cloudMove 4s linear infinite;
+}
+
+.cloud2 {
+  width: 40px;
+  height: 15px;
+  top: 80px;
+  right: -150px;
+  animation: cloudMove 6s linear infinite 1s;
+}
+
+.loadingText {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+}
+
+.dots {
+  display: inline-block;
+  width: 20px;
+  text-align: left;
+}
+
+@keyframes roadMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-60px); }
+}
+
+@keyframes cloudMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-600px); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.wheel {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: rotate 0.5s linear infinite;
+}
+
+.tree {
+  position: absolute;
+  bottom: 40px;
+  width: 40px;
+  height: 60px;
+  z-index: 5;
+}
+
+.tree1 { right: -100px; animation: sceneryMove 3s linear infinite; }
+.tree2 { right: -300px; animation: sceneryMove 3s linear infinite 1.5s; }
+
+.grassContainer {
+  position: absolute;
+  bottom: 35px;
+  width: 100%;
+  height: 10px;
+  display: flex;
+  gap: 20px;
+  z-index: 6;
+}
+
+.grass {
+  width: 15px;
+  height: 10px;
+  background: #22c55e;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  animation: roadMove 0.8s linear infinite;
+}
+
+@keyframes sceneryMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-600px); }
+}
+
+.smoke {
+  position: absolute;
+  bottom: 45px;
+  left: 20px;
+  width: 8px;
+  height: 8px;
+  background: #cbd5e1;
+  border-radius: 50%;
+  opacity: 0;
+  animation: smokeMove 1s linear infinite;
+}
+
+@keyframes smokeMove {
+  0% { transform: scale(0.5) translate(0, 0); opacity: 1; }
+  100% { transform: scale(2) translate(-40px, -20px); opacity: 0; }
+}
