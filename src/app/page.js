@@ -9,110 +9,20 @@ import {
   Smartphone,
   Apple
 } from "lucide-react";
-import watch from "@/images/home/hero-watch.png"
 import appMockup from "@/images/home/app-mockup.png"
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
 import ProductCard from "@/Components/ProductCard";
 import CategoryCard from "@/Components/CategoryCard";
 import { products, categories } from "@/lib/data";
 import Link from 'next/link';
+import FashionHero from "@/Components/FashionHero";
 
 export default function Home() {
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const y3 = useTransform(scrollYProgress, [0, 1], [0, 50]);
 
   return (
     <main className={styles.main}>
-      {/* Ultra Premium Hero Section */}
-      <section ref={containerRef} className={styles.heroWrapper}>
-        <div className={styles.abstractOrb + " " + styles.orb1}></div>
-        <div className={styles.abstractOrb + " " + styles.orb2}></div>
-        <div className={styles.glowSphere}></div>
-
-        <div className={styles.heroMain}>
-          <div className={styles.contentSide}>
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-              <div className={styles.badgePremium}>
-                <Star size={16} fill="var(--primary)" color="var(--primary)" />
-                <span>TRUSTED BY 50,000+ SHOPPERS</span>
-              </div>
-              <h1 className={styles.titlePremium}>
-                Discover the <br />
-                <span className={styles.italicAccent}>most exclusive</span> <br />
-                picks for you
-              </h1>
-              <p className={styles.introText}>
-                A curated marketplace where quality meets authenticity. Shop the world's finest products from verified premium vendors.
-              </p>
-              <div className={styles.actionRow}>
-                <button className={`${styles.btnModern} ${styles.btnPrimary}`}>Explore Market</button>
-                <button className={`${styles.btnModern} ${styles.btnGhost}`}>View Deals</button>
-              </div>
-            </motion.div>
-          </div>
-
-          <div className={styles.visualSide}>
-            <div className={styles.stage}>
-              {/* Main Card */}
-              <motion.div
-                className={`${styles.floatingCard} ${styles.mainDisplay} ${styles.parallaxItem}`}
-                style={{ y: y1, "--rot": "-3deg" }}
-              >
-                <div className={styles.cardImage}>
-                  <Image src={watch} alt="Nexus Pro Watch" fill style={{ objectFit: "contain" }} />
-                </div>
-                <div className={styles.cardDetails}>
-                  <div className={styles.itemName}>Nexus Pro Watch</div>
-                  <div className={styles.itemPrice}>$399.00</div>
-                </div>
-              </motion.div>
-
-              {/* Secondary Card */}
-              <motion.div
-                className={`${styles.floatingCard} ${styles.secondaryDisplay} ${styles.parallaxItem}`}
-                style={{ y: y2, "--rot": "6deg" }}
-              >
-                <div className={styles.cardImage}>
-                  <Image src="/assets/sneaker.png" alt="Cloud X Runners" fill style={{ objectFit: "contain" }} />
-                </div>
-              </motion.div>
-
-              {/* Tertiary Card */}
-              <motion.div
-                className={`${styles.floatingCard} ${styles.tertiaryDisplay} ${styles.parallaxItem}`}
-                style={{ y: y3, "--rot": "-10deg" }}
-              >
-                <div className={styles.cardImage}>
-                  <Image src="/assets/headphone.png" alt="Pure Audio Max" fill style={{ objectFit: "contain" }} />
-                </div>
-              </motion.div>
-
-              {/* Stat Badge */}
-              <motion.div
-                className={styles.statBadge}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.5 }}
-              >
-                <span className={styles.statValue}>2.4k+</span>
-                <span className={styles.statLabel}>Exclusive Items</span>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FashionHero />
 
       {/* Categories Section */}
       <section className={styles.categories}>
