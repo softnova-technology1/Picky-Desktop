@@ -15,8 +15,8 @@ export default function SubcategoryPage({ params }) {
   const subName = subId.replace(/-/g, " ");
 
   const filteredProducts = products.filter(
-    (p) => 
-      p.category.toLowerCase() === catId.toLowerCase() && 
+    (p) =>
+      p.category.toLowerCase() === catId.toLowerCase() &&
       p.subcategory.toLowerCase() === subName.toLowerCase()
   );
 
@@ -24,22 +24,22 @@ export default function SubcategoryPage({ params }) {
     <div className={styles.wrapper}>
       <div className="container">
         <header className={styles.header}>
-           <div className={styles.breadcrumb}>
-              <Link href="/">HOME</Link> <ChevronRight size={14} /> 
-              <Link href="/categories">CATEGORIES</Link> <ChevronRight size={14} /> 
-              <Link href={`/categories/${catId}`}>{catId.toUpperCase()}</Link> <ChevronRight size={14} /> 
-              <span>{subName.toUpperCase()}</span>
-           </div>
-           
-           <div className={styles.titleRow}>
-              <div>
-                 <h1 className={styles.title}>{subName}</h1>
-                 <p className={styles.count}>{filteredProducts.length} items found</p>
-              </div>
-              <button className={styles.filterBtn}>
-                 <Filter size={18} /> <span>SORT & FILTER</span>
-              </button>
-           </div>
+          <div className={styles.breadcrumb}>
+            <Link href="/">HOME</Link> <ChevronRight size={14} />
+            <Link href="/categories">CATEGORIES</Link> <ChevronRight size={14} />
+            <Link href={`/categories/${catId}`}>{catId.toUpperCase()}</Link> <ChevronRight size={14} />
+            <span>{subName.toUpperCase()}</span>
+          </div>
+
+          <div className={styles.titleRow}>
+            <div>
+              <h1 className={styles.title}>{subName}</h1>
+              <p className={styles.count}>{filteredProducts.length} items found</p>
+            </div>
+            <button className={styles.filterBtn}>
+              <Filter size={18} /> <span>SORT & FILTER</span>
+            </button>
+          </div>
         </header>
 
         {filteredProducts.length > 0 ? (
