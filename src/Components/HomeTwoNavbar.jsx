@@ -52,6 +52,18 @@ export default function HomeTwoNavbar() {
 
   return (
     <>
+      <div className={styles.announcementBar}>
+        <div className={styles.tickerTrack}>
+          {[1, 2, 3, 4, 5, 6].map(i => (
+            <div key={i} className={styles.tickerItem}>
+              🔥 NEW ARRIVAL: LUXURY COLLECTION JUST DROPPED
+              <div className={styles.tickerDot}></div>
+              ✨ LIMITED TIME OFFER: 50% OFF TODAY ONLY
+              <div className={styles.tickerDot}></div>
+            </div>
+          ))}
+        </div>
+      </div>
       <nav className={styles.navbar}>
         <div className={styles.leftSection}>
           <Link href="/" className={styles.logo}>Picky</Link>

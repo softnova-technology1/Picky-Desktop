@@ -3,8 +3,10 @@ import React, { useState, useEffect } from 'react';
 import styles from './AuthPopup.module.css';
 import { X, Mail, Lock, User } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 const AuthPopup = ({ isOpen, onClose, initialTab = 'login' }) => {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState(initialTab);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,6 +23,7 @@ const AuthPopup = ({ isOpen, onClose, initialTab = 'login' }) => {
     e.preventDefault();
     login({ name: name || email.split('@')[0], email, id: Date.now() });
     onClose();
+    router.push('/hometwo');
   };
 
   if (!isOpen) return null;
