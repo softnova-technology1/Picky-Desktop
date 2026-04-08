@@ -151,7 +151,7 @@ const Navbar = () => {
                 onClose={() => setShowAuthPopup(false)} 
                 initialTab={authTab}
             />
-        </>
+        </>              
     );
 };
 
