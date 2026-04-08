@@ -60,7 +60,7 @@ const ProductCard = ({ product }) => {
           >
             <ShoppingCart size={20} />
           </button>
-          
+
           <motion.button
             className={`${styles.wishlistBtn} ${isFavorite ? styles.wishlistActive : ''}`}
             onClick={(e) => {
@@ -83,7 +83,7 @@ const ProductCard = ({ product }) => {
         <div className={styles.priceContainer}>
           <span className={styles.price}>${product.price}</span>
         </div>
-        
+
         <Link href={`/product/${product.id}`} className={styles.shopNowBtn}>
           SHOP NOW
         </Link>

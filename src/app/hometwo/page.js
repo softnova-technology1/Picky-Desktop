@@ -6,13 +6,8 @@ import Link from "next/link";
 import {
   Star,
   ArrowRight,
-  CheckCircle2,
   Heart,
   ShoppingBag,
-  Settings,
-  Bell,
-  Search,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   User,
@@ -24,7 +19,6 @@ import {
   Tv,
   Gamepad2,
   Apple,
-  Car,
   Bike,
   Trophy,
   Book,
@@ -35,14 +29,12 @@ import {
   RotateCcw,
   Lock,
   Headphones,
-  Mail,
-  Send,
   ShoppingCart
 } from "lucide-react";
-import watch from "@/images/home/hero-watch.png"
-import fashion from "@/images/home/fashion.png"
-import lamp from "@/images/home/lamp.png"
-import BlogSection from "@/Components/BlogDetails/BlogSection";
+// import watch from "@/images/home/hero-watch.png"
+// import fashion from "@/images/home/fashion.png"
+// import lamp from "@/images/home/lamp.png"
+// import BlogSection from "@/Components/BlogDetails/BlogSection";
 import AuthPopup from "@/Components/AuthPopup";
 
 export default function Home2() {
@@ -86,6 +78,7 @@ export default function Home2() {
     return () => clearInterval(timer);
   }, []);
 
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (showUserDropdown && !event.target.closest(`.${styles.userDropdownContainer}`)) {
@@ -95,6 +88,57 @@ export default function Home2() {
     document.addEventListener('click', handleClickOutside);
     return () => document.removeEventListener('click', handleClickOutside);
   }, [showUserDropdown]);
+
+  // Entrance Scroll Animation Observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(styles.activeReveal);
+            // Optional: stop observing once revealed
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const elements = document.querySelectorAll(`.${styles.revealSection}`);
+    elements.forEach((el) => observer.observe(el));
+
+    return () => elements.forEach((el) => observer.unobserve(el));
+  }, []);
+
+  // Magnetic Button Effect
+  useEffect(() => {
+    const magneticBtns = document.querySelectorAll(`.${styles.magneticBtn}`);
+    
+    const handleMouseMove = (e) => {
+      const btn = e.currentTarget;
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+    };
+
+    const handleMouseLeave = (e) => {
+      const btn = e.currentTarget;
+      btn.style.transform = `translate(0px, 0px)`;
+    };
+
+    magneticBtns.forEach(btn => {
+      btn.addEventListener('mousemove', handleMouseMove);
+      btn.addEventListener('mouseleave', handleMouseLeave);
+    });
+
+    return () => {
+      magneticBtns.forEach(btn => {
+        btn.removeEventListener('mousemove', handleMouseMove);
+        btn.removeEventListener('mouseleave', handleMouseLeave);
+      });
+    };
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
@@ -145,7 +189,7 @@ export default function Home2() {
                 </div>
                 <h3 className={styles.offerText}>{slide.offer}</h3>
                 <p className={styles.moreText}>+MORE</p>
-                <button className={styles.slideCTA}>SHOP COLLECTION</button>
+                <button className={`${styles.slideCTA} ${styles.magneticBtn}`}>SHOP COLLECTION</button>
               </div>
             </div>
           ))}
@@ -180,7 +224,7 @@ export default function Home2() {
       </section>
 
       {/* Category Ribbon */}
-      <section className={styles.categoryRibbon}>
+      <section className={`${styles.categoryRibbon} ${styles.revealSection}`}>
         <div className={styles.ribbonContainer}>
           {categoryRibbon.map((item, idx) => (
             <div
@@ -198,7 +242,7 @@ export default function Home2() {
       </section>
 
       {/* Reference-Matched Flash Deals Section */}
-      <section className={styles.refFlashSection}>
+      <section className={`${styles.refFlashSection} ${styles.revealSection}`}>
         <div className="container">
           <div className={styles.userFriendlyHeader}>
             <div className={styles.titleTimerGroup}>
@@ -247,7 +291,7 @@ export default function Home2() {
       </section>
 
       {/* Reference-Matched Promotion Banners */}
-      <section className={styles.refBannerSection}>
+      <section className={`${styles.refBannerSection} ${styles.revealSection}`}>
         <div className="container">
           <div className={styles.refBannerGrid}>
             <div className={`${styles.refBannerItem} ${styles.bannerBlack}`}>
@@ -255,7 +299,7 @@ export default function Home2() {
               <div className={styles.bannerOverlay}>
                 <h3>Luxe Fashion</h3>
                 <p>Upgrade your wardrobe with premium brands</p>
-                <button className={styles.bannerBtn}>Explore Now</button>
+                <button className={`${styles.bannerBtn} ${styles.magneticBtn}`}>Explore Now</button>
               </div>
             </div>
             <div className={`${styles.refBannerItem} ${styles.bannerBlue}`}>
@@ -263,7 +307,7 @@ export default function Home2() {
               <div className={styles.bannerOverlay}>
                 <h3>Smart Tech</h3>
                 <p>The latest in innovation and productivity</p>
-                <button className={styles.bannerBtn} style={{ background: '#3b82f6' }}>Explore Now</button>
+                <button className={`${styles.bannerBtn} ${styles.magneticBtn}`} style={{ background: '#3b82f6' }}>Explore Now</button>
               </div>
             </div>
             <div className={`${styles.refBannerItem} ${styles.bannerGray}`}>
@@ -271,7 +315,7 @@ export default function Home2() {
               <div className={styles.bannerOverlay}>
                 <h3>Home Studio</h3>
                 <p>Elevate your living and working space</p>
-                <button className={styles.bannerBtn} style={{ background: '#334155' }}>Explore Now</button>
+                <button className={`${styles.bannerBtn} ${styles.magneticBtn}`} style={{ background: '#334155' }}>Explore Now</button>
               </div>
             </div>
           </div>
@@ -279,7 +323,7 @@ export default function Home2() {
       </section>
 
       {/* Special Offers / Deals Section - High-Conversion Layout */}
-      <section className={styles.specialDealsMaster}>
+      <section className={`${styles.specialDealsMaster} ${styles.revealSection}`}>
         <div className="container">
           <div className={styles.spHeader}>
             <div className={styles.spTitleGroup}>
@@ -311,7 +355,7 @@ export default function Home2() {
                     <div className={styles.spTimeBlock}>12<small>SEC</small></div>
                   </div>
 
-                  <button className={styles.spMainCta}>Shop Now</button>
+                  <button className={`${styles.spMainCta} ${styles.magneticBtn}`}>Shop Now</button>
                 </div>
               </div>
             </div>
@@ -342,7 +386,7 @@ export default function Home2() {
       </section>
 
       {/* NEW ARRIVALS - The Mag-Grid Architectural Layout */}
-      <section className={styles.magArrivalsMaster}>
+      <section className={`${styles.magArrivalsMaster} ${styles.revealSection}`}>
         <div className="container">
           <div className={styles.magLayoutSplit}>
 
@@ -368,7 +412,7 @@ export default function Home2() {
                     <div className={styles.sbTag}>LIMITED</div>
                     <div className={styles.sbTitle}>Elevated Essentials</div>
                     <div className={styles.sbOffer}>-20% OFF</div>
-                    <button className={styles.sbBtn}>CLAIM NOW</button>
+                    <button className={`${styles.sbBtn} ${styles.magneticBtn}`}>CLAIM NOW</button>
                   </div>
                 </div>
               </div>
@@ -408,7 +452,7 @@ export default function Home2() {
       </section>
 
       {/* BEST SELLERS - The Spotlight Discovery Architectural Layout */}
-      <section className={styles.spotlightMaster}>
+      <section className={`${styles.spotlightMaster} ${styles.revealSection}`}>
         <div className="container">
           <div className={styles.spTitleHeader}>
             <div className={styles.spTitleMain}>
@@ -447,7 +491,7 @@ export default function Home2() {
 
                 <div className={styles.podiumAction}>
                   <div className={styles.podiumPrice}>₹4,999</div>
-                  <button className={styles.podiumAddBtn}><ShoppingBag size={18} /> ADDTOCART</button>
+                  <button className={`${styles.podiumAddBtn} ${styles.magneticBtn}`}><ShoppingBag size={18} /> ADDTOCART</button>
                 </div>
               </div>
             </div>
@@ -488,7 +532,7 @@ export default function Home2() {
                       <div className={styles.tHeatMini}>
                         <div className={styles.tHeatFill} style={{ width: item.heat }}></div>
                       </div>
-                      <button className={styles.tQuickBtn}>EXPLORE</button>
+                      <button className={`${styles.tQuickBtn} ${styles.magneticBtn}`}>EXPLORE</button>
                     </div>
                   </div>
                 ))}
@@ -499,18 +543,18 @@ export default function Home2() {
       </section>
 
       {/* CUSTOMER VOICES - Architectural Step Carousel */}
-      <section className={styles.reviewSectionMaster}>
+      <section className={`${styles.reviewSectionMaster} ${styles.revealSection}`}>
         <div className="container">
           <div className={styles.reviewHeader}>
-             <span className={styles.revTag}>TESTIMONIALS</span>
-             <h2 className={styles.revHeading}>Customer Voices</h2>
-             <div className={styles.revStatLine}>
-                <div className={styles.revAverage}>4.9/5</div>
-                <div className={styles.revStars}>
-                  {[1,2,3,4,5].map(s => <Star key={s} size={14} fill="#4C0519" color="#4C0519" />)}
-                </div>
-                <div className={styles.revCount}>Based on 12,020+ Reviews</div>
-             </div>
+            <span className={styles.revTag}>TESTIMONIALS</span>
+            <h2 className={styles.revHeading}>Customer Voices</h2>
+            <div className={styles.revStatLine}>
+              <div className={styles.revAverage}>4.9/5</div>
+              <div className={styles.revStars}>
+                {[1, 2, 3, 4, 5].map(s => <Star key={s} size={14} fill="#4C0519" color="#4C0519" />)}
+              </div>
+              <div className={styles.revCount}>Based on 12,020+ Reviews</div>
+            </div>
           </div>
         </div>
 
@@ -536,17 +580,17 @@ export default function Home2() {
                   </div>
                 </div>
                 <div className={styles.revStarsMini}>
-                  {[1,2,3,4,5].map(s => <Star key={s} size={12} fill="#FFD700" color="#FFD700" />)}
+                  {[1, 2, 3, 4, 5].map(s => <Star key={s} size={12} fill="#FFD700" color="#FFD700" />)}
                 </div>
                 <p className={styles.revText}>"{rev.text}"</p>
-                
+
                 <div className={styles.revProductHighlight}>
-                   <span className={styles.revBoughtTag}>PURCHASED:</span>
-                   <span className={styles.revBoughtName}>{rev.product}</span>
+                  <span className={styles.revBoughtTag}>PURCHASED:</span>
+                  <span className={styles.revBoughtName}>{rev.product}</span>
                 </div>
               </div>
             ))}
-            
+
             {/* Duplicate for seamless infinite step loop */}
             {[
               { name: "Sarah J.", role: "Verified Buyer", text: "The quality of the premium wireless headphones is unmatched.", product: "Premium Wireless Pro", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1976" },
@@ -565,12 +609,12 @@ export default function Home2() {
                   </div>
                 </div>
                 <div className={styles.revStarsMini}>
-                  {[1,2,3,4,5].map(s => <Star key={s} size={12} fill="#FFD700" color="#FFD700" />)}
+                  {[1, 2, 3, 4, 5].map(s => <Star key={s} size={12} fill="#FFD700" color="#FFD700" />)}
                 </div>
                 <p className={styles.revText}>"{rev.text}"</p>
                 <div className={styles.revProductHighlight}>
-                   <span className={styles.revBoughtTag}>PURCHASED:</span>
-                   <span className={styles.revBoughtName}>{rev.product}</span>
+                  <span className={styles.revBoughtTag}>PURCHASED:</span>
+                  <span className={styles.revBoughtName}>{rev.product}</span>
                 </div>
               </div>
             ))}
@@ -578,46 +622,8 @@ export default function Home2() {
         </div>
       </section>
 
-      {/* THE ARCHITECTURAL NEWSLETTER - Overlay Bloom Design */}
-      <section className={styles.newsSectionMaster}>
-        <div className={styles.newsHeroBg}>
-          <Image 
-            src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974" 
-            alt="Newsletter Background" 
-            fill 
-            className={styles.newsHeroImg} 
-          />
-          <div className={styles.newsHeroOverlay}></div>
-          <div className={styles.newsHeroContent}>
-             <span className={styles.newsUpperTag}>GET NEWSLETTER</span>
-             <h2 className={styles.newsHeroHeading}>Sign Up to Newsletter</h2>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className={styles.newsOverCardContainer}>
-            <div className={styles.newsOverCard}>
-              <div className={styles.newsOverIconGroup}>
-                <div className={styles.newsPaperPlane}>
-                  <ShoppingCart size={40} strokeWidth={2} />
-                </div>
-              </div>
-              
-              <div className={styles.newsInputGroupPremium}>
-                <input type="email" placeholder="Enter Your Email" className={styles.newsInputPremium} />
-                <button className={styles.newsSubmitBtnGradient}>
-                  SUBSCRIBE NOW <ArrowRight size={18} />
-                </button>
-              </div>
-              <p className={styles.newsPrivacyNotice}>* By subscribing, you agree with our Privacy Policy and Terms of Service.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
       {/* THE EDITORIAL BLOG HUB - Latest News & Blog */}
-      <section className={styles.blogSectionMaster}>
+      <section className={`${styles.blogSectionMaster} ${styles.revealSection}`}>
         <div className="container">
           <div className={styles.blogSectionHeader}>
             <div className={styles.blogTitleGroup}>
@@ -637,24 +643,24 @@ export default function Home2() {
             ].map((post, i) => (
               <div key={post.id} className={styles.blogCard}>
                 <div className={styles.blogCardVisual}>
-                   <Image src={post.img} alt={post.title} fill className={styles.blogImg} />
-                   <div className={styles.blogDateBadge}>
-                      <span className={styles.dateDay}>{post.date.split(' ')[0]}</span>
-                      <span className={styles.dateMonth}>{post.date.split(' ')[1]}</span>
-                   </div>
+                  <Image src={post.img} alt={post.title} fill className={styles.blogImg} />
+                  <div className={styles.blogDateBadge}>
+                    <span className={styles.dateDay}>{post.date.split(' ')[0]}</span>
+                    <span className={styles.dateMonth}>{post.date.split(' ')[1]}</span>
+                  </div>
                 </div>
-                
+
                 <div className={styles.blogCardBody}>
-                   <div className={styles.blogMeta}>
-                      <User size={14} color="#4C0519" />
-                      <span className={styles.blogAuthor}>By Admin</span>
-                   </div>
-                   <h3 className={styles.blogTitle}>{post.title}</h3>
-                   <p className={styles.blogSnippet}>There are many variations of passages of professional styling available, but the majority have suffered luxury alteration.</p>
-                   
-                   <button className={styles.blogReadBtn}>
-                      READ MORE <ArrowRight size={14} />
-                   </button>
+                  <div className={styles.blogMeta}>
+                    <User size={14} color="#4C0519" />
+                    <span className={styles.blogAuthor}>By Admin</span>
+                  </div>
+                  <h3 className={styles.blogTitle}>{post.title}</h3>
+                  <p className={styles.blogSnippet}>There are many variations of passages of professional styling available, but the majority have suffered luxury alteration.</p>
+
+                  <button className={styles.blogReadBtn}>
+                    READ MORE <ArrowRight size={14} />
+                  </button>
                 </div>
               </div>
             ))}
@@ -662,8 +668,48 @@ export default function Home2() {
         </div>
       </section>
 
-      {/* THE TRUST ECOSYSTEM - Why Choose Us */}
-      <section className={styles.trustSectionMaster}>
+
+      <section className={`${styles.newsSectionMaster} ${styles.revealSection}`}>
+        <div className={styles.newsHeroBg}>
+          <Image
+            src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974"
+            alt="Newsletter Background"
+            fill
+            className={styles.newsHeroImg}
+          />
+          <div className={styles.newsHeroOverlay}></div>
+          <div className={styles.newsHeroContent}>
+            <span className={styles.newsUpperTag}>GET NEWSLETTER</span>
+            <h2 className={styles.newsHeroHeading}>Sign Up to Newsletter</h2>
+          </div>
+        </div>
+
+        <div className="container">
+          <div className={styles.newsOverCardContainer}>
+            <div className={styles.newsOverCard}>
+              <div className={styles.newsOverIconGroup}>
+                <div className={styles.newsPaperPlane}>
+                  <ShoppingCart size={40} strokeWidth={2} />
+                </div>
+              </div>
+
+              <div className={styles.newsInputGroupPremium}>
+                <input type="email" placeholder="Enter Your Email" className={styles.newsInputPremium} />
+                <button className={`${styles.newsSubmitBtnGradient} ${styles.magneticBtn}`}>
+                  SUBSCRIBE NOW <ArrowRight size={18} />
+                </button>
+              </div>
+              <p className={styles.newsPrivacyNotice}>* By subscribing, you agree with our Privacy Policy and Terms of Service.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+
+      <section className={`${styles.trustSectionMaster} ${styles.revealSection}`}>
         <div className="container">
           <div className={styles.trustGrid}>
             {[
@@ -683,6 +729,7 @@ export default function Home2() {
           </div>
         </div>
       </section>
+
 
 
       {/* Auth Popup */}
