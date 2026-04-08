@@ -1,15 +1,18 @@
 "use client";
 
 import { useAuth } from "@/context/AuthContext";
+import { useCart } from "@/context/CartContext";
 import Navbar from "@/Components/Navbar";
 import HomeTwoNavbar from "@/Components/HomeTwoNavbar";
 import Footer from "@/Components/Footer";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import AuthPopup from "@/Components/AuthPopup";
+import CartNotification from "./CartNotification";
 
 export default function NavbarWrapper({ children }) {
   const { user } = useAuth();
+  const { notification, setNotification } = useCart();
   const pathname = usePathname();
   const [showAutoLogin, setShowAutoLogin] = useState(false);
 
@@ -41,6 +44,12 @@ export default function NavbarWrapper({ children }) {
         isOpen={showAutoLogin} 
         onClose={() => setShowAutoLogin(false)} 
         initialTab="login"
+      />
+
+      <CartNotification
+        show={notification.show}
+        product={notification.product}
+        onClose={() => setNotification(prev => ({ ...prev, show: false }))}
       />
     </>
   );

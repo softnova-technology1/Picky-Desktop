@@ -12,10 +12,14 @@ import {
 } from "lucide-react";
 import styles from "./HomeTwoNavbar.module.css";
 import { useAuth } from "@/context/AuthContext";
+import { useWishlist } from "@/context/WishlistContext";
+import { useCart } from "@/context/CartContext";
 import AuthPopup from "@/Components/AuthPopup";
 
 export default function HomeTwoNavbar() {
   const { user, logout } = useAuth();
+  const { wishlistItems } = useWishlist();
+  const { totalItems } = useCart();
   const [userName, setUserName] = useState("Member");
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [showAuthPopup, setShowAuthPopup] = useState(false);
@@ -160,8 +164,18 @@ export default function HomeTwoNavbar() {
           </div>
 
           <div className={styles.navIcons}>
-            <button className={styles.iconBtn}><Heart size={22} /></button>
-            <button className={styles.iconBtn}><ShoppingBag size={22} /></button>
+            <Link href="/wishlist" className={styles.iconBtn}>
+              <div className={styles.iconWrapper}>
+                <Heart size={22} fill={wishlistItems.length > 0 ? "currentColor" : "none"} />
+                {wishlistItems.length > 0 && <span className={styles.badge}>{wishlistItems.length}</span>}
+              </div>
+            </Link>
+            <Link href="/cart" className={styles.iconBtn}>
+              <div className={styles.iconWrapper}>
+                <ShoppingBag size={22} />
+                {totalItems > 0 && <span className={styles.badge}>{totalItems}</span>}
+              </div>
+            </Link>
 
             <div className={styles.userDropdownContainer}>
               <button

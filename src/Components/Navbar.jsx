@@ -6,8 +6,10 @@ import { usePathname } from 'next/navigation';
 import { ShoppingBag, Search, User, Menu, X, Heart, LogOut, ChevronDown } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
+import { useWishlist } from '@/context/WishlistContext';
 import styles from './Navbar.module.css';
 import { motion, AnimatePresence } from 'framer-motion';
+import CartNotification from './CartNotification';
 import AuthPopup from './AuthPopup';
 
 const Navbar = () => {
@@ -17,6 +19,7 @@ const Navbar = () => {
     const [authTab, setAuthTab] = useState('login');
     const pathname = usePathname();
     const { totalItems } = useCart();
+    const { wishlistItems } = useWishlist();
     const { user, logout } = useAuth();
 
     useEffect(() => {
@@ -37,7 +40,7 @@ const Navbar = () => {
     const navLinks = [
         { name: 'HOME', path: '/' },
         { name: 'SHOP', path: '/shop' },
-        { name: 'CATEGORIES', path: '/category'},
+        { name: 'CATEGORIES', path: '/category' },
         { name: 'NEW ARRIVALS', path: '/new-arrivals' },
         { name: 'OFFERS', path: '/offers' },
         { name: 'BLOG', path: '/Blog' },
@@ -72,9 +75,9 @@ const Navbar = () => {
                     <div className={styles.searchContainer}>
                         <div className={styles.searchWrapper}>
                             <Search size={18} className={styles.searchIcon} />
-                            <input 
-                                type="text" 
-                                placeholder="Search Picky..." 
+                            <input
+                                type="text"
+                                placeholder="Search Picky..."
                                 className={styles.searchInput}
                             />
                         </div>
@@ -83,10 +86,13 @@ const Navbar = () => {
 
                     {/* Actions (Right) */}
                     <div className={styles.actions}>
-                        <button className={styles.iconBtn} title="Wishlist">
-                            <Heart size={22} />
-                        </button>
-                        
+                        <Link href="/wishlist" className={styles.iconBtn} title="Wishlist">
+                            <div className={styles.badgeWrapper}>
+                                <Heart size={22} fill={wishlistItems.length > 0 ? "currentColor" : "none"} />
+                                {wishlistItems.length > 0 && <span className={styles.badge}>{wishlistItems.length}</span>}
+                            </div>
+                        </Link>
+
                         <Link href="/cart" className={styles.cartBtn} title="Cart">
                             <div className={styles.cartBadgeWrapper}>
                                 <ShoppingBag size={22} />
@@ -102,8 +108,8 @@ const Navbar = () => {
                                 </button>
                             </div>
                         ) : (
-                            <button 
-                                className={styles.iconBtn} 
+                            <button
+                                className={styles.iconBtn}
                                 title="Account"
                                 onClick={() => openAuth('login')}
                             >
@@ -145,10 +151,10 @@ const Navbar = () => {
                 </AnimatePresence>
             </nav>
 
-            {/* Global Auth Popup */}
-            <AuthPopup 
-                isOpen={showAuthPopup} 
-                onClose={() => setShowAuthPopup(false)} 
+
+            <AuthPopup
+                isOpen={showAuthPopup}
+                onClose={() => setShowAuthPopup(false)}
                 initialTab={authTab}
             />
         </>              
