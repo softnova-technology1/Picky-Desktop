@@ -65,10 +65,16 @@ const ProductCard = ({ product }) => {
       </div>
 
       <div className={styles.content}>
-        <Link href={`/product/${product.id}`}>
+        <Link href={`/product/${product.id}`} className={styles.titleLink}>
           <h3 className={styles.title}>{product.name}</h3>
         </Link>
-        <span className={styles.price}>${product.price}</span>
+        <div className={styles.priceContainer}>
+          <span className={styles.price}>${product.price}</span>
+        </div>
+        
+        <Link href={`/product/${product.id}`} className={styles.shopNowBtn}>
+          SHOP NOW
+        </Link>
       </div>
     </motion.div>
   );

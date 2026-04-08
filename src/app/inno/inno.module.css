@@ -1,0 +1,202 @@
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff; /* Soft ambient grey */
+    padding: 20px;
+    margin-top: 3em;
+    font-family: 'Inter', sans-serif;
+}
+
+.sliderWrapper {
+    width: 90%;
+    /* max-width: 1400px; */
+    height: 700px;
+    display: flex;
+    /* border-radius: 60px; */
+    overflow: hidden;
+    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.15);
+    background: #fff;
+    cursor: pointer;
+}
+
+/* Base Panel Style */
+.panel {
+    flex: 1;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: flex 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Active State Expansion */
+.panel.active {
+    flex: 2.5; /* Larger expansion */
+}
+
+/* Huge Background Heading Style */
+.bgTextLayer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.3);
+    pointer-events: none;
+    line-height: 1;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+/* For Collapsed Panel: Show Text Vertically */
+.collapsedLabel {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.5em;
+    opacity: 0.4;
+    text-transform: uppercase;
+    transition: opacity 0.5s ease;
+    z-index: 5;
+}
+
+.panel.active .collapsedLabel {
+    opacity: 0;
+}
+
+/* Product Stage (Floating Image) */
+.productStage {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.imgWrap {
+    position: relative;
+    width: 280px;
+    height: 280px;
+}
+
+.mainImg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Expanded Content Details */
+.expandedContent {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 60px;
+    text-align: center;
+    z-index: 20;
+}
+
+.priceTag {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.expandedTitle {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    letter-spacing: -0.02em;
+    opacity: 0.8;
+}
+
+.expandedDesc {
+    font-size: 1.1rem;
+    max-width: 450px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+    opacity: 0.6;
+}
+
+/* Button style from image */
+.buyBtn {
+    border: none;
+    /* border-radius: 100px; */
+    border-top-left-radius: 100px;
+    /* border-top-right-radius: 100px; */
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+    padding: 16px 45px;
+    font-weight: 800;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.buyBtn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    filter: brightness(1.1);
+}
+
+/* Back Button */
+.backBtn {
+    position: fixed;
+    top: 40px;
+    left: 40px;
+    padding: 12px 24px;
+    background: white;
+    border-radius: 100px;
+    font-weight: 800;
+    font-size: 0.75rem;
+    color: #1a1a1a;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    z-index: 100;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+/* Responsive adjustment */
+@media (max-width: 1024px) {
+    .sliderWrapper {
+        height: 600px;
+        border-radius: 40px;
+    }
+    .panel:nth-child(n+5) {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .sliderWrapper {
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        border-radius: 0;
+        overflow-y: auto;
+    }
+    .panel {
+        flex: 0 0 400px !important;
+        width: 100%;
+    }
+    .bgTextLayer {
+        font-size: 10rem;
+    }
+}

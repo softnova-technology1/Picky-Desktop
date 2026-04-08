@@ -41,11 +41,11 @@ export const products = [
   },
   {
     id: "2",
-    name: "MagSafe Silicone Case",
-    category: "electronics",
-    subcategory: "Cases",
+    name: "Pant Short",
+    category: "fashion",
+    subcategory: "Shorts",
     price: 49,
-    image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MT4P3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1693521360533",
+    image: "https://images.unsplash.com/photo-1516762689617-e1cffcef479d?q=80&w=2022&auto=format&fit=crop",
     description: "Silky, soft-touch finish of the silicone exterior."
   },
   {

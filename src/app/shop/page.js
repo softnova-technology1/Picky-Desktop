@@ -19,6 +19,7 @@ export default function AllProductsPage() {
         </header>
 
         <div className={styles.grid}>
+          
           {products.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}

@@ -9,6 +9,8 @@ const CategoryCard = ({ category, categoryId, subcategory }) => {
   // If subcategory is provided, this is a subcategory card
   // Otherwise, it's a main category card
   const isSubcategory = !!subcategory;
+  const subCount = category?.subcategories?.length || 0;
+
   
   // Construct the correct href based on requirements
   const href = isSubcategory 
@@ -27,22 +29,37 @@ const CategoryCard = ({ category, categoryId, subcategory }) => {
     <Link href={href} className={styles.card}>
       <motion.div
         className={styles.imageContainer}
-        whileHover={{ scale: 1.05 }}
-        transition={{ duration: 0.6, ease: [0.165, 0.84, 0.44, 1] }}
+        whileHover="hover"
+        initial="initial"
       >
         <Image
           src={displayImage}
           alt={displayName}
           fill
           style={{ objectFit: 'cover' }}
+          className={styles.image}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
         />
-        <div className={styles.overlay}>
+
+        {/* Collections Count Badge */}
+        {!isSubcategory && subCount > 0 && (
+          <div className={styles.badge}>
+            <span className={styles.count}>{subCount}</span>
+            <span className={styles.badgeText}>COLLECTIONS</span>
+          </div>
+        )}
+
+        {/* Floating Content Box */}
+        <div className={styles.floatingBox}>
           <div className={styles.content}>
             <span className={styles.label}>{displayLabel}</span>
             <h3 className={styles.name}>{displayName}</h3>
             {!isSubcategory && <p className={styles.description}>{displayDesc}</p>}
-            <div className={styles.exploreBtn}>Explore Items</div>
+            
+            <div className={styles.exploreTrigger}>
+              <span>EXPLORE NOW</span>
+              <div className={styles.arrowIcon}>→</div>
+            </div>
           </div>
         </div>
       </motion.div>
