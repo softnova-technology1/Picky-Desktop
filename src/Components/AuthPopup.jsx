@@ -19,7 +19,6 @@ const AuthPopup = ({ isOpen, onClose, initialTab = 'login' }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulate authentication logic
     login({ name: name || email.split('@')[0], email, id: Date.now() });
     onClose();
   };

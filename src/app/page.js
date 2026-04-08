@@ -10,15 +10,27 @@ import {
   Apple
 } from "lucide-react";
 import appMockup from "@/images/home/app-mockup.png"
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import ProductCard from "@/Components/ProductCard";
 import CategoryCard from "@/Components/CategoryCard";
 import { products, categories } from "@/lib/data";
 import Link from 'next/link';
+import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 import FashionHero from "@/Components/FashionHero";
 
 export default function Home() {
   const containerRef = useRef(null);
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      router.push('/hometwo');
+    }
+  }, [user, router]);
+
+  if (user) return null;
 
   return (
     <main className={styles.main}>
