@@ -135,7 +135,7 @@ const Navbar = () => {
                         >
                             {navLinks.map((link) => (
                                 <Link
-                                    key={link.path}
+                                    key={link.name}
                                     href={link.path}
                                     className={styles.mobileLink}
                                 >
