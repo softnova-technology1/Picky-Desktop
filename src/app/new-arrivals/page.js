@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X } from 'lucide-react';
+import React from 'react';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { Filter, ChevronDown, ArrowRight } from 'lucide-react';
 import NewArrivalsList from './NewArrivalsList';
 import styles from './NewArrivals.module.css';
 import { useCart } from '@/context/CartContext';
@@ -17,21 +18,56 @@ export default function NewArrivalsPage() {
   return (
     <div className={styles.pageWrapper}>
       <div className={styles.container}>
-        {/* Header Section */}
-        <motion.div 
-          className={styles.header}
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <h1 className={styles.title}>New Arrivals</h1>
-          <p className={styles.subtitle}>
-            Explore the latest treasures curated just for you. From modern tech to artisan home decor, be the first to own our newest additions.
-          </p>
-        </motion.div>
+        
+        {/* 1. Hero / Intro Section */}
+        <section className={styles.heroSection}>
+          <div className={styles.heroImageContainer}>
+            <Image 
+              src="/images/new-arrivals-hero-purple.png" 
+              alt="Premium Purple Collection" 
+              fill
+              className={styles.heroImage}
+              priority
+            />
+          </div>
+          <div className={styles.heroContent}>
+            <span className={styles.heroLabel}>PREMIUM SELECTION 2024</span>
+            <h1 className={styles.heroTitle}>The Purple Collection</h1>
+            <p className={styles.heroDescription}>
+              Elevate your lifestyle with our curated selection of products. 
+              Modern aesthetics meeting unparalleled craftsmanship.
+            </p>
+            <button className={styles.heroBtn}>
+              Explore Collection <ArrowRight size={20} />
+            </button>
+          </div>
+        </section>
 
-        {/* Product Listing */}
-        <NewArrivalsList onAddToCart={handleAddToCart} />
+        {/* 2. Section Header */}
+        <div className={styles.sectionHeader}>
+          <div className={styles.sectionTitleGroup}>
+            <h2 className={styles.animateSlideUp}>New Arrivals</h2>
+            <p className={styles.sectionSubtitle}>Exclusively selected for the Picky Editorial</p>
+          </div>
+          
+          <div className={styles.controls}>
+            <button className={styles.controlBtn}>
+              Filters <Filter size={16} />
+            </button>
+            <button className={styles.controlBtn}>
+              Sort By <ChevronDown size={16} />
+            </button>
+          </div>
+        </div>
+
+        {/* 3. Product Grid */}
+        <div className={styles.gridSection}>
+          <NewArrivalsList onAddToCart={handleAddToCart} />
+        </div>
+
+        {/* 4. Editorial Section (Bottom Feature) */}
+        
+
       </div>
     </div>
   );

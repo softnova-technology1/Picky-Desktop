@@ -51,7 +51,7 @@ const NewArrivalsCard = ({ product, index, onAddToCart }) => {
           />
         </div>
 
-        {/* Action Bar - Re-styled for Modern Look */}
+        {/* Action Bar - Restored to Original Design */}
         <div className={styles.actionBar}>
           <button 
             className={styles.addBtn} 
