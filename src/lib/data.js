@@ -1,78 +1,105 @@
-export const categories = [
-  {
-    id: "electronics",
-    name: "Electronics",
-    description: "Cutting-edge technology and premium gadgets.",
-    image: "https://images.unsplash.com/photo-1498049794561-7780e7231661?q=80&w=2070&auto=format&fit=crop",
-    subcategories: ["Mobiles", "Cases", "Chargers", "Laptops", "Headphones"]
-  },
-  {
-    id: "fashion",
-    name: "Fashion",
-    description: "Curated style for the modern individual.",
-    image: "https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=2071&auto=format&fit=crop",
-    subcategories: ["Mens", "Womens", "Watches", "Accessories"]
-  },
-  {
-    id: "home",
-    name: "Home & Living",
-    description: "Elevate your living space with minimal design.",
-    image: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?q=80&w=2070&auto=format&fit=crop",
-    subcategories: ["Furniture", "Lighting", "Decor", "Garden"]
-  },
-  {
-    id: "fitness",
-    name: "Fitness",
-    description: "Professional equipment for the elite athlete.",
-    image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop",
-    subcategories: ["Equipment", "Apparel", "Supplements", "Yoga"]
-  }
-];
+/**
+ * Picky Platform - Scalable Product Engine
+ * Data Location: src/lib/data.js
+ */
+import electronics from "@/images/home/elec.png"
+import fashion from "@/images/home/fashion.png"
+import books from "@/images/home/book.png"
+import homeDecor from "@/images/home/decor.png"
+import gifts from "@/images/home/gift.png"
 
-export const products = [
-  {
-    id: "1",
-    name: "iPhone 15 Pro Max",
-    category: "electronics",
-    subcategory: "Mobiles",
-    price: 1199,
-    image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch-naturaltitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692847847423",
-    description: "Forged in titanium and featuring the groundbreaking A17 Pro chip."
-  },
-  {
-    id: "2",
-    name: "Pant Short",
-    category: "fashion",
-    subcategory: "Shorts",
-    price: 49,
-    image: "https://images.unsplash.com/photo-1516762689617-e1cffcef479d?q=80&w=2022&auto=format&fit=crop",
-    description: "Silky, soft-touch finish of the silicone exterior."
-  },
-  {
-    id: "3",
-    name: "20W USB-C Adapter",
-    category: "electronics",
-    subcategory: "Chargers",
-    price: 19,
-    image: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MHXH3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1602118331000",
-    description: "Fast, efficient charging at home, in the office, or on the go."
-  },
-  {
-    id: "4",
-    name: "MacBook Air M3",
-    category: "electronics",
-    subcategory: "Laptops",
-    price: 1099,
-    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1926&auto=format&fit=crop",
-    description: "Lean. Mean. M3 machine."
-  },
-  {
-    id: "5",
-    name: "Cloud X Runners",
-    category: "fashion",
-    subcategory: "Mens",
-    price: 180,
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop",
-    description: "Lightweight performance sneakers."
-  }
-];
+// Additional local images for variety
+import sneakers from "@/images/home/sneakers.png"
+import watch from "@/images/home/watch.png"
+import clothing from "@/images/home/clothing.png"
+import lamp from "@/images/home/lamp.png"
+import chair from "@/images/home/chair.png"
+import snacks from "@/images/home/snacks.png"
+import living from "@/images/home/living.png"
+
+const categoriesArr = ["Electronics", "Fashion", "Books", "Home Decor", "Gifts"];
+
+const subcategories = {
+  "Electronics": ["Mobiles", "Laptops", "Accessories", "Audio", "Gaming", "Cameras", "Smart Home", "Wearables", "Tablets", "Monitors"],
+  "Fashion": ["Men's Wear", "Women's Wear", "Kids' Wear", "Footwear", "Watches", "Handbags", "Jewellery", "Sunglasses", "Activewear", "Winter Wear"],
+  "Books": ["Fiction", "Non-Fiction", "Children's Books", "Education", "Biographies", "Self-Help", "Sci-Fi & Fantasy", "Mystery & Thriller", "Poetry", "Comics & Manga"],
+  "Home Decor": ["Wall Art", "Lighting", "Furniture", "Rugs & Carpets", "Vases & Accents", "Mirrors", "Curtains", "Bedding", "Kitchen Decor", "Outdoor Decor"],
+  "Gifts": ["Birthday Gifts", "Anniversary Gifts", "Personalized Gifts", "Corporate Gifts", "Festive Gifts", "Gift Hampers", "Toys", "Greeting Cards", "Flowers & Plants", "Gift Vouchers"]
+};
+
+// Map subcategories to LOCAL images for 100% reliability
+const categoryImages = {
+  "Electronics": [electronics, watch, electronics],
+  "Fashion": [fashion, clothing, sneakers, fashion],
+  "Books": [books, books, books],
+  "Home Decor": [homeDecor, lamp, chair, living, homeDecor],
+  "Gifts": [gifts, snacks, gifts]
+};
+
+const subcategoryLocalMap = {
+  "Mobiles": electronics,
+  "Laptops": electronics,
+  "Footwear": sneakers,
+  "Watches": watch,
+  "Men's Wear": clothing,
+  "Women's Wear": fashion,
+  "Lighting": lamp,
+  "Furniture": chair,
+  "Wall Art": living,
+  "Fiction": books,
+  "Toys": gifts,
+  "Gift Hampers": snacks
+};
+
+const adjectives = ["Infinite", "Aura", "Zenith", "Quantum", "Nexus", "Element", "Legacy", "Origin", "Scope", "Apex", "Nova", "Flux", "Core", "Vantage", "Prism"];
+
+const products = [];
+categoriesArr.forEach((cat) => {
+  const subCats = subcategories[cat];
+  const catPool = categoryImages[cat] || [electronics];
+  
+  subCats.forEach((sub, subIdx) => {
+    // Determine the best image for this subcategory
+    const subDefaultImg = subcategoryLocalMap[sub] || catPool[subIdx % catPool.length];
+    
+    for (let i = 1; i <= 30; i++) {
+        const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+        const id = `${cat.toLowerCase().replace(/\s/g, '-')}-${sub.toLowerCase().replace(/\s/g, '-')}-${i}`;
+        const name = `${adj} ${sub.replace(/'s/g, '').slice(0, -1)} Model-${i}`;
+        
+        products.push({
+            id,
+            name,
+            category: cat,
+            subcategory: sub,
+            price: Math.floor(Math.random() * 1950) + 50,
+            image: subDefaultImg, // Using reliable local image
+            description: `This ${name} is a premium piece from our ${sub} collection, designed with excellence in mind for the Picky platform.`
+        });
+    }
+  });
+});
+
+const slugify = (str) => str.toLowerCase().replace(/\s/g, '-').replace(/'/g, '');
+
+export const categories = categoriesArr;
+export const getAllCategories = () => categoriesArr;
+export const getSubcategories = (category) => subcategories[category] || [];
+
+export const getSubcategoryImage = (subcategory, category) => {
+  return subcategoryLocalMap[subcategory] || categoryImages[category][0];
+};
+
+export const getProductsByCategory = (category) => {
+  const catSlug = slugify(category);
+  return products.filter(p => slugify(p.category) === catSlug);
+};
+
+export const getProductsBySubcategory = (category, subcategory) => {
+  const catSlug = slugify(category);
+  const subSlug = slugify(subcategory);
+  return products.filter(p => slugify(p.category) === catSlug && slugify(p.subcategory) === subSlug);
+};
+
+export const getProductById = (id) => products.find(p => p.id === id);
+export { products };

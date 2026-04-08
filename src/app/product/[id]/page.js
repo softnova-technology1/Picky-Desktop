@@ -3,7 +3,7 @@
 import React, { useState, useEffect, use } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { products } from "@/lib/data";
+import { getProductById, products } from "@/lib/data";
 import { useCart } from "@/context/CartContext";
 import ProductCard from "@/Components/ProductCard";
 import styles from "./product.module.css";
@@ -15,7 +15,7 @@ export default function ProductDetailsPage({ params }) {
   const { id } = resolvedParams;
 
   const { addToCart } = useCart();
-  const product = products.find((p) => p.id === id);
+  const product = getProductById(id);
 
   const [quantity, setQuantity] = useState(1);
   const [zoomPos, setZoomPos] = useState({ x: 0, y: 0 });

@@ -5,25 +5,49 @@ import Link from 'next/link';
 import styles from './CategoryCard.module.css';
 import { motion } from 'framer-motion';
 
-const CategoryCard = ({ category, categoryId, subcategory }) => {
-  // If subcategory is provided, this is a subcategory card
-  // Otherwise, it's a main category card
-  const isSubcategory = !!subcategory;
-  const subCount = category?.subcategories?.length || 0;
+import electronics from "@/images/home/elec.png"
+import fashion from "@/images/home/fashion.png"
+import books from "@/images/home/book.png"
+import homeDecor from "@/images/home/decor.png"
+import gifts from "@/images/home/gift.png"
 
-  
-  // Construct the correct href based on requirements
-  const href = isSubcategory 
-    ? `/categories/${categoryId}/${subcategory.toLowerCase().replace(/ /g, "-")}`
-    : `/categories/${category.id}`;
+const CategoryCard = ({ category }) => {
+  // Main Category Card metadata
+  const categoryMetadata = {
+    "Electronics": {
+      desc: "Innovative technology designed for the modern lifestyle.",
+      image: electronics,
+      label: "FUTURE TECH"
+    },
+    "Fashion": {
+      desc: "Curated styles and seasonal edits for every occasion.",
+      image: fashion,
+      label: "STYLE EDIT"
+    },
+    "Books": {
+      desc: "A vast collection of knowledge, fiction, and art.",
+      image: books,
+      label: "LITERARY WORLD"
+    },
+    "Home Decor": {
+      desc: "Thoughtfully curated pieces to elevate your living spaces.",
+      image: homeDecor,
+      label: "INTERIOR DESIGN"
+    },
+    "Gifts": {
+      desc: "Find the perfect gift for every celebration and milestone.",
+      image: gifts,
+      label: "CELEBRATIONS"
+    }
+  };
 
-  const displayName = isSubcategory ? subcategory : category.name;
-  const displayLabel = isSubcategory ? "COLLECTION" : "DEPARTMENT";
+  const meta = categoryMetadata[category] || {
+    desc: "Discover our curated collection.",
+    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop",
+    label: "DEPARTMENT"
+  };
 
-  // Fallback images to prevent "empty string" src console errors
-  const fallbackImg = "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop";
-  const displayImage = isSubcategory ? fallbackImg : (category.image || fallbackImg);
-  const displayDesc = isSubcategory ? "" : (category.description || "Discover our curated collection.");
+  const href = `/category/${category.toLowerCase().replace(/\s/g, '-')}`;
 
   return (
     <Link href={href} className={styles.card}>
@@ -33,8 +57,8 @@ const CategoryCard = ({ category, categoryId, subcategory }) => {
         initial="initial"
       >
         <Image
-          src={displayImage}
-          alt={displayName}
+          src={meta.image}
+          alt={category}
           fill
           style={{ objectFit: 'cover' }}
           className={styles.image}
@@ -42,19 +66,17 @@ const CategoryCard = ({ category, categoryId, subcategory }) => {
         />
 
         {/* Collections Count Badge */}
-        {!isSubcategory && subCount > 0 && (
-          <div className={styles.badge}>
-            <span className={styles.count}>{subCount}</span>
-            <span className={styles.badgeText}>COLLECTIONS</span>
-          </div>
-        )}
+        <div className={styles.badge}>
+          <span className={styles.count}>10</span>
+          <span className={styles.badgeText}>COLLECTIONS</span>
+        </div>
 
         {/* Floating Content Box */}
         <div className={styles.floatingBox}>
           <div className={styles.content}>
-            <span className={styles.label}>{displayLabel}</span>
-            <h3 className={styles.name}>{displayName}</h3>
-            {!isSubcategory && <p className={styles.description}>{displayDesc}</p>}
+            <span className={styles.label}>{meta.label}</span>
+            <h3 className={styles.name}>{category}</h3>
+            <p className={styles.description}>{meta.desc}</p>
             
             <div className={styles.exploreTrigger}>
               <span>EXPLORE NOW</span>

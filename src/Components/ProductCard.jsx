@@ -29,12 +29,15 @@ const ProductCard = ({ product }) => {
       <div className={styles.imageWrapper}>
         <Link href={`/product/${product.id}`} className={styles.imageContainer}>
           <Image
-            src={product.image}
+            src={product.image || 'https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=800'}
             alt={product.name}
             fill
             style={{ objectFit: 'contain' }}
             className={styles.image}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+            onError={(e) => {
+              e.currentTarget.src = 'https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=800'
+            }}
           />
         </Link>
 
