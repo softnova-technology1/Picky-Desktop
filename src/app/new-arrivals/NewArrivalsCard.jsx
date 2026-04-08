@@ -3,28 +3,18 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingCart, Heart, Eye } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 import styles from './NewArrivals.module.css';
 
 const NewArrivalsCard = ({ product, index, onAddToCart }) => {
   const { addToCart } = useCart();
-  const [isFavorite, setIsFavorite] = useState(false);
+  const { toggleWishlist, isInWishlist } = useWishlist();
 
-  useEffect(() => {
-    const favorites = JSON.parse(localStorage.getItem('picky_favorites') || '[]');
-    setIsFavorite(favorites.includes(product.id));
-  }, [product.id]);
+  const isFavorite = isInWishlist(product.id);
 
-  const toggleFavorite = (e) => {
+  const handleToggleFavorite = (e) => {
     e.preventDefault();
-    const favorites = JSON.parse(localStorage.getItem('picky_favorites') || '[]');
-    let newFavorites;
-    if (isFavorite) {
-      newFavorites = favorites.filter(id => id !== product.id);
-    } else {
-      newFavorites = [...favorites, product.id];
-    }
-    localStorage.setItem('picky_favorites', JSON.stringify(newFavorites));
-    setIsFavorite(!isFavorite);
+    toggleWishlist(product);
   };
 
   const handleAddToCart = (e) => {
@@ -71,13 +61,15 @@ const NewArrivalsCard = ({ product, index, onAddToCart }) => {
             <ShoppingCart size={20} />
           </button>
 
-          <button 
+          <motion.button 
             className={`${styles.viewBtn} ${isFavorite ? styles.favoriteActive : ''}`} 
-            onClick={toggleFavorite}
-            title="Add to Wishlist"
+            onClick={handleToggleFavorite}
+            whileTap={{ scale: 0.8 }}
+            whileHover={{ scale: 1.1 }}
+            title={isFavorite ? "Remove from Wishlist" : "Add to Wishlist"}
           >
-            <Heart size={20} fill={isFavorite ? "white" : "none"} />
-          </button>
+            <Heart size={20} fill={isFavorite ? "#ff0404ff" : "none"} color={isFavorite ? "#f10000ff" : "currentColor"} />
+          </motion.button>
         </div>
       </div>
 
