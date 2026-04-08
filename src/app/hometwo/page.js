@@ -1,27 +1,100 @@
 "use client"
 import Image from "next/image";
-import styles from "@/Stylesheet/Hometwo.module.css";
+import styles from "./hometwo.module.css";
 import { useEffect, useState } from "react";
-import { 
-  Star, 
-  ArrowRight, 
-  CheckCircle2, 
-  Heart, 
-  ShoppingBag, 
+import Link from "next/link";
+import {
+  Star,
+  ArrowRight,
+  CheckCircle2,
+  Heart,
+  ShoppingBag,
   Settings,
-  Bell
+  Bell,
+  Search,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  User,
+  Shirt,
+  Smartphone,
+  Sparkles,
+  Laptop,
+  Lamp,
+  Tv,
+  Gamepad2,
+  Apple,
+  Car,
+  Bike,
+  Trophy,
+  Book,
+  Armchair,
+  Flame,
+  Quote,
+  Truck,
+  RotateCcw,
+  Lock,
+  Headphones,
+  Mail,
+  Send,
+  ShoppingCart
 } from "lucide-react";
 import watch from "@/images/home/hero-watch.png"
 import fashion from "@/images/home/fashion.png"
 import lamp from "@/images/home/lamp.png"
+import BlogSection from "@/Components/BlogDetails/BlogSection";
+import AuthPopup from "./AuthPopup/AuthPopup";
 
 export default function Home2() {
   const [userName, setUserName] = useState("Member");
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [activeCategory, setActiveCategory] = useState("For You");
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [showAuthPopup, setShowAuthPopup] = useState(false);
+  const [authTab, setAuthTab] = useState('login');
+
+  const promoSlides = [
+    {
+      brand: "ZARA",
+      offer: "60% OFF",
+      image: "https://i.pinimg.com/1200x/28/56/34/28563432c82fb689e5537b23e45f30fd.jpg",
+      bg: "#f3f3f3"
+    },
+    {
+      brand: "GUCCI",
+      offer: "30% OFF",
+      image: "https://i.pinimg.com/1200x/1d/f3/c3/1df3c39405253649603248231357d0d2.jpg",
+      bg: "#e9ecef"
+    },
+    {
+      brand: "PRADA",
+      offer: "NEW DROP",
+      image: "https://i.pinimg.com/1200x/13/86/b1/1386b1f8a086570c65c445c4987527d3.jpg",
+      bg: "#f8f9fa"
+    }
+  ];
 
   useEffect(() => {
     const savedName = localStorage.getItem('userName');
     if (savedName) setUserName(savedName);
+
+    // Carousel Timer
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % promoSlides.length);
+    }, 8000); // 8 seconds per slide
+
+    return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showUserDropdown && !event.target.closest(`.${styles.userDropdownContainer}`)) {
+        setShowUserDropdown(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [showUserDropdown]);
 
   const handleLogout = () => {
     localStorage.removeItem('isLoggedIn');
@@ -29,99 +102,779 @@ export default function Home2() {
     window.location.href = '/';
   };
 
+  const categoryRibbon = [
+    { name: "For You", icon: ShoppingBag },
+    { name: "Fashion", icon: Shirt },
+    { name: "Mobiles", icon: Smartphone },
+    { name: "Beauty", icon: Sparkles },
+    { name: "Electronics", icon: Laptop },
+    { name: "Home", icon: Lamp },
+    { name: "Appliances", icon: Tv },
+    { name: "Toys, baby...", icon: Gamepad2 },
+    { name: "Food & Health", icon: Apple },
+    // { name: "Auto Acc...", icon: Car },
+    { name: "2 Wheeler", icon: Bike },
+    { name: "Sports & ...", icon: Trophy },
+    { name: "Books & ...", icon: Book },
+    { name: "Furniture", icon: Armchair },
+  ];
+
   return (
     <main className={styles.main}>
+      {/* Navbar Section */}
+      <nav className={styles.navbar}>
+        <Link href="/" className={styles.logo}>Picky</Link>
+
+        <div className={styles.navLinks}>
+          <Link href="#" className={styles.navLink}>HOME</Link>
+          <Link href="#" className={styles.navLink}>SHOP</Link>
+          <div className={`${styles.navLink} ${styles.hasMegaMenu}`}>
+            CATEGORIES <ChevronDown size={14} />
+            {/* Mega Menu Dropdown */}
+            <div className={styles.megaMenu}>
+              {/* Column 1: Inner Pages */}
+              <div className={styles.megaColumn}>
+                <h4 className={styles.megaTitle}>INNER PAGES</h4>
+                <div className={styles.megaLinks}>
+                  {["ABOUT", "BLOGS", "BLOGS LAYOUT 2", "BLOG DETAILS", "CONTACT", "FAQ", "OUR STORE", "REVIEWS", "LOG IN", "SIGN UP"].map(link => (
+                    <Link
+                      key={link}
+                      href={link === "BLOGS" ? "/Blog" : link.includes("BLOG") ? "/Blog/1" : "#"}
+                      className={styles.megaLink}
+                    >
+                      {link}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              {/* Column 2: Shop Pages */}
+              <div className={styles.megaColumn}>
+                <h4 className={styles.megaTitle}>SHOP PAGES</h4>
+                <div className={styles.megaLinks}>
+                  {["SHOP LEFT SIDEBAR", "SHOP RIGHT SIDEBAR", "SHOP FULL WIDTH", "SHOP DETAILS", "WISHLIST", "CART", "CHECKOUT"].map(link => (
+                    <Link key={link} href="#" className={styles.megaLink}>{link}</Link>
+                  ))}
+                </div>
+              </div>
+              {/* Column 3: Men's & Women's */}
+              <div className={styles.megaColumn}>
+                <h4 className={styles.megaTitle}>FASHION</h4>
+                <div className={styles.megaLinks}>
+                  {["CLOTHING", "FOOTWEAR", "ACCESSORIES", "ACTIVEWEAR", "GROOMING", "BEAUTY", "ETHNIC WEAR"].map(link => (
+                    <Link key={link} href="#" className={styles.megaLink}>{link}</Link>
+                  ))}
+                </div>
+              </div>
+              {/* Column 4: Children's */}
+              <div className={styles.megaColumn}>
+                <h4 className={styles.megaTitle}>CHILDREN'S</h4>
+                <div className={styles.megaLinks}>
+                  {["CLOTHING", "FOOTWEAR", "ACCESSORIES", "TOYS & GAMES", "BABY ESSENTIALS"].map(link => (
+                    <Link key={link} href="#" className={styles.megaLink}>{link}</Link>
+                  ))}
+                </div>
+              </div>
+              {/* Column 5: Jewellery */}
+              <div className={styles.megaColumn}>
+                <h4 className={styles.megaTitle}>JEWELLERY</h4>
+                <div className={styles.megaLinks}>
+                  {["ETHNIC", "BRIDAL", "BRACELETS", "RINGS", "EARRINGS", "CHAINS"].map(link => (
+                    <Link key={link} href="#" className={styles.megaLink}>{link}</Link>
+                  ))}
+                </div>
+              </div>
+              {/* Column 6: Featured / Promo */}
+              <div className={styles.featuredColumn}>
+                <div className={styles.featuredCard}>
+                  <span className={styles.featuredTag}>NEW ARRIVAL</span>
+                  <h5 className={styles.featuredTitle}>The Heritage Collection</h5>
+                  <p className={styles.featuredText}>Explore our most anticipated luxury release of the season.</p>
+                  <button className={styles.primaryBtn} style={{ padding: '10px 24px', fontSize: '11px' }}>DISCOVER NOW</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <Link href="#" className={styles.navLink}>NEW ARRIVALS</Link>
+          <Link href="#" className={styles.navLink}>OFFERS</Link>
+          <Link href="/Blog" className={styles.navLink}>BLOG</Link>
+          <Link href="#" className={styles.navLink}>ABOUT US</Link>
+        </div>
+
+        <div className={styles.searchContainer}>
+          <div className={styles.searchBox}>
+            <Search className={styles.searchIcon} size={18} />
+            <input type="text" placeholder="Search Picky..." className={styles.searchInput} />
+          </div>
+        </div>
+
+        <div className={styles.navIcons}>
+          <button className={styles.iconBtn}><Heart size={22} /></button>
+          <button className={styles.iconBtn}><ShoppingBag size={22} /></button>
+
+          <div className={styles.userDropdownContainer}>
+            <button
+              className={styles.iconBtn}
+              onClick={() => setShowUserDropdown(!showUserDropdown)}
+            >
+              <User size={22} />
+            </button>
+
+            {showUserDropdown && (
+              <div className={styles.userDropdown}>
+                <div className={styles.dropdownHeader}>
+                  <span className={styles.dropdownWelcome}>Welcome, {userName}</span>
+                </div>
+                <div className={styles.dropdownLinks}>
+                  <button
+                    className={styles.dropdownLink}
+                    onClick={() => {
+                      setAuthTab('login');
+                      setShowAuthPopup(true);
+                      setShowUserDropdown(false);
+                    }}
+                  >
+                    <User size={16} /> LOGIN
+                  </button>
+                  <button
+                    className={styles.dropdownLink}
+                    onClick={() => {
+                      setAuthTab('signup');
+                      setShowAuthPopup(true);
+                      setShowUserDropdown(false);
+                    }}
+                  >
+                    <Settings size={16} /> SIGN UP
+                  </button>
+                  <div className={styles.dropdownDivider}></div>
+                  <button
+                    className={styles.dropdownLink}
+                    onClick={() => setShowUserDropdown(false)}
+                  >
+                    <ShoppingBag size={16} /> MY ORDERS
+                  </button>
+                  <button
+                    className={`${styles.dropdownLink} ${styles.logoutText}`}
+                    onClick={() => {
+                      handleLogout();
+                      setShowUserDropdown(false);
+                    }}
+                  >
+                    LOGOUT
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </nav>
+      <div className={styles.navSpacer}></div>
+
+
+
       {/* Welcome Dashboard */}
-      <section className={styles.welcomeSection}>
+      {/* <section className={styles.welcomeSection}>
         <div className="container">
           <div className={styles.welcomeHeader}>
             <div className={styles.welcomeMsg}>
-                <div className={styles.userBadge}>
-                    <CheckCircle2 size={14} fill="var(--primary)" color="white" />
-                    <span>PREMIUM MEMBER STATUS</span>
-                </div>
-                <h1 className={styles.title}>
-                    Welcome back, <br />
-                    <span className={styles.italic}>{userName}</span>
-                </h1>
-                <p className={styles.subtitle}>
-                    It's good to see you again. We've curated a new selection of rare exclusive pieces arriving this week just for your taste.
-                </p>
+              <div className={styles.userBadge}>
+                <CheckCircle2 size={14} fill="#5D2D91" color="white" />
+                <span>PREMIUM MEMBER STATUS</span>
+              </div>
+              <h1 className={styles.title}>
+                Welcome back, <br />
+                <span className={styles.italic}>{userName}</span>
+              </h1>
+              <p className={styles.subtitle}>
+                It's good to see you again. We've curated a new selection of rare exclusive pieces arriving this week just for your taste.
+              </p>
             </div>
             <div className={styles.statsBar}>
-                <div className={styles.statItem}>
-                    <span className={styles.statValue}>12</span>
-                    <span className={styles.statLabel}>Watchlist</span>
+              <div className={styles.statItem}>
+                <span className={styles.statValue}>12</span>
+                <span className={styles.statLabel}>Watchlist</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statValue}>04</span>
+                <span className={styles.statLabel}>In Cart</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statValue}>2.4k</span>
+                <span className={styles.statLabel}>Reward Pts</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> */}
+
+      {/* Section 2: Promo Carousel (Full Width Hero) */}
+      <section className={styles.promoContainer}>
+        <div className={styles.carousel}>
+          {promoSlides.map((slide, index) => (
+            <div
+              key={index}
+              className={`${styles.slide} ${currentSlide === index ? styles.slideActive : ''}`}
+            >
+              <div className={styles.slideImage}>
+                <Image
+                  src={slide.image}
+                  alt={slide.brand}
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+              <div className={styles.slideContent}>
+                <div className={styles.brandLabel}>
+                  <h2 className={styles.brandSolid}>{slide.brand}</h2>
+                  <h2 className={styles.brandOutline}>{slide.brand}</h2>
                 </div>
-                <div className={styles.statItem}>
-                    <span className={styles.statValue}>04</span>
-                    <span className={styles.statLabel}>In Cart</span>
+                <h3 className={styles.offerText}>{slide.offer}</h3>
+                <p className={styles.moreText}>+MORE</p>
+                <button className={styles.slideCTA}>SHOP COLLECTION</button>
+              </div>
+            </div>
+          ))}
+
+          {/* New Nav Controls: Arrows + Dots */}
+          <div className={styles.navControls}>
+            <button
+              className={styles.navArrow}
+              onClick={() => setCurrentSlide((prev) => (prev - 1 + promoSlides.length) % promoSlides.length)}
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            <div className={styles.carouselDots}>
+              {promoSlides.map((_, index) => (
+                <button
+                  key={index}
+                  className={`${styles.dot} ${currentSlide === index ? styles.dotActive : ''}`}
+                  onClick={() => setCurrentSlide(index)}
+                />
+              ))}
+            </div>
+
+            <button
+              className={styles.navArrow}
+              onClick={() => setCurrentSlide((prev) => (prev + 1) % promoSlides.length)}
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Category Ribbon */}
+      <section className={styles.categoryRibbon}>
+        <div className={styles.ribbonContainer}>
+          {categoryRibbon.map((item, idx) => (
+            <div
+              key={idx}
+              className={`${styles.ribbonItem} ${activeCategory === item.name ? styles.ribbonActive : ''}`}
+              onClick={() => setActiveCategory(item.name)}
+            >
+              <div className={styles.ribbonIconWrapper}>
+                <item.icon size={26} strokeWidth={1.5} className={styles.ribbonIcon} />
+              </div>
+              <span className={styles.ribbonName}>{item.name}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Reference-Matched Flash Deals Section */}
+      <section className={styles.refFlashSection}>
+        <div className="container">
+          <div className={styles.userFriendlyHeader}>
+            <div className={styles.titleTimerGroup}>
+              <div className={styles.refFlashTextCol}>
+                <h2 className={styles.refFlashTitle}>Flash Deals</h2>
+                <p className={styles.refFlashSubtitle}>Don't miss out! Exclusive deals on premium essentials.</p>
+              </div>
+              <div className={styles.standardTimer}>
+                <div className={styles.timerUnitBox}>04</div>
+                <span className={styles.timerLowSep}>:</span>
+                <div className={styles.timerUnitBox}>21</div>
+                <span className={styles.timerLowSep}>:</span>
+                <div className={styles.timerUnitBox}>55</div>
+              </div>
+            </div>
+            <Link href="#" className={styles.refViewAll}>View All <ChevronRight size={18} /></Link>
+          </div>
+
+          <div className={styles.refFlashGrid}>
+            {[
+              { cat: "Electronics", name: "Premium Wireless Noise Canceling ...", price: "$249.00", old: "$399.00", discount: "-40%", type: "discount", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070" },
+              { cat: "Fashion", name: "Minimalist Silver Watch Elite Edition", price: "$120.00", old: "$160.00", discount: "-25%", type: "discount", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999" },
+              { cat: "Gadgets", name: "Retro Instant Film Camera - Mint", price: "$85.00", old: "$100.00", discount: "-15%", type: "discount", img: "https://i.pinimg.com/736x/76/9d/84/769d8454f78dabe81ec54e51fea6d156.jpg" },
+              { cat: "Footwear", name: "AeroSprint Pro Running Shoes", price: "$129.00", old: "$180.00", discount: "HOT", type: "hot", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070" },
+            ].map((prod, idx) => (
+              <div key={idx} className={styles.refCard}>
+                <div className={styles.refImgWrapper}>
+                  <Image src={prod.img} alt={prod.name} fill className={styles.refProductImg} />
+                  <div className={`${styles.refBadge} ${prod.type === 'hot' ? styles.badgeHot : styles.badgeDisc}`}>
+                    {prod.discount}
+                  </div>
                 </div>
-                <div className={styles.statItem}>
-                    <span className={styles.statValue}>2.4k</span>
-                    <span className={styles.statLabel}>Reward Pts</span>
+                <div className={styles.refCardBody}>
+                  <span className={styles.refProdCat}>{prod.cat}</span>
+                  <h3 className={styles.refProdName}>{prod.name}</h3>
+                  <div className={styles.refPricing}>
+                    <span className={styles.refPriceNow}>{prod.price}</span>
+                    <span className={styles.refPriceOld}>{prod.old}</span>
+                  </div>
+                  <button className={styles.refAddToCart}>Add to Cart</button>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Reference-Matched Promotion Banners */}
+      <section className={styles.refBannerSection}>
+        <div className="container">
+          <div className={styles.refBannerGrid}>
+            <div className={`${styles.refBannerItem} ${styles.bannerBlack}`}>
+              <Image src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=2012" alt="Luxe Fashion" fill className={styles.bannerImg} />
+              <div className={styles.bannerOverlay}>
+                <h3>Luxe Fashion</h3>
+                <p>Upgrade your wardrobe with premium brands</p>
+                <button className={styles.bannerBtn}>Explore Now</button>
+              </div>
+            </div>
+            <div className={`${styles.refBannerItem} ${styles.bannerBlue}`}>
+              <Image src="https://images.unsplash.com/photo-1547082299-de196ea013d6?q=80&w=2070" alt="Smart Tech" fill className={styles.bannerImg} />
+              <div className={styles.bannerOverlay}>
+                <h3>Smart Tech</h3>
+                <p>The latest in innovation and productivity</p>
+                <button className={styles.bannerBtn} style={{ background: '#3b82f6' }}>Explore Now</button>
+              </div>
+            </div>
+            <div className={`${styles.refBannerItem} ${styles.bannerGray}`}>
+              <Image src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?q=80&w=2070" alt="Home Studio" fill className={styles.bannerImg} />
+              <div className={styles.bannerOverlay}>
+                <h3>Home Studio</h3>
+                <p>Elevate your living and working space</p>
+                <button className={styles.bannerBtn} style={{ background: '#334155' }}>Explore Now</button>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Curated Just for You */}
-      <section className="container">
-        <h2 className={styles.sectionTitle}>Curated Just for You</h2>
-        <div className={styles.curatedGrid}>
-            {[
-                { name: "The Aurora Desk", cat: "FURNITURE", img: lamp },
-                { name: "Urban Essence", cat: "FRAGRANCE", img: fashion },
-                { name: "Nexus Chrono", cat: "ACCESSORIES", img: watch },
-                { name: "Silken Drape", cat: "LIFESTYLE", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop" },
-                { name: "Onyx Sound", cat: "AUDIO", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop" },
-                { name: "Glow Sphere", cat: "LIGHTING", img: "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?q=80&w=2070&auto=format&fit=crop" },
-            ].map((item, i) => (
-                <div key={i} className={styles.curatedItem}>
-                    <Image src={item.img} alt={item.name} fill style={{ objectFit: "cover"}} className={styles.curatedImg} />
-                    <div className={styles.curatedOverlay}>
-                        <span className={styles.itemCat}>{item.cat}</span>
-                        <h3 className={styles.itemName}>{item.name}</h3>
-                    </div>
+      {/* Special Offers / Deals Section - High-Conversion Layout */}
+      <section className={styles.specialDealsMaster}>
+        <div className="container">
+          <div className={styles.spHeader}>
+            <div className={styles.spTitleGroup}>
+              <h2 className={styles.spMainTitle}>Limited Time Deals</h2>
+              <div className={styles.spUnderline}></div>
+            </div>
+          </div>
+
+          <div className={styles.spContentGrid}>
+            {/* Main Premium Banner */}
+            <div className={styles.spHeroBanner}>
+              <Image
+                src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070"
+                alt="Banner Deal"
+                fill
+                className={styles.spBannerImg}
+              />
+              <div className={styles.spBannerOverlay}>
+                <div className={styles.spBannerInfo}>
+                  <div className={styles.spHurryBadge}>Hurry! Limited Time Only</div>
+                  <h3 className={styles.spPromoText}>50% OFF TODAY ONLY</h3>
+                  <p className={styles.spPromoSub}>Grab the Deal Now. Exclusive high-fashion collections.</p>
+
+                  <div className={styles.spCountdown}>
+                    <div className={styles.spTimeBlock}>02<small>HRS</small></div>
+                    <span className={styles.spTimeSep}>:</span>
+                    <div className={styles.spTimeBlock}>45<small>MIN</small></div>
+                    <span className={styles.spTimeSep}>:</span>
+                    <div className={styles.spTimeBlock}>12<small>SEC</small></div>
+                  </div>
+
+                  <button className={styles.spMainCta}>Shop Now</button>
                 </div>
+              </div>
+            </div>
+
+            {/* Smaller Deal Cards */}
+            <div className={styles.spCardsGrid}>
+              {[
+                { off: "70%", title: "Elite Footwear", desc: "Premium sneakers collection.", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070" },
+                { off: "40%", title: "Modern Tech", desc: "Next-gen smart essentials.", img: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?q=80&w=2065" },
+                { off: "55%", title: "Urban Wear", desc: "Unbeatable streetwear styles.", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920" },
+                { off: "HOT", title: "Audio Gear", desc: "Studio quality listening.", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070" }
+              ].map((card, i) => (
+                <div key={i} className={styles.spMiniCard}>
+                  <div className={styles.spMiniVisual}>
+                    <Image src={card.img} alt={card.title} fill className={styles.spMiniImg} />
+                    <div className={styles.spMiniBadge}>-{card.off}</div>
+                  </div>
+                  <div className={styles.spMiniBody}>
+                    <h4 className={styles.spMiniTitle}>{card.title}</h4>
+                    <p className={styles.spMiniDesc}>{card.desc}</p>
+                    <button className={styles.spMiniBtn}>Buy Now</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* NEW ARRIVALS - The Mag-Grid Architectural Layout */}
+      <section className={styles.magArrivalsMaster}>
+        <div className="container">
+          <div className={styles.magLayoutSplit}>
+
+            {/* Left Sidebar Title Block */}
+            <div className={styles.magTitleSidebar}>
+              <div className={styles.magStickyContent}>
+                <span className={styles.magSuperscript}>SEASON 2026</span>
+                <h2 className={styles.magMainHeading}>New<br />Arrivals</h2>
+                <p className={styles.magSidebarDesc}>Architectural silhouettes and premium textures. Discover the curation of the month.</p>
+                <div className={styles.magActionLine}>
+                  <Link href="#" className={styles.magExploreBtn}>View Entire Collection <ArrowRight size={20} /></Link>
+                </div>
+
+                {/* New Architectural Sidebar Banner */}
+                <div className={styles.magSideBanner}>
+                  <Image
+                    src="https://i.pinimg.com/736x/83/a9/1c/83a91c9ad44aec38dcee9ad108c92739.jpg"
+                    alt="Featured Look"
+                    fill
+                    className={styles.sideBannerImg}
+                  />
+                  <div className={styles.sideBannerOverlay}>
+                    <div className={styles.sbTag}>LIMITED</div>
+                    <div className={styles.sbTitle}>Elevated Essentials</div>
+                    <div className={styles.sbOffer}>-20% OFF</div>
+                    <button className={styles.sbBtn}>CLAIM NOW</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Product Flow - Medium 3-Column Grid */}
+            <div className={styles.magProductFlowMedium}>
+              {[
+                { id: "01", name: "Urban Essence Jacket", price: "₹4,999", img: "https://images.unsplash.com/photo-1551028150-64b9f398f678?q=80&w=1974" },
+                { id: "02", name: "Nexus Stealth Watch", price: "₹2,499", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999" },
+                { id: "03", name: "Solaris Pro Shades", price: "₹1,899", img: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?q=80&w=2080" },
+                { id: "04", name: "Vanguard Leather Bag", price: "₹3,750", img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=2069" },
+                { id: "05", name: "Aria Wireless Buds", price: "₹2,299", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070" },
+                { id: "06", name: "Cruiser Mesh Shoes", price: "₹2,999", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070" }
+              ].map((prod, idx) => (
+                <div key={idx} className={styles.magCardMedium}>
+                  <div className={styles.magImageFrameMedium}>
+                    <Image src={prod.img} alt={prod.name} fill className={styles.magActualImg} />
+                    <div className={styles.magNumberWatermark}>{prod.id}</div>
+                    <div className={styles.magFloatingBadge}>NEW</div>
+                    <button className={styles.magHeart}><Heart size={18} /></button>
+
+                    <div className={styles.magHoverSheet}>
+                      <button className={styles.magQuickBtn}>QUICK LOOK</button>
+                      <button className={styles.magAddCartBtn}><ShoppingBag size={18} /> ADDTOCART</button>
+                    </div>
+                  </div>
+                  <div className={styles.magProductMeta}>
+                    <h4 className={styles.magProdName}>{prod.name}</h4>
+                    <p className={styles.magProdPrice}>{prod.price}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* BEST SELLERS - The Spotlight Discovery Architectural Layout */}
+      <section className={styles.spotlightMaster}>
+        <div className="container">
+          <div className={styles.spTitleHeader}>
+            <div className={styles.spTitleMain}>
+              <span className={styles.spTagLine}>TOP PERFOMERS</span>
+              <h2 className={styles.spHeading}>Best Sellers</h2>
+            </div>
+            <div className={styles.spTitleSide}>
+              <p className={styles.spSubtitleHero}>The most coveted pieces of the season, ranked by you.</p>
+              <Link href="#" className={styles.spViewTrend}>View All Collection <ChevronRight size={18} /></Link>
+            </div>
+          </div>
+
+          <div className={styles.spLayoutGrid}>
+
+            {/* RANK #1 - THE PODIUM HERO (Remains Fixed Spotlight) */}
+            <div className={styles.podiumHeroCard}>
+              <div className={styles.podiumVisual}>
+                <Image src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999" alt="Top Seller" fill className={styles.podiumImg} />
+                <div className={styles.podiumRankDigit}>01</div>
+                <div className={styles.podiumBadge}><Trophy size={14} fill="#1a1a1a" /> TOP RANKED</div>
+              </div>
+              <div className={styles.podiumBody}>
+                <div className={styles.podiumTrust}>
+                  <div className={styles.podiumStars}>
+                    {[1, 2, 3, 4, 5].map(s => <Star key={s} size={16} fill="#FFD700" color="#FFD700" />)}
+                  </div>
+                  <span className={styles.podiumReviews}>500+ Reviews</span>
+                </div>
+                <h3 className={styles.podiumTitle}>Nexus Stealth Edition</h3>
+                <p className={styles.podiumDesc}>The definitive timepiece for the modern architect of style. Uncompromising precision and elegance.</p>
+
+                <div className={styles.podiumHeatArea}>
+                  <div className={styles.heatLabel}><Flame size={14} color="#4C0519" fill="#4C0519" /> HIGH DEMAND: 98% SOLD</div>
+                  <div className={styles.heatBar}><div className={styles.heatFill} style={{ width: '98%' }}></div></div>
+                </div>
+
+                <div className={styles.podiumAction}>
+                  <div className={styles.podiumPrice}>₹4,999</div>
+                  <button className={styles.podiumAddBtn}><ShoppingBag size={18} /> ADDTOCART</button>
+                </div>
+              </div>
+            </div>
+
+            {/* AUTOMATIC TRENDING MARQUEE - Seamless Infinite Scroll */}
+            <div className={styles.trendingMarqueeWrapper}>
+              <div className={styles.trendingMarqueeTrack}>
+                {[
+                  { rank: "02", name: "Premium Wireless Pro", price: "₹8,450", desc: "Cinema-grade audio with active cancellation.", rating: 5, reviews: 312, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070", heat: "85%" },
+                  { rank: "03", name: "Luxe Leather Tote", price: "₹1,999", desc: "Handcrafted Italian leather for daily grace.", rating: 4, reviews: 145, img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=2069", heat: "72%" },
+                  { rank: "04", name: "Vibe Mesh Runner", price: "₹2,299", desc: "Ultra-breathable tech for high performance.", rating: 5, reviews: 290, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070", heat: "91%" },
+                  { rank: "05", name: "Aria Smart Buds", price: "₹3,450", desc: "Intelligent noise masking for focus.", rating: 4, reviews: 180, img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=2070", heat: "64%" },
+                  { rank: "06", name: "Modernist Chronograph", price: "₹5,200", desc: "Precision movement in a matte finish.", rating: 5, reviews: 210, img: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1988", heat: "88%" },
+                  { rank: "07", name: "Studio Desk Lamp", price: "₹1,850", desc: "Dual-spectrum light for 12hr workdays.", rating: 4, reviews: 95, img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=1974", heat: "55%" },
+                ].concat([
+                  { rank: "02", name: "Premium Wireless Pro", price: "₹8,450", desc: "Cinema-grade audio.", rating: 5, reviews: 312, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070", heat: "85%" },
+                  { rank: "03", name: "Luxe Leather Tote", price: "₹1,999", desc: "Handcrafted Italian leather.", rating: 4, reviews: 145, img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=2069", heat: "72%" },
+                  { rank: "04", name: "Vibe Mesh Runner", price: "₹2,299", desc: "Ultra-breathable tech.", rating: 5, reviews: 290, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070", heat: "91%" },
+                  { rank: "05", name: "Aria Smart Buds", price: "₹3,450", desc: "Intelligent noise masking.", rating: 4, reviews: 180, img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=2070", heat: "64%" },
+                  { rank: "06", name: "Modernist Chronograph", price: "₹5,200", desc: "Precision movement.", rating: 5, reviews: 210, img: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1988", heat: "88%" },
+                  { rank: "07", name: "Studio Desk Lamp", price: "₹1,850", desc: "Dual-spectrum light.", rating: 4, reviews: 95, img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=1974", heat: "55%" },
+                ]).map((item, i) => (
+                  <div key={i} className={styles.trendingMiniCard}>
+                    <div className={styles.trendingImgWrapper}>
+                      <Image src={item.img} alt={item.name} fill className={styles.tImg} />
+                      <div className={styles.trendingRank}>{item.rank}</div>
+                      <button className={styles.tHeart}><Heart size={16} /></button>
+                    </div>
+                    <div className={styles.trendingInfo}>
+                      <div className={styles.tRatingLine}>
+                        <Star size={12} fill="#FFD700" color="#FFD700" />
+                        <span className={styles.tRatingVal}>4.9/5</span>
+                        <span className={styles.tReviewCount}>({item.reviews})</span>
+                      </div>
+                      <h4 className={styles.tProdName}>{item.name}</h4>
+                      <p className={styles.tProdDesc}>{item.desc}</p>
+                      <div className={styles.tPrice}>{item.price}</div>
+                      <div className={styles.tHeatMini}>
+                        <div className={styles.tHeatFill} style={{ width: item.heat }}></div>
+                      </div>
+                      <button className={styles.tQuickBtn}>EXPLORE</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CUSTOMER VOICES - Architectural Step Carousel */}
+      <section className={styles.reviewSectionMaster}>
+        <div className="container">
+          <div className={styles.reviewHeader}>
+             <span className={styles.revTag}>TESTIMONIALS</span>
+             <h2 className={styles.revHeading}>Customer Voices</h2>
+             <div className={styles.revStatLine}>
+                <div className={styles.revAverage}>4.9/5</div>
+                <div className={styles.revStars}>
+                  {[1,2,3,4,5].map(s => <Star key={s} size={14} fill="#4C0519" color="#4C0519" />)}
+                </div>
+                <div className={styles.revCount}>Based on 12,020+ Reviews</div>
+             </div>
+          </div>
+        </div>
+
+        <div className={styles.revCarouselWrapper}>
+          <div className={styles.revCarouselTrack}>
+            {[
+              { name: "Sarah J.", role: "Verified Buyer", text: "The quality of the premium wireless headphones is unmatched. The deep wine color is stunning!", product: "Premium Wireless Pro", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1976" },
+              { name: "David M.", role: "Verified Buyer", text: "Fast delivery and the packaging was pure luxury. My Modernist Chronograph is my daily essential.", product: "Modernist Chronograph", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974" },
+              { name: "Elena R.", role: "Verified Buyer", text: "I've tried many luxury totes, but this leather tote has the best balance. A masterpiece of design.", product: "Luxe Leather Tote", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070" },
+              { name: "Alex K.", role: "Verified Buyer", text: "Stunning craftsmanship on the smartwatch band. The attention to detail is evident. Fast shipping!", product: "SmartWatch Pro", img: "https://images.unsplash.com/photo-1541647376583-d6c5ca910171?q=80&w=1974" },
+              { name: "Jessica L.", role: "Verified Buyer", text: "The Smart Buds changed my commute. Noise cancellation is perfect and they look so stylish.", product: "Aria Smart Buds", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974" },
+              { name: "Michael T.", role: "Verified Buyer", text: "The desk lamp is exactly what my studio needed. The light is very easy on the eyes.", product: "Studio Desk Lamp", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070" }
+            ].map((rev, i) => (
+              <div key={i} className={styles.revCardPremium}>
+                <div className={styles.revQuoteIcon}><Quote size={30} fill="#4C0519" opacity={0.05} /></div>
+                <div className={styles.revUser}>
+                  <div className={styles.revAvatar}>
+                    <Image src={rev.img} alt={rev.name} fill className={styles.revAvatarImg} />
+                  </div>
+                  <div className={styles.revUserInfo}>
+                    <h4 className={styles.revUserName}>{rev.name}</h4>
+                    <span className={styles.revUserRole}>{rev.role}</span>
+                  </div>
+                </div>
+                <div className={styles.revStarsMini}>
+                  {[1,2,3,4,5].map(s => <Star key={s} size={12} fill="#FFD700" color="#FFD700" />)}
+                </div>
+                <p className={styles.revText}>"{rev.text}"</p>
+                
+                <div className={styles.revProductHighlight}>
+                   <span className={styles.revBoughtTag}>PURCHASED:</span>
+                   <span className={styles.revBoughtName}>{rev.product}</span>
+                </div>
+              </div>
             ))}
+            
+            {/* Duplicate for seamless infinite step loop */}
+            {[
+              { name: "Sarah J.", role: "Verified Buyer", text: "The quality of the premium wireless headphones is unmatched.", product: "Premium Wireless Pro", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1976" },
+              { name: "David M.", role: "Verified Buyer", text: "Fast delivery and the packaging was pure luxury.", product: "Modernist Chronograph", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974" },
+              { name: "Elena R.", role: "Verified Buyer", text: "I've tried many luxury totes, but this leather tote has the best balance.", product: "Luxe Leather Tote", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070" }
+            ].map((rev, i) => (
+              <div key={i + 10} className={styles.revCardPremium}>
+                <div className={styles.revQuoteIcon}><Quote size={30} fill="#4C0519" opacity={0.05} /></div>
+                <div className={styles.revUser}>
+                  <div className={styles.revAvatar}>
+                    <Image src={rev.img} alt={rev.name} fill className={styles.revAvatarImg} />
+                  </div>
+                  <div className={styles.revUserInfo}>
+                    <h4 className={styles.revUserName}>{rev.name}</h4>
+                    <span className={styles.revUserRole}>{rev.role}</span>
+                  </div>
+                </div>
+                <div className={styles.revStarsMini}>
+                  {[1,2,3,4,5].map(s => <Star key={s} size={12} fill="#FFD700" color="#FFD700" />)}
+                </div>
+                <p className={styles.revText}>"{rev.text}"</p>
+                <div className={styles.revProductHighlight}>
+                   <span className={styles.revBoughtTag}>PURCHASED:</span>
+                   <span className={styles.revBoughtName}>{rev.product}</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Member Portal Actions */}
-      <section className="container" style={{ paddingBottom: '100px' }}>
-        <div style={{ display: 'flex', gap: '20px', justifyContent: 'center'}}>
-            <button 
-                onClick={handleLogout}
-                style={{
-                    background: 'var(--primary)',
-                    color: 'white',
-                    padding: '16px 40px',
-                    borderRadius: '16px',
-                    fontWeight: '800',
-                    border: 'none',
-                    cursor: 'pointer'
-                }}
-            >
-                Secure Sign Out
-            </button>
-            <button 
-                style={{
-                    background: 'white',
-                    color: 'var(--primary)',
-                    padding: '16px 40px',
-                    borderRadius: '16px',
-                    fontWeight: '800',
-                    border: '2px solid var(--primary)',
-                    cursor: 'pointer'
-                }}
-            >
-                Account Settings
-            </button>
+      {/* THE ARCHITECTURAL NEWSLETTER - Overlay Bloom Design */}
+      <section className={styles.newsSectionMaster}>
+        <div className={styles.newsHeroBg}>
+          <Image 
+            src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974" 
+            alt="Newsletter Background" 
+            fill 
+            className={styles.newsHeroImg} 
+          />
+          <div className={styles.newsHeroOverlay}></div>
+          <div className={styles.newsHeroContent}>
+             <span className={styles.newsUpperTag}>GET NEWSLETTER</span>
+             <h2 className={styles.newsHeroHeading}>Sign Up to Newsletter</h2>
+          </div>
+        </div>
+
+        <div className="container">
+          <div className={styles.newsOverCardContainer}>
+            <div className={styles.newsOverCard}>
+              <div className={styles.newsOverIconGroup}>
+                <div className={styles.newsPaperPlane}>
+                  <ShoppingCart size={40} strokeWidth={2} />
+                </div>
+              </div>
+              
+              <div className={styles.newsInputGroupPremium}>
+                <input type="email" placeholder="Enter Your Email" className={styles.newsInputPremium} />
+                <button className={styles.newsSubmitBtnGradient}>
+                  SUBSCRIBE NOW <ArrowRight size={18} />
+                </button>
+              </div>
+              <p className={styles.newsPrivacyNotice}>* By subscribing, you agree with our Privacy Policy and Terms of Service.</p>
+            </div>
+          </div>
         </div>
       </section>
 
+
+      {/* THE EDITORIAL BLOG HUB - Latest News & Blog */}
+      <section className={styles.blogSectionMaster}>
+        <div className="container">
+          <div className={styles.blogSectionHeader}>
+            <div className={styles.blogTitleGroup}>
+              <span className={styles.blogUpperTag}>NEWS & BLOG</span>
+              <h2 className={styles.blogMainHeading}>Latest News & Blog</h2>
+            </div>
+            <Link href="#" className={styles.blogViewAllLink}>
+              VIEW ALL BLOG <ArrowRight size={18} />
+            </Link>
+          </div>
+
+          <div className={styles.blogGrid}>
+            {[
+              { id: 1, title: "Creative Modern Style", date: "15 Dec", img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070" },
+              { id: 2, title: "The Urban Street Edit", date: "18 Dec", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920" },
+              { id: 3, title: "Beauty & Delicate Craft", date: "22 Dec", img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974" }
+            ].map((post, i) => (
+              <div key={post.id} className={styles.blogCard}>
+                <div className={styles.blogCardVisual}>
+                   <Image src={post.img} alt={post.title} fill className={styles.blogImg} />
+                   <div className={styles.blogDateBadge}>
+                      <span className={styles.dateDay}>{post.date.split(' ')[0]}</span>
+                      <span className={styles.dateMonth}>{post.date.split(' ')[1]}</span>
+                   </div>
+                </div>
+                
+                <div className={styles.blogCardBody}>
+                   <div className={styles.blogMeta}>
+                      <User size={14} color="#4C0519" />
+                      <span className={styles.blogAuthor}>By Admin</span>
+                   </div>
+                   <h3 className={styles.blogTitle}>{post.title}</h3>
+                   <p className={styles.blogSnippet}>There are many variations of passages of professional styling available, but the majority have suffered luxury alteration.</p>
+                   
+                   <button className={styles.blogReadBtn}>
+                      READ MORE <ArrowRight size={14} />
+                   </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* THE TRUST ECOSYSTEM - Why Choose Us */}
+      <section className={styles.trustSectionMaster}>
+        <div className="container">
+          <div className={styles.trustGrid}>
+            {[
+              { icon: <Truck size={32} />, title: "Free Delivery", desc: "For all orders above ₹2000. Seamless & fast." },
+              { icon: <RotateCcw size={32} />, title: "Easy Returns", desc: "30-day hassle-free policy for your peace of mind." },
+              { icon: <Lock size={32} />, title: "Secure Payment", desc: "100% SSL encrypted checkout for safe shopping." },
+              { icon: <Headphones size={32} />, title: "24/7 Support", desc: "Dedicated team available round the clock for you." }
+            ].map((pod, i) => (
+              <div key={i} className={styles.trustPod}>
+                <div className={styles.trustIconBox}>{pod.icon}</div>
+                <div className={styles.trustContent}>
+                  <h4 className={styles.trustTitle}>{pod.title}</h4>
+                  <p className={styles.trustDesc}>{pod.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+      {/* Auth Popup */}
+      <AuthPopup
+        isOpen={showAuthPopup}
+        onClose={() => setShowAuthPopup(false)}
+        initialTab={authTab}
+      />
     </main>
   );
 }

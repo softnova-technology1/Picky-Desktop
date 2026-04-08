@@ -1,0 +1,222 @@
+.blogDetailPage {
+    padding: 60px 20px;
+    background-color: #fff;
+    font-family: 'Outfit', sans-serif;
+    color: #171717;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 50px;
+    margin-top: 5%;
+}
+
+.mainContent {
+    flex: 2;
+}
+
+.sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* Header & Meta */
+.title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 30px;
+}
+
+.heroImageWrapper {
+    position: relative;
+    width: 100%;
+    height: 500px; /* Fixed height for consistency */
+    margin-bottom: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.heroImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Crop to fit without distortion */
+    display: block;
+}
+
+.metaBadge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #df213a;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: white;
+    font-size: 0.85rem;
+    display: flex;
+    gap: 15px;
+    font-weight: 500;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* Article Body */
+.articleBody {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    line-height: 1.7;
+    font-size: 1.05rem;
+    color: #444;
+}
+
+.imageGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.imageGrid img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.quote {
+    background: #fdf2f3;
+    padding: 40px;
+    border-radius: 20px;
+    position: relative;
+    font-style: italic;
+    color: #171717;
+    margin: 20px 0;
+}
+
+.quoteIcon {
+    font-size: 5rem;
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    color: #df213a;
+    opacity: 0.3;
+}
+
+/* Sidebar Elements */
+.searchBox {
+    position: relative;
+    width: 100%;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 15px 20px;
+    padding-right: 50px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.searchInput:focus {
+    border-color: #df213a;
+}
+
+.searchBtn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.sectionTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.recentPostItem {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.recentThumb {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.recentDate {
+    font-size: 0.8rem;
+    color: #df213a;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.recentTitle {
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.topicsGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.topicTag {
+    background: #f8f8f8;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.topicTag:hover {
+    background: #df213a;
+    color: white;
+}
+
+.adBanner {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.adBanner img {
+    width: 100%;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+    }
+    
+    .title {
+        font-size: 1.75rem;
+    }
+}
