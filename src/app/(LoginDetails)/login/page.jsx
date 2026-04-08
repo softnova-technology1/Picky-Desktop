@@ -3,18 +3,20 @@ import styles from '../../../Stylesheet/Login.module.css';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 import AuthBackground from '@/Components/AuthBackground';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const { login } = useAuth();
     const router = useRouter();
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const email = e.target[0].value;
         // Simulate login success
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userEmail', e.target[0].value);
-        router.push('/home2');
+        login({ email, name: email.split('@')[0] });
+        router.push('/hometwo');
     };
 
     return (

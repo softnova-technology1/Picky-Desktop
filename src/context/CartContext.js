@@ -7,6 +7,14 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [checkoutItems, setCheckoutItems] = useState([]);
+  const [notification, setNotification] = useState({ show: false, product: null });
+
+  const triggerNotification = (product) => {
+    setNotification({ show: true, product });
+    setTimeout(() => {
+      setNotification(prev => ({ ...prev, show: false }));
+    }, 3000);
+  };
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -85,7 +93,10 @@ export const CartProvider = ({ children }) => {
       clearCart,
       subtotal,
       totalItems,
-      checkoutSubtotal
+      checkoutSubtotal,
+      notification,
+      setNotification,
+      triggerNotification
     }}>
       {children}
     </CartContext.Provider>

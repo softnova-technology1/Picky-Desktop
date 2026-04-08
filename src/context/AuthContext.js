@@ -10,8 +10,20 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const storedUser = localStorage.getItem('picky_user');
+    const legacyLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const legacyUserName = localStorage.getItem('userName');
+
     if (storedUser) {
       setUser(JSON.parse(storedUser));
+    } else if (legacyLoggedIn) {
+      // Migrate legacy login to new system
+      const migratedUser = { 
+        name: legacyUserName || "Member", 
+        email: "", 
+        id: "legacy_" + Date.now() 
+      };
+      setUser(migratedUser);
+      localStorage.setItem('picky_user', JSON.stringify(migratedUser));
     }
     setLoading(false);
   }, []);
@@ -25,6 +37,8 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem('picky_user');
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userName');
   };
 
   return (

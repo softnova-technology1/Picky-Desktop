@@ -475,10 +475,25 @@
   box-shadow: 0 10px 20px rgba(100, 61, 151, 0.2);
 }
 
+<<<<<<< HEAD
 .verticalDivider {
   height: 1px;
   background: rgba(0, 0, 0, 0.05);
   width: 100%;
+=======
+.wishlistActive {
+  background: white !important;
+  color: #ff4d4d !important;
+  border-color: #ff4d4d !important;
+}
+
+.productTitle {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--primary);
+  margin-bottom: 24px;
+  line-height: 1.1;
+>>>>>>> 8d9a917e7a2f2cf48693bc37b5047e19c7b72892
 }
 
 .actionCard {

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getProductById, products } from "@/lib/data";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 import ProductCard from "@/Components/ProductCard";
 import styles from "./product.module.css";
 import { Star, Truck, ShieldCheck, RefreshCw, Minus, Plus, Heart, Share2, ChevronRight, Sparkles, Zap, X, Search, Maximize2 } from "lucide-react";
@@ -14,7 +15,8 @@ export default function ProductDetailsPage({ params }) {
   const resolvedParams = use(params);
   const { id } = resolvedParams;
 
-  const { addToCart } = useCart();
+  const { addToCart, triggerNotification } = useCart();
+  const { isInWishlist, toggleWishlist } = useWishlist();
   const product = getProductById(id);
 
   const [quantity, setQuantity] = useState(1);
@@ -26,6 +28,7 @@ export default function ProductDetailsPage({ params }) {
   const [showWriteReview, setShowWriteReview] = useState(false);
   const [newReview, setNewReview] = useState({ rating: 5, comment: "", name: "" });
 
+<<<<<<< HEAD
   // Generate a mock gallery based on the main image
   const mockGallery = [
     product.image,
@@ -89,6 +92,11 @@ export default function ProductDetailsPage({ params }) {
   };
 
   // Suggested products
+=======
+  const isInWish = isInWishlist(product?.id);
+
+  // Suggested products from same category
+>>>>>>> 8d9a917e7a2f2cf48693bc37b5047e19c7b72892
   const relatedProducts = products
     .filter((p) => p.category === product?.category && p.id !== id)
     .slice(0, 4);
@@ -301,6 +309,7 @@ export default function ProductDetailsPage({ params }) {
             </div>
           </div>
 
+<<<<<<< HEAD
           <div className={styles.heroOverlayActions}>
             <button className={styles.glassIconBtn}><Heart size={20} /></button>
             <button className={styles.glassIconBtn}><Share2 size={20} /></button>
@@ -310,6 +319,26 @@ export default function ProductDetailsPage({ params }) {
              <Sparkles size={16} /> Premium Edition
           </div>
         </motion.div>
+=======
+          {/* Right: Content Details */}
+          <div className={styles.detailsWrapper}>
+            <div className={styles.stickyContent}>
+              <div className={styles.metaHeader}>
+                <span className={styles.categoryLabel}>{product.category.toUpperCase()}</span>
+                <div className={styles.actions}>
+                  <motion.button 
+                    className={`${styles.iconBtn} ${isInWish ? styles.wishlistActive : ''}`}
+                    onClick={() => toggleWishlist(product)}
+                    whileTap={{ scale: 0.8 }}
+                    whileHover={{ scale: 1.1 }}
+                    title={isInWish ? "Remove from Wishlist" : "Add to Wishlist"}
+                  >
+                    <Heart size={20} fill={isInWish ? "#ff4d4d" : "none"} color={isInWish ? "#ffffffff" : "currentColor"} />
+                  </motion.button>
+                  <button className={styles.iconBtn}><Share2 size={20} /></button>
+                </div>
+              </div>
+>>>>>>> 8d9a917e7a2f2cf48693bc37b5047e19c7b72892
 
         {/* BENTO 2: Header & Price */}
         <motion.div className={`${styles.bentoBox} ${styles.titleCard}`} variants={itemVariants}>
@@ -326,6 +355,7 @@ export default function ProductDetailsPage({ params }) {
           </div>
         </motion.div>
 
+<<<<<<< HEAD
         {/* BENTO 3: Dynamic Selectors */}
         <motion.div className={`${styles.bentoBox} ${styles.selectorsCard}`} variants={itemVariants}>
           <div className={styles.selectorGroup}>
@@ -349,6 +379,56 @@ export default function ProductDetailsPage({ params }) {
                   </button>
                 )
               ))}
+=======
+              <div className={styles.trustBar}>
+                <div className={styles.rating}>
+                  {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="#FFD700" color="#FFD700" />)}
+                  <span>(248 reviews)</span>
+                </div>
+                <div className={styles.divider}></div>
+                <div className={styles.status}>IN STOCK</div>
+              </div>
+
+              <div className={styles.priceSection}>
+                <span className={styles.mainPrice}>${product.price.toFixed(2)}</span>
+                <span className={styles.taxInfo}>Including VAT and Duties</span>
+              </div>
+
+              <p className={styles.description}>{product.description}</p>
+
+              <div className={styles.purchaseControls}>
+                <div className={styles.qtyBox}>
+                  <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className={styles.qtyBtn}><Minus size={16} /></button>
+                  <span className={styles.qtyValue}>{quantity}</span>
+                  <button onClick={() => setQuantity(quantity + 1)} className={styles.qtyBtn}><Plus size={16} /></button>
+                </div>
+
+                <button
+                  className={styles.addToCartBtn}
+                  onClick={() => {
+                    addToCart({ ...product, quantity });
+                    triggerNotification(product);
+                  }}
+                >
+                  ADD TO BAG — ${(product.price * quantity).toFixed(2)}
+                </button>
+              </div>
+
+              <div className={styles.featureGrid}>
+                <div className={styles.featureItem}>
+                  <Truck size={20} />
+                  <span>Free Global Shipping</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <ShieldCheck size={20} />
+                  <span>Secure Payments</span>
+                </div>
+                <div className={styles.featureItem}>
+                  <RefreshCw size={20} />
+                  <span>30-Day Guarantee</span>
+                </div>
+              </div>
+>>>>>>> 8d9a917e7a2f2cf48693bc37b5047e19c7b72892
             </div>
           </div>
 
