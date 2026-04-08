@@ -120,7 +120,7 @@ export default function PaymentSuccessPage() {
         </motion.h1>
 
         <motion.p 
-          style={{ color: 'var(--text-muted)', fontSize: '1.2rem', marginBottom: '2.5rem' }}
+          style={{ color: 'var(--text-muted)', fontSize: '1.2rem', marginBottom: '1rem' }}
           variants={itemVariants}
         >
           Thank you for choosing <span style={{ fontWeight: '800', color: 'var(--primary)' }}>Picky</span>. 
@@ -129,7 +129,7 @@ export default function PaymentSuccessPage() {
 
         {/* Order Summary Snapshot */}
         <motion.div className={styles.summary} variants={itemVariants}>
-          <h3 style={{ fontSize: '1rem', fontWeight: '800', marginBottom: '1.5rem', color: 'var(--primary)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+          <h3 style={{ fontSize: '1rem', fontWeight: '800', marginBottom: '1.0rem', color: 'var(--primary)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
             ORDER SNAPSHOT
           </h3>
           <div style={{ display: 'grid', gap: '1.5rem' }}>

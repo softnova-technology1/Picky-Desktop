@@ -1,0 +1,157 @@
+.blogSection {
+    padding: 100px 20px;
+    background-color: #ffffff;
+    /* Keeping main background pure white */
+    font-family: 'Outfit', sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    /* Increased gap for better breathing space */
+}
+
+.blogCard {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+}
+
+.blogCard:hover {
+    transform: translateY(-8px);
+}
+
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 2.8;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    /* Standardized spacing below image */
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.blogCard:hover .image {
+    transform: scale(1.05);
+}
+
+.dateBadge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: #df213a;
+    color: white;
+    width: 45px;
+    height: 55px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    z-index: 10;
+}
+
+.dateDay {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.dateMonth {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+}
+
+.blogInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 5px;
+    /* Gentle side padding for text alignment */
+}
+
+.metadata {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #df213a;
+    font-size: 0.85rem;
+}
+
+.authorName {
+    font-weight: 500;
+}
+
+.blogTitle {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #171717;
+    line-height: 1.3;
+}
+
+.blogExcerpt {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.readMoreBtn {
+    background: transparent;
+    border: 1px solid #e0e0e0;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #171717;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.readMoreBtn:hover {
+    background: #171717;
+    color: #fff;
+    border-color: #171717;
+}
+
+.readMoreBtn svg {
+    transition: transform 0.3s ease;
+}
+
+.readMoreBtn:hover svg {
+    transform: translate(2px, -2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .blogTitle {
+        font-size: 1.3rem;
+    }
+}

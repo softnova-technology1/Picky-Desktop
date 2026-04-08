@@ -47,7 +47,7 @@ const Navbar = () => {
         { name: 'CATEGORIES', path: '/categories', hasDropdown: true },
         { name: 'NEW ARRIVALS', path: '/new-arrivals' },
         { name: 'OFFERS', path: '/offers' },
-        { name: 'BLOG', path: '/blog' },
+        { name: 'BLOG', path: '/Blog' },
         { name: 'ABOUT US', path: '/about' },
     ];
 
@@ -135,7 +135,7 @@ const Navbar = () => {
                         >
                             {navLinks.map((link) => (
                                 <Link
-                                    key={link.path}
+                                    key={link.name}
                                     href={link.path}
                                     className={styles.mobileLink}
                                 >

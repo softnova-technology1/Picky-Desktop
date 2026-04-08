@@ -87,7 +87,7 @@ export default function PaymentFailedPage() {
             </motion.div>
           </Link>
           
-          <Link href="/" style={{ color: '#4b5563', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '700', marginTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+          <Link href="/" style={{ color: '#4b5563', textDecoration: 'none', fontSize: '0.9rem', fontWeight: '700', marginTop: '-2rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
              <ArrowLeft size={16} /> Back to Market
           </Link>
         </motion.div>

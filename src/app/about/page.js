@@ -1,25 +1,59 @@
 import React from 'react'
 import styles from "./about.module.css";
+
 function About() {
   return (
-    <div>
-                <section className={styles.aboutContainer}>
+    <div className={styles.mainWrapper}>
+        <section className={styles.aboutContainer}>
+            {/* Background Decorative Text */}
+            <div className={styles.bgText}>SINCE 2024</div>
+            
             <div className={styles.contentWrapper}>
                 {/* Left Side: Text Content */}
                 <div className={styles.textContent}>
-                    <p className={styles.subheading}>About Us</p>
-                    <h2 className={styles.heading}>Best Brand Best Quality</h2>
+                    <div className={styles.subheadingWrapper}>
+                        <span className={styles.dot}></span>
+                        <p className={styles.subheading}>Our Legacy</p>
+                    </div>
+                    
+                    <h2 className={styles.heading}>
+                        Crafting <span className={styles.highlight}>Premium</span> Fashion For The Modern World
+                    </h2>
+                    
                     <div className={styles.description}>
                         <p>
-                            There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form words.
+                            Experience the pinnacle of craftsmanship. We don't just create clothes; we curate experiences that define your unique style. Our journey began with a simple vision: to bring high-end design to every wardrobe without compromising on quality or ethics.
                         </p>
                         <p>
-                            If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Inter net. It uses a dictionary of over 200 Latin words.
+                            Every stitch tells a story of dedication and artistry. From sourcing the finest materials to perfecting the smallest detail, our process is a testament to our commitment to excellence. Join us in redefining luxury for the contemporary era.
                         </p>
                     </div>
-                    <a href="#" className={styles.moreLink}>
-                        More About Us <span className={styles.arrow}>&rsaquo;</span>
-                    </a>
+
+                    <div className={styles.linkWrapper}>
+                        <a href="#" className={styles.moreLink}>
+                            <span>Explore Our Story</span>
+                            <div className={styles.arrowIcon}>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div className={styles.statsGrid}>
+                        <div className={styles.statBox}>
+                            <span className={styles.statNumber}>10k+</span>
+                            <span className={styles.statLabel}>Happy Clients</span>
+                        </div>
+                        <div className={styles.statBox}>
+                            <span className={styles.statNumber}>50+</span>
+                            <span className={styles.statLabel}>Collections</span>
+                        </div>
+                        <div className={styles.statBox}>
+                            <span className={styles.statNumber}>15+</span>
+                            <span className={styles.statLabel}>Design Awards</span>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Right Side: Image Collage */}
@@ -45,6 +79,9 @@ function About() {
                             className={styles.smallImage}
                         />
                     </div>
+                    
+                    {/* Decorative element for the collage */}
+                    <div className={styles.collageDecoration}></div>
                 </div>
             </div>
         </section>
