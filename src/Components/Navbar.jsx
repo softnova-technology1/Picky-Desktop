@@ -36,8 +36,8 @@ const Navbar = () => {
 
     const navLinks = [
         { name: 'HOME', path: '/' },
-        { name: 'SHOP', path: '/products' },
-        { name: 'CATEGORIES', path: '/categories', hasDropdown: true },
+        { name: 'SHOP', path: '/shop' },
+        { name: 'CATEGORIES', path: '/category'},
         { name: 'NEW ARRIVALS', path: '/new-arrivals' },
         { name: 'OFFERS', path: '/offers' },
         { name: 'BLOG', path: '/Blog' },

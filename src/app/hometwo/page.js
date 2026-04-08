@@ -43,7 +43,7 @@ import watch from "@/images/home/hero-watch.png"
 import fashion from "@/images/home/fashion.png"
 import lamp from "@/images/home/lamp.png"
 import BlogSection from "@/Components/BlogDetails/BlogSection";
-import AuthPopup from "./AuthPopup/AuthPopup";
+import AuthPopup from "@/Components/AuthPopup";
 
 export default function Home2() {
   const [userName, setUserName] = useState("Member");

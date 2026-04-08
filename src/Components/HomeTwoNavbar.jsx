@@ -49,13 +49,15 @@ export default function HomeTwoNavbar() {
   return (
     <>
       <nav className={styles.navbar}>
-        <Link href="/" className={styles.logo}>Picky</Link>
+        <div className={styles.leftSection}>
+          <Link href="/" className={styles.logo}>Picky</Link>
+        </div>
 
         <div className={styles.navLinks}>
           <Link href="/" className={styles.navLink}>HOME</Link>
-          <Link href="/products" className={styles.navLink}>SHOP</Link>
+          <Link href="/shop" className={styles.navLink}>SHOP</Link>
           <div className={styles.hasMegaMenu}>
-            <Link href="/categories" className={styles.navLink}>
+            <Link href="/category" className={styles.navLink}>
               CATEGORIES <ChevronDown size={14} />
             </Link>
             {/* Mega Menu Dropdown */}
@@ -82,7 +84,7 @@ export default function HomeTwoNavbar() {
                     let href = "#";
                     if (link === "BLOGS") href = "/Blog";
                     else if (link === "ABOUT") href = "/about";
-                    else if (link === "OUR STORE") href = "/products";
+                    else if (link === "OUR STORE") href = "/shop";
                     else if (link.includes("BLOG")) href = "/Blog/1";
                     
                     return (
@@ -101,7 +103,7 @@ export default function HomeTwoNavbar() {
                 <h4 className={styles.megaTitle}>SHOP PAGES</h4>
                 <div className={styles.megaLinks}>
                   {["SHOP LEFT SIDEBAR", "SHOP RIGHT SIDEBAR", "SHOP FULL WIDTH", "SHOP DETAILS", "WISHLIST", "CART", "CHECKOUT"].map(link => {
-                    let href = "/products";
+                    let href = "/shop";
                     if (link === "CART") href = "/cart";
                     else if (link === "CHECKOUT") href = "/checkout";
                     else if (link === "WISHLIST") href = "/wishlist";
@@ -113,7 +115,7 @@ export default function HomeTwoNavbar() {
                 <h4 className={styles.megaTitle}>FASHION</h4>
                 <div className={styles.megaLinks}>
                   {["CLOTHING", "FOOTWEAR", "ACCESSORIES", "ACTIVEWEAR", "GROOMING", "BEAUTY", "ETHNIC WEAR"].map(link => (
-                    <Link key={link} href="/categories" className={styles.megaLink}>{link}</Link>
+                    <Link key={link} href="/category" className={styles.megaLink}>{link}</Link>
                   ))}
                 </div>
               </div>
@@ -121,7 +123,7 @@ export default function HomeTwoNavbar() {
                 <h4 className={styles.megaTitle}>CHILDREN'S</h4>
                 <div className={styles.megaLinks}>
                   {["CLOTHING", "FOOTWEAR", "ACCESSORIES", "TOYS & GAMES", "BABY ESSENTIALS"].map(link => (
-                    <Link key={link} href="/categories" className={styles.megaLink}>{link}</Link>
+                    <Link key={link} href="/category" className={styles.megaLink}>{link}</Link>
                   ))}
                 </div>
               </div>
@@ -129,7 +131,7 @@ export default function HomeTwoNavbar() {
                 <h4 className={styles.megaTitle}>JEWELLERY</h4>
                 <div className={styles.megaLinks}>
                   {["ETHNIC", "BRIDAL", "BRACELETS", "RINGS", "EARRINGS", "CHAINS"].map(link => (
-                    <Link key={link} href="/categories" className={styles.megaLink}>{link}</Link>
+                    <Link key={link} href="/category" className={styles.megaLink}>{link}</Link>
                   ))}
                 </div>
               </div>
@@ -149,68 +151,70 @@ export default function HomeTwoNavbar() {
           <Link href="/about" className={styles.navLink}>ABOUT US</Link>
         </div>
 
-        <div className={styles.searchContainer}>
-          <div className={styles.searchBox}>
-            <Search className={styles.searchIcon} size={18} />
-            <input type="text" placeholder="Search Picky..." className={styles.searchInput} />
+        <div className={styles.rightSection}>
+          <div className={styles.searchContainer}>
+            <div className={styles.searchBox}>
+              <Search className={styles.searchIcon} size={18} />
+              <input type="text" placeholder="Search Picky..." className={styles.searchInput} />
+            </div>
           </div>
-        </div>
 
-        <div className={styles.navIcons}>
-          <button className={styles.iconBtn}><Heart size={22} /></button>
-          <button className={styles.iconBtn}><ShoppingBag size={22} /></button>
+          <div className={styles.navIcons}>
+            <button className={styles.iconBtn}><Heart size={22} /></button>
+            <button className={styles.iconBtn}><ShoppingBag size={22} /></button>
 
-          <div className={styles.userDropdownContainer}>
-            <button
-              className={styles.iconBtn}
-              onClick={() => setShowUserDropdown(!showUserDropdown)}
-            >
-              <User size={22} />
-            </button>
+            <div className={styles.userDropdownContainer}>
+              <button
+                className={styles.iconBtn}
+                onClick={() => setShowUserDropdown(!showUserDropdown)}
+              >
+                <User size={22} />
+              </button>
 
-            {showUserDropdown && (
-              <div className={styles.userDropdown}>
-                <div className={styles.dropdownHeader}>
-                  <span className={styles.dropdownWelcome}>Welcome, {userName}</span>
-                </div>
-                <div className={styles.dropdownLinks}>
-                  {!user ? (
-                    <>
-                      <button onClick={() => openAuth('login')} className={styles.dropdownLink}>
-                        <User size={16} /> LOGIN
-                      </button>
-                      <button onClick={() => openAuth('signup')} className={styles.dropdownLink}>
-                        <Settings size={16} /> SIGN UP
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <button className={styles.dropdownLink}>
-                        <User size={16} /> PROFILE
-                      </button>
-                      <button className={styles.dropdownLink}>
-                        <Settings size={16} /> SETTINGS
-                      </button>
-                    </>
-                  )}
-                  <div className={styles.dropdownDivider}></div>
-                  <button className={styles.dropdownLink}>
-                    <ShoppingBag size={16} /> MY ORDERS
-                  </button>
-                  {user && (
-                    <button
-                      className={`${styles.dropdownLink} ${styles.logoutText}`}
-                      onClick={() => {
-                        handleLogout();
-                        setShowUserDropdown(false);
-                      }}
-                    >
-                      LOGOUT
+              {showUserDropdown && (
+                <div className={styles.userDropdown}>
+                  <div className={styles.dropdownHeader}>
+                    <span className={styles.dropdownWelcome}>Welcome, {userName}</span>
+                  </div>
+                  <div className={styles.dropdownLinks}>
+                    {!user ? (
+                      <>
+                        <button onClick={() => openAuth('login')} className={styles.dropdownLink}>
+                          <User size={16} /> LOGIN
+                        </button>
+                        <button onClick={() => openAuth('signup')} className={styles.dropdownLink}>
+                          <Settings size={16} /> SIGN UP
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button className={styles.dropdownLink}>
+                          <User size={16} /> PROFILE
+                        </button>
+                        <button className={styles.dropdownLink}>
+                          <Settings size={16} /> SETTINGS
+                        </button>
+                      </>
+                    )}
+                    <div className={styles.dropdownDivider}></div>
+                    <button className={styles.dropdownLink}>
+                      <ShoppingBag size={16} /> MY ORDERS
                     </button>
-                  )}
+                    {user && (
+                      <button
+                        className={`${styles.dropdownLink} ${styles.logoutText}`}
+                        onClick={() => {
+                          handleLogout();
+                          setShowUserDropdown(false);
+                        }}
+                      >
+                        LOGOUT
+                      </button>
+                    )}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </nav>
