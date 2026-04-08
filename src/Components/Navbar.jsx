@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { ShoppingBag, Search, User, Menu, X, Heart, LogOut, ChevronDown } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
+import { useWishlist } from '@/context/WishlistContext';
 import styles from './Navbar.module.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import LoginPopup from './LoginPopup';
@@ -16,6 +17,7 @@ const Navbar = () => {
     const [showLogin, setShowLogin] = useState(false);
     const pathname = usePathname();
     const { totalItems } = useCart();
+    const { wishlistItems } = useWishlist();
     const { user, logout } = useAuth();
 
     useEffect(() => {
@@ -90,9 +92,12 @@ const Navbar = () => {
 
                     {/* Actions (Right) */}
                     <div className={styles.actions}>
-                        <button className={styles.iconBtn} title="Wishlist">
-                            <Heart size={22} />
-                        </button>
+                        <Link href="/wishlist" className={styles.iconBtn} title="Wishlist">
+                            <div className={styles.badgeWrapper}>
+                                <Heart size={22} fill={wishlistItems.length > 0 ? "currentColor" : "none"} />
+                                {wishlistItems.length > 0 && <span className={styles.badge}>{wishlistItems.length}</span>}
+                            </div>
+                        </Link>
                         
                         <Link href="/cart" className={styles.cartBtn} title="Cart">
                             <div className={styles.cartBadgeWrapper}>

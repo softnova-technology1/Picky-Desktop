@@ -148,6 +148,12 @@
   transform: translateY(-2px);
 }
 
+.wishlistActive {
+  background: white !important;
+  color: #ff4d4d !important;
+  border-color: #ff4d4d !important;
+}
+
 .productTitle {
   font-size: 3.5rem;
   font-weight: 900;

@@ -112,6 +112,12 @@
   transform: scale(1.1) translateY(-2px);
 }
 
+.wishlistActive {
+  background: #643d97 !important;
+  color: #ff4d4d !important;
+  /* border: 1px solid #ff4d4d !important; */
+}
+
 
 .content {
   padding: 24px 16px;

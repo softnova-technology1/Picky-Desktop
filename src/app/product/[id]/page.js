@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/lib/data";
 import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 import ProductCard from "@/Components/ProductCard";
 import styles from "./product.module.css";
 import { Star, Truck, ShieldCheck, RefreshCw, Minus, Plus, Heart, Share2 } from "lucide-react";
@@ -15,11 +16,14 @@ export default function ProductDetailsPage({ params }) {
   const { id } = resolvedParams;
 
   const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
   const product = products.find((p) => p.id === id);
 
   const [quantity, setQuantity] = useState(1);
   const [zoomPos, setZoomPos] = useState({ x: 0, y: 0 });
   const [showZoom, setShowZoom] = useState(false);
+
+  const isInWish = isInWishlist(product?.id);
 
   // Suggested products from same category
   const relatedProducts = products
@@ -91,7 +95,15 @@ export default function ProductDetailsPage({ params }) {
               <div className={styles.metaHeader}>
                 <span className={styles.categoryLabel}>{product.category.toUpperCase()}</span>
                 <div className={styles.actions}>
-                  <button className={styles.iconBtn}><Heart size={20} /></button>
+                  <motion.button 
+                    className={`${styles.iconBtn} ${isInWish ? styles.wishlistActive : ''}`}
+                    onClick={() => toggleWishlist(product)}
+                    whileTap={{ scale: 0.8 }}
+                    whileHover={{ scale: 1.1 }}
+                    title={isInWish ? "Remove from Wishlist" : "Add to Wishlist"}
+                  >
+                    <Heart size={20} fill={isInWish ? "#ff4d4d" : "none"} color={isInWish ? "#ffffffff" : "currentColor"} />
+                  </motion.button>
                   <button className={styles.iconBtn}><Share2 size={20} /></button>
                 </div>
               </div>
