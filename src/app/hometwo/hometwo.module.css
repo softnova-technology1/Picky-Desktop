@@ -4,6 +4,64 @@
   /* Light background */
   min-height: 100vh;
 }
+.announcementBar {
+  background: var(--primary);
+  color: white;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Stays at the very top */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tickerTrack {
+  display: flex;
+  white-space: nowrap;
+  animation: tickerScroll 35s linear infinite;
+}
+
+.tickerItem {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 60px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.tickerDot {
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  margin: 0 25px;
+}
+
+@keyframes tickerScroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.tickerTrack:hover {
+  animation-play-state: paused;
+}
+
+.main {
+  background-color: var(--background);
+  /* Light background */
+  min-height: 100vh;
+}
 
 /* Navbar Styles */
 .navbar {

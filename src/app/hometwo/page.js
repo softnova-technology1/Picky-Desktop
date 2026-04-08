@@ -6,13 +6,8 @@ import Link from "next/link";
 import {
   Star,
   ArrowRight,
-  CheckCircle2,
   Heart,
   ShoppingBag,
-  Settings,
-  Bell,
-  Search,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   User,
@@ -24,7 +19,6 @@ import {
   Tv,
   Gamepad2,
   Apple,
-  Car,
   Bike,
   Trophy,
   Book,
@@ -35,14 +29,12 @@ import {
   RotateCcw,
   Lock,
   Headphones,
-  Mail,
-  Send,
   ShoppingCart
 } from "lucide-react";
-import watch from "@/images/home/hero-watch.png"
-import fashion from "@/images/home/fashion.png"
-import lamp from "@/images/home/lamp.png"
-import BlogSection from "@/Components/BlogDetails/BlogSection";
+// import watch from "@/images/home/hero-watch.png"
+// import fashion from "@/images/home/fashion.png"
+// import lamp from "@/images/home/lamp.png"
+// import BlogSection from "@/Components/BlogDetails/BlogSection";
 import AuthPopup from "@/Components/AuthPopup";
 
 export default function Home2() {
@@ -85,7 +77,27 @@ export default function Home2() {
 
     return () => clearInterval(timer);
   }, []);
+  // --- Entrance Scroll Animation Logic ---
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.15, // Trigger when 15% of section is visible
+      rootMargin: "0px 0px -50px 0px" // Slight offset for better feel
+    };
 
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(styles.visible);
+        }
+      });
+    }, observerOptions);
+
+    const revealElements = document.querySelectorAll(`.${styles.reveal}`);
+    revealElements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (showUserDropdown && !event.target.closest(`.${styles.userDropdownContainer}`)) {
@@ -121,6 +133,19 @@ export default function Home2() {
 
   return (
     <main className={styles.main}>
+
+          <div className={styles.announcementBar}>
+        <div className={styles.tickerTrack}>
+          {[1, 2, 3, 4, 5, 6].map(i => (
+            <div key={i} className={styles.tickerItem}>
+              🔥 NEW ARRIVAL: LUXURY COLLECTION JUST DROPPED
+              <div className={styles.tickerDot}></div>
+              ✨ LIMITED TIME OFFER: 50% OFF TODAY ONLY
+              <div className={styles.tickerDot}></div>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Promo Carousel (Full Width Hero) */}
       <section className={styles.promoContainer}>
