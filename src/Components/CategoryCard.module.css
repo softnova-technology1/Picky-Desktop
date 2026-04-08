@@ -1,9 +1,36 @@
 .card {
   display: block;
   text-decoration: none;
-  border-radius: 40px;
+  border-radius: 34px;
   overflow: hidden;
+  position: relative;
   background-color: var(--background);
+  transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+.card:hover {
+  box-shadow: 0 50px 80px rgba(100, 61, 151, 0.12);
 }
 
 .imageContainer {
@@ -12,20 +39,88 @@
   width: 100%;
 }
 
-.overlay {
+.image {
+  transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.card:hover .image {
+  transform: scale(1.1) rotate(1deg);
+}
+
+/* Metadata Badge at top right */
+.badge {
   position: absolute;
-  inset: 0;
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  padding: 8px 16px;
+  border-radius: 100px;
   display: flex;
-  align-items: flex-end;
-  padding: 40px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0) 60%);
-  transition: all 0.5s ease;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 5;
+  transition: all 0.4s ease;
+}
+
+.card:hover .badge {
+  background: white;
+  border-color: white;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.count {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: white;
+}
+
+.card:hover .count {
+  color: var(--primary);
+}
+
+.badgeText {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.card:hover .badgeText {
+  color: var(--text-muted);
+}
+
+/* Floating Glass Content Box */
+.floatingBox {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  background: rgba(20, 20, 20, 0.2);
+  backdrop-filter: blur(25px);
+  padding: 30px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  z-index: 5;
+}
+
+.card:hover .floatingBox {
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateY(-10px);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.2);
+  border-color: white;
 }
 
 .content {
   color: white;
-  transform: translateY(20px);
-  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: color 0.4s ease;
+}
+
+.card:hover .content {
+  color: #121212;
 }
 
 .label {
@@ -38,50 +133,62 @@
 }
 
 .name {
-  font-size: 2rem;
-  font-weight: 900;
-  margin-bottom: 12px;
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 8px;
   line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .description {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   line-height: 1.5;
-  margin-bottom: 24px;
-  opacity: 0;
+  margin-bottom: 20px;
+  opacity: 0.7;
   max-height: 0;
   overflow: hidden;
-  transition: all 0.5s ease;
-}
-
-.exploreBtn {
-  font-size: 0.8rem;
-  font-weight: 800;
-  padding: 12px 24px;
-  background: white;
-  color: #000;
-  border-radius: 99px;
-  width: fit-content;
-  opacity: 0;
-  transform: scale(0.9);
-  transition: all 0.5s ease;
-}
-
-.card:hover .overlay {
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 100%);
-}
-
-.card:hover .content {
-  transform: translateY(0);
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .card:hover .description {
-  opacity: 0.9;
   max-height: 100px;
-  margin-bottom: 32px;
+  margin-top: 12px;
+  opacity: 0.9;
 }
 
-.card:hover .exploreBtn {
-  opacity: 1;
-  transform: scale(1);
+.exploreTrigger {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  margin-top: 20px;
+}
+
+.arrowIcon {
+  width: 24px;
+  height: 24px;
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: all 0.4s ease;
+}
+
+.card:hover .arrowIcon {
+  transform: translateX(6px) rotate(-45deg);
+  background: var(--primary-light);
+}
+
+@media (max-width: 768px) {
+  .floatingBox {
+    padding: 20px;
+  }
+  .name {
+    font-size: 1.5rem;
+  }
 }

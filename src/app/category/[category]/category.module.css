@@ -1,0 +1,155 @@
+.wrapper {
+  padding-bottom: 120px;
+}
+
+.header {
+  padding: 100px 0 60px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #94a3b8;
+  margin-bottom: 24px;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+
+.subcategorySection {
+  margin-top: 60px;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 30px;
+  letter-spacing: -0.01em;
+}
+
+.subcategoryGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  margin-bottom: 80px;
+}
+
+.subCard {
+  background: white;
+  padding: 15px;
+  border-radius: 20px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.subCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+  border-color: var(--primary-light);
+}
+
+.subImageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/10;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.subCardContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px 5px;
+}
+
+.subCard h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+}
+
+.subArrow {
+  color: var(--primary-light);
+  opacity: 0.5;
+}
+
+.subCard:hover .subArrow {
+  opacity: 1;
+}
+
+.previewSection {
+  padding-top: 80px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.notFound {
+  padding: 200px 0;
+  text-align: center;
+}
+
+@media (max-width: 1200px) {
+  .subcategoryGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .subcategoryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .subcategoryGrid {
+    grid-template-columns: 1fr;
+  }
+  .productGrid {
+    grid-template-columns: 1fr;
+  }
+}
+

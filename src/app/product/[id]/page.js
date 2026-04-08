@@ -3,7 +3,7 @@
 import React, { useState, useEffect, use } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { products } from "@/lib/data";
+import { getProductById, products } from "@/lib/data";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import ProductCard from "@/Components/ProductCard";
@@ -15,9 +15,9 @@ export default function ProductDetailsPage({ params }) {
   const resolvedParams = use(params);
   const { id } = resolvedParams;
 
-  const { addToCart } = useCart();
-  const { toggleWishlist, isInWishlist } = useWishlist();
-  const product = products.find((p) => p.id === id);
+  const { addToCart, triggerNotification } = useCart();
+  const { isInWishlist, toggleWishlist } = useWishlist();
+  const product = getProductById(id);
 
   const [quantity, setQuantity] = useState(1);
   const [zoomPos, setZoomPos] = useState({ x: 0, y: 0 });
@@ -135,7 +135,10 @@ export default function ProductDetailsPage({ params }) {
 
                 <button
                   className={styles.addToCartBtn}
-                  onClick={() => addToCart({ ...product, quantity })}
+                  onClick={() => {
+                    addToCart({ ...product, quantity });
+                    triggerNotification(product);
+                  }}
                 >
                   ADD TO BAG — ${(product.price * quantity).toFixed(2)}
                 </button>

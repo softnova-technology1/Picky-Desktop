@@ -1,0 +1,22 @@
+.trending {
+  padding: 100px 0;
+}
+
+.trendingHeader {
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.piecesTitle {
+  font-size: 1rem;
+  letter-spacing: 0.4em;
+  color: var(--primary);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}

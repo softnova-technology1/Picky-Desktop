@@ -7,6 +7,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 
 export default function AllProductsPage() {
+  const displayProducts = products.slice(0, 100);
   return (
     <div className={styles.wrapper}>
       <div className="container">
@@ -19,7 +20,7 @@ export default function AllProductsPage() {
         </header>
 
         <div className={styles.grid}>
-          {products.map((p) => (
+          {displayProducts.map((p) => (
             <ProductCard key={p.id} product={p} />
           ))}
         </div>

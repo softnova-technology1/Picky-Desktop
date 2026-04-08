@@ -11,12 +11,13 @@ import styles from './wishlist.module.css';
 
 const WishlistPage = () => {
     const { wishlistItems, removeFromWishlist } = useWishlist();
-    const { addToCart } = useCart();
+    const { addToCart, triggerNotification } = useCart();
 
     const handleAddToCart = (item) => {
         addToCart(item);
-        // Optional: Show toast or feedback
+        triggerNotification(item);
     };
+
 
     return (
         <main className={styles.main}>

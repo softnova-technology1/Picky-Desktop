@@ -7,17 +7,17 @@ import snacks from "@/images/home/snacks.png";
 import electronics from "@/images/home/elec.png";
 import fashion from "@/images/home/cloth.png";
 import home from "@/images/home/decor.png";
-import gifts from "@/images/home/books.png";
+import gifts from "@/images/home/gift.png";
 
 import Link from 'next/link';
 
 const FashionHero = () => {
     const [categories, setCategories] = useState([
-        { id: 1, src: snacks, alt: "Premium Snacks", title: "Snacks", label: "Pantry", path: "/category/snacks" },
-        { id: 2, src: electronics, alt: "Minimalist Electronics", title: "Electronics", label: "Tech", path: "/categories/electronics" },
-        { id: 3, src: fashion, alt: "Featured Fashion", title: "Fashion", label: "Style", path: "/categories/fashion" },
-        { id: 4, src: home, alt: "Modern Home Decor", title: "Home & Decor", label: "Living", path: "/categories/home" },
-        { id: 5, src: gifts, alt: "Curated Gifts", title: "Books & Gifts", label: "Gifting", path: "/shop?category=gifts" },
+        { id: 1, src: electronics, alt: "Electronics", title: "Electronics", label: "Tech", path: "/category/electronics" },
+        { id: 2, src: fashion, alt: "Fashion", title: "Fashion" , label: "Style", path: "/category/fashion" },
+        { id: 3, src: gifts, alt: "Books", title: "Books", label: "Knowledge", path: "/category/books" },
+        { id: 4, src: home, alt: "Home Decor", title: "Home Decor", label: "Living", path: "/category/home-decor" },
+        { id: 5, src: gifts, alt: "Gifts", title: "Gifts", label: "Celebration", path: "/category/gifts" },
     ]);
 
     const [isPaused, setIsPaused] = useState(false);

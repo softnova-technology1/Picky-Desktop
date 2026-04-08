@@ -1,0 +1,179 @@
+.editorialPromos {
+  padding: 80px 0;
+  background: white;
+}
+
+.editorialGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.eCardMain, .eCardSide {
+  height: 420px;
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.eCardMain {
+  display: flex;
+  background: #f9f9f9;
+  padding: 40px;
+  border: 1px solid #f0f0f0;
+}
+
+.eContent {
+  display: flex;
+  gap: 30px;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.eVerticalText {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  color: #ddd;
+  display: flex;
+  align-items: center;
+}
+
+.eMainText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.eLabel {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.eTitle {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: #1a1a1a;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.eSerif {
+  font-family: serif;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--primary);
+}
+
+.eDesc {
+  font-size: 0.95rem;
+  color: #666;
+  max-width: 280px;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.eBtn {
+  width: fit-content;
+  background: #1a1a1a;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.eBtn:hover {
+  background: var(--primary);
+  transform: translateY(-2px);
+}
+
+.eImageFrame {
+  width: 45%;
+  height: 100%;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  flex-shrink: 0;
+}
+
+.eImg {
+    object-fit: cover;
+}
+
+.eCardSide {
+  display: flex;
+  flex-direction: column;
+}
+
+.eSideImage {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.eSideOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: rgba(100,61,151,0.1);
+}
+
+.eGlassBox {
+  width: 100%;
+  max-width: 320px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 32px;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  border: 1px solid white;
+}
+
+.eSmallLabel {
+  font-size: 0.6rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  color: #aaa;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.eSideTitle {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #1a1a1a;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.eArrowLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 0.75rem;
+  color: var(--primary);
+  transition: all 0.3s ease;
+}
+
+.eCardSide:hover .eArrowLink {
+  transform: translateX(5px);
+}

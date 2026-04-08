@@ -10,13 +10,14 @@ import { useWishlist } from '@/context/WishlistContext';
 import styles from './Navbar.module.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import LoginPopup from './LoginPopup';
+import CartNotification from './CartNotification';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
     const pathname = usePathname();
-    const { totalItems } = useCart();
+    const { totalItems, notification, setNotification } = useCart();
     const { wishlistItems } = useWishlist();
     const { user, logout } = useAuth();
 
@@ -46,10 +47,10 @@ const Navbar = () => {
     const navLinks = [
         { name: 'HOME', path: '/' },
         { name: 'SHOP', path: '/shop' },
-        { name: 'CATEGORIES', path: '/categories', hasDropdown: true },
+        { name: 'CATEGORIES', path: '/category', hasDropdown: true },
         { name: 'NEW ARRIVALS', path: '/new-arrivals' },
         { name: 'OFFERS', path: '/offers' },
-        { name: 'BLOG', path: '/blog' },
+        { name: 'BLOG', path: '/Blog' },
         { name: 'ABOUT US', path: '/about' },
     ];
 
@@ -156,6 +157,12 @@ const Navbar = () => {
             <AnimatePresence>
                 {showLogin && <LoginPopup onClose={() => setShowLogin(false)} />}
             </AnimatePresence>
+
+            <CartNotification 
+                show={notification.show} 
+                product={notification.product} 
+                onClose={() => setNotification(prev => ({ ...prev, show: false }))} 
+            />
         </>
     );
 };
