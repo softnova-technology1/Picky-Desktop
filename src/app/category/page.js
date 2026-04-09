@@ -552,56 +552,7 @@ export default function CategoriesPage() {
       </section>
 
 
-      {/* Footer */}
-      <footer className={styles.luxuryFooter}>
-        <div className={styles.container}>
-          <div className={styles.footerInner}>
-            <div className={styles.footerCol}>
-              <h3 className={styles.footerLogo}>PICKY<span>.</span></h3>
-              <ul className={styles.footerLinks}>
-                <li><Link href="#">About Us</Link></li>
-                <li><Link href="#">Careers</Link></li>
-                <li><Link href="#">Blog</Link></li>
-                <li><Link href="#">Contact</Link></li>
-              </ul>
-            </div>
-            <div className={styles.footerCol}>
-              <h4>Categories</h4>
-              <ul className={styles.footerLinks}>
-                <li><Link href="/category/electronics">Electronics</Link></li>
-                <li><Link href="/category/clothes">Clothes</Link></li>
-                <li><Link href="/category/home-accessories">Home Accessories</Link></li>
-                <li><Link href="/category/chocolates">Chocolates</Link></li>
-              </ul>
-            </div>
-            <div className={styles.footerCol}>
-              <h4>Support</h4>
-              <ul className={styles.footerLinks}>
-                <li><Link href="#">Help Center</Link></li>
-                <li><Link href="#">Shipping</Link></li>
-                <li><Link href="#">Returns</Link></li>
-                <li><Link href="#">FAQ</Link></li>
-              </ul>
-            </div>
-            <div className={styles.footerCol}>
-              <h4>Newsletter</h4>
-              <p className={styles.newsletterLabel}>Subscribe to get the latest updates.</p>
-              <div className={styles.subscribeBox}>
-                <input type="email" placeholder="Your email address" />
-                <button>Join</button>
-              </div>
-            </div>
-          </div>
-          <div className={styles.footerBottom}>
-            <p>© 2026 Premium Marketplace. All rights reserved.</p>
-            <div className={styles.socialLinks}>
-              <Link href="#">IG</Link>
-              <Link href="#">TW</Link>
-              <Link href="#">FB</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+
     </div>
   );
 }

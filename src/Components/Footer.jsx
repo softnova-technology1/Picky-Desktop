@@ -1,7 +1,7 @@
 "use client"
 import styles from '../Stylesheet/Footer.module.css';
 import Image from 'next/image';
-import { MapPin, Phone, Mail, ShoppingCart, ArrowRight, Truck, RotateCcw, Lock, Headphones } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 
 const FacebookIcon = ({ size }) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>;
 const InstagramIcon = ({ size }) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>;
@@ -14,63 +14,6 @@ const TwitterIcon = ({ size }) => <svg width={size} height={size} viewBox="0 0 2
 const Footer = () => {
   return (
     <>
-      <section className={styles.newsSectionMaster}>
-        <div className={styles.newsHeroBg}>
-          <Image
-            src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974"
-            alt="Newsletter Background"
-            fill
-            className={styles.newsHeroImg}
-          />
-          <div className={styles.newsHeroOverlay}></div>
-          <div className={styles.newsHeroContent}>
-            <span className={styles.newsUpperTag}>GET NEWSLETTER</span>
-            <h2 className={styles.newsHeroHeading}>Sign Up to Newsletter</h2>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className={styles.newsOverCardContainer}>
-            <div className={styles.newsOverCard}>
-              <div className={styles.newsOverIconGroup}>
-                <div className={styles.newsPaperPlane}>
-                  <ShoppingCart size={40} strokeWidth={2} />
-                </div>
-              </div>
-
-              <div className={styles.newsInputGroupPremium}>
-                <input type="email" placeholder="Enter Your Email" className={styles.newsInputPremium} />
-                <button className={styles.newsSubmitBtnGradient}>
-                  SUBSCRIBE NOW <ArrowRight size={18} />
-                </button>
-              </div>
-              <p className={styles.newsPrivacyNotice}>* By subscribing, you agree with our Privacy Policy and Terms of Service.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.trustSectionMaster}>
-        <div className="container">
-          <div className={styles.trustGrid}>
-            {[
-              { icon: <Truck size={32} />, title: "Free Delivery", desc: "For all orders above ₹2000. Seamless & fast." },
-              { icon: <RotateCcw size={32} />, title: "Easy Returns", desc: "30-day hassle-free policy for your peace of mind." },
-              { icon: <Lock size={32} />, title: "Secure Payment", desc: "100% SSL encrypted checkout for safe shopping." },
-              { icon: <Headphones size={32} />, title: "24/7 Support", desc: "Dedicated team available round the clock for you." }
-            ].map((pod, i) => (
-              <div key={i} className={styles.trustPod}>
-                <div className={styles.trustIconBox}>{pod.icon}</div>
-                <div className={styles.trustContent}>
-                  <h4 className={styles.trustTitle}>{pod.title}</h4>
-                  <p className={styles.trustDesc}>{pod.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <footer className={styles.footer}>
 
       <div className="container">

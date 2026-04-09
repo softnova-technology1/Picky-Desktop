@@ -20,7 +20,7 @@ const CuratedCategory = () => {
                     <Link href="/category" className={styles.viewAll}>VIEW ALL ({categories.length})</Link>
                 </div>
                 <div className={styles.categoryGrid}>
-                    {categories.map((cat) => (
+                    {categories.slice(0, 4).map((cat) => (
                         <CategoryCard key={cat} category={cat} />
                     ))}
                 </div>
