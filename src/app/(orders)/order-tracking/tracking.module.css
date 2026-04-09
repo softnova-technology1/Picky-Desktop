@@ -1,14 +1,14 @@
 .mainWrapper {
   background-color: #fbfcff;
   min-height: 100vh;
-  padding: 120px 0;
+  padding-bottom: 60px;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .container {
   max-width: 1500px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0;
 }
 
 /* Header Section */

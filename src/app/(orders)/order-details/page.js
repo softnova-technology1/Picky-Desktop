@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Link from 'next/link';
 import styles from './order-details.module.css';
 import { 
   Check, 
@@ -168,9 +169,14 @@ export default function OrderDetailsPage() {
                </div>
                
                <div className={styles.sideActions}>
-                  <button className={styles.primaryBtn}><Download size={16} /> Download Invoice</button>
-                  <button className={styles.secondaryBtn}><Share2 size={16} /> Share Status</button>
-               </div>
+                  <Link href="/order-tracking" className={styles.primaryBtn} style={{ textDecoration: 'none', justifyContent: 'center' }}>
+                    <Truck size={16} /> Track Order
+                  </Link>
+                  <button className={styles.secondaryBtn}><Download size={16} /> Download Invoice</button>
+                  <Link href="/cancel-order" className={styles.cancelLink} style={{ marginTop: '1rem', display: 'block', textAlign: 'center', fontSize: '13px', color: '#ff4d4f', textDecoration: 'none' }}>
+                    Cancel Order
+                  </Link>
+                </div>
             </div>
           </div>
         </div>

@@ -6,16 +6,20 @@ import { usePathname } from 'next/navigation';
 import { ShoppingBag, Search, User, Menu, X, Heart, LogOut, ChevronDown } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
+import { useWishlist } from '@/context/WishlistContext';
 import styles from './Navbar.module.css';
 import { motion, AnimatePresence } from 'framer-motion';
-import LoginPopup from './LoginPopup';
+import CartNotification from './CartNotification';
+import AuthPopup from './AuthPopup';
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [showLogin, setShowLogin] = useState(false);
+    const [showAuthPopup, setShowAuthPopup] = useState(false);
+    const [authTab, setAuthTab] = useState('login');
     const pathname = usePathname();
     const { totalItems } = useCart();
+    const { wishlistItems } = useWishlist();
     const { user, logout } = useAuth();
 
     useEffect(() => {
@@ -28,23 +32,15 @@ const Navbar = () => {
         setMobileMenuOpen(false);
     }, [pathname]);
 
-    useEffect(() => {
-        // Auto-show login popup after 5 seconds if user is not logged in and not on login page
-        const hasShownBefore = sessionStorage.getItem('login_popup_shown');
-        
-        if (!user && pathname !== '/login' && !hasShownBefore) {
-            const timer = setTimeout(() => {
-                setShowLogin(true);
-                sessionStorage.setItem('login_popup_shown', 'true');
-            }, 5000);
-            return () => clearTimeout(timer);
-        }
-    }, [user, pathname]);
+    const openAuth = (tab) => {
+        setAuthTab(tab);
+        setShowAuthPopup(true);
+    };
 
     const navLinks = [
         { name: 'HOME', path: '/' },
         { name: 'SHOP', path: '/shop' },
-        { name: 'CATEGORIES', path: '/category', hasDropdown: true },
+        { name: 'CATEGORIES', path: '/category' },
         { name: 'NEW ARRIVALS', path: '/new-arrivals' },
         { name: 'OFFERS', path: '/offers' },
         { name: 'BLOG', path: '/Blog' },
@@ -79,9 +75,9 @@ const Navbar = () => {
                     <div className={styles.searchContainer}>
                         <div className={styles.searchWrapper}>
                             <Search size={18} className={styles.searchIcon} />
-                            <input 
-                                type="text" 
-                                placeholder="Search Picky..." 
+                            <input
+                                type="text"
+                                placeholder="Search Picky..."
                                 className={styles.searchInput}
                             />
                         </div>
@@ -90,10 +86,13 @@ const Navbar = () => {
 
                     {/* Actions (Right) */}
                     <div className={styles.actions}>
-                        <button className={styles.iconBtn} title="Wishlist">
-                            <Heart size={22} />
-                        </button>
-                        
+                        <Link href="/wishlist" className={styles.iconBtn} title="Wishlist">
+                            <div className={styles.badgeWrapper}>
+                                <Heart size={22} fill={wishlistItems.length > 0 ? "currentColor" : "none"} />
+                                {wishlistItems.length > 0 && <span className={styles.badge}>{wishlistItems.length}</span>}
+                            </div>
+                        </Link>
+
                         <Link href="/cart" className={styles.cartBtn} title="Cart">
                             <div className={styles.cartBadgeWrapper}>
                                 <ShoppingBag size={22} />
@@ -109,9 +108,13 @@ const Navbar = () => {
                                 </button>
                             </div>
                         ) : (
-                            <Link href="/login" className={styles.iconBtn} title="Account">
+                            <button
+                                className={styles.iconBtn}
+                                title="Account"
+                                onClick={() => openAuth('login')}
+                            >
                                 <User size={22} />
-                            </Link>
+                            </button>
                         )}
 
                         {/* Mobile Toggle */}
@@ -140,6 +143,7 @@ const Navbar = () => {
                                     className={styles.mobileLink}
                                 >
                                     {link.name}
+                                    {link.hasDropdown && <ChevronDown size={14} className={styles.chevron} />}
                                 </Link>
                             ))}
                         </motion.div>
@@ -147,11 +151,13 @@ const Navbar = () => {
                 </AnimatePresence>
             </nav>
 
-            {/* Login Popup - Outside Nav for Perfect Centering */}
-            <AnimatePresence>
-                {showLogin && <LoginPopup onClose={() => setShowLogin(false)} />}
-            </AnimatePresence>
-        </>
+
+            <AuthPopup
+                isOpen={showAuthPopup}
+                onClose={() => setShowAuthPopup(false)}
+                initialTab={authTab}
+            />
+        </>              
     );
 };
 

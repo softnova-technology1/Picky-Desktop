@@ -5,15 +5,19 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AuthBackground from '@/Components/AuthBackground';
 
+import { useAuth } from '@/context/AuthContext';
+
 const CreateAccount = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const { login } = useAuth();
     const router = useRouter();
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const name = e.target[0].value;
+        const email = e.target[1].value;
         // Simulate register success
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userName', e.target[0].value);
+        login({ email, name });
         router.push('/hometwo');
     };
 

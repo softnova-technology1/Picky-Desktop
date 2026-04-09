@@ -199,7 +199,7 @@ export default function MyOrdersPage() {
                     <p className={styles.productDesc}>{order.productDesc}</p>
                     
                     <div className={styles.links}>
-                      <span className={styles.actionLink}><PackageCheck size={14} style={{ marginRight: '6px' }} /> Order Details</span>
+                      <Link href="/order-details" className={styles.actionLink}><PackageCheck size={14} style={{ marginRight: '6px' }} /> Order Details</Link>
                       <span className={styles.actionLink}><RotateCcw size={14} style={{ marginRight: '6px' }} /> Write Review</span>
                     </div>
                   </div>

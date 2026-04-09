@@ -3,15 +3,19 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 import styles from './ProductCard.module.css';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ShoppingCart, Heart, Eye } from 'lucide-react';
 
 import { useRouter } from 'next/navigation';
 
 const ProductCard = ({ product }) => {
-  const { addToCart, setCheckoutItems } = useCart();
+  const { addToCart, setCheckoutItems, triggerNotification } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
   const router = useRouter();
+
+  const isFavorite = isInWishlist(product.id);
 
   const handleBuyNow = () => {
     setCheckoutItems([{ ...product, quantity: 1 }]);
@@ -27,19 +31,21 @@ const ProductCard = ({ product }) => {
       transition={{ duration: 0.6, ease: [0.165, 0.84, 0.44, 1] }}
     >
       <div className={styles.imageWrapper}>
-        <Link href={`/product/${product.id}`} className={styles.imageContainer}>
-          <Image
-            src={product.image || 'https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=800'}
-            alt={product.name}
-            fill
-            style={{ objectFit: 'contain' }}
-            className={styles.image}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-            onError={(e) => {
-              e.currentTarget.src = 'https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=800'
-            }}
-          />
-        </Link>
+        <div className={styles.imageContainer}>
+          <Link href={`/product/${product.id}`} className={styles.titleLink}>
+            <Image
+              src={product.image || 'https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=800'}
+              alt={product.name}
+              fill
+              style={{ objectFit: 'contain' }}
+              className={styles.image}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+              onError={(e) => {
+                e.currentTarget.src = 'https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=800'
+              }}
+            />
+          </Link>
+        </div>
 
         {/* Action Bar at bottom of image area */}
         <div className={styles.actionBar}>
@@ -48,22 +54,25 @@ const ProductCard = ({ product }) => {
             onClick={(e) => {
               e.preventDefault();
               addToCart(product);
+              triggerNotification(product);
             }}
             title="Add to Cart"
           >
             <ShoppingCart size={20} />
           </button>
           
-          <button
-            className={styles.wishlistBtn}
+          <motion.button
+            className={`${styles.wishlistBtn} ${isFavorite ? styles.wishlistActive : ''}`}
             onClick={(e) => {
               e.preventDefault();
-              // Wishlist logic would go here
+              toggleWishlist(product);
             }}
-            title="Add to Wishlist"
+            whileTap={{ scale: 0.8 }}
+            whileHover={{ scale: 1.1 }}
+            title={isFavorite ? "Remove from Wishlist" : "Add to Wishlist"}
           >
-            <Heart size={20} />
-          </button>
+            <Heart size={20} fill={isFavorite ? "#ff4d4d" : "none"} color={isFavorite ? "#ff4d4d" : "currentColor"} />
+          </motion.button>
         </div>
       </div>
 
