@@ -69,9 +69,19 @@
 }
 
 .active {
-  color: #9c0af1fa;
-  border-bottom: 2px double #9c0af1fa;
-  padding-bottom: 2px;
+  color: #9c0af1fa !important;
+  position: relative;
+}
+
+.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #9c0af1fa;
+  border-radius: 2px;
 }
 
 .chevron {
