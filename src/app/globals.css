@@ -2,6 +2,7 @@
 
 :root {
   --primary: #643d97;
+  --primary-rgb: 100, 61, 151;
   --primary-light: #7E60BF;
   --secondary: #E4B1F0;
   --accent: #FFE1FF;
@@ -32,7 +33,6 @@ body {
   color: var(--foreground);
   background-color: var(--background);
   scroll-behavior: smooth;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -91,6 +91,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
+
 
 /* Buttons */
 .btn {
