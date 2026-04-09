@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { 
+import {
+
   ChevronDown, 
   Search, 
   Heart, 
   ShoppingBag, 
   User, 
-  Settings 
+  Settings,
+  ArrowRight
 } from "lucide-react";
 import styles from "./HomeTwoNavbar.module.css";
 import { useAuth } from "@/context/AuthContext";
@@ -29,7 +31,7 @@ export default function HomeTwoNavbar() {
     if (user) {
       setUserName(user.name || user.email || "Member");
     }
-    
+
     const handleClickOutside = (event) => {
       if (showUserDropdown && !event.target.closest(`.${styles.userDropdownContainer}`)) {
         setShowUserDropdown(false);
@@ -102,7 +104,7 @@ export default function HomeTwoNavbar() {
                     else if (link === "ABOUT") href = "/about";
                     else if (link === "OUR STORE") href = "/shop";
                     else if (link.includes("BLOG")) href = "/Blog/1";
-                    
+
                     return (
                       <Link
                         key={link}
@@ -179,13 +181,13 @@ export default function HomeTwoNavbar() {
             <Link href="/wishlist" className={styles.iconBtn}>
               <div className={styles.iconWrapper}>
                 <Heart size={22} fill={wishlistItems.length > 0 ? "currentColor" : "none"} />
-                {wishlistItems.length > 0 && <span className={styles.badge}>{wishlistItems.length}</span>}
+                {wishlistItems.length > 0 && <span className={`${styles.badge} ${styles.wishlistBadge}`}>{wishlistItems.length}</span>}
               </div>
             </Link>
             <Link href="/cart" className={styles.iconBtn}>
               <div className={styles.iconWrapper}>
                 <ShoppingBag size={22} />
-                {totalItems > 0 && <span className={styles.badge}>{totalItems}</span>}
+                {totalItems > 0 && <span className={`${styles.badge} ${styles.cartBadge}`}>{totalItems}</span>}
               </div>
             </Link>
 
@@ -200,43 +202,62 @@ export default function HomeTwoNavbar() {
               {showUserDropdown && (
                 <div className={styles.userDropdown}>
                   <div className={styles.dropdownHeader}>
-                    <span className={styles.dropdownWelcome}>Welcome, {userName}</span>
+                    <div className={styles.headerTop}>
+                      <div className={styles.miniAvatar}>
+                        <img src="/images/amber.png" alt="User" />
+                      </div>
+                      <div className={styles.headerInfo}>
+                        <span className={styles.dropdownWelcome}>{userName}</span>
+                        <span className={styles.memberStatus}>PREMIUM MEMBER</span>
+                      </div>
+                    </div>
                   </div>
+                  
                   <div className={styles.dropdownLinks}>
                     {!user ? (
                       <>
                         <button onClick={() => openAuth('login')} className={styles.dropdownLink}>
-                          <User size={16} /> LOGIN
+                          <div className={styles.linkIcon}><User size={14} /></div>
+                          <span>LOGIN</span>
                         </button>
                         <button onClick={() => openAuth('signup')} className={styles.dropdownLink}>
-                          <Settings size={16} /> SIGN UP
+                          <div className={styles.linkIcon}><Settings size={14} /></div>
+                          <span>SIGN UP</span>
                         </button>
                       </>
                     ) : (
                       <>
-                        <button className={styles.dropdownLink}>
-                          <User size={16} /> PROFILE
-                        </button>
-                        <button className={styles.dropdownLink}>
-                          <Settings size={16} /> SETTINGS
+                        <Link href="/profile" className={styles.dropdownLink} onClick={() => setShowUserDropdown(false)}>
+                          <div className={styles.linkIcon}><User size={14} /></div>
+                          <span>PROFILE</span>
+                        </Link>
+                        <Link href="/account-settings" className={styles.dropdownLink} onClick={() => setShowUserDropdown(false)}>
+                          <div className={styles.linkIcon}><Settings size={14} /></div>
+                          <span>SETTINGS</span>
+                        </Link>
+                        <div className={styles.dropdownDivider}></div>
+                        <Link href="/my-orders" className={styles.dropdownLink} onClick={() => setShowUserDropdown(false)}>
+                          <div className={styles.linkIcon}><ShoppingBag size={14} /></div>
+                          <span>MY ORDERS</span>
+                        </Link>
+                        <button
+                          className={`${styles.dropdownLink} ${styles.logoutText}`}
+                          onClick={() => {
+                            handleLogout();
+                            setShowUserDropdown(false);
+                          }}
+                        >
+                          <div className={styles.linkIcon} style={{ background: 'rgba(255, 77, 77, 0.1)', color: '#ff4d4d' }}>
+                             <ArrowRight size={14} />
+                          </div>
+                          <span>LOGOUT</span>
                         </button>
                       </>
                     )}
-                    <div className={styles.dropdownDivider}></div>
-                    <button className={styles.dropdownLink}>
-                      <ShoppingBag size={16} /> MY ORDERS
-                    </button>
-                    {user && (
-                      <button
-                        className={`${styles.dropdownLink} ${styles.logoutText}`}
-                        onClick={() => {
-                          handleLogout();
-                          setShowUserDropdown(false);
-                        }}
-                      >
-                        LOGOUT
-                      </button>
-                    )}
+                  </div>
+                  
+                  <div className={styles.dropdownFooter}>
+                    <button className={styles.supportButton}>NEED HELP?</button>
                   </div>
                 </div>
               )}
@@ -245,10 +266,10 @@ export default function HomeTwoNavbar() {
         </div>
       </nav>
       <div className={styles.navSpacer}></div>
-      <AuthPopup 
-        isOpen={showAuthPopup} 
-        onClose={() => setShowAuthPopup(false)} 
-        initialTab={authTab} 
+      <AuthPopup
+        isOpen={showAuthPopup}
+        onClose={() => setShowAuthPopup(false)}
+        initialTab={authTab}
       />
     </>
   );

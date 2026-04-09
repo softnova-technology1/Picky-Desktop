@@ -1,11 +1,8 @@
-/* hometwo.module.css */
+
 .main {
   background-color: var(--background);
   min-height: 100vh;
-}
-.main {
-  background-color: var(--background);
-  min-height: 100vh;
+  /* overflow-x: hidden; */
 }
 
 /* Navbar Styles */

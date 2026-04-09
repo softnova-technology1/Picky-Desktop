@@ -57,7 +57,7 @@ const OfferCard = ({ product, index, onAddToCart }) => {
           />
         </div>
 
-        {/* Action Bar - Re-styled for Modern Look */}
+        {/* Action Bar - Restored to Original Position */}
         <div className={styles.actionBar}>
           <button 
             className={styles.addBtn} 

@@ -1,6 +1,7 @@
 "use client"
 import styles from '../Stylesheet/Footer.module.css';
 import { Star, CheckCircle2, ArrowRight } from "lucide-react";
+import Link from 'next/link';
 
 /**
  * Global Footer Component
@@ -45,7 +46,7 @@ const Footer = () => {
               <h4 className={styles.footerColTitle}>Company</h4>
               <ul className={styles.footerLinksList}>
                 <li><a href="#">About Us</a></li>
-                <li><a href="#">Vendors</a></li>
+                <li><Link href="/contact">Contact</Link></li>
                 <li><a href="#">Careers</a></li>
                 <li><a href="#">Privacy Policy</a></li>
               </ul>

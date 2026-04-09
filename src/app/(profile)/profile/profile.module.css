@@ -1,0 +1,530 @@
+.profileWrapper {
+  display: flex;
+  min-height: 100vh;
+  background-color: #fbfcff;
+  margin: 0 auto;
+  /* max-width: 1500px; */
+}
+
+/* Sidebar Styling - Fixed Left Side */
+.sidebar {
+  width: 320px;
+  padding: 60px 40px;
+  background-color: #fff;
+  border-right: 1px solid #f0f0f5;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.userCard {
+  text-align: left;
+  margin-bottom: 50px;
+  padding-left: 20px;
+}
+
+.avatarWrapper {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 25px;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.userName {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 5px;
+}
+
+.userRole {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  opacity: 0.7;
+}
+
+.navSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 18px 25px;
+  border-radius: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #999;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.navItem:hover {
+  color: #1a1a1a;
+}
+
+.activeNavItem {
+  color: #1a1a1a;
+  background-color: transparent;
+}
+
+.activeNavItem::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 24px;
+  background-color: var(--primary);
+}
+
+.footerNav {
+  margin-top: auto;
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.logoutBtn {
+  margin-top: 20px;
+  color: #ff4d4f;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  padding: 18px 25px;
+  transition: opacity 0.3s;
+}
+
+.logoutBtn:hover {
+  opacity: 0.7;
+}
+
+/* Main Content Styling - Scrolling Right Side */
+.mainContent {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 60px;
+  padding: 60px 80px 100px;
+  background-color: #fbfcff;
+}
+
+.contentBody {
+  max-width: 850px;
+}
+
+.header {
+  margin-bottom: 60px;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.8rem;
+  font-weight: 600;
+  font-style: italic;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+
+.subtitle {
+  color: #888;
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Photo Upload */
+.photoSection {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.profilePhotoWrapper {
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+
+.profilePhoto {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #111;
+}
+
+.editIcon {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: var(--primary);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #fbfcff;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.editIcon:hover {
+  transform: scale(1.1);
+}
+
+.photoInfo h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.photoInfo p {
+  font-size: 0.85rem;
+  color: #999;
+  line-height: 1.5;
+}
+
+/* Form Styling */
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.inputGroup label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #bbb;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.inputField {
+  padding: 18px 25px;
+  background-color: #f4f5f8;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  color: #1a1a1a;
+  outline: none;
+  transition: background-color 0.3s;
+}
+
+.inputField:focus {
+  background-color: #eeeef5;
+}
+
+.textArea {
+  height: 150px;
+  resize: none;
+}
+
+/* Right Panel Elements (Premium Card) */
+.rightPanel {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.premiumCard {
+  background-color: var(--primary);
+  color: white;
+  border-radius: 30px;
+  padding: 40px 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.activePlanBadge {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background-color: rgba(255,255,255,0.2);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.premiumIcon {
+  margin-bottom: 30px;
+}
+
+.premiumTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.premiumDesc {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  opacity: 0.8;
+  margin-bottom: 35px;
+}
+
+.renewalBox {
+  background-color: rgba(255,255,255,0.1);
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 30px;
+}
+
+.renewalLabel {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  opacity: 0.6;
+}
+
+.renewalDate {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.manageBtn {
+  width: 100%;
+  padding: 15px;
+  background-color: white;
+  color: var(--primary);
+  border: none;
+  border-radius: 40px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* Save / Discard Card */
+.actionCard {
+  background: white;
+  padding: 40px;
+  border-radius: 30px;
+  border: 1px solid #f0f0f5;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.saveBtn {
+  width: 100%;
+  padding: 18px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 40px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.saveBtn:hover {
+  background-color: #000;
+}
+
+.discardBtn {
+  background: none;
+  border: none;
+  color: #999;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Connected Accounts */
+.sectionBlock {
+  margin-top: 60px;
+}
+
+.sectionBlock h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+}
+
+.accountRow {
+  background-color: #f4f5f8;
+  padding: 25px 30px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accountInfo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.accountRow  button{
+  border: none;
+  background-color: var(--primary) !important;
+  color: white !important;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.accountRow  button:hover{
+  background-color: var(--primary-dark);
+}
+.googleIcon {
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.accountDetails h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.accountDetails p {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.statusBadge {
+  background-color: #e5e7eb;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #666;
+}
+
+/* Export Data */
+.exportBox {
+  border: 2px dashed #eee;
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border-color 0.3s;
+}
+
+.exportBox:hover {
+  border-color: var(--primary);
+}
+
+.exportInfo h5 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.exportInfo p {
+  font-size: 0.85rem;
+  color: #888;
+  max-width: 400px;
+}
+
+.downloadLink {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: right;
+  max-width: 120px;
+  cursor: pointer;
+}
+
+.assistanceSection {
+  margin-top: 20px;
+  padding: 0 10px;
+}
+
+.assistanceTitle {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.assistanceText {
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.contactLink {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-bottom: 1px solid currentColor;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.contactLink:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 1400px) {
+  .mainContent {
+    grid-template-columns: 1fr;
+    padding: 60px 40px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .profileWrapper {
+    display: block;
+  }
+  .sidebar {
+    display: none;
+  }
+  .mainContent {
+    margin-left: 0;
+    padding: 40px 20px;
+  }
+}
+

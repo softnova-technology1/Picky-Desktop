@@ -1,0 +1,135 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.modal {
+  background: white;
+  width: 90%;
+  max-width: 480px;
+  padding: 50px 40px;
+  border-radius: 30px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.1);
+  transform-origin: center;
+  animation: modalScale 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  transition: color 0.3s;
+}
+
+.closeBtn:hover {
+  color: #1a1a1a;
+}
+
+.iconWrapper {
+  width: 90px;
+  height: 90px;
+  background-color: #f9f7ff;
+  border: 1px solid #eeebff;
+  border-radius: 50%;
+  margin: 0 auto 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  position: relative;
+}
+
+.iconWrapper::after {
+  content: '';
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  border: 1px dashed rgba(124, 58, 237, 0.2);
+  border-radius: 50%;
+  animation: rotate 10s linear infinite;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1a1a1a;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+.btnGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.primaryBtn {
+  width: 100%;
+  padding: 18px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.primaryBtn:hover {
+  transform: translateY(-2px);
+  background-color: #1a0b36;
+}
+
+.secondaryBtn {
+  width: 100%;
+  padding: 18px;
+  background: none;
+  border: 1px solid #eee;
+  border-radius: 40px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalScale {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
