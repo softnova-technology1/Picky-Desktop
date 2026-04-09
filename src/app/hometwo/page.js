@@ -669,68 +669,6 @@ export default function Home2() {
       </section>
 
 
-      <section className={`${styles.newsSectionMaster} ${styles.revealSection}`}>
-        <div className={styles.newsHeroBg}>
-          <Image
-            src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974"
-            alt="Newsletter Background"
-            fill
-            className={styles.newsHeroImg}
-          />
-          <div className={styles.newsHeroOverlay}></div>
-          <div className={styles.newsHeroContent}>
-            <span className={styles.newsUpperTag}>GET NEWSLETTER</span>
-            <h2 className={styles.newsHeroHeading}>Sign Up to Newsletter</h2>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className={styles.newsOverCardContainer}>
-            <div className={styles.newsOverCard}>
-              <div className={styles.newsOverIconGroup}>
-                <div className={styles.newsPaperPlane}>
-                  <ShoppingCart size={40} strokeWidth={2} />
-                </div>
-              </div>
-
-              <div className={styles.newsInputGroupPremium}>
-                <input type="email" placeholder="Enter Your Email" className={styles.newsInputPremium} />
-                <button className={`${styles.newsSubmitBtnGradient} ${styles.magneticBtn}`}>
-                  SUBSCRIBE NOW <ArrowRight size={18} />
-                </button>
-              </div>
-              <p className={styles.newsPrivacyNotice}>* By subscribing, you agree with our Privacy Policy and Terms of Service.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-
-
-
-      <section className={`${styles.trustSectionMaster} ${styles.revealSection}`}>
-        <div className="container">
-          <div className={styles.trustGrid}>
-            {[
-              { icon: <Truck size={32} />, title: "Free Delivery", desc: "For all orders above ₹2000. Seamless & fast." },
-              { icon: <RotateCcw size={32} />, title: "Easy Returns", desc: "30-day hassle-free policy for your peace of mind." },
-              { icon: <Lock size={32} />, title: "Secure Payment", desc: "100% SSL encrypted checkout for safe shopping." },
-              { icon: <Headphones size={32} />, title: "24/7 Support", desc: "Dedicated team available round the clock for you." }
-            ].map((pod, i) => (
-              <div key={i} className={styles.trustPod}>
-                <div className={styles.trustIconBox}>{pod.icon}</div>
-                <div className={styles.trustContent}>
-                  <h4 className={styles.trustTitle}>{pod.title}</h4>
-                  <p className={styles.trustDesc}>{pod.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
 
       {/* Auth Popup */}
       <AuthPopup

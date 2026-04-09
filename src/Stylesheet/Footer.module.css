@@ -1,31 +1,35 @@
 /* Footer Module Styles */
 .footer {
-  padding: 100px 0 40px;
-  background: #f8fafc;
-  border-top: 1px solid var(--border);
+  background: #111827; /* Rich dark background */
+  color: #f1f5f9;
+  padding: 0;
+  font-family: inherit;
 }
 
-.footerGrid {
+
+/* Main Footer Grid */
+.footerMainGrid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
-  gap: 60px;
-  margin-bottom: 80px;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1.6fr;
+  gap: 30px;
+  padding: 80px 0 60px;
 }
 
+/* Logo and Description */
 .footerLogo {
   display: flex;
   align-items: center;
   gap: 12px;
   font-size: 1.5rem;
   font-weight: 900;
-  color: var(--primary);
+  color: #ffffff;
   margin-bottom: 24px;
 }
 
 .logoIconFooter {
   width: 32px;
   height: 32px;
-  background: var(--primary);
+  background: var(--primary, #4C0519);
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -35,41 +39,37 @@
 .footerDesc {
   font-size: 0.95rem;
   line-height: 1.6;
-  color: var(--text-muted);
+  color: #9ca3af;
   margin-bottom: 24px;
-  max-width: 300px;
+  max-width: 90%;
 }
 
-.footerSocials {
+.contactList {
   display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
   gap: 12px;
+  font-size: 0.95rem;
+  color: #cbd5e1;
 }
 
-.socialIcon {
-  width: 40px;
-  height: 40px;
-  background: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--primary);
-  border: 1px solid var(--border);
-  cursor: pointer;
-  transition: all 0.3s ease;
+.contactIcon {
+  color: #E4B1F0;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
-.socialIcon:hover {
-  background: var(--primary);
-  color: white;
-  transform: translateY(-3px);
-}
-
+/* Links Columns */
 .footerColTitle {
   font-size: 1.1rem;
   font-weight: 800;
-  color: var(--primary);
-  margin-bottom: 24px;
+  color: #ffffff;
+  margin: 0 0 24px 0;
 }
 
 .footerLinksList {
@@ -81,122 +81,518 @@
   gap: 14px;
 }
 
-.footerLinksList a {
+.footerLinksList li a {
   font-size: 0.95rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  transition: color 0.3s ease;
+  color: #9ca3af;
   text-decoration: none;
+  transition: color 0.3s ease, padding-left 0.3s ease;
 }
 
-.footerLinksList a:hover {
-  color: var(--primary);
+.footerLinksList li a:hover {
+  color: #fbbf24;
+  padding-left: 4px;
 }
 
+/* Newsletter & Socials */
 .newsletterDesc {
   font-size: 0.95rem;
-  color: var(--text-muted);
-  line-height: 1.6;
+  color: #9ca3af;
+  line-height: 1.5;
   margin-bottom: 20px;
 }
 
 .newsletterBox {
   display: flex;
-  gap: 10px;
+  margin-top: 15px;
 }
 
 .newsletterInput {
   flex: 1;
-  padding: 12px 20px;
-  background: white;
-  border: 1.5px solid var(--border);
-  border-radius: 12px;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
+  padding: 12px 16px;
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.newsletterInput::placeholder {
+  color: #6b7280;
 }
 
 .newsletterInput:focus {
-  outline: none;
-  border-color: var(--primary-light);
-  box-shadow: 0 10px 20px rgba(126, 96, 191, 0.05);
+  border-color: #fbbf24;
 }
 
 .newsletterBtn {
-  width: 48px;
-  height: 48px;
-  background: #3b82f6;
-  color: white;
+  padding: 0 20px;
+  background:  #E4B1F0;
+  color: #111827;
+  font-weight: 700;
   border: none;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 0 8px 8px 0;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s, transform 0.2s;
+  font-size: 0.95rem;
 }
 
 .newsletterBtn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+  opacity: 0.9;
 }
 
+.footerSocials {
+  display: flex;
+  gap: 12px;
+}
+
+.socialIcon {
+  width: 38px;
+  height: 38px;
+  background: #1f2937;
+  border-radius: 50%;
+  border: 1px solid #374151;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.socialIcon:hover {
+  background:  #E4B1F0;
+  color: #111827;
+  border-color: #fbbf24;
+  transform: translateY(-3px);
+}
+
+.appDownloads {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.appBtn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1f2937;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #374151;
+  color: #ffffff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  min-width: 130px;
+}
+
+.appBtn:hover {
+  border-color: #fbbf24;
+}
+
+.appIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appText {
+  display: flex;
+  flex-direction: column;
+}
+
+.appText span {
+  font-size: 0.65rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+  line-height: 1;
+}
+
+.appText strong {
+  font-size: 0.9rem;
+  line-height: 1;
+  font-weight: 600;
+}
+
+/* Bottom Bar */
 .footerBottom {
-  padding-top: 40px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid #374151;
+  padding: 30px 0;
 }
 
 .footerBottomContent {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .copyrightText {
-  font-size: 0.85rem;
-  color: #94a3b8;
+  font-size: 0.9rem;
+  color: #9ca3af;
   font-weight: 500;
 }
 
-.footerBottomLinks {
+.paymentMethods {
   display: flex;
+  align-items: center;
   gap: 24px;
+  flex-wrap: wrap;
 }
 
-.footerBottomLinks a {
-  font-size: 0.85rem;
-  color: #94a3b8;
+.secureBadge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #10b981;
   font-weight: 600;
-  transition: color 0.3s ease;
-  text-decoration: none;
 }
 
-.footerBottomLinks a:hover {
+.paymentIcons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.payIcon {
+  padding: 4px 10px;
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+/* Responsiveness */
+@media (max-width: 1200px) {
+  .footerMainGrid {
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+  }
+  .footerColNewsletter {
+    grid-column: span 4;
+    margin-top: 20px;
+  }
+  .newsletterBox {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 900px) {
+  .footerMainGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+  .footerColBrand, .footerColNewsletter {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .footerMainGrid {
+    grid-template-columns: 1fr;
+  }
+  .footerColBrand, .footerColNewsletter {
+    grid-column: span 1;
+  }
+  .footerBottomContent {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
+  .paymentMethods {
+    justify-content: center;
+  }
+}
+
+/* Global Newsletter & Trust Badges Sections Extracted from HomeTwo */
+.newsSectionMaster {
+  background: #fff;
+  position: relative;
+}
+
+.newsHeroBg {
+  height: 380px;
+  width: 100%;
+  position: relative;
+  border-radius: 60px;
+  margin: 40px auto;
+  width: calc(100% - 80px);
+  overflow: hidden;
+}
+
+.newsHeroImg {
+  object-fit: cover;
+  filter: brightness(0.7) contrast(1.1);
+}
+
+.newsHeroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(100, 61, 151, 0.9) 0%, rgba(126, 96, 191, 0.6) 100%);
+}
+
+.newsHeroContent {
+  position: absolute;
+  top: 27%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+  width: 100%;
+}
+
+.newsUpperTag {
+  font-size: 13px;
+  font-weight: 1000;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 4px;
+  display: block;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.newsHeroHeading {
+  font-size: 52px;
+  font-weight: 1000;
+  color: #fff;
+  letter-spacing: -2px;
+}
+
+.newsOverCardContainer {
+  position: relative;
+  top: -230px;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+}
+
+.newsOverCard {
+  background: #fff;
+  width: 100%;
+  max-width: 1100px;
+  padding: 50px 80px;
+  border-radius: 50px;
+  box-shadow: 0 40px 100px rgba(100, 61, 151, 0.12);
+  position: relative;
+  overflow: hidden;
+  background-image:
+    radial-gradient(circle at 100% 150%, #fff 24%, rgba(100, 61, 151, 0.02) 25%, rgba(100, 61, 151, 0.02) 28%, #fff 29%),
+    radial-gradient(circle at 0% 150%, #fff 24%, rgba(100, 61, 151, 0.02) 25%, rgba(100, 61, 151, 0.02) 28%, #fff 29%);
+  background-size: 80px 80px;
+  text-align: center;
+}
+
+.newsOverIconGroup {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.newsPaperPlane {
+  color: #1a1a1a;
+  transform: rotate(-15deg);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.newsOverCard:hover .newsPaperPlane {
+  transform: rotate(0deg) scale(1.1);
   color: var(--primary);
 }
 
-@media (max-width: 1024px) {
-  .footerGrid {
+.newsInputGroupPremium {
+  display: flex;
+  background: #fff;
+  border: 1.5px solid rgba(100, 61, 151, 0.15);
+  border-radius: 50px;
+  padding: 10px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  transition: all 0.4s;
+}
+
+.newsInputGroupPremium:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 10px 30px rgba(100, 61, 151, 0.08);
+}
+
+.newsInputPremium {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0 30px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.newsSubmitBtnGradient {
+  background: linear-gradient(90deg, #F97316 0%, #E11D48 100%);
+  color: #fff;
+  border: none;
+  padding: 18px 40px;
+  border-radius: 40px;
+  font-size: 13px;
+  font-weight: 1000;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.4s;
+  box-shadow: 0 10px 20px rgba(225, 29, 72, 0.2);
+}
+
+.newsSubmitBtnGradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(225, 29, 72, 0.3);
+}
+
+.newsPrivacyNotice {
+  font-size: 12px;
+  color: #888;
+  margin-top: 20px;
+  font-weight: 500;
+}
+
+.trustGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: -150px;
+  margin-bottom: 50px;
+}
+
+.trustPod {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  padding: 30px 40px;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+}
+
+.trustPod:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 60px;
+  background: var(--border, #eee);
+}
+
+.trustIconBox {
+  color: var(--primary);
+  background: rgba(100, 61, 151, 0.05);
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.trustIconBox::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  background: var(--primary);
+  border-top-left-radius: 40%;
+  border-top-right-radius: 45%;
+  transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+  z-index: -1;
+}
+
+.trustPod:hover .trustIconBox {
+  color: white;
+  transform: scale(1.1) translateY(-5px);
+  box-shadow: 0 10px 25px rgba(100, 61, 151, 0.25);
+}
+
+.trustPod:hover .trustIconBox::before {
+  top: -15%;
+  transform: rotate(360deg);
+}
+
+.trustTitle {
+  font-size: 18px;
+  font-weight: 1000;
+  color: var(--foreground);
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+
+.trustDesc {
+  font-size: 13px;
+  color: var(--text-muted, #666);
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+@media (max-width: 1200px) {
+  .trustGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
+  }
+  .trustPod:nth-child(2)::after {
+    display: none;
   }
 }
 
 @media (max-width: 768px) {
-  .footerGrid {
+  .trustGrid {
     grid-template-columns: 1fr;
-    text-align: center;
   }
-  
-  .footerLogo, .footerSocials, .newsletterBox {
-    justify-content: center;
+  .trustPod::after {
+    display: none;
   }
-  
-  .footerDesc {
-    margin: 0 auto 24px;
+  .trustPod {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border, #eee);
   }
-  
-  .footerBottomContent {
+  .newsHeroBg {
+    height: 300px;
+    width: calc(100% - 40px);
+  }
+  .newsHeroHeading {
+    font-size: 32px;
+  }
+  .newsOverCard {
+    padding: 30px;
+    max-width: 90%;
+  }
+  .newsInputGroupPremium {
     flex-direction: column;
-    gap: 20px;
+    border: none;
+    background: transparent;
+    gap: 15px;
+  }
+  .newsInputPremium {
+    background: #fff;
+    border: 1.5px solid rgba(100, 61, 151, 0.15);
+    border-radius: 50px;
+    padding: 18px 30px;
+  }
+  .newsSubmitBtnGradient {
+    justify-content: center;
   }
 }
