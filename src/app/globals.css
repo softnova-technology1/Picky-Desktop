@@ -2,6 +2,7 @@
 
 :root {
   --primary: #643d97;
+  --primary-rgb: 100, 61, 151;
   --primary-light: #7E60BF;
   --secondary: #E4B1F0;
   --accent: #FFE1FF;
@@ -32,9 +33,45 @@ body {
   color: var(--foreground);
   background-color: var(--background);
   scroll-behavior: smooth;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
+
+/* --- Premium Custom Scrollbar with Dynamic Effect --- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary) 0%, #000 100%);
+  border-radius: 100px;
+  /* Magic Inset Shine */
+  border: 3px solid transparent;
+  background-clip: content-box;
+  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.3);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+  border: 1px solid transparent;
+  /* Atmospheric Magic Glow */
+  box-shadow: 0 0 15px rgba(4, 1, 8, 0.6), 
+              inset 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+
+/* Firefox Support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
+}
+
+
 
 a {
   color: inherit;
@@ -91,6 +128,7 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
+
 
 /* Buttons */
 .btn {

@@ -1,0 +1,304 @@
+.mainWrapper {
+  background-color: #fbfcff;
+  min-height: 100vh;
+  padding-bottom: 60px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0px;
+}
+
+/* Header Section */
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  font-style: italic;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.orderMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #999;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.orderMeta span {
+  color: #1a1a1a;
+}
+
+.historyLink {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+.historyLink:hover {
+  opacity: 1;
+}
+
+/* Layout Grid */
+.layoutGrid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 60px;
+}
+
+.sectionTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Review Items */
+.itemList {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 60px;
+}
+
+.itemCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.itemMain {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.itemImg {
+  width: 120px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 12px;
+  background-color: #f3f4f6;
+}
+
+.itemInfo h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+}
+
+.itemVariant {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 30px;
+}
+
+.itemQty {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.itemPrice {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+/* Reason Selection */
+.reasonSection {
+  margin-bottom: 40px;
+}
+
+.helperText {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+.dropdown {
+  width: 100%;
+  padding: 18px 25px;
+  background-color: #f4f5f8;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #666;
+  letter-spacing: 1.5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+/* Comments */
+.commentsSection h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  font-style: italic;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+}
+
+.textArea {
+  width: 100%;
+  height: 150px;
+  padding: 25px;
+  background-color: #f4f5f8;
+  border: none;
+  border-radius: 16px;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+  outline: none;
+  resize: none;
+}
+
+.textArea::placeholder {
+  color: #999;
+}
+
+/* Side Panel: Refund */
+.sidePanel {
+  background-color: #f9f7ff;
+  border-radius: 20px;
+  padding: 40px;
+}
+
+.refundHeader {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 35px;
+}
+
+.refundList {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-bottom: 35px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  margin-bottom: 35px;
+}
+
+.refundItem {
+  display: flex;
+  gap: 15px;
+}
+
+.refundItem i {
+  color: var(--primary);
+  margin-top: 4px;
+}
+
+.refundInfo h5 {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.refundInfo p {
+  font-size: 0.8rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.refundTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.totalLabel {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #999;
+  letter-spacing: 1px;
+}
+
+.totalValue {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+/* Actions */
+.buttonGroup {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.confirmBtn {
+  width: 100%;
+  padding: 18px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 40px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(99, 85, 130, 0.1);
+}
+
+.cancelBtn {
+  width: 100%;
+  padding: 18px;
+  background-color: #fff;
+  color: #1a1a1a;
+  border: 1px solid #eee;
+  border-radius: 40px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+}
+
+.disclaimer {
+  margin-top: 20px;
+  font-size: 0.65rem;
+  color: #999;
+  text-transform: uppercase;
+  line-height: 1.6;
+  text-align: center;
+  letter-spacing: 1px;
+}

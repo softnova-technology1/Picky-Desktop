@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import {
-  ChevronDown,
-  Search,
-  Heart,
-  ShoppingBag,
-  User,
-  Settings
+
+  ChevronDown, 
+  Search, 
+  Heart, 
+  ShoppingBag, 
+  User, 
+  Settings,
+  ArrowRight
 } from "lucide-react";
 import styles from "./HomeTwoNavbar.module.css";
 import { useAuth } from "@/context/AuthContext";
@@ -200,43 +202,62 @@ export default function HomeTwoNavbar() {
               {showUserDropdown && (
                 <div className={styles.userDropdown}>
                   <div className={styles.dropdownHeader}>
-                    <span className={styles.dropdownWelcome}>Welcome, {userName}</span>
+                    <div className={styles.headerTop}>
+                      <div className={styles.miniAvatar}>
+                        <img src="/images/amber.png" alt="User" />
+                      </div>
+                      <div className={styles.headerInfo}>
+                        <span className={styles.dropdownWelcome}>{userName}</span>
+                        <span className={styles.memberStatus}>PREMIUM MEMBER</span>
+                      </div>
+                    </div>
                   </div>
+                  
                   <div className={styles.dropdownLinks}>
                     {!user ? (
                       <>
                         <button onClick={() => openAuth('login')} className={styles.dropdownLink}>
-                          <User size={16} /> LOGIN
+                          <div className={styles.linkIcon}><User size={14} /></div>
+                          <span>LOGIN</span>
                         </button>
                         <button onClick={() => openAuth('signup')} className={styles.dropdownLink}>
-                          <Settings size={16} /> SIGN UP
+                          <div className={styles.linkIcon}><Settings size={14} /></div>
+                          <span>SIGN UP</span>
                         </button>
                       </>
                     ) : (
                       <>
-                        <button className={styles.dropdownLink}>
-                          <User size={16} /> PROFILE
-                        </button>
-                        <button className={styles.dropdownLink}>
-                          <Settings size={16} /> SETTINGS
+                        <Link href="/profile" className={styles.dropdownLink} onClick={() => setShowUserDropdown(false)}>
+                          <div className={styles.linkIcon}><User size={14} /></div>
+                          <span>PROFILE</span>
+                        </Link>
+                        <Link href="/account-settings" className={styles.dropdownLink} onClick={() => setShowUserDropdown(false)}>
+                          <div className={styles.linkIcon}><Settings size={14} /></div>
+                          <span>SETTINGS</span>
+                        </Link>
+                        <div className={styles.dropdownDivider}></div>
+                        <Link href="/my-orders" className={styles.dropdownLink} onClick={() => setShowUserDropdown(false)}>
+                          <div className={styles.linkIcon}><ShoppingBag size={14} /></div>
+                          <span>MY ORDERS</span>
+                        </Link>
+                        <button
+                          className={`${styles.dropdownLink} ${styles.logoutText}`}
+                          onClick={() => {
+                            handleLogout();
+                            setShowUserDropdown(false);
+                          }}
+                        >
+                          <div className={styles.linkIcon} style={{ background: 'rgba(255, 77, 77, 0.1)', color: '#ff4d4d' }}>
+                             <ArrowRight size={14} />
+                          </div>
+                          <span>LOGOUT</span>
                         </button>
                       </>
                     )}
-                    <div className={styles.dropdownDivider}></div>
-                    <button className={styles.dropdownLink}>
-                      <ShoppingBag size={16} /> MY ORDERS
-                    </button>
-                    {user && (
-                      <button
-                        className={`${styles.dropdownLink} ${styles.logoutText}`}
-                        onClick={() => {
-                          handleLogout();
-                          setShowUserDropdown(false);
-                        }}
-                      >
-                        LOGOUT
-                      </button>
-                    )}
+                  </div>
+                  
+                  <div className={styles.dropdownFooter}>
+                    <button className={styles.supportButton}>NEED HELP?</button>
                   </div>
                 </div>
               )}

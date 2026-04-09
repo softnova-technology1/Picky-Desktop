@@ -55,7 +55,7 @@ const CartNotification = ({ show, product, onClose }) => {
               <div className={styles.productDetails}>
                 <h5 className={styles.productName}>{product.name}</h5>
                 <div className={styles.priceTag}>
-                  ${(product.price || 0).toFixed(2)}
+                  ${Number(product.price || 0).toFixed(2)}
                 </div>
               </div>
             </div>
