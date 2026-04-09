@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { 
-  ChevronDown, 
-  Search, 
-  Heart, 
-  ShoppingBag, 
-  User, 
-  Settings 
+import {
+  ChevronDown,
+  Search,
+  Heart,
+  ShoppingBag,
+  User,
+  Settings
 } from "lucide-react";
 import styles from "./HomeTwoNavbar.module.css";
 import { useAuth } from "@/context/AuthContext";
@@ -29,7 +29,7 @@ export default function HomeTwoNavbar() {
     if (user) {
       setUserName(user.name || user.email || "Member");
     }
-    
+
     const handleClickOutside = (event) => {
       if (showUserDropdown && !event.target.closest(`.${styles.userDropdownContainer}`)) {
         setShowUserDropdown(false);
@@ -102,7 +102,7 @@ export default function HomeTwoNavbar() {
                     else if (link === "ABOUT") href = "/about";
                     else if (link === "OUR STORE") href = "/shop";
                     else if (link.includes("BLOG")) href = "/Blog/1";
-                    
+
                     return (
                       <Link
                         key={link}
@@ -179,13 +179,13 @@ export default function HomeTwoNavbar() {
             <Link href="/wishlist" className={styles.iconBtn}>
               <div className={styles.iconWrapper}>
                 <Heart size={22} fill={wishlistItems.length > 0 ? "currentColor" : "none"} />
-                {wishlistItems.length > 0 && <span className={styles.badge}>{wishlistItems.length}</span>}
+                {wishlistItems.length > 0 && <span className={`${styles.badge} ${styles.wishlistBadge}`}>{wishlistItems.length}</span>}
               </div>
             </Link>
             <Link href="/cart" className={styles.iconBtn}>
               <div className={styles.iconWrapper}>
                 <ShoppingBag size={22} />
-                {totalItems > 0 && <span className={styles.badge}>{totalItems}</span>}
+                {totalItems > 0 && <span className={`${styles.badge} ${styles.cartBadge}`}>{totalItems}</span>}
               </div>
             </Link>
 
@@ -245,10 +245,10 @@ export default function HomeTwoNavbar() {
         </div>
       </nav>
       <div className={styles.navSpacer}></div>
-      <AuthPopup 
-        isOpen={showAuthPopup} 
-        onClose={() => setShowAuthPopup(false)} 
-        initialTab={authTab} 
+      <AuthPopup
+        isOpen={showAuthPopup}
+        onClose={() => setShowAuthPopup(false)}
+        initialTab={authTab}
       />
     </>
   );
