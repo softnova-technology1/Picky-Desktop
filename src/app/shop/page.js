@@ -53,7 +53,25 @@ export default function AllProductsPage() {
       );
     }
     if (selectedCategory !== "All") {
-      result = result.filter(p => p.category === selectedCategory);
+      // Mapping for Marketplace categories
+      const categoryMapping = {
+        "Popular": () => true,
+        "Kurti, Saree & Lehenga": (p) => p.category === "Fashion" && (p.subcategory.includes("Women") || p.subcategory.includes("Jewellery")),
+        "Women Western": (p) => p.category === "Fashion" && p.subcategory.includes("Women"),
+        "Lingerie": (p) => p.category === "Fashion" && p.subcategory.includes("Women"),
+        "Men": (p) => p.category === "Fashion" && p.subcategory.includes("Men"),
+        "Kids & Toys": (p) => p.category === "Fashion" && p.subcategory.includes("Kids") || p.category === "Gifts",
+        "Home & Kitchen": (p) => p.category === "Home Decor",
+        "Beauty & Health": (p) => p.category === "Fashion" && (p.subcategory.includes("Accessories") || p.subcategory.includes("Jewellery")),
+        "Jewelry & Accessories": (p) => p.category === "Fashion" && (p.subcategory.includes("Jewellery") || p.subcategory.includes("Watches")),
+        "Bags & Footwear": (p) => p.category === "Fashion" && (p.subcategory.includes("Handbags") || p.subcategory.includes("Footwear")),
+      };
+
+      if (categoryMapping[selectedCategory]) {
+        result = result.filter(categoryMapping[selectedCategory]);
+      } else {
+        result = result.filter(p => p.category === selectedCategory);
+      }
     }
     result = result.filter(p => p.price >= priceRange.min && p.price <= priceRange.max);
     if (sortBy === "Price: Low to High") {
@@ -82,6 +100,32 @@ export default function AllProductsPage() {
     <div className={styles.wrapper}>
       <div className="container">
         
+        {/* SECTION 0.5: MARKETPLACE CATEGORY NAVBAR */}
+        <nav className={styles.categoryNavbar}>
+          <div className={styles.navItems}>
+            {[
+              "Popular", 
+              "Kurti, Saree & Lehenga", 
+              "Women Western", 
+              "Lingerie", 
+              "Men", 
+              "Kids & Toys", 
+              "Home & Kitchen", 
+              "Beauty & Health", 
+              "Jewelry & Accessories", 
+              "Bags & Footwear"
+            ].map((cat) => (
+              <div 
+                key={cat} 
+                className={`${styles.navItem} ${selectedCategory === cat ? styles.navItemActive : ""}`}
+                onClick={() => setSelectedCategory(prev => prev === cat ? "All" : cat)}
+              >
+                {cat}
+              </div>
+            ))}
+          </div>
+        </nav>
+
         {/* SECTION 1: HERO HEADER - FULL WIDTH */}
         <header className={styles.heroSection}>
            <div className={styles.breadcrumb}>
