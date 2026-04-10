@@ -26,7 +26,7 @@ export default function SubcategoryPage({ params }) {
       "fashion": "Fashion",
       "books": "Books",
       "home-decor": "Home Decor",
-      "gifts": "Gifts"
+      "chocolates": "Chocolates"
   };
 
   const categoryName = mapping[catPath.toLowerCase()] || formatName(catPath);
