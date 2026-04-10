@@ -16,6 +16,7 @@ import {
   Gift, 
   Layers
 } from "lucide-react";
+import Shop from "@/Components/shop";
 
 export default function AllProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -81,7 +82,6 @@ export default function AllProductsPage() {
   return (
     <div className={styles.wrapper}>
       <div className="container">
-        
         {/* SECTION 1: HERO HEADER - FULL WIDTH */}
         <header className={styles.heroSection}>
            <div className={styles.breadcrumb}>
@@ -92,7 +92,7 @@ export default function AllProductsPage() {
               Showing {filteredProducts.length} unique pieces curated for your lifestyle.
            </p>
            
-           <div className={styles.discoveryBanner}>
+           {/* <div className={styles.discoveryBanner}>
               <div className={styles.bannerContent}>
                 <span className={styles.bannerBadge}>LIMITED EDITION</span>
                 <h2 className={styles.bannerTitle}>Curated Minimalism</h2>
@@ -100,8 +100,9 @@ export default function AllProductsPage() {
                 <button className={styles.bannerBtn}>SHOP THE EDIT</button>
               </div>
               <div className={styles.bannerDecor} />
-           </div>
+           </div> */}
         </header>
+        <Shop/>
 
         {/* SECTION 2: SHOP CONTENT - SPLIT LAYOUT */}
         <div className={styles.shopLayout}>
@@ -163,7 +164,6 @@ export default function AllProductsPage() {
               </p>
             </div>
           </aside>
-
           <main className={styles.mainContent}>
             <div className={styles.toolbar}>
               <div className={styles.resultCount}>
