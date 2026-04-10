@@ -255,7 +255,7 @@ export default function ProductDetailsPage({ params }) {
   return (
     <div className={styles.cinemaWrapper}>
       {/* Abstract Background Elements */}
-      <div className={styles.ambientGlowPrimary} style={{ background: dynamicData.isColor1 ? dynamicData.options1[sel1] : 'var(--primary)' }} />
+      <div className={styles.ambientGlowPrimary} />
       <div className={styles.ambientGlowSecondary} />
 
       <motion.div 

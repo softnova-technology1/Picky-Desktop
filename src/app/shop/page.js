@@ -52,8 +52,9 @@ export default function AllProductsPage() {
         p.subcategory.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
+    
+    // Original category filtering
     if (selectedCategory !== "All") {
-      // Mapping for Marketplace categories
       const categoryMapping = {
         "Popular": () => true,
         "Kurti, Saree & Lehenga": (p) => p.category === "Fashion" && (p.subcategory.includes("Women") || p.subcategory.includes("Jewellery")),
@@ -73,7 +74,11 @@ export default function AllProductsPage() {
         result = result.filter(p => p.category === selectedCategory);
       }
     }
+
+    // Price filtering
     result = result.filter(p => p.price >= priceRange.min && p.price <= priceRange.max);
+
+    // Sort logic
     if (sortBy === "Price: Low to High") {
       result = [...result].sort((a, b) => a.price - b.price);
     } else if (sortBy === "Price: High to Low") {
@@ -98,33 +103,33 @@ export default function AllProductsPage() {
 
   return (
     <div className={styles.wrapper}>
+      {/* SECTION 0.5: MARKETPLACE CATEGORY NAVBAR */}
+      <nav className={styles.categoryNavbar}>
+        <div className={styles.navItems}>
+          {[
+            "Popular", 
+            "Kurti, Saree & Lehenga", 
+            "Women Western", 
+            "Lingerie", 
+            "Men", 
+            "Kids & Toys", 
+            "Home & Kitchen", 
+            "Beauty & Health", 
+            "Jewelry & Accessories", 
+            "Bags & Footwear"
+          ].map((cat) => (
+            <div 
+              key={cat} 
+              className={`${styles.navItem} ${selectedCategory === cat ? styles.navItemActive : ""}`}
+              onClick={() => setSelectedCategory(prev => prev === cat ? "All" : cat)}
+            >
+              {cat}
+            </div>
+          ))}
+        </div>
+      </nav>
+
       <div className="container">
-        
-        {/* SECTION 0.5: MARKETPLACE CATEGORY NAVBAR */}
-        <nav className={styles.categoryNavbar}>
-          <div className={styles.navItems}>
-            {[
-              "Popular", 
-              "Kurti, Saree & Lehenga", 
-              "Women Western", 
-              "Lingerie", 
-              "Men", 
-              "Kids & Toys", 
-              "Home & Kitchen", 
-              "Beauty & Health", 
-              "Jewelry & Accessories", 
-              "Bags & Footwear"
-            ].map((cat) => (
-              <div 
-                key={cat} 
-                className={`${styles.navItem} ${selectedCategory === cat ? styles.navItemActive : ""}`}
-                onClick={() => setSelectedCategory(prev => prev === cat ? "All" : cat)}
-              >
-                {cat}
-              </div>
-            ))}
-          </div>
-        </nav>
 
         {/* SECTION 1: HERO HEADER - FULL WIDTH */}
         <header className={styles.heroSection}>
@@ -208,6 +213,7 @@ export default function AllProductsPage() {
             </div>
           </aside>
 
+
           <main className={styles.mainContent}>
             <div className={styles.toolbar}>
               <div className={styles.resultCount}>
@@ -215,6 +221,12 @@ export default function AllProductsPage() {
               </div>
 
               <div className={styles.sortWrapper}>
+                <button 
+                  className={styles.mobileFilterBtn}
+                  onClick={() => setIsMobileSidebarOpen(true)}
+                >
+                  <Layers size={16} /> FILTERS
+                </button>
                 <span className={styles.sortLabel}>SORT BY:</span>
                 <select 
                   className={styles.sortSelect}

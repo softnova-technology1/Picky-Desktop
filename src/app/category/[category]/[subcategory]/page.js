@@ -1,11 +1,13 @@
 "use client";
 
-import { use } from "react";
+import React, { useState, use } from "react";
 import { getProductsBySubcategory } from "@/lib/data";
 import ProductCard from "@/Components/ProductCard";
 import styles from "./products.module.css";
 import Link from "next/link";
 import { ChevronRight, Filter } from "lucide-react";
+
+import SmartStyleAssistant from "@/Components/SmartStyleAssistant/SmartStyleAssistant";
 
 export default function SubcategoryPage({ params }) {
   const resolvedParams = use(params);
@@ -32,6 +34,15 @@ export default function SubcategoryPage({ params }) {
 
   const filteredProducts = getProductsBySubcategory(categoryName, subcategoryName);
 
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [assistantFilters, setAssistantFilters] = useState({});
+
+  const handleAssistantFilterChange = (filters) => {
+    setAssistantFilters(filters);
+  };
+
+  const isFashion = catPath.toLowerCase() === "fashion";
+
   return (
     <div className={styles.wrapper}>
       <div className="container">
@@ -48,24 +59,39 @@ export default function SubcategoryPage({ params }) {
               <h1 className={styles.title}>{subcategoryName}</h1>
               <p className={styles.count}>{filteredProducts.length} items curated for you</p>
             </div>
-            <button className={styles.filterBtn}>
+            <button 
+              className={styles.filterBtn}
+              onClick={() => setIsMobileSidebarOpen(true)}
+            >
               <Filter size={18} /> <span>SORT & FILTER</span>
             </button>
           </div>
         </header>
 
-        {filteredProducts.length > 0 ? (
-          <div className={styles.grid}>
-            {filteredProducts.map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
+        <div className={styles.shopLayout}>
+          <div className={styles.sidebarColumn}>
+            <SmartStyleAssistant 
+              onFilterChange={handleAssistantFilterChange} 
+              isMobileOpen={isMobileSidebarOpen}
+              onClose={() => setIsMobileSidebarOpen(false)}
+            />
           </div>
-        ) : (
-          <div className={styles.empty}>
-            <h2>No products found in this section.</h2>
-            <Link href={`/category/${catPath}`}>Return to {categoryName}</Link>
-          </div>
-        )}
+
+          <main className={styles.mainContent}>
+            {filteredProducts.length > 0 ? (
+              <div className={styles.grid}>
+                {filteredProducts.map((p) => (
+                  <ProductCard key={p.id} product={p} />
+                ))}
+              </div>
+            ) : (
+              <div className={styles.empty}>
+                <h2>No products found in this section.</h2>
+                <Link href={`/category/${catPath}`}>Return to {categoryName}</Link>
+              </div>
+            )}
+          </main>
+        </div>
       </div>
     </div>
   );
