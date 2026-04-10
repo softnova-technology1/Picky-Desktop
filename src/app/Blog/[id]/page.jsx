@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './BlogDetail.module.css';
 import Link from 'next/link';
 import { blogPosts } from '@/data/blogData';
+import { Home, ChevronRight } from 'lucide-react';
 
 const BlogDetail = async ({ params }) => {
     // Correctly accessing params in Next.js 15
@@ -25,6 +26,17 @@ const BlogDetail = async ({ params }) => {
             <div className={styles.container}>
                 {/* Main Content Area */}
                 <main className={styles.mainContent}>
+                    <div className={styles.breadcrumb}>
+                        <Link href="/" className={styles.breadcrumbLink}>
+                            <Home size={14} className={styles.breadcrumbIcon} /> 
+                            <span>Home</span>
+                        </Link>
+                        <ChevronRight size={14} className={styles.breadcrumbSeparator} />
+                        <Link href="/Blog" className={styles.breadcrumbLink}>Blog</Link>
+                        <ChevronRight size={14} className={styles.breadcrumbSeparator} />
+                        <span className={styles.breadcrumbCurrent}>{post.title}</span>
+                    </div>
+
                     <header className={styles.header}>
                         <h1 className={styles.title}>
                             {post.title}

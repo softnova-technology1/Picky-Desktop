@@ -6,7 +6,7 @@ import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import styles from './ProductCard.module.css';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShoppingCart, Heart, Eye } from 'lucide-react';
+import { ShoppingCart, Heart, Eye, Star } from 'lucide-react';
 
 import { useRouter } from 'next/navigation';
 
@@ -16,6 +16,12 @@ const ProductCard = ({ product }) => {
   const router = useRouter();
 
   const isFavorite = isInWishlist(product.id);
+
+  const rating = product.rating || 4.8;
+  const reviewCount = product.reviewCount || 124;
+  const discountAmount = product.discountAmount || (parseFloat(product.price) * 0.25).toFixed(2);
+  const originalPrice = product.originalPrice || (parseFloat(product.price) + parseFloat(discountAmount)).toFixed(2);
+  const activeOffer = product.offer || `SAVE $${discountAmount}`;
 
   const handleBuyNow = () => {
     setCheckoutItems([{ ...product, quantity: 1 }]);
@@ -30,6 +36,10 @@ const ProductCard = ({ product }) => {
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: [0.165, 0.84, 0.44, 1] }}
     >
+      <div className={styles.offerBadge}>
+        {activeOffer}
+      </div>
+      
       <div className={styles.imageWrapper}>
         <div className={styles.imageContainer}>
           <Link href={`/product/${product.id}`} className={styles.titleLink}>
@@ -60,7 +70,7 @@ const ProductCard = ({ product }) => {
           >
             <ShoppingCart size={20} />
           </button>
-          
+
           <motion.button
             className={`${styles.wishlistBtn} ${isFavorite ? styles.wishlistActive : ''}`}
             onClick={(e) => {
@@ -82,8 +92,17 @@ const ProductCard = ({ product }) => {
         </Link>
         <div className={styles.priceContainer}>
           <span className={styles.price}>${product.price}</span>
+          <span className={styles.originalPrice}>${originalPrice}</span>
         </div>
-        
+        <div className={styles.ratingContainer}>
+          <div className={styles.stars}>
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} size={14} fill={i < Math.floor(rating) ? "#FFC107" : "none"} color={i < Math.floor(rating) ? "#FFC107" : "#E0E0E0"} />
+            ))}
+          </div>
+          <span className={styles.reviewCount}>({reviewCount})</span>
+        </div>
+
         <Link href={`/product/${product.id}`} className={styles.shopNowBtn}>
           SHOP NOW
         </Link>

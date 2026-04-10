@@ -16,15 +16,15 @@ const CartNotification = ({ show, product, onClose }) => {
     <AnimatePresence>
       {show && (
         <div className={styles.popupOverlay}>
-          <motion.div 
+          <motion.div
             className={styles.popupCard}
             initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={{ type: "spring", damping: 25, stiffness: 350 }}
           >
-            <button 
-              className={styles.popupClose} 
+            <button
+              className={styles.popupClose}
               onClick={onClose}
               aria-label="Close notification"
             >
@@ -43,9 +43,9 @@ const CartNotification = ({ show, product, onClose }) => {
 
             <div className={styles.productSection}>
               <div className={styles.imageContainer}>
-                <Image 
-                  src={imageSrc} 
-                  alt={product.name} 
+                <Image
+                  src={imageSrc}
+                  alt={product.name}
                   width={64}
                   height={64}
                   className={styles.productImage}
@@ -55,7 +55,7 @@ const CartNotification = ({ show, product, onClose }) => {
               <div className={styles.productDetails}>
                 <h5 className={styles.productName}>{product.name}</h5>
                 <div className={styles.priceTag}>
-                  ${(product.price || 0).toFixed(2)}
+                  ${Number(product.price || 0).toFixed(2)}
                 </div>
               </div>
             </div>

@@ -32,6 +32,11 @@ import {
   ShoppingCart
 } from "lucide-react";
 import AuthPopup from "@/Components/AuthPopup";
+import { blogPosts } from "@/data/blogData";
+import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
+import { motion, AnimatePresence } from "framer-motion";
+import { Check, X } from "lucide-react";
 
 export default function Home2() {
   const [userName, setUserName] = useState("Member");
@@ -40,6 +45,34 @@ export default function Home2() {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [showAuthPopup, setShowAuthPopup] = useState(false);
   const [authTab, setAuthTab] = useState('login');
+  
+  const { addToCart, triggerNotification } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
+  
+  // Local notification state for Wishlist (to support custom titles without modifying global component)
+  const [localNotif, setLocalNotif] = useState({ show: false, product: null, title: "" });
+
+  const showLocalNotif = (product, title) => {
+    setLocalNotif({ show: true, product, title });
+    setTimeout(() => setLocalNotif(prev => ({ ...prev, show: false })), 3000);
+  };
+
+  const handleAddToCart = (e, prod) => {
+    e.preventDefault();
+    // Normalize price for cart (remove currency symbol if present)
+    const numericPrice = typeof prod.price === 'string' ? parseFloat(prod.price.replace(/[^\d.]/g, '')) : prod.price;
+    // Normalize image property for the notification component (which expects 'image')
+    const normalizedProduct = { ...prod, price: numericPrice || 0, image: prod.image || prod.img };
+    addToCart(normalizedProduct);
+    triggerNotification(normalizedProduct);
+  };
+
+  const handleWishlistToggle = (e, prod) => {
+    e.preventDefault();
+    const isAdding = !isInWishlist(prod.id);
+    toggleWishlist(prod);
+    showLocalNotif(prod, isAdding ? "Added to Wishlist ❤️" : "Removed from Wishlist");
+  };
 
   const promoSlides = [
     {
@@ -277,7 +310,12 @@ export default function Home2() {
                     <span className={styles.refPriceNow}>{prod.price}</span>
                     <span className={styles.refPriceOld}>{prod.old}</span>
                   </div>
-                  <button className={styles.refAddToCart}>Add to Cart</button>
+                  <button 
+                    className={styles.refAddToCart}
+                    onClick={(e) => handleAddToCart(e, { ...prod, id: `flash-${idx}` })}
+                  >
+                    Add to Cart
+                  </button>
                 </div>
               </div>
             ))}
@@ -371,7 +409,12 @@ export default function Home2() {
                   <div className={styles.spMiniBody}>
                     <h4 className={styles.spMiniTitle}>{card.title}</h4>
                     <p className={styles.spMiniDesc}>{card.desc}</p>
-                    <button className={styles.spMiniBtn}>Buy Now</button>
+                    <button 
+                      className={styles.spMiniBtn}
+                      onClick={(e) => handleAddToCart(e, { ...card, id: `deal-${i}`, name: card.title, image: card.img, price: "₹0" })}
+                    >
+                      Buy Now
+                    </button>
                   </div>
                 </div>
               ))}
@@ -428,11 +471,28 @@ export default function Home2() {
                     <Image src={prod.img} alt={prod.name} fill className={styles.magActualImg} />
                     <div className={styles.magNumberWatermark}>{prod.id}</div>
                     <div className={styles.magFloatingBadge}>NEW</div>
-                    <button className={styles.magHeart}><Heart size={18} /></button>
+                    <button 
+                      className={`${styles.magHeart} ${isInWishlist(prod.id) ? styles.magHeartActive : ""}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        toggleWishlist(prod);
+                      }}
+                    >
+                      <Heart size={18} fill={isInWishlist(prod.id) ? "#ff4d4d" : "none"} color={isInWishlist(prod.id) ? "#ff4d4d" : "currentColor"} />
+                    </button>
 
                     <div className={styles.magHoverSheet}>
                       <button className={styles.magQuickBtn}>QUICK LOOK</button>
-                      <button className={styles.magAddCartBtn}><ShoppingBag size={18} /> ADDTOCART</button>
+                      <button 
+                        className={styles.magAddCartBtn}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          const numericPrice = typeof prod.price === 'string' ? parseFloat(prod.price.replace(/[^\d.]/g, '')) : prod.price;
+                          addToCart({ ...prod, price: numericPrice || 0, image: prod.image || prod.img });
+                        }}
+                      >
+                        <ShoppingBag size={18} /> ADDTOCART
+                      </button>
                     </div>
                   </div>
                   <div className={styles.magProductMeta}>
@@ -486,7 +546,12 @@ export default function Home2() {
 
                 <div className={styles.podiumAction}>
                   <div className={styles.podiumPrice}>₹4,999</div>
-                  <button className={`${styles.podiumAddBtn} ${styles.magneticBtn}`}><ShoppingBag size={18} /> ADDTOCART</button>
+                  <button 
+                    className={`${styles.podiumAddBtn} ${styles.magneticBtn}`}
+                    onClick={(e) => handleAddToCart(e, { id: "best-01", name: "Nexus Stealth Edition", price: "₹4,999", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999" })}
+                  >
+                    <ShoppingBag size={18} /> ADDTOCART
+                  </button>
                 </div>
               </div>
             </div>
@@ -513,7 +578,12 @@ export default function Home2() {
                     <div className={styles.trendingImgWrapper}>
                       <Image src={item.img} alt={item.name} fill className={styles.tImg} />
                       <div className={styles.trendingRank}>{item.rank}</div>
-                      <button className={styles.tHeart}><Heart size={16} /></button>
+                      <button 
+                        className={`${styles.tHeart} ${isInWishlist(`best-${i}`) ? styles.tHeartActive : ""}`}
+                        onClick={(e) => handleWishlistToggle(e, { ...item, id: `best-${i}`, image: item.img })}
+                      >
+                        <Heart size={16} fill={isInWishlist(`best-${i}`) ? "#ff4d4d" : "none"} color={isInWishlist(`best-${i}`) ? "#ff4d4d" : "currentColor"} />
+                      </button>
                     </div>
                     <div className={styles.trendingInfo}>
                       <div className={styles.tRatingLine}>
@@ -527,7 +597,15 @@ export default function Home2() {
                       <div className={styles.tHeatMini}>
                         <div className={styles.tHeatFill} style={{ width: item.heat }}></div>
                       </div>
-                      <button className={`${styles.tQuickBtn} ${styles.magneticBtn}`}>EXPLORE</button>
+                      <div className={styles.tActions}>
+                        <button className={`${styles.tQuickBtn} ${styles.magneticBtn}`}>EXPLORE</button>
+                        <button 
+                          className={styles.tAddCartBtn}
+                          onClick={(e) => handleAddToCart(e, { ...item, id: `best-${i}`, image: item.img })}
+                        >
+                          <ShoppingBag size={14} />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -612,7 +690,7 @@ export default function Home2() {
                   <span className={styles.revBoughtName}>{rev.product}</span>
                 </div>
               </div>
-            ))}
+                        ))}
           </div>
         </div>
       </section>
@@ -625,20 +703,16 @@ export default function Home2() {
               <span className={styles.blogUpperTag}>NEWS & BLOG</span>
               <h2 className={styles.blogMainHeading}>Latest News & Blog</h2>
             </div>
-            <Link href="#" className={styles.blogViewAllLink}>
+            <Link href="/Blog" className={styles.blogViewAllLink}>
               VIEW ALL BLOG <ArrowRight size={18} />
             </Link>
           </div>
 
           <div className={styles.blogGrid}>
-            {[
-              { id: 1, title: "Creative Modern Style", date: "15 Dec", img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070" },
-              { id: 2, title: "The Urban Street Edit", date: "18 Dec", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920" },
-              { id: 3, title: "Beauty & Delicate Craft", date: "22 Dec", img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974" }
-            ].map((post, i) => (
+            {blogPosts.slice(0, 3).map((post, i) => (
               <div key={post.id} className={styles.blogCard}>
                 <div className={styles.blogCardVisual}>
-                  <Image src={post.img} alt={post.title} fill className={styles.blogImg} />
+                  <Image src={post.image} alt={post.title} fill className={styles.blogImg} />
                   <div className={styles.blogDateBadge}>
                     <span className={styles.dateDay}>{post.date.split(' ')[0]}</span>
                     <span className={styles.dateMonth}>{post.date.split(' ')[1]}</span>
@@ -648,14 +722,14 @@ export default function Home2() {
                 <div className={styles.blogCardBody}>
                   <div className={styles.blogMeta}>
                     <User size={14} color="#4C0519" />
-                    <span className={styles.blogAuthor}>By Admin</span>
+                    <span className={styles.blogAuthor}>By {post.author}</span>
                   </div>
                   <h3 className={styles.blogTitle}>{post.title}</h3>
-                  <p className={styles.blogSnippet}>There are many variations of passages of professional styling available, but the majority have suffered luxury alteration.</p>
+                  <p className={styles.blogSnippet}>{post.excerpt}</p>
 
-                  <button className={styles.blogReadBtn}>
+                  <Link href={`/Blog/${post.id}`} className={styles.blogReadBtn}>
                     READ MORE <ArrowRight size={14} />
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -663,8 +737,7 @@ export default function Home2() {
         </div>
       </section>
 
-
-      <section className={`${styles.newsSectionMaster} ${styles.revealSection}`}>
+      <section className={styles.newsSectionMaster}>
         <div className={styles.newsHeroBg}>
           <Image
             src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974"
@@ -690,7 +763,7 @@ export default function Home2() {
 
               <div className={styles.newsInputGroupPremium}>
                 <input type="email" placeholder="Enter Your Email" className={styles.newsInputPremium} />
-                <button className={`${styles.newsSubmitBtnGradient} ${styles.magneticBtn}`}>
+                <button className={styles.newsSubmitBtnGradient}>
                   SUBSCRIBE NOW <ArrowRight size={18} />
                 </button>
               </div>
@@ -700,11 +773,7 @@ export default function Home2() {
         </div>
       </section>
 
-
-
-
-
-      <section className={`${styles.trustSectionMaster} ${styles.revealSection}`}>
+      <section className={styles.trustSectionMaster}>
         <div className="container">
           <div className={styles.trustGrid}>
             {[
@@ -725,14 +794,52 @@ export default function Home2() {
         </div>
       </section>
 
-
-
       {/* Auth Popup */}
       <AuthPopup
         isOpen={showAuthPopup}
         onClose={() => setShowAuthPopup(false)}
         initialTab={authTab}
       />
+
+      {/* Local Wishlist Notification UI */}
+      <AnimatePresence>
+        {localNotif.show && (
+          <div className={styles.notifOverlay}>
+            <motion.div 
+              className={styles.notifCard}
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 50, scale: 0.9 }}
+              transition={{ type: "spring", damping: 25, stiffness: 350 }}
+            >
+              <div className={styles.notifHeader}>
+                <div className={styles.notifIcon}><Check size={16} color="white" strokeWidth={3} /></div>
+                <div className={styles.notifTitleGroup}>
+                  <h4>{localNotif.title}</h4>
+                  <p>Successfully updated your collection</p>
+                </div>
+                <button onClick={() => setLocalNotif(prev => ({ ...prev, show: false }))} className={styles.notifClose}>
+                  <X size={14} />
+                </button>
+              </div>
+              <div className={styles.notifBody}>
+                <div className={styles.notifImgBox}>
+                  <Image 
+                    src={localNotif.product.image?.src || localNotif.product.image || localNotif.product.img || ""} 
+                    alt={localNotif.product.name} 
+                    fill
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+                <div className={styles.notifInfo}>
+                  <h5>{localNotif.product.name}</h5>
+                  <span>{localNotif.product.price}</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

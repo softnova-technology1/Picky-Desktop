@@ -1,4 +1,4 @@
-/**
+ /**
  * Picky Platform - Scalable Product Engine
  * Data Location: src/lib/data.js
  */
