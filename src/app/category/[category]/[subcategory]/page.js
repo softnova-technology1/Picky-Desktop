@@ -74,6 +74,7 @@ export default function SubcategoryPage({ params }) {
               onFilterChange={handleAssistantFilterChange} 
               isMobileOpen={isMobileSidebarOpen}
               onClose={() => setIsMobileSidebarOpen(false)}
+              category={categoryName}
             />
           </div>
 

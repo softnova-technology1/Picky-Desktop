@@ -21,18 +21,28 @@ import {
 } from "lucide-react";
 import styles from "./SmartStyleAssistant.module.css";
 
-const SmartStyleAssistant = ({ onFilterChange, isMobileOpen, onClose }) => {
+const SmartStyleAssistant = ({ onFilterChange, isMobileOpen, onClose, category }) => {
   const [activeStyle, setActiveStyle] = useState(null);
   const [selectedOccasions, setSelectedOccasions] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
   const [price, setPrice] = useState(500);
   const [activeSize, setActiveSize] = useState("M");
   const [activeFit, setActiveFit] = useState("Regular");
+  const [selectedBrands, setSelectedBrands] = useState([]);
   const [toggles, setToggles] = useState({
     trending: true,
     new: false,
     premium: false
   });
+
+  const isFashion = category?.toLowerCase().includes("fashion") || 
+                    category?.toLowerCase().includes("wear") || 
+                    category?.toLowerCase().includes("clothing") ||
+                    category?.toLowerCase() === "popular";
+
+  const isElectronics = category?.toLowerCase().includes("electronics") || 
+                        category?.toLowerCase().includes("mobile") ||
+                        category?.toLowerCase().includes("smart");
 
   const styles_data = [
     { id: 'min', name: 'Minimal', desc: 'Clean, neutral, timeless', img: '/images/styles/minimalist.png' },
@@ -40,6 +50,10 @@ const SmartStyleAssistant = ({ onFilterChange, isMobileOpen, onClose }) => {
     { id: 'luxury', name: 'Luxury', desc: 'Elegant evening wear', img: '/images/styles/luxury.png' },
     { id: 'casual', name: 'Casual', desc: 'Soft knitwear & denim', img: '/images/styles/casual.png' }
   ];
+
+  const brands = isElectronics ? 
+    ["Picky Pro", "Aura Tech", "Nova", "Elite", "Horizon"] :
+    ["Picky Premium", "Aura Designs", "Elite Collections", "Urban Wear"];
 
   const colors = [
     { name: 'Midnight', hex: '#0f172a' },
@@ -60,6 +74,12 @@ const SmartStyleAssistant = ({ onFilterChange, isMobileOpen, onClose }) => {
     );
   };
 
+  const toggleBrand = (brand) => {
+    setSelectedBrands(prev => 
+      prev.includes(brand) ? prev.filter(b => b !== brand) : [...prev, brand]
+    );
+  };
+
   const toggleColor = (hex) => {
     setSelectedColors(prev => 
       prev.includes(hex) ? prev.filter(c => c !== hex) : [...prev, hex]
@@ -68,17 +88,18 @@ const SmartStyleAssistant = ({ onFilterChange, isMobileOpen, onClose }) => {
 
   const activeFilters = [
     ...(activeStyle ? [styles_data.find(s => s.id === activeStyle).name] : []),
-    ...selectedOccasions,
-    ...selectedColors.map(c => colors.find(col => col.hex === c).name),
+    ...(isFashion ? selectedOccasions : []),
+    ...selectedBrands,
+    ...selectedColors.map(c => colors.find(col => col.hex === c)?.name).filter(Boolean),
     `Under $${price}`,
-    activeSize,
-    activeFit
+    ...(isFashion ? [activeSize, activeFit] : [])
   ];
 
   const clearAll = () => {
     setActiveStyle(null);
     setSelectedOccasions([]);
     setSelectedColors([]);
+    setSelectedBrands([]);
     setPrice(500);
     setActiveSize("M");
     setActiveFit("Regular");
@@ -92,13 +113,16 @@ const SmartStyleAssistant = ({ onFilterChange, isMobileOpen, onClose }) => {
         style: activeStyle,
         occasions: selectedOccasions,
         colors: selectedColors,
+        brands: selectedBrands,
         price,
         size: activeSize,
         fit: activeFit,
-        toggles
+        toggles,
+        isFashion,
+        isElectronics
       });
     }
-  }, [activeStyle, selectedOccasions, selectedColors, price, activeSize, activeFit, toggles]);
+  }, [activeStyle, selectedOccasions, selectedColors, selectedBrands, price, activeSize, activeFit, toggles]);
 
   return (
     <aside className={`${styles.sidebar} ${isMobileOpen ? styles.sidebarActive : ""}`}>
@@ -110,65 +134,89 @@ const SmartStyleAssistant = ({ onFilterChange, isMobileOpen, onClose }) => {
         </button>
       </div>
 
-      {/* 1. AI STYLE SELECTOR */}
-      <section className={styles.section}>
-        <div className={styles.sectionTitle}>
-          <span className={styles.aiHeader}>
-            <Cpu size={14} /> AI STYLE ASSISTANT
-          </span>
-        </div>
-        <div className={styles.styleGrid}>
-          {styles_data.map((s) => (
-            <motion.div 
-              key={s.id}
-              className={`${styles.styleCard} ${activeStyle === s.id ? styles.styleCardActive : ""}`}
-              onClick={() => setActiveStyle(s.id === activeStyle ? null : s.id)}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Image src={s.img} alt={s.name} fill className={styles.styleImage} />
-              <div className={styles.styleOverlay}>
-                <h4 className={styles.styleName}>{s.name}</h4>
-                <p className={styles.styleDesc}>{s.desc}</p>
-                {activeStyle === s.id && (
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    style={{ position: 'absolute', top: 10, right: 10, background: '#7024eb', borderRadius: '50%', padding: 4, boxShadow: '0 0 10px rgba(112,36,235,0.5)' }}
-                  >
-                    <Check size={12} color="white" strokeWidth={3} />
-                  </motion.div>
-                )}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      {/* 1. AI STYLE SELECTOR (Fashion Only) */}
+      {isFashion && (
+        <section className={styles.section}>
+          <div className={styles.sectionTitle}>
+            <span className={styles.aiHeader}>
+              <Cpu size={14} /> AI STYLE ASSISTANT
+            </span>
+          </div>
+          <div className={styles.styleGrid}>
+            {styles_data.map((s) => (
+              <motion.div 
+                key={s.id}
+                className={`${styles.styleCard} ${activeStyle === s.id ? styles.styleCardActive : ""}`}
+                onClick={() => setActiveStyle(s.id === activeStyle ? null : s.id)}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Image src={s.img} alt={s.name} fill className={styles.styleImage} />
+                <div className={styles.styleOverlay}>
+                  <h4 className={styles.styleName}>{s.name}</h4>
+                  <p className={styles.styleDesc}>{s.desc}</p>
+                  {activeStyle === s.id && (
+                    <motion.div 
+                      initial={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      style={{ position: 'absolute', top: 10, right: 10, background: '#7024eb', borderRadius: '50%', padding: 4, boxShadow: '0 0 10px rgba(112,36,235,0.5)' }}
+                    >
+                      <Check size={12} color="white" strokeWidth={3} />
+                    </motion.div>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+      )}
 
-      {/* 2. OCCASION SELECTOR */}
+      {/* 1.5 BRAND SELECTOR (General/Tech) */}
       <section className={styles.section}>
         <div className={styles.sectionTitle}>
-          <Sparkles size={14} /> OCCASION
+          <LayoutGrid size={14} /> {isElectronics ? "MANUFACTURER" : "BRAND"}
         </div>
         <div className={styles.chipGrid}>
-          {occasions.map(occ => (
+          {brands.map(brand => (
             <motion.button 
-              key={occ}
-              className={`${styles.chip} ${selectedOccasions.includes(occ) ? styles.chipActive : ""}`}
-              onClick={() => toggleOccasion(occ)}
-              whileHover={{ scale: 1.05, y: -2 }}
+              key={brand}
+              className={`${styles.chip} ${selectedBrands.includes(brand) ? styles.chipActive : ""}`}
+              onClick={() => toggleBrand(brand)}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              {occ}
+              {brand}
             </motion.button>
           ))}
         </div>
       </section>
 
+      {/* 2. OCCASION SELECTOR (Fashion Only) */}
+      {isFashion && (
+        <section className={styles.section}>
+          <div className={styles.sectionTitle}>
+            <Sparkles size={14} /> OCCASION
+          </div>
+          <div className={styles.chipGrid}>
+            {occasions.map(occ => (
+              <motion.button 
+                key={occ}
+                className={`${styles.chip} ${selectedOccasions.includes(occ) ? styles.chipActive : ""}`}
+                onClick={() => toggleOccasion(occ)}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {occ}
+              </motion.button>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* 3. COLOR PICKER */}
       <section className={styles.section}>
         <div className={styles.sectionTitle}>
-          <Palette size={14} /> COLOR PALETTE
+          <Palette size={14} /> {isElectronics ? "CHASSIS FINISH" : "COLOR PALETTE"}
         </div>
         <div className={styles.colorGrid}>
           {colors.map(c => (
@@ -205,7 +253,7 @@ const SmartStyleAssistant = ({ onFilterChange, isMobileOpen, onClose }) => {
       {/* 4. PRICE INTERACTION */}
       <section className={styles.section}>
         <div className={styles.sectionTitle}>
-          <DollarSign size={14} /> INVESTMENT RANGE
+          <DollarSign size={14} /> {isElectronics ? "PRICE RANGE" : "INVESTMENT RANGE"}
         </div>
         <div className={styles.priceSliderContainer}>
           <div className={styles.customSlider}>
@@ -219,11 +267,6 @@ const SmartStyleAssistant = ({ onFilterChange, isMobileOpen, onClose }) => {
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0}
-              onDrag={(e, info) => {
-                const parentWidth = e.target.parentElement.offsetWidth;
-                const newPrice = Math.min(1000, Math.max(0, Math.round((info.point.x / parentWidth) * 1000)));
-                // This is a bit tricky with absolute positioning, better use range input with custom style
-              }}
             >
               <div className={styles.tooltip}>${price}</div>
             </motion.div>
@@ -251,36 +294,58 @@ const SmartStyleAssistant = ({ onFilterChange, isMobileOpen, onClose }) => {
         </div>
       </section>
 
-      {/* 5. SIZE + FIT */}
-      <section className={styles.section}>
-        <div className={styles.sectionTitle}>
-          <Maximize2 size={14} /> SIZE & FIT
-        </div>
-        <div className={styles.sizeGrid}>
-          {["XS", "S", "M", "L", "XL"].map(s => (
-            <motion.button 
-              key={s} 
-              className={`${styles.sizeBtn} ${activeSize === s ? styles.sizeBtnActive : ""}`}
-              onClick={() => setActiveSize(s)}
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {s}
-            </motion.button>
-          ))}
-        </div>
-        <div className={styles.fitOptions}>
-          {["Slim", "Regular", "Oversized"].map(f => (
-            <button 
-              key={f} 
-              className={`${styles.fitBtn} ${activeFit === f ? styles.fitBtnActive : ""}`}
-              onClick={() => setActiveFit(f)}
-            >
-              {f}
-            </button>
-          ))}
-        </div>
-      </section>
+      {/* 5. SIZE + FIT (Fashion Only) */}
+      {isFashion && (
+        <section className={styles.section}>
+          <div className={styles.sectionTitle}>
+            <Maximize2 size={14} /> SIZE & FIT
+          </div>
+          <div className={styles.sizeGrid}>
+            {["XS", "S", "M", "L", "XL"].map(s => (
+              <motion.button 
+                key={s} 
+                className={`${styles.sizeBtn} ${activeSize === s ? styles.sizeBtnActive : ""}`}
+                onClick={() => setActiveSize(s)}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {s}
+              </motion.button>
+            ))}
+          </div>
+          <div className={styles.fitOptions}>
+            {["Slim", "Regular", "Oversized"].map(f => (
+              <button 
+                key={f} 
+                className={`${styles.fitBtn} ${activeFit === f ? styles.fitBtnActive : ""}`}
+                onClick={() => setActiveFit(f)}
+              >
+                {f}
+              </button>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 5.5 TECH SPECS (Electronics Only) */}
+      {isElectronics && (
+        <section className={styles.section}>
+          <div className={styles.sectionTitle}>
+            <Cpu size={14} /> SPECIFICATIONS
+          </div>
+          <div className={styles.chipGrid}>
+            {["5G Ready", "8GB+ RAM", "256GB+ SSD", "OLED Display"].map(spec => (
+              <motion.button 
+                key={spec}
+                className={styles.chip}
+                whileHover={{ scale: 1.05 }}
+              >
+                {spec}
+              </motion.button>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* 6. TREND SWITCHES */}
       <section className={styles.section}>
