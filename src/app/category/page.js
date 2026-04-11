@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import styles from "./categories.module.css";
 import { ArrowRight, ChevronRight, Truck, Headphones, RotateCcw, ShieldCheck, Shield, Lock, Lamp, Shirt, Sofa, Cookie, BookOpen } from "lucide-react";
@@ -20,41 +20,10 @@ import sneakers from "@/images/home/sneakers.png";
 import clothing from "@/images/home/clothing.png";
 import chair from "@/images/home/chair.png";
 
-const HeroCard = ({ card, index, scrollYProgress }) => {
-  const x = useTransform(scrollYProgress, [0, 0.5, 1], [card.openX, card.openX, 0]);
-  const rotate = useTransform(scrollYProgress, [0, 0.5, 1], [card.openRotate, card.openRotate, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [card.openScale, card.openScale, 0.95]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8, 1], [1, 1, 0]);
 
-  return (
-    <motion.div
-      className={styles.heroCard}
-      style={{
-        x,
-        rotate,
-        scale,
-        opacity,
-        zIndex: card.z
-      }}
-    >
-      <motion.div 
-        animate={{ y: [0, -10, 0] }} 
-        transition={{ repeat: Infinity, duration: 4 + index * 0.3, ease: "easeInOut", delay: index * 0.15 }} 
-        style={{ width: '100%', height: '100%', position: 'relative' }}
-      >
-        <Image src={card.image} alt="Products" fill style={{ objectFit: 'cover' }} />
-      </motion.div>
-    </motion.div>
-  );
-};
 
 export default function CategoriesPage() {
-  const heroRef = useRef(null);
   const timeoutId = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"]
-  });
 
   const [hoveredTab, setHoveredTab] = useState(null);
 
@@ -69,13 +38,7 @@ export default function CategoriesPage() {
     }, 150);
   };
 
-  const cards = [
-    { image: watch, openX: -240, openRotate: -18, openScale: 0.88, initialOpacity: 0, z: 1 },
-    { image: fashion, openX: -120, openRotate: -8, openScale: 0.94, initialOpacity: 0, z: 2 },
-    { image: electronics, openX: 0, openRotate: 0, openScale: 1.05, initialOpacity: 1, z: 5 },
-    { image: homeDecor, openX: 120, openRotate: 8, openScale: 0.94, initialOpacity: 0, z: 2 },
-    { image: gifts, openX: 240, openRotate: 18, openScale: 0.88, initialOpacity: 0, z: 1 },
-  ];
+
 
   const categories = getAllCategories();
   const featuredProducts = products.slice(0, 4);
@@ -113,38 +76,7 @@ export default function CategoriesPage() {
 
   return (
     <div className={styles.main}>
-      {/* Luxury Hero */}
-      <section className={styles.hero} ref={heroRef}>
-        <div className={styles.deckWrapper}>
-           {cards.map((card, index) => (
-             <HeroCard key={index} card={card} index={index} scrollYProgress={scrollYProgress} />
-           ))}
 
-          <div className={styles.heroContent}>
-            <motion.h1
-              className={styles.heroTitle}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-            >
-              OUR
-              <div className={styles.titleWrapper}>
-                <div className={styles.titleGlow}></div>
-                <span> COLLECTIONS</span>
-              </div>
-            </motion.h1>
-            <motion.p
-              className={styles.heroSubtitle}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              style={{color:'white',fontWeight:'bold'}}
-            >
-              Explore our curated selection of high-quality products across five primary departments.
-            </motion.p>
-          </div>
-        </div>
-      </section>
 
       {/* Sticky Department Bar */}
       <div className={styles.departmentBar}>
@@ -433,7 +365,24 @@ export default function CategoriesPage() {
         </div>
       </section>
 
-      {/* Premium Feature Bar (Centered) */}
+     
+
+      {/* Recently Added */}
+      <section className={styles.recentlyAddedSection}>
+        <div className={styles.container}>
+          <div className={styles.innovativeHeader}>
+            <h2 className={styles.sectionTitleTop} style={{ marginBottom: 0 }}>Recently Added</h2>
+            <div className={styles.headerLine}></div>
+          </div>
+          <div className={styles.productGrid}>
+            {recentlyAdded.map((p) => (
+              <ProductCard key={p.id} product={p} invert={true} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+       {/* Premium Feature Bar (Centered) */}
       <div className={styles.featureBarWrapper}>
         <div className={styles.container}>
           <div className={styles.featureBar}>
@@ -457,41 +406,7 @@ export default function CategoriesPage() {
         </div>
       </div>
 
-      {/* Recently Added */}
-      <section className={styles.recentlyAddedSection}>
-        <div className={styles.container}>
-          <div className={styles.innovativeHeader}>
-            <h2 className={styles.sectionTitleTop} style={{ marginBottom: 0 }}>Recently Added</h2>
-            <div className={styles.headerLine}></div>
-          </div>
-          <div className={styles.productGrid}>
-            {recentlyAdded.map((p) => (
-              <ProductCard key={p.id} product={p} invert={true} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Best Sellers Section */}
-      <section className={styles.collectionSection}>
-        <div className={styles.container}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <h2>The Edit</h2>
-              <p style={{ opacity: 0.6 }}>Trending now across all departments.</p>
-            </div>
-          </div>
-
-          <div className={styles.productGrid}>
-            {featuredProducts.map((p) => (
-              <ProductCard key={p.id} product={p} invert={true} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-
+     
     </div>
   );
 }
