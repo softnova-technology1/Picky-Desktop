@@ -12,8 +12,10 @@ import {
   Search,
   PackageCheck,
   RotateCcw,
-  ExternalLink
+  ExternalLink,
+  ShoppingBag
 } from 'lucide-react';
+import ReturnItemPopup from '@/Components/ReturnItemPopup';
 
 export default function MyOrdersPage() {
   const [activeTab, setActiveTab] = useState('All Orders');
@@ -21,6 +23,9 @@ export default function MyOrdersPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
+  
+  const [isReturnPopupOpen, setIsReturnPopupOpen] = useState(false);
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
 
   const allOrders = [
     {
@@ -34,7 +39,7 @@ export default function MyOrdersPage() {
       productDesc: "Crafted for everyday running, featuring high-rebound cushioning and a breathable mesh upper in triple black.",
       image: "https://i.pinimg.com/736x/ae/ef/07/aeef075aa6ec0b293ab809683d38df6a.jpg",
       primaryAction: "Buy it again",
-      secondaryAction: "Return Item"
+      secondaryAction: "Return Order"
     },
     {
       id: "AU-104928",
@@ -73,7 +78,7 @@ export default function MyOrdersPage() {
       productDesc: "Superior sound quality with active noise cancellation and 40-hour battery life.",
       image: "https://i.pinimg.com/736x/ae/ef/07/aeef075aa6ec0b293ab809683d38df6a.jpg",
       primaryAction: "Buy it again",
-      secondaryAction: "Write Review"
+      secondaryAction: "Return Order"
     },
     {
       id: "AU-661524",
@@ -86,7 +91,7 @@ export default function MyOrdersPage() {
       productDesc: "100% mulberry silk set for ultimate sleep comfort and skin protection.",
       image: "https://i.pinimg.com/736x/d0/e2/9b/d0e29b99da6fab6fccedfb599a2d5867.jpg",
       primaryAction: "Buy it again",
-      secondaryAction: "Return Item"
+      secondaryAction: "Return Order"
     }
   ];
 
@@ -200,7 +205,6 @@ export default function MyOrdersPage() {
                     
                     <div className={styles.links}>
                       <Link href="/order-details" className={styles.actionLink}><PackageCheck size={14} style={{ marginRight: '6px' }} /> Order Details</Link>
-                      <span className={styles.actionLink}><RotateCcw size={14} style={{ marginRight: '6px' }} /> Write Review</span>
                     </div>
                   </div>
 
@@ -214,7 +218,14 @@ export default function MyOrdersPage() {
                     {order.secondaryAction ? (
                       <button 
                         className={styles.secondaryBtn}
-                        onClick={() => alert(`Internal Modal: ${order.secondaryAction}`)}
+                        onClick={() => {
+                          if (order.secondaryAction === "Return Order") {
+                            setSelectedOrderId(order.id);
+                            setIsReturnPopupOpen(true);
+                          } else {
+                            alert(`Internal Modal: ${order.secondaryAction}`);
+                          }
+                        }}
                       >
                         {order.secondaryAction}
                       </button>
@@ -269,6 +280,11 @@ export default function MyOrdersPage() {
             </div>
           </div>
         )}
+      <ReturnItemPopup 
+        isOpen={isReturnPopupOpen} 
+        onClose={() => setIsReturnPopupOpen(false)} 
+        orderId={selectedOrderId} 
+      />
       </div>
     </div>
   );
