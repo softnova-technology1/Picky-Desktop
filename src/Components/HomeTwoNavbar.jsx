@@ -10,7 +10,8 @@ import {
   ShoppingBag, 
   User, 
   Settings,
-  ArrowRight
+  ArrowRight,
+  X
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import styles from "./HomeTwoNavbar.module.css";
@@ -18,14 +19,17 @@ import { useAuth } from "@/context/AuthContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useCart } from "@/context/CartContext";
 import AuthPopup from "@/Components/AuthPopup";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function HomeTwoNavbar() {
   const { user, logout } = useAuth();
   const { wishlistItems } = useWishlist();
-  const { totalItems } = useCart();
+  const { totalItems, cartItems, subtotal } = useCart();
+  // const { totalItems } = useCart();
   const pathname = usePathname();
   const [userName, setUserName] = useState("Member");
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [showCartDrawer, setShowCartDrawer] = useState(false);
   const [showAuthPopup, setShowAuthPopup] = useState(false);
   const [authTab, setAuthTab] = useState('login');
 
@@ -190,12 +194,116 @@ export default function HomeTwoNavbar() {
                 {wishlistItems.length > 0 && <span className={`${styles.badge} ${styles.wishlistBadge}`}>{wishlistItems.length}</span>}
               </div>
             </Link>
-            <Link href="/cart" className={styles.iconBtn}>
-              <div className={styles.iconWrapper}>
-                <ShoppingBag size={22} />
-                {totalItems > 0 && <span className={`${styles.badge} ${styles.cartBadge}`}>{totalItems}</span>}
-              </div>
-            </Link>
+            <div 
+              className={styles.cartDrawerContainer}
+              onMouseEnter={() => setShowCartDrawer(true)}
+            >
+              <button 
+                className={styles.iconBtn}
+                onClick={() => setShowCartDrawer(true)}
+              >
+                <div className={styles.iconWrapper}>
+                  <ShoppingBag size={22} />
+                  {totalItems > 0 && <span className={`${styles.badge} ${styles.cartBadge}`}>{totalItems}</span>}
+                </div>
+              </button>
+
+              <AnimatePresence>
+                {showCartDrawer && (
+                  <>
+                    <motion.div 
+                      className={styles.drawerBackdrop}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      onClick={() => setShowCartDrawer(false)}
+                    />
+                    <motion.div 
+                      className={styles.cartDrawer}
+                      initial={{ x: "100%" }}
+                      animate={{ x: 0 }}
+                      exit={{ x: "100%" }}
+                      transition={{ type: "tween", duration: 0.3, ease: "easeOut" }}
+                    >
+                      <div className={styles.drawerHeader}>
+                        <div className={styles.drawerTitleGroup}>
+                          <h2 className={styles.drawerTitle}>YOUR CART</h2>
+                          <span className={styles.drawerItemCount}>{totalItems} ITEMS</span>
+                        </div>
+                        <button 
+                          className={styles.closeDrawerBtn} 
+                          onClick={() => setShowCartDrawer(false)}
+                        >
+                          <X size={24} />
+                        </button>
+                      </div>
+
+                      <div className={styles.drawerContent}>
+                        {cartItems.length > 0 ? (
+                          <div className={styles.drawerItemsList}>
+                            {cartItems.map((item) => (
+                              <div key={item.id} className={styles.drawerItem}>
+                                <div className={styles.drawerItemImage}>
+                                  <img src={item.image?.src || item.image || item.img?.src || item.img || "/images/placeholder.png"} alt={item.name} />
+                                </div>
+                                <div className={styles.drawerItemInfo}>
+                                  <h3 className={styles.drawerItemName}>{item.name}</h3>
+                                  <div className={styles.drawerItemMeta}>
+                                    <span className={styles.drawerItemPrice}>${item.price}</span>
+                                    <span className={styles.drawerItemQty}>QTY: {item.quantity}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <div className={styles.emptyDrawer}>
+                            <div className={styles.emptyIconWrapper}>
+                              <ShoppingBag size={60} strokeWidth={1} />
+                            </div>
+                            <h3 className={styles.emptyDrawerTitle}>Your cart is empty</h3>
+                            <p className={styles.emptyDrawerText}>Looks like you haven't added anything to your cart yet.</p>
+                            <Link 
+                              href="/shop" 
+                              className={styles.shopNowBtn}
+                              onClick={() => setShowCartDrawer(false)}
+                            >
+                              START SHOPPING
+                            </Link>
+                          </div>
+                        )}
+                      </div>
+
+                      {cartItems.length > 0 && (
+                        <div className={styles.drawerFooter}>
+                          <div className={styles.drawerSubtotal}>
+                            <span className={styles.subtotalLabel}>SUBTOTAL</span>
+                            <span className={styles.subtotalValue}>${subtotal.toFixed(2)}</span>
+                          </div>
+                          <p className={styles.drawerTaxNote}>Shipping & taxes calculated at checkout</p>
+                          <div className={styles.drawerActions}>
+                            <Link 
+                              href="/cart" 
+                              className={styles.drawerSecondaryBtn}
+                              onClick={() => setShowCartDrawer(false)}
+                            >
+                              VIEW CART
+                            </Link>
+                            <Link 
+                              href="/checkout" 
+                              className={styles.drawerPrimaryBtn}
+                              onClick={() => setShowCartDrawer(false)}
+                            >
+                              CHECKOUT NOW
+                            </Link>
+                          </div>
+                        </div>
+                      )}
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
+            </div>
 
             <div className={styles.userDropdownContainer}>
               <button

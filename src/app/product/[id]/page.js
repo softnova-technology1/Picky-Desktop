@@ -8,18 +8,44 @@ import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import ProductCard from "@/Components/ProductCard";
 import styles from "./product.module.css";
-import { Star, Truck, ShieldCheck, RefreshCw, Minus, Plus, Heart, Share2, ChevronRight, Sparkles, Zap, X, Search, Maximize2 } from "lucide-react";
+import { Star, Truck, ShieldCheck, RefreshCw, Minus, Plus, Heart, Share2, ChevronRight, Sparkles, Zap, X, Search, Maximize2, ShoppingCart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSearchParams, useRouter } from "next/navigation";
 
 export default function ProductDetailsPage({ params }) {
   const resolvedParams = use(params);
   const { id } = resolvedParams;
+  const searchParams = useSearchParams();
+  const passedImg = searchParams.get("img");
 
-  const { addToCart, triggerNotification } = useCart();
+  const { addToCart, triggerNotification, setCheckoutItems } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
+  const router = useRouter();
   const product = getProductById(id);
+  
+  if (!product) {
+    return (
+      <div className={styles.notFound}>
+        <h2>Product not found</h2>
+        <Link href="/">Return to Catalog</Link>
+      </div>
+    );
+  }
+
+  // Ensure image consistency: use passed image if available
+  const displayImage = passedImg || product.image;
 
   const [quantity, setQuantity] = useState(1);
+  const [isAnimatingCart, setIsAnimatingCart] = useState(false);
+
+  const handleAddToCart = () => {
+    addToCart({ ...product, quantity, image: product.image || product.img });
+    triggerNotification({ ...product, image: product.image || product.img });
+    
+    // Trigger running animation
+    setIsAnimatingCart(true);
+    setTimeout(() => setIsAnimatingCart(false), 2000);
+  };
   const [sel1, setSel1] = useState(0);
   const [sel2, setSel2] = useState(0);
   const [bottomTab, setBottomTab] = useState("Reviews");
@@ -39,11 +65,11 @@ export default function ProductDetailsPage({ params }) {
 
   // Generate a mock gallery based on the main image
   const mockGallery = [
-    product.image,
-    product.image,
-    product.image,
-    product.image,
-    product.image
+    displayImage,
+    displayImage,
+    displayImage,
+    displayImage,
+    displayImage
   ];
 
   // Dynamic Options based on Category
@@ -83,8 +109,8 @@ export default function ProductDetailsPage({ params }) {
   const dynamicData = getDynamicSelectors();
 
   const mockReviews = [
-    { id: 1, name: "Sarah L.", rating: 5, date: "October 12, 2025", comment: "Absolutely incredible! The quality exceeded my expectations and the delivery was super fast. Highly recommend.", images: [product.image, product.image] },
-    { id: 2, name: "Michael R.", rating: 5, date: "September 28, 2025", comment: "A premium product through and through. The detailing is perfect and it feels extremely durable in hand.", images: [product.image] },
+    { id: 1, name: "Sarah L.", rating: 5, date: "October 12, 2025", comment: "Absolutely incredible! The quality exceeded my expectations and the delivery was super fast. Highly recommend.", images: [displayImage, displayImage] },
+    { id: 2, name: "Michael R.", rating: 5, date: "September 28, 2025", comment: "A premium product through and through. The detailing is perfect and it feels extremely durable in hand.", images: [displayImage] },
     { id: 3, name: "Emma T.", rating: 4, date: "August 15, 2025", comment: "Very good quality, arrived in beautiful packaging. Taking one star off because it took an extra day to arrive, but the item itself is flawless." }
   ];
 
@@ -396,14 +422,61 @@ export default function ProductDetailsPage({ params }) {
                 <button onClick={() => setQuantity(quantity + 1)}><Plus size={16}/></button>
              </div>
            </div>
+           <div className={styles.quickActions}>
+             <motion.button 
+               className={styles.actionIconBtn}
+               onClick={handleAddToCart}
+               whileHover={{ scale: 1.02 }}
+               whileTap={{ scale: 0.98 }}
+               disabled={isAnimatingCart}
+               title="Add to Cart"
+             >
+               <AnimatePresence mode="wait">
+                 {!isAnimatingCart ? (
+                   <motion.span
+                     key="text"
+                     initial={{ opacity: 0, y: 10 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     exit={{ opacity: 0, y: -10 }}
+                     className={styles.btnText}
+                   >
+                     Add to Bag
+                   </motion.span>
+                 ) : (
+                   <motion.div
+                     key="icon"
+                     initial={{ opacity: 0, x: -140, scale: 0.8 }}
+                     animate={{ 
+                       opacity: [0, 1, 1, 0], 
+                       x: [-140, 0, 140],
+                      //  rotate: [0, 15, -15, 0],
+                       scale: [0.8, 1, 1, 1]
+                     }}
+                     exit={{ opacity: 0 }}
+                     transition={{ 
+                       duration: 1.5, 
+                       ease: "linear",
+                       times: [0, 0.3, 0.7, 1]
+                     }}
+                     className={styles.btnIconCentral}
+                   >
+                     <ShoppingCart size={26} />
+                   </motion.div>
+                 )}
+               </AnimatePresence>
+             </motion.button>
+           </div>
            
            <motion.button 
              className={styles.cyberCheckoutBtn}
-             onClick={() => addToCart({ ...product, quantity })}
+             onClick={() => {
+               setCheckoutItems([{ ...product, quantity, image: product.image || product.img }]);
+               router.push('/checkout');
+             }}
              whileHover={{ scale: 1.02 }}
              whileTap={{ scale: 0.98 }}
            >
-             Add to Vault <span>—</span> ${(product.price * quantity).toFixed(2)}
+             Buy Now <span>—</span> ${(product.price * quantity).toFixed(2)}
            </motion.button>
         </motion.div>
 

@@ -186,6 +186,7 @@
   flex-direction: column;
   overflow: hidden;
   text-align: center;
+  cursor: pointer;
 }
 
 .card:hover {

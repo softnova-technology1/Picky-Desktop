@@ -16,10 +16,13 @@ export const CartProvider = ({ children }) => {
     }, 3000);
   };
 
+  const [isLoaded, setIsLoaded] = useState(false);
+
   // Load from localStorage on mount
   useEffect(() => {
-    const savedCart = localStorage.getItem('picky_cart');
+    const savedCart = localStorage.getItem('cartItems') || localStorage.getItem('picky_cart');
     const savedCheckout = localStorage.getItem('picky_checkout');
+    
     if (savedCart) {
       try {
         setCartItems(JSON.parse(savedCart));
@@ -27,6 +30,7 @@ export const CartProvider = ({ children }) => {
         console.error("Failed to parse cart:", e);
       }
     }
+    
     if (savedCheckout) {
       try {
         setCheckoutItems(JSON.parse(savedCheckout));
@@ -34,26 +38,39 @@ export const CartProvider = ({ children }) => {
         console.error("Failed to parse checkout items:", e);
       }
     }
+    
+    setIsLoaded(true);
   }, []);
 
-  // Save to localStorage on change
+  // Save to localStorage on change, but only after initial load
   useEffect(() => {
-    localStorage.setItem('picky_cart', JSON.stringify(cartItems));
-  }, [cartItems]);
+    if (isLoaded) {
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    }
+  }, [cartItems, isLoaded]);
 
   useEffect(() => {
-    localStorage.setItem('picky_checkout', JSON.stringify(checkoutItems));
-  }, [checkoutItems]);
+    if (isLoaded) {
+      localStorage.setItem('picky_checkout', JSON.stringify(checkoutItems));
+    }
+  }, [checkoutItems, isLoaded]);
 
   const addToCart = (product) => {
+    // Normalize product data to ensure consistent field names (image, price, etc.)
+    const normalizedProduct = {
+      ...product,
+      image: product.image || product.img || product.thumb || "/images/placeholder.png",
+      price: typeof product.price === 'string' ? parseFloat(product.price.replace(/[^\d.]/g, '')) || 0 : (product.price || 0)
+    };
+
     setCartItems(prevItems => {
-      const existingItem = prevItems.find(item => item.id === product.id);
+      const existingItem = prevItems.find(item => item.id === normalizedProduct.id);
       if (existingItem) {
         return prevItems.map(item =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === normalizedProduct.id ? { ...item, quantity: item.quantity + 1 } : item
         );
       }
-      return [...prevItems, { ...product, quantity: 1 }];
+      return [...prevItems, { ...normalizedProduct, quantity: 1 }];
     });
   };
 

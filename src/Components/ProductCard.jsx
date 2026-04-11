@@ -23,6 +23,10 @@ const ProductCard = ({ product }) => {
   const originalPrice = product.originalPrice || (parseFloat(product.price) + parseFloat(discountAmount)).toFixed(2);
   const activeOffer = product.offer || `SAVE $${discountAmount}`;
 
+  // Robust image field selection
+  const productImgSrc = product.image || product.img || product.thumb || 'https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=800';
+  const encodedImg = encodeURIComponent(typeof productImgSrc === 'string' ? productImgSrc : (productImgSrc?.src || productImgSrc));
+
   const handleBuyNow = () => {
     setCheckoutItems([{ ...product, quantity: 1 }]);
     router.push('/checkout');
@@ -42,9 +46,9 @@ const ProductCard = ({ product }) => {
       
       <div className={styles.imageWrapper}>
         <div className={styles.imageContainer}>
-          <Link href={`/product/${product.id}`} className={styles.titleLink}>
+          <Link href={`/product/${product.id}?img=${encodedImg}`} className={styles.titleLink}>
             <Image
-              src={product.image || 'https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=800'}
+              src={productImgSrc}
               alt={product.name}
               fill
               style={{ objectFit: 'contain' }}
@@ -87,7 +91,7 @@ const ProductCard = ({ product }) => {
       </div>
 
       <div className={styles.content}>
-        <Link href={`/product/${product.id}`} className={styles.titleLink}>
+        <Link href={`/product/${product.id}?img=${encodedImg}`} className={styles.titleLink}>
           <h3 className={styles.title}>{product.name}</h3>
         </Link>
         <div className={styles.priceContainer}>
@@ -103,7 +107,7 @@ const ProductCard = ({ product }) => {
           <span className={styles.reviewCount}>({reviewCount})</span>
         </div>
 
-        <Link href={`/product/${product.id}`} className={styles.shopNowBtn}>
+        <Link href={`/product/${product.id}?img=${encodedImg}`} className={styles.shopNowBtn}>
           SHOP NOW
         </Link>
       </div>
