@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { ShoppingBag, Search, User, Menu, X, Heart, LogOut, ChevronDown } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
@@ -18,7 +19,7 @@ const Navbar = () => {
     const [showAuthPopup, setShowAuthPopup] = useState(false);
     const [authTab, setAuthTab] = useState('login');
     const pathname = usePathname();
-    const { totalItems } = useCart();
+    const { totalItems, cartItems, subtotal, prepareCheckout, notification, setNotification, removeFromCart, clearCart, isCartOpen, setIsCartOpen, openCart, closeCart, toggleCart } = useCart();
     const { wishlistItems } = useWishlist();
     const { user, logout } = useAuth();
 
@@ -98,12 +99,21 @@ const Navbar = () => {
                             </div>
                         </Link>
 
-                        <Link href="/cart" className={styles.cartBtn} title="Cart">
-                            <div className={styles.cartBadgeWrapper}>
-                                <ShoppingBag size={22} />
-                                {totalItems > 0 && <span className={styles.cartBadge}>{totalItems}</span>}
-                            </div>
-                        </Link>
+                        <div 
+                            className={styles.cartDrawerContainer} 
+                            onMouseEnter={openCart}
+                            onClick={toggleCart}
+                        >
+                            <button 
+                                className={styles.cartBtn} 
+                                title="Cart"
+                            >
+                                <div className={styles.cartBadgeWrapper}>
+                                    <ShoppingBag size={22} />
+                                    {totalItems > 0 && <span className={styles.cartBadge}>{totalItems}</span>}
+                                </div>
+                            </button>
+                        </div>
 
                         {user ? (
                             <div className={styles.userProfile}>
@@ -161,6 +171,12 @@ const Navbar = () => {
                 isOpen={showAuthPopup}
                 onClose={() => setShowAuthPopup(false)}
                 initialTab={authTab}
+            />
+
+            <CartNotification 
+                show={notification.show} 
+                product={notification.product} 
+                onClose={() => setNotification({ ...notification, show: false })} 
             />
         </>              
     );

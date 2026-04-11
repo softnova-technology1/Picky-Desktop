@@ -21,8 +21,8 @@ export default function ProfileLayout({ children }) {
     { name: 'EDIT PROFILE', icon: <User size={20} />, path: '/profile' },
     { name: 'ACCOUNT SETTINGS', icon: <Settings size={20} />, path: '/account-settings' },
     { name: 'SECURITY', icon: <ShieldCheck size={20} />, path: '/security' },
-    { name: 'BILLING', icon: <CreditCard size={20} />, path: '/billing' },
-    { name: 'PREFERENCES', icon: <ToggleLeft size={20} />, path: '/preferences' },
+    { name: 'BILLING', icon: <CreditCard size={20} />, path: '/billing' }
+    
   ];
 
   const footerNav = [

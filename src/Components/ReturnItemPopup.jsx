@@ -1,25 +1,27 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import styles from './CancelOrderPopup.module.css';
-import { X, Check, ShoppingBag, Eye, ArrowRight } from 'lucide-react';
+import styles from './ReturnItemPopup.module.css';
+import { X, Check, ArrowRight, RotateCcw } from 'lucide-react';
 
 const REASONS = [
-  "Order placed by mistake",
-  "Item is no longer needed",
-  "Found a better price elsewhere",
-  "Standard delivery time is too long",
-  "Shipping cost is too high",
+  "Product is damaged or defective",
+  "Incorrect item received",
+  "Item does not fit (Size issues)",
+  "Product quality not as expected",
+  "Changed my mind / No longer needed",
+  "Better price found elsewhere",
+  "Delivered late or slow shipping",
   "Other (please specify)"
 ];
 
-const CancelOrderPopup = ({ isOpen, onClose, orderId = "#PKY-8821" }) => {
+const ReturnItemPopup = ({ isOpen, onClose, orderId }) => {
   const [selectedReason, setSelectedReason] = useState(null);
   const [customReason, setCustomReason] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Reset state when closing/opening and handle scroll lock
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -38,6 +40,7 @@ const CancelOrderPopup = ({ isOpen, onClose, orderId = "#PKY-8821" }) => {
 
   const handleConfirm = () => {
     setIsSubmitting(true);
+    // Simulate API call
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSuccess(true);
@@ -56,9 +59,9 @@ const CancelOrderPopup = ({ isOpen, onClose, orderId = "#PKY-8821" }) => {
 
         {!isSuccess ? (
           <>
-            <h2 className={styles.title}>Cancel Order</h2>
+            <h2 className={styles.title}>Return Item</h2>
             <p className={styles.subtitle}>
-              We'll process your cancellation immediately. Please tell us why you're cancelling order <strong>{orderId}</strong>.
+              We're sorry your purchase didn't work out. Please select a reason for your return for order <strong>{orderId}</strong>.
             </p>
 
             <div className={styles.reasonGrid}>
@@ -78,7 +81,7 @@ const CancelOrderPopup = ({ isOpen, onClose, orderId = "#PKY-8821" }) => {
                     <div className={styles.customInputWrapper}>
                       <textarea
                         className={styles.customInput}
-                        placeholder="Please share more details..."
+                        placeholder="Please tell us more about your return..."
                         value={customReason}
                         onChange={(e) => setCustomReason(e.target.value)}
                         autoFocus
@@ -94,9 +97,11 @@ const CancelOrderPopup = ({ isOpen, onClose, orderId = "#PKY-8821" }) => {
               onClick={handleConfirm}
               disabled={!canConfirm || isSubmitting}
             >
-              {isSubmitting ? "Processing..." : (
+              {isSubmitting ? (
+                 <span>Processing...</span>
+              ) : (
                 <>
-                  Confirm Cancellation
+                  Confirm Return
                   <ArrowRight size={18} />
                 </>
               )}
@@ -105,21 +110,18 @@ const CancelOrderPopup = ({ isOpen, onClose, orderId = "#PKY-8821" }) => {
         ) : (
           <div className={styles.successBody}>
             <div className={styles.successIconWrapper}>
-              <Check size={48} strokeWidth={3} />
+              <Check size={40} className={styles.checkmark} strokeWidth={3} />
             </div>
-            <h2 className={styles.successTitle}>Order Cancelled</h2>
+            <h2 className={styles.successTitle}>Return Requested</h2>
             <p className={styles.subtitle}>
-              Your order {orderId} has been successfully cancelled. A confirmation email and refund details have been sent to your inbox.
+              Your return request for order {orderId} has been successfully submitted. We'll send you an email with shipping instructions within 24 hours.
             </p>
-            
-            <div className={styles.btnGroup}>
-               <Link href="/shop" className={styles.confirmBtn} style={{ textDecoration: 'none' }}>
-                  <ShoppingBag size={18} /> Continue Shopping
-               </Link>
-               <Link href="/my-orders" className={styles.confirmBtn} style={{ textDecoration: 'none', background: '#f8f8f8', color: '#1a1a1a' }}>
-                  <Eye size={18} /> View Order History
-               </Link>
-            </div>
+            <button 
+              className={styles.confirmBtn}
+              onClick={onClose}
+            >
+              Back to My Orders
+            </button>
           </div>
         )}
       </div>
@@ -127,4 +129,4 @@ const CancelOrderPopup = ({ isOpen, onClose, orderId = "#PKY-8821" }) => {
   );
 };
 
-export default CancelOrderPopup;
+export default ReturnItemPopup;

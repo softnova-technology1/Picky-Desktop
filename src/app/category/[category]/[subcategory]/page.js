@@ -22,11 +22,11 @@ export default function SubcategoryPage({ params }) {
   };
 
   const mapping = {
-    "electronics": "Electronics",
-    "fashion": "Fashion",
-    "books": "Books",
-    "home-decor": "Home Decor",
-    "gifts": "Gifts"
+      "electronics": "Electronics",
+      "fashion": "Fashion",
+      "books": "Books",
+      "home-decor": "Home Decor",
+      "chocolates": "Chocolates"
   };
 
   const categoryName = mapping[catPath.toLowerCase()] || formatName(catPath);
@@ -59,12 +59,7 @@ export default function SubcategoryPage({ params }) {
               <h1 className={styles.title}>{subcategoryName}</h1>
               <p className={styles.count}>{filteredProducts.length} items curated for you</p>
             </div>
-            <button
-              className={styles.filterBtn}
-              onClick={() => setIsMobileSidebarOpen(true)}
-            >
-              <Filter size={18} /> <span>SORT & FILTER</span>
-            </button>
+
           </div>
         </header>
 

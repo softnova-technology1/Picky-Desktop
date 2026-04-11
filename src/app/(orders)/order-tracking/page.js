@@ -11,10 +11,13 @@ import {
   MessageCircle, 
   Edit3, 
   Box, 
-  Package 
+  Package,
+  XCircle
 } from 'lucide-react';
+import CancelOrderPopup from '@/Components/CancelOrderPopup';
 
 export default function OrderTrackingPage() {
+  const [isCancelPopupOpen, setIsCancelPopupOpen] = React.useState(false);
   const products = [
     { name: "Premium Headphones Pro", variant: "MATTE BLACK • 1 UNIT", image: "https://i.pinimg.com/736x/ae/ef/07/aeef075aa6ec0b293ab809683d38df6a.jpg" },
     { name: "Travel Hardcase", variant: "GUNMETAL • 1 UNIT", image: "https://i.pinimg.com/736x/d0/e2/9b/d0e29b99da6fab6fccedfb599a2d5867.jpg" }
@@ -61,29 +64,6 @@ export default function OrderTrackingPage() {
         <div className={styles.trackingGrid}>
            {/* Left Column: Map & Timeline */}
            <div className={styles.leftCol}>
-              <div className={styles.mapSection}>
-                 <div className={styles.mapWrapper}>
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434509374!2d-122.41941548468252!3d37.77492957975948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c6c8f4459%3A0xb10edc36e4f39c8c!2sSan%20Francisco%2C%20CA!5e0!3m2!1sen!2sus!4v1625068000000!5m2!1sen!2sus"
-                        width="100%" 
-                        height="100%" 
-                        style={{ border: 0 }} 
-                        allowFullScreen="" 
-                        loading="lazy"
-                        className={styles.mapIframe}
-                    ></iframe>
-                    <div className={styles.currentLocationCard}>
-                       <div className={styles.locationIcon}>
-                          <Truck size={24} strokeWidth={1.5} />
-                       </div>
-                       <div className={styles.locationInfo}>
-                          <label>CURRENT LOCATION</label>
-                          <span>San Francisco, CA</span>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-
               <div className={styles.journeySection}>
                  <h2>Journey Progress</h2>
                  <div className={styles.timeline}>
@@ -100,10 +80,45 @@ export default function OrderTrackingPage() {
                     ))}
                  </div>
               </div>
+
+              <div className={styles.mapSection}>
+                 <div className={styles.mapWrapper}>
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62705.80165780282!2d79.10260485!3d10.7870!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baab892c906782c%3A0x19a0a4cff2e11e86!2sThanjavur%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1712815600000!5m2!1sen!2sin"
+                        width="100%" 
+                        height="100%" 
+                        style={{ border: 0 }} 
+                        allowFullScreen="" 
+                        loading="lazy"
+                        className={styles.mapIframe}
+                    ></iframe>
+                    <div className={styles.currentLocationCard}>
+                       <div className={styles.locationIcon}>
+                          <Truck size={24} strokeWidth={1.5} />
+                       </div>
+                       <div className={styles.locationInfo}>
+                          <label>CURRENT LOCATION</label>
+                          <span>Thanjavur, Tamil Nadu</span>
+                       </div>
+                    </div>
+                 </div>
+              </div>
            </div>
 
            {/* Right Column: Sidebar Panels */}
            <aside className={styles.sidebar}>
+              <div className={styles.buttonGroup}>
+                 <button className={styles.primaryBtn}><MessageCircle size={18} /> Live Chat Support</button>
+                 <button 
+                    className={styles.secondaryBtn}
+                    onClick={() => setIsCancelPopupOpen(true)}
+                 >
+                    <XCircle size={18} /> Cancel Order
+                 </button>
+              </div>
+
+              <p className={styles.helpText}>QUESTIONS? CALL US AT 1-800-GALLERY</p>
+
               <div className={styles.sideCard}>
                  <h3 className={styles.sideHeader}><Box size={20} /> Package Contents</h3>
                  {products.map((item, index) => (
@@ -124,17 +139,15 @@ export default function OrderTrackingPage() {
                     <p>842 Pine Street, Apt 4C <br /> San Francisco, CA 94108 <br /> United States</p>
                  </div>
               </div>
-
-              <div className={styles.buttonGroup}>
-                 <button className={styles.primaryBtn}><MessageCircle size={18} /> Live Chat Support</button>
-                 <button className={styles.secondaryBtn}><Edit3 size={18} /> Update Instructions</button>
-              </div>
-
-              <p className={styles.helpText}>QUESTIONS? CALL US AT 1-800-GALLERY</p>
            </aside>
         </div>
 
       </div>
+      <CancelOrderPopup 
+         isOpen={isCancelPopupOpen} 
+         onClose={() => setIsCancelPopupOpen(false)} 
+         orderId="#PKY-8821" 
+      />
     </div>
   );
 }

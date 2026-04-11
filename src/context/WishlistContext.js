@@ -6,23 +6,42 @@ const WishlistContext = createContext();
 
 export const WishlistProvider = ({ children }) => {
   const [wishlistItems, setWishlistItems] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const STORAGE_KEY = 'picky_wishlist_v1';
 
   // Load from localStorage on mount
   useEffect(() => {
-    const savedWishlist = localStorage.getItem('wishlistItems');
-    if (savedWishlist) {
-      try {
-        setWishlistItems(JSON.parse(savedWishlist));
-      } catch (e) {
-        console.error("Failed to parse wishlist:", e);
+    if (typeof window !== 'undefined') {
+      const savedWishlist = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('wishlistItems');
+      if (savedWishlist) {
+        try {
+          const parsed = JSON.parse(savedWishlist);
+          if (Array.isArray(parsed)) setWishlistItems(parsed);
+        } catch (e) {
+          console.error("Failed to parse wishlist:", e);
+        }
       }
+      setIsLoaded(true);
     }
   }, []);
 
   // Save to localStorage on change
   useEffect(() => {
-    localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
-  }, [wishlistItems]);
+    if (isLoaded) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(wishlistItems));
+    }
+  }, [wishlistItems, isLoaded]);
+
+  // Sync across tabs
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === STORAGE_KEY) {
+        setWishlistItems(JSON.parse(e.newValue || '[]'));
+      }
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
+  }, []);
 
   const toggleWishlist = (product) => {
     setWishlistItems(prevItems => {

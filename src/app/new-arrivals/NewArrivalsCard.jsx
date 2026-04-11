@@ -5,8 +5,10 @@ import { ShoppingCart, Heart, Eye } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import styles from './NewArrivals.module.css';
+import { useRouter } from 'next/navigation';
 
 const NewArrivalsCard = ({ product, index, onAddToCart }) => {
+  const router = useRouter();
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
 
@@ -14,13 +16,19 @@ const NewArrivalsCard = ({ product, index, onAddToCart }) => {
 
   const handleToggleFavorite = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     toggleWishlist(product);
   };
 
   const handleAddToCart = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     addToCart(product);
     if (onAddToCart) onAddToCart(product);
+  };
+
+  const handleCardClick = () => {
+    router.push(`/product/${product.id}?img=${encodeURIComponent(product.image)}`);
   };
 
   return (
@@ -29,6 +37,7 @@ const NewArrivalsCard = ({ product, index, onAddToCart }) => {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+      onClick={handleCardClick}
     >
       <div className={styles.imageBox}>
         <motion.div 

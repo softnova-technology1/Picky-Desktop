@@ -165,7 +165,7 @@ export default function PaymentSuccessPage() {
         </motion.div>
 
         <motion.div style={{ display: 'grid', gap: '1.2rem' }} variants={itemVariants}>
-          <Link href="/" style={{ textDecoration: 'none' }}>
+          <Link href="/new-arrivals" style={{ textDecoration: 'none' }}>
             <motion.button 
               className={styles.ctaButton}
               whileHover={{ scale: 1.05 }}

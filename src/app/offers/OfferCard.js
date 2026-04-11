@@ -5,8 +5,10 @@ import { ShoppingCart, Heart, Eye } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import styles from './Offers.module.css';
+import { useRouter } from 'next/navigation';
 
 const OfferCard = ({ product, index, onAddToCart }) => {
+  const router = useRouter();
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
 
@@ -14,11 +16,13 @@ const OfferCard = ({ product, index, onAddToCart }) => {
 
   const handleToggleFavorite = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     toggleWishlist(product);
   };
 
   const handleAddToCart = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     // Use discountPrice for the cart
     const cartProduct = {
       ...product,
@@ -28,12 +32,17 @@ const OfferCard = ({ product, index, onAddToCart }) => {
     if (onAddToCart) onAddToCart(cartProduct);
   };
 
+  const handleCardClick = () => {
+    router.push(`/product/${product.id}?img=${encodeURIComponent(product.image)}`);
+  };
+
   return (
     <motion.div 
       className={styles.card}
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }}
+      onClick={handleCardClick}
     >
       <div className={styles.imageBox}>
         {/* Discount Badge */}

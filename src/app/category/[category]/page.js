@@ -32,7 +32,7 @@ export default function CategoryPage({ params }) {
             "fashion": "Fashion",
             "books": "Books",
             "home-decor": "Home Decor",
-            "gifts": "Gifts"
+            "chocolates": "Chocolates"
         };
         const finalName = mapping[categoryName.toLowerCase()] || formattedCategory;
         const subFinal = getSubcategories(finalName);
@@ -53,7 +53,7 @@ export default function CategoryPage({ params }) {
       "fashion": "Fashion",
       "books": "Books",
       "home-decor": "Home Decor",
-      "gifts": "Gifts"
+      "chocolates": "Chocolates"
   };
   const normalizedCategory = mapping[categoryName.toLowerCase()] || formattedCategory;
   const actualSubcategories = getSubcategories(normalizedCategory);

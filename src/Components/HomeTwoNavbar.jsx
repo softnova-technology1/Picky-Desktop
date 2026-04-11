@@ -11,7 +11,8 @@ import {
   User,
   Settings,
   ArrowRight,
-  MapPin
+  MapPin,
+  X
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import styles from "./HomeTwoNavbar.module.css";
@@ -19,11 +20,13 @@ import { useAuth } from "@/context/AuthContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useCart } from "@/context/CartContext";
 import AuthPopup from "@/Components/AuthPopup";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function HomeTwoNavbar() {
   const { user, logout } = useAuth();
   const { wishlistItems } = useWishlist();
-  const { totalItems } = useCart();
+  const { totalItems, cartItems, subtotal, removeFromCart, prepareCheckout, clearCart, isCartOpen, setIsCartOpen, openCart, closeCart, toggleCart } = useCart();
   const pathname = usePathname();
   const [userName, setUserName] = useState("Member");
   const [showUserDropdown, setShowUserDropdown] = useState(false);
@@ -75,7 +78,7 @@ export default function HomeTwoNavbar() {
         </div>
         <div className={styles.topLocation}>
           <MapPin size={12} strokeWidth={3} />
-          <span className={styles.topLocationText}>Peravuranu - Thanjavur, India</span>
+          <span className={styles.topLocationText}>Peravurani - Thanjavur, India</span>
           <div className={styles.indiaFlag}>
             <svg viewBox="0 0 640 480" width="16" height="12">
               <path fill="#ff9933" d="M0 0h640v160H0z" />
@@ -215,12 +218,20 @@ export default function HomeTwoNavbar() {
                 {wishlistItems.length > 0 && <span className={`${styles.badge} ${styles.wishlistBadge}`}>{wishlistItems.length}</span>}
               </div>
             </Link>
-            <Link href="/cart" className={styles.iconBtn}>
-              <div className={styles.iconWrapper}>
-                <ShoppingBag size={22} />
-                {totalItems > 0 && <span className={`${styles.badge} ${styles.cartBadge}`}>{totalItems}</span>}
-              </div>
-            </Link>
+            <div 
+              className={styles.cartDrawerContainer}
+              onMouseEnter={openCart}
+            >
+              <button 
+                className={styles.iconBtn}
+                onClick={toggleCart}
+              >
+                <div className={styles.iconWrapper}>
+                  <ShoppingBag size={22} />
+                  {totalItems > 0 && <span className={`${styles.badge} ${styles.cartBadge}`}>{totalItems}</span>}
+                </div>
+              </button>
+            </div>
 
             <div className={styles.userDropdownContainer}>
               <button
@@ -235,7 +246,7 @@ export default function HomeTwoNavbar() {
                   <div className={styles.dropdownHeader}>
                     <div className={styles.headerTop}>
                       <div className={styles.miniAvatar}>
-                        <img src="/images/amber.png" alt="User" />
+                        <Image src="/images/amber.png" alt="User" width={50} height={50} />
                       </div>
                       <div className={styles.headerInfo}>
                         <span className={styles.dropdownWelcome}>{userName}</span>
