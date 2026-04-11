@@ -7,8 +7,10 @@ import { Filter, ChevronDown, ArrowRight } from 'lucide-react';
 import NewArrivalsList from './NewArrivalsList';
 import styles from './NewArrivals.module.css';
 import { useCart } from '@/context/CartContext';
+import { useRouter } from 'next/navigation';
 
 export default function NewArrivalsPage() {
+  const router = useRouter();
   const { triggerNotification } = useCart();
 
   const handleAddToCart = (product) => {
@@ -37,7 +39,10 @@ export default function NewArrivalsPage() {
               Elevate your lifestyle with our curated selection of products. 
               Modern aesthetics meeting unparalleled craftsmanship.
             </p>
-            <button className={styles.heroBtn}>
+            <button 
+              className={styles.heroBtn}
+              onClick={() => router.push('/shop')}
+            >
               Explore Collection <ArrowRight size={20} />
             </button>
           </div>

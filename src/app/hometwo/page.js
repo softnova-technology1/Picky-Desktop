@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "./hometwo.module.css";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   Star,
   ArrowRight,
@@ -46,7 +47,8 @@ export default function Home2() {
   const [showAuthPopup, setShowAuthPopup] = useState(false);
   const [authTab, setAuthTab] = useState('login');
   
-  const { addToCart, triggerNotification } = useCart();
+  const router = useRouter();
+  const { addToCart, triggerNotification, setCheckoutItems } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
   
   // Local notification state for Wishlist (to support custom titles without modifying global component)
@@ -58,7 +60,10 @@ export default function Home2() {
   };
 
   const handleAddToCart = (e, prod) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     // Normalize price for cart (remove currency symbol if present)
     const numericPrice = typeof prod.price === 'string' ? parseFloat(prod.price.replace(/[^\d.]/g, '')) : prod.price;
     // Normalize image property for the notification component (which expects 'image')
@@ -67,8 +72,27 @@ export default function Home2() {
     triggerNotification(normalizedProduct);
   };
 
+  const handleBuyNow = (e, prod) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const numericPrice = typeof prod.price === 'string' ? parseFloat(prod.price.replace(/[^\d.]/g, '')) : prod.price;
+    const normalizedProduct = { 
+      ...prod, 
+      price: numericPrice || 0, 
+      image: prod.image || prod.img,
+      quantity: 1 
+    };
+    setCheckoutItems([normalizedProduct]);
+    router.push('/checkout');
+  };
+
   const handleWishlistToggle = (e, prod) => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     const isAdding = !isInWishlist(prod.id);
     toggleWishlist(prod);
     showLocalNotif(prod, isAdding ? "Added to Wishlist ❤️" : "Removed from Wishlist");
@@ -290,17 +314,45 @@ export default function Home2() {
           </div>
 
           <div className={styles.refFlashGrid}>
-            {[
-              { cat: "Electronics", name: "Premium Wireless Noise Canceling ...", price: "$249.00", old: "$399.00", discount: "-40%", type: "discount", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070" },
-              { cat: "Fashion", name: "Minimalist Silver Watch Elite Edition", price: "$120.00", old: "$160.00", discount: "-25%", type: "discount", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999" },
-              { cat: "Gadgets", name: "Retro Instant Film Camera - Mint", price: "$85.00", old: "$100.00", discount: "-15%", type: "discount", img: "https://i.pinimg.com/736x/76/9d/84/769d8454f78dabe81ec54e51fea6d156.jpg" },
-              { cat: "Footwear", name: "AeroSprint Pro Running Shoes", price: "$129.00", old: "$180.00", discount: "HOT", type: "hot", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070" },
-            ].map((prod, idx) => (
-              <div key={idx} className={styles.refCard}>
+            { [
+              { id: "electronics-audio-1", cat: "Electronics", name: "Premium Wireless Noise Canceling ...", price: "$249.00", old: "$399.00", discount: "-40%", type: "discount", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070" },
+              { id: "fashion-watches-1", cat: "Fashion", name: "Minimalist Silver Watch Elite Edition", price: "$120.00", old: "$160.00", discount: "-25%", type: "discount", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999" },
+              { id: "electronics-cameras-1", cat: "Gadgets", name: "Retro Instant Film Camera - Mint", price: "$85.00", old: "$100.00", discount: "-15%", type: "discount", img: "https://i.pinimg.com/736x/76/9d/84/769d8454f78dabe81ec54e51fea6d156.jpg" },
+              { id: "fashion-footwear-1", cat: "Footwear", name: "AeroSprint Pro Running Shoes", price: "$129.00", old: "$180.00", discount: "HOT", type: "hot", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070" },
+            ].map((prod, idx) => {
+              const prodId = prod.id;
+              return (
+              <div 
+                key={idx} 
+                className={styles.refCard}
+                onClick={() => router.push(`/product/${prodId}?img=${encodeURIComponent(prod.img)}`)}
+              >
                 <div className={styles.refImgWrapper}>
                   <Image src={prod.img} alt={prod.name} fill className={styles.refProductImg} />
                   <div className={`${styles.refBadge} ${prod.type === 'hot' ? styles.badgeHot : styles.badgeDisc}`}>
                     {prod.discount}
+                  </div>
+
+                  {/* Pixel-Perfect Shop Action Bar */}
+                  <div className={styles.shopActionBar}>
+                    <button 
+                      className={styles.shopCartBtn}
+                      onClick={(e) => handleAddToCart(e, { ...prod, id: prodId })}
+                      title="Add to Cart"
+                    >
+                      <ShoppingCart size={20} />
+                    </button>
+                    <button 
+                      className={`${styles.shopWishlistBtn} ${isInWishlist(prodId) ? styles.shopWishlistActive : ""}`}
+                      onClick={(e) => handleWishlistToggle(e, { ...prod, id: prodId, image: prod.img })}
+                      title={isInWishlist(prodId) ? "Remove from Wishlist" : "Add to Wishlist"}
+                    >
+                      <Heart 
+                        size={20} 
+                        fill={isInWishlist(prodId) ? "#ff4d4d" : "none"} 
+                        color={isInWishlist(prodId) ? "#ff4d4d" : "currentColor"} 
+                      />
+                    </button>
                   </div>
                 </div>
                 <div className={styles.refCardBody}>
@@ -312,13 +364,13 @@ export default function Home2() {
                   </div>
                   <button 
                     className={styles.refAddToCart}
-                    onClick={(e) => handleAddToCart(e, { ...prod, id: `flash-${idx}` })}
+                    onClick={(e) => handleBuyNow(e, { ...prod, id: prodId })}
                   >
-                    Add to Cart
+                    Buy Now
                   </button>
                 </div>
               </div>
-            ))}
+            )}) }
           </div>
         </div>
       </section>
@@ -332,7 +384,12 @@ export default function Home2() {
               <div className={styles.bannerOverlay}>
                 <h3>Luxe Fashion</h3>
                 <p>Upgrade your wardrobe with premium brands</p>
-                <button className={`${styles.bannerBtn} ${styles.magneticBtn}`}>Explore Now</button>
+                <button 
+                  className={`${styles.bannerBtn} ${styles.magneticBtn}`}
+                  onClick={() => router.push('/category/fashion/footwear')}
+                >
+                  Explore Now
+                </button>
               </div>
             </div>
             <div className={`${styles.refBannerItem} ${styles.bannerBlue}`}>
@@ -340,7 +397,13 @@ export default function Home2() {
               <div className={styles.bannerOverlay}>
                 <h3>Smart Tech</h3>
                 <p>The latest in innovation and productivity</p>
-                <button className={`${styles.bannerBtn} ${styles.magneticBtn}`} style={{ background: '#3b82f6' }}>Explore Now</button>
+                <button 
+                  className={`${styles.bannerBtn} ${styles.magneticBtn}`} 
+                  style={{ background: '#3b82f6' }}
+                  onClick={() => router.push('/category/electronics')}
+                >
+                  Explore Now
+                </button>
               </div>
             </div>
             <div className={`${styles.refBannerItem} ${styles.bannerGray}`}>
@@ -348,7 +411,13 @@ export default function Home2() {
               <div className={styles.bannerOverlay}>
                 <h3>Home Studio</h3>
                 <p>Elevate your living and working space</p>
-                <button className={`${styles.bannerBtn} ${styles.magneticBtn}`} style={{ background: '#334155' }}>Explore Now</button>
+                 <button 
+                  className={`${styles.bannerBtn} ${styles.magneticBtn}`} 
+                  style={{ background: '#334155' }}
+                  onClick={() => router.push('/category/home-decor')}
+                >
+                  Explore Now
+                </button>
               </div>
             </div>
           </div>
@@ -388,7 +457,12 @@ export default function Home2() {
                     <div className={styles.spTimeBlock}>12<small>SEC</small></div>
                   </div>
 
-                  <button className={`${styles.spMainCta} ${styles.magneticBtn}`}>Shop Now</button>
+                  <button 
+                    className={`${styles.spMainCta} ${styles.magneticBtn}`}
+                    onClick={() => router.push('/offers')}
+                  >
+                    Shop Now
+                  </button>
                 </div>
               </div>
             </div>
@@ -396,22 +470,44 @@ export default function Home2() {
             {/* Smaller Deal Cards */}
             <div className={styles.spCardsGrid}>
               {[
-                { off: "70%", title: "Elite Footwear", desc: "Premium sneakers collection.", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070" },
-                { off: "40%", title: "Modern Tech", desc: "Next-gen smart essentials.", img: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?q=80&w=2065" },
-                { off: "55%", title: "Urban Wear", desc: "Unbeatable streetwear styles.", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920" },
-                { off: "HOT", title: "Audio Gear", desc: "Studio quality listening.", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070" }
+                { id: "fashion-footwear-1", off: "70%", title: "Elite Footwear", desc: "Premium sneakers collection.", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070" },
+                { id: "electronics-smart-home-1", off: "40%", title: "Modern Tech", desc: "Next-gen smart essentials.", img: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?q=80&w=2065" },
+                { id: "fashion-men's-wear-1", off: "55%", title: "Urban Wear", desc: "Unbeatable streetwear styles.", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920" },
+                { id: "electronics-audio-1", off: "HOT", title: "Audio Gear", desc: "Studio quality listening.", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070" }
               ].map((card, i) => (
-                <div key={i} className={styles.spMiniCard}>
+                <div 
+                  key={i} 
+                  className={styles.spMiniCard}
+                  onClick={() => router.push(`/product/${card.id}?img=${encodeURIComponent(card.img)}`)}
+                >
                   <div className={styles.spMiniVisual}>
                     <Image src={card.img} alt={card.title} fill className={styles.spMiniImg} />
                     <div className={styles.spMiniBadge}>-{card.off}</div>
+                    
+                    {/* Pixel-Perfect Shop Action Bar */}
+                    <div className={styles.shopActionBar}>
+                      <button 
+                        className={styles.shopCartBtn}
+                        onClick={(e) => handleBuyNow(e, { ...card, name: card.title, image: card.img, price: "₹0" })}
+                        title="Add to Cart"
+                      >
+                        <ShoppingCart size={20} />
+                      </button>
+                      <button 
+                        className={`${styles.shopWishlistBtn} ${isInWishlist(card.id) ? styles.shopWishlistActive : ""}`}
+                        onClick={(e) => handleWishlistToggle(e, { ...card, name: card.title, image: card.img })}
+                        title="Wishlist"
+                      >
+                        <Heart size={20} fill={isInWishlist(card.id) ? "#ff4d4d" : "none"} color={isInWishlist(card.id) ? "#ff4d4d" : "currentColor"} />
+                      </button>
+                    </div>
                   </div>
                   <div className={styles.spMiniBody}>
                     <h4 className={styles.spMiniTitle}>{card.title}</h4>
                     <p className={styles.spMiniDesc}>{card.desc}</p>
                     <button 
                       className={styles.spMiniBtn}
-                      onClick={(e) => handleAddToCart(e, { ...card, id: `deal-${i}`, name: card.title, image: card.img, price: "₹0" })}
+                      onClick={(e) => handleBuyNow(e, { ...card, name: card.title, image: card.img, price: "₹0" })}
                     >
                       Buy Now
                     </button>
@@ -435,7 +531,7 @@ export default function Home2() {
                 <h2 className={styles.magMainHeading}>New<br />Arrivals</h2>
                 <p className={styles.magSidebarDesc}>Architectural silhouettes and premium textures. Discover the curation of the month.</p>
                 <div className={styles.magActionLine}>
-                  <Link href="#" className={styles.magExploreBtn}>View Entire Collection <ArrowRight size={20} /></Link>
+                  <Link href="/new-arrivals" className={styles.magExploreBtn}>View Entire Collection <ArrowRight size={20} /></Link>
                 </div>
 
                 {/* New Architectural Sidebar Banner */}
@@ -459,39 +555,41 @@ export default function Home2() {
             {/* Right Product Flow - Medium 3-Column Grid */}
             <div className={styles.magProductFlowMedium}>
               {[
-                { id: "01", name: "Urban Essence Jacket", price: "₹4,999", img: "https://images.unsplash.com/photo-1551028150-64b9f398f678?q=80&w=1974" },
-                { id: "02", name: "Nexus Stealth Watch", price: "₹2,499", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999" },
-                { id: "03", name: "Solaris Pro Shades", price: "₹1,899", img: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?q=80&w=2080" },
-                { id: "04", name: "Vanguard Leather Bag", price: "₹3,750", img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=2069" },
-                { id: "05", name: "Aria Wireless Buds", price: "₹2,299", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070" },
-                { id: "06", name: "Cruiser Mesh Shoes", price: "₹2,999", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070" }
+                { id: "fashion-men's-wear-5", count: "01", name: "Urban Essence Jacket", price: "₹4,999", img: "https://images.unsplash.com/photo-1551028150-64b9f398f678?q=80&w=1974" },
+                { id: "electronics-wearables-5", count: "02", name: "Nexus Stealth Watch", price: "₹2,499", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999" },
+                { id: "electronics-accessories-5", count: "03", name: "Solaris Pro Shades", price: "₹1,899", img: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?q=80&w=2080" },
+                { id: "fashion-handbags-5", count: "04", name: "Vanguard Leather Bag", price: "₹3,750", img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=2069" },
+                { id: "electronics-audio-5", count: "05", name: "Aria Wireless Buds", price: "₹2,299", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070" },
+                { id: "fashion-footwear-5", count: "06", name: "Cruiser Mesh Shoes", price: "₹2,999", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070" }
               ].map((prod, idx) => (
-                <div key={idx} className={styles.magCardMedium}>
+                <div 
+                  key={idx} 
+                  className={styles.magCardMedium}
+                  onClick={() => router.push(`/product/${prod.id}?img=${encodeURIComponent(prod.img)}`)}
+                >
                   <div className={styles.magImageFrameMedium}>
                     <Image src={prod.img} alt={prod.name} fill className={styles.magActualImg} />
-                    <div className={styles.magNumberWatermark}>{prod.id}</div>
+                    <div className={styles.magNumberWatermark}>{prod.count}</div>
                     <div className={styles.magFloatingBadge}>NEW</div>
-                    <button 
-                      className={`${styles.magHeart} ${isInWishlist(prod.id) ? styles.magHeartActive : ""}`}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        toggleWishlist(prod);
-                      }}
-                    >
-                      <Heart size={18} fill={isInWishlist(prod.id) ? "#ff4d4d" : "none"} color={isInWishlist(prod.id) ? "#ff4d4d" : "currentColor"} />
-                    </button>
-
-                    <div className={styles.magHoverSheet}>
-                      <button className={styles.magQuickBtn}>QUICK LOOK</button>
+                    
+                    {/* Pixel-Perfect Shop Action Bar */}
+                    <div className={styles.shopActionBar}>
                       <button 
-                        className={styles.magAddCartBtn}
+                        className={styles.shopCartBtn}
                         onClick={(e) => {
-                          e.preventDefault();
                           const numericPrice = typeof prod.price === 'string' ? parseFloat(prod.price.replace(/[^\d.]/g, '')) : prod.price;
-                          addToCart({ ...prod, price: numericPrice || 0, image: prod.image || prod.img });
+                          handleAddToCart(e, { ...prod, price: numericPrice || 0, image: prod.img });
                         }}
+                        title="Add to Cart"
                       >
-                        <ShoppingBag size={18} /> ADDTOCART
+                        <ShoppingCart size={20} />
+                      </button>
+                      <button 
+                        className={`${styles.shopWishlistBtn} ${isInWishlist(prod.id) ? styles.shopWishlistActive : ""}`}
+                        onClick={(e) => handleWishlistToggle(e, { ...prod, id: prod.id, image: prod.img })}
+                        title="Wishlist"
+                      >
+                        <Heart size={20} fill={isInWishlist(prod.id) ? "#ff4d4d" : "none"} color={isInWishlist(prod.id) ? "#ff4d4d" : "currentColor"} />
                       </button>
                     </div>
                   </div>
@@ -523,7 +621,10 @@ export default function Home2() {
           <div className={styles.spLayoutGrid}>
 
             {/* RANK #1 - THE PODIUM HERO (Remains Fixed Spotlight) */}
-            <div className={styles.podiumHeroCard}>
+            <div 
+              className={styles.podiumHeroCard}
+              onClick={() => router.push(`/product/electronics-wearables-1?img=${encodeURIComponent("https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999")}`)}
+            >
               <div className={styles.podiumVisual}>
                 <Image src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999" alt="Top Seller" fill className={styles.podiumImg} />
                 <div className={styles.podiumRankDigit}>01</div>
@@ -560,30 +661,45 @@ export default function Home2() {
             <div className={styles.trendingMarqueeWrapper}>
               <div className={styles.trendingMarqueeTrack}>
                 {[
-                  { rank: "02", name: "Premium Wireless Pro", price: "₹8,450", desc: "Cinema-grade audio with active cancellation.", rating: 5, reviews: 312, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070", heat: "85%" },
-                  { rank: "03", name: "Luxe Leather Tote", price: "₹1,999", desc: "Handcrafted Italian leather for daily grace.", rating: 4, reviews: 145, img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=2069", heat: "72%" },
-                  { rank: "04", name: "Vibe Mesh Runner", price: "₹2,299", desc: "Ultra-breathable tech for high performance.", rating: 5, reviews: 290, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070", heat: "91%" },
-                  { rank: "05", name: "Aria Smart Buds", price: "₹3,450", desc: "Intelligent noise masking for focus.", rating: 4, reviews: 180, img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=2070", heat: "64%" },
-                  { rank: "06", name: "Modernist Chronograph", price: "₹5,200", desc: "Precision movement in a matte finish.", rating: 5, reviews: 210, img: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1988", heat: "88%" },
-                  { rank: "07", name: "Studio Desk Lamp", price: "₹1,850", desc: "Dual-spectrum light for 12hr workdays.", rating: 4, reviews: 95, img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=1974", heat: "55%" },
+                  { rank: "02", id: "electronics-audio-2", name: "Premium Wireless Pro", price: "₹8,450", desc: "Cinema-grade audio with active cancellation.", rating: 5, reviews: 312, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070", heat: "85%" },
+                  { rank: "03", id: "fashion-handbags-2", name: "Luxe Leather Tote", price: "₹1,999", desc: "Handcrafted Italian leather for daily grace.", rating: 4, reviews: 145, img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=2069", heat: "72%" },
+                  { rank: "04", id: "fashion-footwear-2", name: "Vibe Mesh Runner", price: "₹2,299", desc: "Ultra-breathable tech for high performance.", rating: 5, reviews: 290, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070", heat: "91%" },
+                  { rank: "05", id: "electronics-audio-3", name: "Aria Smart Buds", price: "₹3,450", desc: "Intelligent noise masking for focus.", rating: 4, reviews: 180, img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=2070", heat: "64%" },
+                  { rank: "06", id: "fashion-watches-3", name: "Modernist Chronograph", price: "₹5,200", desc: "Precision movement in a matte finish.", rating: 5, reviews: 210, img: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1988", heat: "88%" },
+                  { rank: "07", id: "home-decor-lighting-2", name: "Studio Desk Lamp", price: "₹1,850", desc: "Dual-spectrum light for 12hr workdays.", rating: 4, reviews: 95, img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=1974", heat: "55%" },
                 ].concat([
-                  { rank: "02", name: "Premium Wireless Pro", price: "₹8,450", desc: "Cinema-grade audio.", rating: 5, reviews: 312, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070", heat: "85%" },
-                  { rank: "03", name: "Luxe Leather Tote", price: "₹1,999", desc: "Handcrafted Italian leather.", rating: 4, reviews: 145, img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=2069", heat: "72%" },
-                  { rank: "04", name: "Vibe Mesh Runner", price: "₹2,299", desc: "Ultra-breathable tech.", rating: 5, reviews: 290, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070", heat: "91%" },
-                  { rank: "05", name: "Aria Smart Buds", price: "₹3,450", desc: "Intelligent noise masking.", rating: 4, reviews: 180, img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=2070", heat: "64%" },
-                  { rank: "06", name: "Modernist Chronograph", price: "₹5,200", desc: "Precision movement.", rating: 5, reviews: 210, img: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1988", heat: "88%" },
-                  { rank: "07", name: "Studio Desk Lamp", price: "₹1,850", desc: "Dual-spectrum light.", rating: 4, reviews: 95, img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=1974", heat: "55%" },
+                  { rank: "02", id: "electronics-audio-2", name: "Premium Wireless Pro", price: "₹8,450", desc: "Cinema-grade audio.", rating: 5, reviews: 312, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070", heat: "85%" },
+                  { rank: "03", id: "fashion-handbags-2", name: "Luxe Leather Tote", price: "₹1,999", desc: "Handcrafted Italian leather.", rating: 4, reviews: 145, img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=2069", heat: "72%" },
+                  { rank: "04", id: "fashion-footwear-2", name: "Vibe Mesh Runner", price: "₹2,299", desc: "Ultra-breathable tech.", rating: 5, reviews: 290, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070", heat: "91%" },
+                  { rank: "05", id: "electronics-audio-3", name: "Aria Smart Buds", price: "₹3,450", desc: "Intelligent noise masking.", rating: 4, reviews: 180, img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=2070", heat: "64%" },
+                  { rank: "06", id: "fashion-watches-3", name: "Modernist Chronograph", price: "₹5,200", desc: "Precision movement.", rating: 5, reviews: 210, img: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1988", heat: "88%" },
+                  { rank: "07", id: "home-decor-lighting-2", name: "Studio Desk Lamp", price: "₹1,850", desc: "Dual-spectrum light.", rating: 4, reviews: 95, img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=1974", heat: "55%" },
                 ]).map((item, i) => (
-                  <div key={i} className={styles.trendingMiniCard}>
+                  <div 
+                    key={i} 
+                    className={styles.trendingMiniCard}
+                    onClick={() => router.push(`/product/${item.id}?img=${encodeURIComponent(item.img)}`)}
+                  >
                     <div className={styles.trendingImgWrapper}>
                       <Image src={item.img} alt={item.name} fill className={styles.tImg} />
                       <div className={styles.trendingRank}>{item.rank}</div>
-                      <button 
-                        className={`${styles.tHeart} ${isInWishlist(`best-${i}`) ? styles.tHeartActive : ""}`}
-                        onClick={(e) => handleWishlistToggle(e, { ...item, id: `best-${i}`, image: item.img })}
-                      >
-                        <Heart size={16} fill={isInWishlist(`best-${i}`) ? "#ff4d4d" : "none"} color={isInWishlist(`best-${i}`) ? "#ff4d4d" : "currentColor"} />
-                      </button>
+                      
+                      {/* Pixel-Perfect Shop Action Bar */}
+                      <div className={styles.shopActionBar}>
+                        <button 
+                          className={styles.shopCartBtn}
+                          onClick={(e) => handleAddToCart(e, { ...item, image: item.img })}
+                          title="Add to Cart"
+                        >
+                          <ShoppingCart size={18} />
+                        </button>
+                        <button 
+                          className={`${styles.shopWishlistBtn} ${isInWishlist(item.id) ? styles.shopWishlistActive : ""}`}
+                          onClick={(e) => handleWishlistToggle(e, { ...item, image: item.img })}
+                        >
+                          <Heart size={18} fill={isInWishlist(item.id) ? "#ff4d4d" : "none"} color={isInWishlist(item.id) ? "#ff4d4d" : "currentColor"} />
+                        </button>
+                      </div>
                     </div>
                     <div className={styles.trendingInfo}>
                       <div className={styles.tRatingLine}>
@@ -599,12 +715,7 @@ export default function Home2() {
                       </div>
                       <div className={styles.tActions}>
                         <button className={`${styles.tQuickBtn} ${styles.magneticBtn}`}>EXPLORE</button>
-                        <button 
-                          className={styles.tAddCartBtn}
-                          onClick={(e) => handleAddToCart(e, { ...item, id: `best-${i}`, image: item.img })}
-                        >
-                          <ShoppingBag size={14} />
-                        </button>
+                       
                       </div>
                     </div>
                   </div>

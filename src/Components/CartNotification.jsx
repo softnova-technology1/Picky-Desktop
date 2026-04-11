@@ -10,7 +10,7 @@ const CartNotification = ({ show, product, onClose }) => {
   if (!product) return null;
 
   // Handle both object images (static imports) and string images (URLs)
-  const imageSrc = product.image?.src || product.image || 'https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=800';
+  const imageSrc = product.image?.src || product.image || product.img?.src || product.img || product.thumb || 'https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=800';
 
   return (
     <AnimatePresence>

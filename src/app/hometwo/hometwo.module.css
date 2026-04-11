@@ -979,6 +979,7 @@
   border: 1px solid var(--border);
   overflow: hidden;
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .refCard:hover {
@@ -1006,6 +1007,69 @@
   font-weight: 900;
   color: white;
   z-index: 5;
+}
+
+/* Pixel-Perfect Replicated Shop Action Bar */
+.shopActionBar {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  background: transparent;
+  transition: all 0.4s ease;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 10;
+}
+
+/* Hover Reveals for all Product Grid Types */
+.refCard:hover .shopActionBar,
+.spMiniCard:hover .shopActionBar,
+.magCardMedium:hover .shopActionBar,
+.trendingMiniCard:hover .shopActionBar {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.shopCartBtn, .shopWishlistBtn {
+  width: 48px;
+  height: 48px;
+  background: var(--primary);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 15px rgba(100, 61, 151, 0.25);
+}
+
+.shopCartBtn {
+  border-radius: 0 20px 20px 20px;
+}
+
+.shopWishlistBtn {
+  border-radius: 20px 0 20px 20px;
+}
+
+.shopCartBtn:hover, .shopWishlistBtn:hover {
+  background: var(--primary-light);
+  transform: scale(1.1) translateY(-2px);
+  box-shadow: 0 12px 25px rgba(100, 61, 151, 0.35);
+}
+
+.shopWishlistActive {
+  background: var(--primary) !important;
+  color: #ff4d4d !important;
+}
+
+.shopWishlistActive:hover {
+  background: var(--primary-light) !important;
 }
 
 .badgeDisc {
@@ -1347,6 +1411,7 @@
   overflow: hidden;
   transition: all 0.4s ease;
   border: 1px solid var(--border);
+  cursor: pointer;
 }
 
 .spMiniCard:hover {
@@ -1585,6 +1650,7 @@
 .magCardMedium {
   position: relative;
   transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  cursor: pointer;
 }
 
 .magImageFrameMedium {
@@ -1861,6 +1927,7 @@
   border-radius: 32px;
   padding: 15px;
   /* transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); */
+  cursor: pointer;
 }
 
 /* PODIUM HERO - THE NO. 1 SELLER */
@@ -1872,6 +1939,7 @@
   overflow: hidden;
   box-shadow: 0 40px 100px rgba(100, 61, 151, 0.15);
   min-height: 550px;
+  cursor: pointer;
 }
 
 .podiumVisual {

@@ -239,7 +239,7 @@ export default function AllProductsPage() {
                 )}
               </div>
 
-              <div className={styles.searchContainer}>
+              <div className={styles.searchContainer}> 
                 <Search size={16} className={styles.searchIcon} />
                 <input
                   type="text"

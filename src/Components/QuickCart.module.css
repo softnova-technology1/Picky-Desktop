@@ -1,0 +1,291 @@
+/* QuickCart.module.css */
+.quickCartWrapper {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 10000 !important;
+}
+
+.floatingButton {
+    width: 65px;
+    height: 65px;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(15px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    color: var(--primary);
+}
+
+.floatingButton:hover {
+    transform: scale(1.1) rotate(-8deg);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--primary);
+    color: white;
+    min-width: 24px;
+    height: 24px;
+    border-radius: 99px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 900;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Drawer Styles */
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    z-index: 10001;
+}
+
+.drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 570px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.85); /* Glassmorphism Panel */
+    backdrop-filter: blur(25px);
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: -20px 0 50px rgba(0, 0, 0, 0.1);
+    z-index: 10002;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (max-width: 500px) {
+    .drawer {
+        width: 100%;
+    }
+    .quickCartWrapper {
+        bottom: 20px;
+        right: 20px;
+    }
+    .floatingButton {
+        width: 75px;
+        height: 75px;
+    }
+}
+
+.header {
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.titleGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--foreground);
+    letter-spacing: 0.5px;
+}
+
+.closeBtn {
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--foreground);
+    transition: all 0.3s ease;
+}
+
+.closeBtn:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: rotate(90deg);
+}
+
+.content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 30px;
+}
+
+/* Custom Scrollbar for Quick Cart */
+.content::-webkit-scrollbar {
+    width: 4px;
+}
+.content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.03);
+}
+.content::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+.content::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+}
+
+.itemList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.item {
+    display: flex;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.4);
+    padding: 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.itemImage {
+    width: 70px;
+    height: 70px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+    flex-shrink: 0;
+}
+
+.itemImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.itemInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.itemName {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--foreground);
+    margin-bottom: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.itemPriceQty {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.itemPrice {
+    font-size: 14px;
+    font-weight: 900;
+    color: var(--primary);
+}
+
+.itemQty {
+    font-size: 11px;
+    font-weight: 700;
+    color: #888;
+}
+
+.emptyState {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0.6;
+}
+
+.footer {
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.subtotalRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.subtotalLabel {
+    font-size: 14px;
+    font-weight: 700;
+    color: #777;
+    text-transform: uppercase;
+}
+
+.subtotalValue {
+    font-size: 20px;
+    font-weight: 950;
+    color: var(--foreground);
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.viewCartBtn, .checkoutBtn {
+    width: 100%;
+    padding: 16px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 900;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s;
+    letter-spacing: 0.5px;
+}
+
+.viewCartBtn {
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--foreground);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.viewCartBtn:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.checkoutBtn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    box-shadow: 0 10px 20px rgba(100, 61, 151, 0.15);
+}
+
+.checkoutBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(100, 61, 151, 0.25);
+}
