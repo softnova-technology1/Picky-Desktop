@@ -54,6 +54,15 @@ export default function ProductDetailsPage({ params }) {
   const [showWriteReview, setShowWriteReview] = useState(false);
   const [newReview, setNewReview] = useState({ rating: 5, comment: "", name: "" });
 
+  if (!product) {
+    return (
+      <div className={styles.notFound}>
+        <h2>Product not found</h2>
+        <Link href="/">Return to Catalog</Link>
+      </div>
+    );
+  }
+
   // Generate a mock gallery based on the main image
   const mockGallery = [
     displayImage,
@@ -123,6 +132,8 @@ export default function ProductDetailsPage({ params }) {
   const relatedProducts = products
     .filter((p) => p.category === product?.category && p.id !== id)
     .slice(0, 4);
+
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -272,7 +283,7 @@ export default function ProductDetailsPage({ params }) {
   return (
     <div className={styles.cinemaWrapper}>
       {/* Abstract Background Elements */}
-      <div className={styles.ambientGlowPrimary} style={{ background: dynamicData.isColor1 ? dynamicData.options1[sel1] : 'var(--primary)' }} />
+      <div className={styles.ambientGlowPrimary} />
       <div className={styles.ambientGlowSecondary} />
 
       <motion.div 

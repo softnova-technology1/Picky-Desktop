@@ -2,12 +2,12 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import styles from './inno.module.css';
+import styles from '@/Stylesheet/shop.module.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ShoppingBag } from 'lucide-react';
 import Link from 'next/link';
-import lux from '@/images/inno/luxhead.png';
-import shirt from '@/images/inno/shirt.png';
+import lux from '@/images/shop/luxhead.png';
+import shirt from '@/images/shop/shirt.png';
 
 const ACCORDION_DATA = [
     
@@ -18,7 +18,7 @@ const ACCORDION_DATA = [
         desc: "Curated collection of architectural journals and timeless typography.",
         price: "$45.00",
         img: lux,
-        gradient: "linear-gradient(135deg, #fce9d1 0%, #f7d8b5 100%)",
+        gradient: "linear-gradient(135deg, #ddbef7ff 0%, #f7d8b5 100%)",
         textColor: "#83431bff"
     },{
         id: 2,
@@ -27,7 +27,7 @@ const ACCORDION_DATA = [
         desc: "Experience the pinnacle of minimalist engineering and neural performance.",
         price: "$899.00",
         img: shirt,
-        gradient: "linear-gradient(135deg, #e3ecf5 0%, #cbd9e8 100%)",
+        gradient: "linear-gradient(135deg, #f0eaf5ff 0%, #ddbef7ff 100%)",
         textColor: "#0f4f5f7c"
     },
     {
@@ -37,7 +37,7 @@ const ACCORDION_DATA = [
         desc: "Thoughtfully assembled gift sets for those who appreciate the finer things.",
         price: "$120.00",
         img: lux,
-        gradient: "linear-gradient(135deg, #eaf5eb 0%, #d1e8d4 100%)",
+        gradient: "linear-gradient(135deg, #eaf5eb 0%, #ddbef7ff 100%)",
         textColor: "#1e2c20"
     },
     {
@@ -47,7 +47,7 @@ const ACCORDION_DATA = [
         desc: "Transform your space into a sanctuary of organic textures and flow.",
         price: "$350.00",
         img: shirt,
-        gradient: "linear-gradient(135deg, #fceaea 0%, #f7d1d1 100%)",
+        gradient: "linear-gradient(135deg, #ddbef7ff 0%, #f7d1d1 100%)",
         textColor: "#5e2e2e"
     },
     {
@@ -57,12 +57,12 @@ const ACCORDION_DATA = [
         desc: "Modern tailoring meets sustainable luxury for the contemporary silhouette.",
         price: "$210.00",
         img: lux,
-        gradient: "linear-gradient(135deg, #eaedfc 0%, #d1d5f7 100%)",
+        gradient: "linear-gradient(135deg, #eaedfc 0%, #ddbef7ff 100%)",
         textColor: "#2e325e"
     }
 ];
 
-export default function InnoPage() {
+export default function Shop() {
     const [hoveredId, setHoveredId] = useState(3); // Start with center expanded
 
     return (

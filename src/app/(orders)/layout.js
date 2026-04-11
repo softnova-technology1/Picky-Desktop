@@ -8,7 +8,8 @@ import {
   ShoppingBag, 
   MapPin, 
   FileText, 
-  XOctagon 
+  XOctagon,
+  RotateCcw
 } from "lucide-react";
 
 export default function OrdersLayout({ children }) {
@@ -18,6 +19,7 @@ export default function OrdersLayout({ children }) {
     { name: "My Orders", path: "/my-orders", icon: <ShoppingBag size={18} /> },
     { name: "Order Details", path: "/order-details", icon: <FileText size={18} /> },
     { name: "Order Tracking", path: "/order-tracking", icon: <MapPin size={18} /> },
+    { name: "Refund", path: "/refund", icon: <RotateCcw size={18} /> },
     { name: "Cancel Order", path: "/cancel-order", icon: <XOctagon size={18} /> },
   ];
 

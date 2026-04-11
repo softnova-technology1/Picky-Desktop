@@ -48,6 +48,11 @@ const Navbar = () => {
         { name: 'ABOUT US', path: '/about' },
     ];
 
+    const isActive = (path) => {
+        if (path === '/') return pathname === '/';
+        return pathname.startsWith(path);
+    };
+
     return (
         <>
             <nav className={`${styles.navbar} ${scrolled ? styles.navbarScrolled : ''}`}>
@@ -63,7 +68,7 @@ const Navbar = () => {
                             <li key={link.name}>
                                 <Link
                                     href={link.path}
-                                    className={`${styles.navLink} ${pathname === link.path ? styles.active : ''}`}
+                                    className={`${styles.navLink} ${isActive(link.path) ? styles.active : ''}`}
                                 >
                                     {link.name}
                                     {link.hasDropdown && <ChevronDown size={14} className={styles.chevron} />}
@@ -246,7 +251,7 @@ const Navbar = () => {
                                 <Link
                                     key={link.name}
                                     href={link.path}
-                                    className={styles.mobileLink}
+                                    className={`${styles.mobileLink} ${isActive(link.path) ? styles.active : ''}`}
                                 >
                                     {link.name}
                                     {link.hasDropdown && <ChevronDown size={14} className={styles.chevron} />}

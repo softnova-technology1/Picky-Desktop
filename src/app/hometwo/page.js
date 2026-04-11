@@ -33,6 +33,7 @@ import {
   ShoppingCart
 } from "lucide-react";
 import AuthPopup from "@/Components/AuthPopup";
+import { blogPosts } from "@/data/blogData";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { motion, AnimatePresence } from "framer-motion";
@@ -800,7 +801,7 @@ export default function Home2() {
                   <span className={styles.revBoughtName}>{rev.product}</span>
                 </div>
               </div>
-            ))}
+                        ))}
           </div>
         </div>
       </section>
@@ -813,20 +814,16 @@ export default function Home2() {
               <span className={styles.blogUpperTag}>NEWS & BLOG</span>
               <h2 className={styles.blogMainHeading}>Latest News & Blog</h2>
             </div>
-            <Link href="#" className={styles.blogViewAllLink}>
+            <Link href="/Blog" className={styles.blogViewAllLink}>
               VIEW ALL BLOG <ArrowRight size={18} />
             </Link>
           </div>
 
           <div className={styles.blogGrid}>
-            {[
-              { id: 1, title: "Creative Modern Style", date: "15 Dec", img: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070" },
-              { id: 2, title: "The Urban Street Edit", date: "18 Dec", img: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920" },
-              { id: 3, title: "Beauty & Delicate Craft", date: "22 Dec", img: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974" }
-            ].map((post, i) => (
+            {blogPosts.slice(0, 3).map((post, i) => (
               <div key={post.id} className={styles.blogCard}>
                 <div className={styles.blogCardVisual}>
-                  <Image src={post.img} alt={post.title} fill className={styles.blogImg} />
+                  <Image src={post.image} alt={post.title} fill className={styles.blogImg} />
                   <div className={styles.blogDateBadge}>
                     <span className={styles.dateDay}>{post.date.split(' ')[0]}</span>
                     <span className={styles.dateMonth}>{post.date.split(' ')[1]}</span>
@@ -836,14 +833,14 @@ export default function Home2() {
                 <div className={styles.blogCardBody}>
                   <div className={styles.blogMeta}>
                     <User size={14} color="#4C0519" />
-                    <span className={styles.blogAuthor}>By Admin</span>
+                    <span className={styles.blogAuthor}>By {post.author}</span>
                   </div>
                   <h3 className={styles.blogTitle}>{post.title}</h3>
-                  <p className={styles.blogSnippet}>There are many variations of passages of professional styling available, but the majority have suffered luxury alteration.</p>
+                  <p className={styles.blogSnippet}>{post.excerpt}</p>
 
-                  <button className={styles.blogReadBtn}>
+                  <Link href={`/Blog/${post.id}`} className={styles.blogReadBtn}>
                     READ MORE <ArrowRight size={14} />
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -851,8 +848,7 @@ export default function Home2() {
         </div>
       </section>
 
-
-      <section className={`${styles.newsSectionMaster} ${styles.revealSection}`}>
+      <section className={styles.newsSectionMaster}>
         <div className={styles.newsHeroBg}>
           <Image
             src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974"
@@ -878,7 +874,7 @@ export default function Home2() {
 
               <div className={styles.newsInputGroupPremium}>
                 <input type="email" placeholder="Enter Your Email" className={styles.newsInputPremium} />
-                <button className={`${styles.newsSubmitBtnGradient} ${styles.magneticBtn}`}>
+                <button className={styles.newsSubmitBtnGradient}>
                   SUBSCRIBE NOW <ArrowRight size={18} />
                 </button>
               </div>
@@ -888,11 +884,7 @@ export default function Home2() {
         </div>
       </section>
 
-
-
-
-
-      <section className={`${styles.trustSectionMaster} ${styles.revealSection}`}>
+      <section className={styles.trustSectionMaster}>
         <div className="container">
           <div className={styles.trustGrid}>
             {[
@@ -912,8 +904,6 @@ export default function Home2() {
           </div>
         </div>
       </section>
-
-
 
       {/* Auth Popup */}
       <AuthPopup
