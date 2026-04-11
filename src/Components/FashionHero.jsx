@@ -14,7 +14,7 @@ import Link from 'next/link';
 const FashionHero = () => {
     const [categories, setCategories] = useState([
         { id: 1, src: electronics, alt: "Electronics", title: "Electronics", label: "Tech", path: "/category/electronics" },
-        { id: 2, src: fashion, alt: "Fashion", title: "Fashion" , label: "Style", path: "/category/fashion" },
+        { id: 2, src: fashion, alt: "Fashion", title: "Fashion", label: "Style", path: "/category/fashion" },
         { id: 3, src: gifts, alt: "Books", title: "Books", label: "Knowledge", path: "/category/books" },
         { id: 4, src: home, alt: "Home Decor", title: "Home Decor", label: "Living", path: "/category/home-decor" },
         { id: 5, src: gifts, alt: "Gifts", title: "Gifts", label: "Celebration", path: "/category/gifts" },
