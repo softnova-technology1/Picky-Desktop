@@ -37,7 +37,8 @@
 .logoText {
   font-size: 2rem;
   font-weight: 800;
-  color: #5a0d99; /* Gold/Yellow from reference */
+  color: #5a0d99;
+  /* Gold/Yellow from reference */
   letter-spacing: -0.02em;
   font-family: inherit;
 }
@@ -104,7 +105,7 @@
   border-radius: 99px;
   padding: 0 16px;
   height: 44px;
-  border: 1px solid rgba(0,0,0,0.03);
+  border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .searchIcon {
@@ -275,10 +276,12 @@
   .navLinks {
     display: none;
   }
+
   .searchContainer {
-      flex: 1;
-      max-width: none;
+    flex: 1;
+    max-width: none;
   }
+
   .menuToggle {
     display: flex;
     background: transparent;
@@ -290,10 +293,11 @@
 }
 
 @media (max-width: 768px) {
-    .container {
-        padding: 0 1.5rem;
-    }
-    .searchContainer {
-        display: none;
-    }
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .searchContainer {
+    display: none;
+  }
 }

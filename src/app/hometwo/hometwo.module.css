@@ -458,7 +458,7 @@
 .carousel {
   position: relative;
   width: 100%;
-  height: 90vh;
+  height: 50vh;
   /* Hero height */
   background: #000;
   overflow: hidden;
@@ -550,8 +550,8 @@
 }
 
 .brandSolid {
-  font-size: 110px;
-  font-weight: 1000;
+  font-size: 80px;
+  font-weight: 900;
   color: var(--foreground);
   line-height: 1;
   letter-spacing: -5px;
@@ -565,7 +565,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-49%, -42%);
-  font-size: 120px;
+  font-size: 90px;
   font-weight: 900;
   color: transparent;
   -webkit-text-stroke: 2px rgba(0, 0, 0, 0.05);
@@ -576,7 +576,7 @@
 }
 
 .offerText {
-  font-size: 64px;
+  font-size: 50px;
   font-weight: 950;
   color: #1a1a1a;
   text-transform: uppercase;
@@ -585,7 +585,7 @@
 }
 
 .moreText {
-  font-size: 32px;
+  font-size: 25px;
   font-weight: 800;
   color: #cccccc;
   text-transform: uppercase;

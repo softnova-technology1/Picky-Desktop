@@ -28,6 +28,15 @@ export default function ProductDetailsPage({ params }) {
   const [showWriteReview, setShowWriteReview] = useState(false);
   const [newReview, setNewReview] = useState({ rating: 5, comment: "", name: "" });
 
+  if (!product) {
+    return (
+      <div className={styles.notFound}>
+        <h2>Product not found</h2>
+        <Link href="/">Return to Catalog</Link>
+      </div>
+    );
+  }
+
   // Generate a mock gallery based on the main image
   const mockGallery = [
     product.image,
@@ -98,14 +107,7 @@ export default function ProductDetailsPage({ params }) {
     .filter((p) => p.category === product?.category && p.id !== id)
     .slice(0, 4);
 
-  if (!product) {
-    return (
-      <div className={styles.notFound}>
-        <h2>Product not found</h2>
-        <Link href="/">Return to Catalog</Link>
-      </div>
-    );
-  }
+
 
   const containerVariants = {
     hidden: { opacity: 0 },

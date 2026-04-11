@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import styles from "./categories.module.css";
-import { ArrowRight, ChevronRight, Truck, Headphones, RotateCcw, ShieldCheck, Shield, Lock, Lamp, Shirt, Sofa, Cookie } from "lucide-react";
+import { ArrowRight, ChevronRight, Truck, Headphones, RotateCcw, ShieldCheck, Shield, Lock, Lamp, Shirt, Sofa, Cookie, BookOpen } from "lucide-react";
 import Link from 'next/link';
 import { getAllCategories, products, getSubcategories, getSubcategoryImage } from "@/lib/data";
 import ProductCard from "@/Components/ProductCard";
@@ -20,13 +20,10 @@ import sneakers from "@/images/home/sneakers.png";
 import clothing from "@/images/home/clothing.png";
 import chair from "@/images/home/chair.png";
 
+
+
 export default function CategoriesPage() {
-  const heroRef = useRef(null);
   const timeoutId = useRef(null);
-  const { scrollY, scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"]
-  });
 
   const [hoveredTab, setHoveredTab] = useState(null);
 
@@ -41,31 +38,7 @@ export default function CategoriesPage() {
     }, 150);
   };
 
-  const deckParallax = useTransform(scrollY, [0, 500], [0, 150]);
 
-  const progressArray = [0, 0.15, 0.45, 0.75, 1];
-
-  // Base X for perfect center is -160px (Card width = 320px)
-  // Show 3 cards immediately: Opacity 1 at start for center, near-left, near-right
-  const nearLeftX = useTransform(scrollYProgress, progressArray, [-220, -220, -420, -420, -160]);
-  const nearLeftRotate = useTransform(scrollYProgress, progressArray, [-8, -8, -12, -12, 0]);
-  const nearLeftOpacity = useTransform(scrollYProgress, progressArray, [1, 1, 1, 1, 0]);
-  const nearLeftScale = useTransform(scrollYProgress, progressArray, [0.96, 0.96, 0.96, 0.96, 0.96]);
-
-  const farLeftX = useTransform(scrollYProgress, progressArray, [-160, -160, -680, -680, -160]);
-  const farLeftRotate = useTransform(scrollYProgress, progressArray, [0, 0, -18, -18, 0]);
-  const farLeftOpacity = useTransform(scrollYProgress, progressArray, [0, 0, 1, 1, 0]);
-  const farLeftScale = useTransform(scrollYProgress, progressArray, [0.92, 0.92, 0.92, 0.92, 0.92]);
-
-  const nearRightX = useTransform(scrollYProgress, progressArray, [-100, -100, 100, 100, -160]);
-  const nearRightRotate = useTransform(scrollYProgress, progressArray, [8, 8, 12, 12, 0]);
-  const nearRightOpacity = useTransform(scrollYProgress, progressArray, [1, 1, 1, 1, 0]);
-  const nearRightScale = useTransform(scrollYProgress, progressArray, [0.96, 0.96, 0.96, 0.96, 0.96]);
-
-  const farRightX = useTransform(scrollYProgress, progressArray, [-160, -160, 360, 360, -160]);
-  const farRightRotate = useTransform(scrollYProgress, progressArray, [0, 0, 18, 18, 0]);
-  const farRightOpacity = useTransform(scrollYProgress, progressArray, [0, 0, 1, 1, 0]);
-  const farRightScale = useTransform(scrollYProgress, progressArray, [0.92, 0.92, 0.92, 0.92, 0.92]);
 
   const categories = getAllCategories();
   const featuredProducts = products.slice(0, 4);
@@ -94,7 +67,7 @@ export default function CategoriesPage() {
       image: homeDecor,
       label: "INTERIOR DESIGN"
     },
-    "Gifts": {
+    "Chocolates": {
       desc: "Find the perfect gift for every celebration and milestone.",
       image: gifts,
       label: "CELEBRATIONS"
@@ -103,110 +76,7 @@ export default function CategoriesPage() {
 
   return (
     <div className={styles.main}>
-      {/* Luxury Hero */}
-      <section className={styles.hero} ref={heroRef}>
-        <motion.div
-          className={styles.heroCardDeck}
-          style={{ y: deckParallax }}
-        >
-          {/* Near Left Card - Fashion */}
-          <motion.div
-            className={styles.heroCard}
-            style={{
-              left: "50%", top: "40%",
-              x: nearLeftX, y: -230,
-              rotate: nearLeftRotate, opacity: nearLeftOpacity,
-              scale: nearLeftScale, zIndex: 4
-            }}
-          >
-            <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 0.5 }} style={{ width: '100%', height: '100%' }}>
-              <Image src={fashion} alt="Fashion" fill style={{ objectFit: 'cover' }} />
-            </motion.div>
-          </motion.div>
 
-          {/* Center Card - Tech */}
-          <motion.div
-            className={styles.heroCard}
-            style={{
-              left: "50%", top: "38%",
-              x: -160, y: -230,
-              rotate: 0, opacity: 1, scale: 1, zIndex: 5
-            }}
-          >
-            <motion.div animate={{ y: [0, -12, 0] }} transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }} style={{ width: '100%', height: '100%' }}>
-              <Image src={electronics} alt="Tech" fill style={{ objectFit: 'cover' }} />
-            </motion.div>
-          </motion.div>
-
-          {/* Near Right Card - Home Decor */}
-          <motion.div
-            className={styles.heroCard}
-            style={{
-              left: "50%", top: "40%",
-              x: nearRightX, y: -230,
-              rotate: nearRightRotate, opacity: nearRightOpacity,
-              scale: nearRightScale, zIndex: 4
-            }}
-          >
-            <motion.div animate={{ y: [0, -10, 0] }} transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 0.8 }} style={{ width: '100%', height: '100%' }}>
-              <Image src={homeDecor} alt="Decor" fill style={{ objectFit: 'cover' }} />
-            </motion.div>
-          </motion.div>
-
-          {/* Far Left Card (Spread Only) */}
-          <motion.div
-            className={styles.heroCard}
-            style={{
-              left: "50%", top: "42%",
-              x: farLeftX, y: -230,
-              rotate: farLeftRotate, opacity: farLeftOpacity,
-              scale: farLeftScale, zIndex: 3
-            }}
-          >
-            <motion.div animate={{ y: [0, -8, 0] }} transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }} style={{ width: '100%', height: '100%' }}>
-              <Image src={books} alt="Books" fill style={{ objectFit: 'cover' }} />
-            </motion.div>
-          </motion.div>
-
-          {/* Far Right Card (Spread Only) */}
-          <motion.div
-            className={styles.heroCard}
-            style={{
-              left: "50%", top: "42%",
-              x: farRightX, y: -230,
-              rotate: farRightRotate, opacity: farRightOpacity,
-              scale: farRightScale, zIndex: 3
-            }}
-          >
-            <motion.div animate={{ y: [0, -8, 0] }} transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1.2 }} style={{ width: '100%', height: '100%' }}>
-              <Image src={gifts} alt="Gifts" fill style={{ objectFit: 'cover' }} />
-            </motion.div>
-          </motion.div>
-        </motion.div>
-
-        <div className={styles.container} style={{ position: 'relative', zIndex: 20, marginTop: '80px' }}>
-          <motion.h1
-            className={styles.heroTitle}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            OUR  
-            <div className={styles.titleWrapper}>
-              <div className={styles.titleGlow}></div>
-              <span> COLLECTIONS</span>
-            </div>
-          </motion.h1>
-          <motion.p
-            className={styles.heroSubtitle}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-          >
-            Explore our curated selection of high-quality products across five primary departments.
-          </motion.p>
-        </div>
-      </section>
 
       {/* Sticky Department Bar */}
       <div className={styles.departmentBar}>
@@ -216,8 +86,8 @@ export default function CategoriesPage() {
               { id: "Electronics", label: "Electronics", icon: <Lamp size={22} /> },
               { id: "Fashion", label: "Clothes", icon: <Shirt size={22} /> },
               { id: "Home Decor", label: "Home Accessories", icon: <Sofa size={22} /> },
-              { id: "Books", label: "Books", icon: <Sofa size={22} /> },
-              { id: "Gifts", label: "Chocolates", icon: <Cookie size={22} /> }
+              { id: "Books", label: "Books", icon: <BookOpen size={22} /> },
+              { id: "Chocolates", label: "Chocolates", icon: <Cookie size={22} /> }
             ].map((cat) => (
               <div
                 key={cat.id}
@@ -288,9 +158,6 @@ export default function CategoriesPage() {
         </div>
       </div>
 
-     
-
-
 
       {/* Top Collection Section */}
       <section className={styles.topCollectionSection}>
@@ -318,7 +185,7 @@ export default function CategoriesPage() {
                   <h3 className={styles.smallTitle}>Home Essentials</h3>
                 </div>
               </Link>
-              <Link href="/category/gifts" className={styles.topColSmall}>
+              <Link href="/category/chocolates" className={styles.topColSmall}>
                 <Image src={snacks} alt="Snacks" fill style={{ objectFit: 'cover' }} className={styles.smallImg} />
                 <div className={styles.smallContent}>
                   <div className={styles.smallLabel}>LUXURY TREATS</div>
@@ -362,7 +229,7 @@ export default function CategoriesPage() {
               </div>
               <Image src={chair} alt="Home" width={300} height={300} className={styles.sbImg} />
             </Link>
-            <Link href="/category/gifts" className={`${styles.spotBanner} ${styles.sbPink}`}>
+            <Link href="/category/chocolates" className={`${styles.spotBanner} ${styles.sbPink}`}>
               <div className={styles.sbContent}>
                 <h3 className={styles.spotTitle}>Chocolate Gift Packs</h3>
                 <div className={styles.spotDiscount}>Special Offers</div>
@@ -382,8 +249,8 @@ export default function CategoriesPage() {
               <h2 className={styles.recommendTitle}>Recommended For You</h2>
               <p className={styles.recommendSub}>Products curated based on your interests</p>
             </div>
-            <div className={styles.recommendGrid}>
-              <Link href="/category/fashion" className={styles.recCard}>
+            {/* <div className={styles.recommendGrid}>
+              <Link href="/product/fashion-mens-wear-1" className={styles.recCard}>
                 <div className={styles.recImgWrap}>
                   <Image src={clothing} alt="Jacket" fill style={{ objectFit: 'cover' }} />
                 </div>
@@ -394,7 +261,7 @@ export default function CategoriesPage() {
                   <button className={styles.recBtn}>Shop Now</button>
                 </div>
               </Link>
-              <Link href="/category/home-decor" className={styles.recCard}>
+              <Link href="/product/home-decor-furniture-1" className={styles.recCard}>
                 <div className={styles.recImgWrap}>
                   <Image src={chair} alt="Chair" fill style={{ objectFit: 'cover' }} />
                 </div>
@@ -405,7 +272,7 @@ export default function CategoriesPage() {
                   <button className={styles.recBtn}>Shop Now</button>
                 </div>
               </Link>
-              <Link href="/category/fashion" className={styles.recCard}>
+              <Link href="/product/fashion-footwear-1" className={styles.recCard}>
                 <div className={styles.recImgWrap}>
                   <Image src={sneakers} alt="Sneakers" fill style={{ objectFit: 'cover' }} />
                 </div>
@@ -416,7 +283,7 @@ export default function CategoriesPage() {
                   <button className={styles.recBtn}>Shop Now</button>
                 </div>
               </Link>
-              <Link href="/category/electronics" className={styles.recCard}>
+              <Link href="/product/electronics-wearables-1" className={styles.recCard}>
                 <div className={styles.recImgWrap}>
                   <Image src={watch} alt="Watch" fill style={{ objectFit: 'cover' }} />
                 </div>
@@ -427,12 +294,16 @@ export default function CategoriesPage() {
                   <button className={styles.recBtn}>Shop Now</button>
                 </div>
               </Link>
+            </div> */}
+            <div className={styles.productGrid}>
+              {famousProducts.map((p) => (
+                <ProductCard key={p.id} product={p} invert={true} />
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-     
 
       {/* Famous Products */}
       <section className={styles.famousProductsSection}>
@@ -494,7 +365,24 @@ export default function CategoriesPage() {
         </div>
       </section>
 
-        {/* Premium Feature Bar (Centered) */}
+     
+
+      {/* Recently Added */}
+      <section className={styles.recentlyAddedSection}>
+        <div className={styles.container}>
+          <div className={styles.innovativeHeader}>
+            <h2 className={styles.sectionTitleTop} style={{ marginBottom: 0 }}>Recently Added</h2>
+            <div className={styles.headerLine}></div>
+          </div>
+          <div className={styles.productGrid}>
+            {recentlyAdded.map((p) => (
+              <ProductCard key={p.id} product={p} invert={true} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+       {/* Premium Feature Bar (Centered) */}
       <div className={styles.featureBarWrapper}>
         <div className={styles.container}>
           <div className={styles.featureBar}>
@@ -518,41 +406,7 @@ export default function CategoriesPage() {
         </div>
       </div>
 
-      {/* Recently Added */}
-      <section className={styles.recentlyAddedSection}>
-        <div className={styles.container}>
-          <div className={styles.innovativeHeader}>
-            <h2 className={styles.sectionTitleTop} style={{ marginBottom: 0 }}>Recently Added</h2>
-            <div className={styles.headerLine}></div>
-          </div>
-          <div className={styles.productGrid}>
-            {recentlyAdded.map((p) => (
-              <ProductCard key={p.id} product={p} invert={true} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Best Sellers Section */}
-      <section className={styles.collectionSection}>
-        <div className={styles.container}>
-          <div className={styles.sectionHeader}>
-            <div>
-              <h2>The Edit</h2>
-              <p style={{ opacity: 0.6 }}>Trending now across all departments.</p>
-            </div>
-          </div>
-
-          <div className={styles.productGrid}>
-            {featuredProducts.map((p) => (
-              <ProductCard key={p.id} product={p} invert={true} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-
+     
     </div>
   );
 }

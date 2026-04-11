@@ -17,14 +17,14 @@ import chair from "@/images/home/chair.png"
 import snacks from "@/images/home/snacks.png"
 import living from "@/images/home/living.png"
 
-const categoriesArr = ["Electronics", "Fashion", "Books", "Home Decor", "Gifts"];
+const categoriesArr = ["Electronics", "Fashion", "Books", "Home Decor", "Chocolates"];
 
 const subcategories = {
   "Electronics": ["Mobiles", "Laptops", "Accessories", "Audio", "Gaming", "Cameras", "Smart Home", "Wearables", "Tablets", "Monitors"],
   "Fashion": ["Men's Wear", "Women's Wear", "Kids' Wear", "Footwear", "Watches", "Handbags", "Jewellery", "Sunglasses", "Activewear", "Winter Wear"],
   "Books": ["Fiction", "Non-Fiction", "Children's Books", "Education", "Biographies", "Self-Help", "Sci-Fi & Fantasy", "Mystery & Thriller", "Poetry", "Comics & Manga"],
   "Home Decor": ["Wall Art", "Lighting", "Furniture", "Rugs & Carpets", "Vases & Accents", "Mirrors", "Curtains", "Bedding", "Kitchen Decor", "Outdoor Decor"],
-  "Gifts": ["Birthday Gifts", "Anniversary Gifts", "Personalized Gifts", "Corporate Gifts", "Festive Gifts", "Gift Hampers", "Toys", "Greeting Cards", "Flowers & Plants", "Gift Vouchers"]
+  "Chocolates": ["Birthday Gifts", "Anniversary Gifts", "Personalized Gifts", "Corporate Gifts", "Festive Gifts", "Gift Hampers", "Toys", "Greeting Cards", "Flowers & Plants", "Gift Vouchers"]
 };
 
 // Map subcategories to LOCAL images for 100% reliability
@@ -33,7 +33,7 @@ const categoryImages = {
   "Fashion": [fashion, clothing, sneakers, fashion],
   "Books": [books, books, books],
   "Home Decor": [homeDecor, lamp, chair, living, homeDecor],
-  "Gifts": [gifts, snacks, gifts]
+  "Chocolates": [gifts, snacks, gifts]
 };
 
 const subcategoryLocalMap = {

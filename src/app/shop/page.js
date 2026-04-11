@@ -24,6 +24,7 @@ export default function AllProductsPage() {
   const [priceRange, setPriceRange] = useState({ min: 0, max: 2000 });
   const [searchQuery, setSearchQuery] = useState("");
   const [visibleItems, setVisibleItems] = useState(24);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   const handleLoadMore = () => {
     setVisibleItems(prev => prev + 24);
@@ -156,8 +157,17 @@ export default function AllProductsPage() {
 
         {/* SECTION 2: SHOP CONTENT - SPLIT LAYOUT */}
         <div className={styles.shopLayout}>
+          {isMobileSidebarOpen && (
+            <div className={styles.backdrop} onClick={() => setIsMobileSidebarOpen(false)} />
+          )}
+          <aside className={`${styles.sidebar} ${isMobileSidebarOpen ? styles.sidebarOpen : ""}`}>
+            <div className={styles.sidebarHeader}>
+              <h3 className={styles.filterTitle}>Filters</h3>
+              <button className={styles.closeBtn} onClick={() => setIsMobileSidebarOpen(false)}>
+                <X size={20} />
+              </button>
+            </div>
 
-          <aside className={styles.sidebar}>
             <div className={styles.filterSection}>
               <h3 className={styles.filterTitle}>Departments</h3>
               <div className={styles.categoryList}>
