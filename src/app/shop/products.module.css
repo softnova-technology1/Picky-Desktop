@@ -195,19 +195,22 @@
 /* Sidebar - Sticky again as it is in the flow */
 .sidebar {
   position: sticky;
-  top: 160px;
-  /* Precise locking position */
+  top: 140px;
   width: 350px;
   flex-shrink: 0;
-  height: auto;
-  max-height: calc(100vh - 180px);
+  max-height: calc(100vh - 160px);
   overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   background: white;
   padding: 35px;
   border-radius: 30px;
   border: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
-  scrollbar-width: none;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
 }
 
 .sidebar::-webkit-scrollbar {

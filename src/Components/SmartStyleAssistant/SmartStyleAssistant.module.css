@@ -11,15 +11,15 @@
   gap: 32px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
   position: sticky;
-  top: 160px;
-  height: calc(100vh - 180px);
+  top: 140px;
+  max-height: calc(100vh - 160px);
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .sidebar::-webkit-scrollbar {
-  width: 4px;
+  display: none;
 }
 
 .sidebar::-webkit-scrollbar-thumb {

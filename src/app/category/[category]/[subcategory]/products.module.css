@@ -91,7 +91,7 @@
   .shopLayout {
     grid-template-columns: 1fr;
   }
-  
+
   .sidebarColumn {
     display: none;
   }
