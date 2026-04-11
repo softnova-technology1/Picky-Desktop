@@ -22,19 +22,11 @@ export default function SubcategoryPage({ params }) {
   };
 
   const mapping = {
-<<<<<<< HEAD
       "electronics": "Electronics",
       "fashion": "Fashion",
       "books": "Books",
       "home-decor": "Home Decor",
       "chocolates": "Chocolates"
-=======
-    "electronics": "Electronics",
-    "fashion": "Fashion",
-    "books": "Books",
-    "home-decor": "Home Decor",
-    "gifts": "Gifts"
->>>>>>> ee7264e4fbf4473e84f5a26dd651083f5a765c50
   };
 
   const categoryName = mapping[catPath.toLowerCase()] || formatName(catPath);

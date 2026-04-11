@@ -27,73 +27,7 @@
   }
 }
 
-.hero {
-  position: relative;
-  min-height: 120vh;
-  background: radial-gradient(circle at 50% 10%, rgba(253, 79, 35, 0.03), transparent);
-  overflow: hidden;
-}
 
-.heroTitle {
-  font-size: clamp(5rem, 7vw, 9rem);
-  font-weight: 700;
-  line-height: 0.9;
-  letter-spacing: -0.05em;
-  color: #1D1830;
-  margin-bottom: 40px;
-  position: relative;
-  z-index: 11;
-}
-
-.heroTitle span {
-  display: block;
-  font-family: serif;
-  font-style: italic;
-  font-weight: 500;
-  font-size: clamp(5.5rem, 8vw, 10rem);
-  color: #b28aff;
-  /* Fallback */
-  background: linear-gradient(90deg, #7E5BFF 0%, #A98DFF 50%, #D8CCFF 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-left: 0;
-  letter-spacing: -0.03em;
-  line-height: 0.88;
-  opacity: 0.92;
-  position: relative;
-  z-index: 2;
-}
-
-.titleGlow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  height: 140%;
-  background: rgba(122, 77, 255, 0.12);
-  filter: blur(60px);
-  z-index: 1;
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.titleWrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.heroSubtitle {
-  font-size: clamp(1.1rem, 1.4vw, 1.3rem);
-  font-weight: 400;
-  color: #6E667F;
-  max-width: 800px;
-  line-height: 1.6;
-  margin: 0 auto;
-  position: relative;
-  z-index: 11;
-}
 
 /* Standardized Product Grid */
 .productGrid {
@@ -125,96 +59,7 @@
 }
 
 /* Card Deck Background */
-.heroCardDeck {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-}
 
-.deckWrapper {
-  position: sticky;
-  top: 18vh;
-  height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 1800px;
-  pointer-events: none;
-  z-index: 2;
-  transform-style: preserve-3d;
-}
-
-.heroCard {
-  position: absolute;
-  width: clamp(220px, 24vw, 340px);
-  aspect-ratio: 3 / 4;
-  border-radius: 32px;
-  overflow: hidden;
-  transform-style: preserve-3d;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow:
-    0 40px 80px rgba(0, 0, 0, 0.28),
-    0 12px 32px rgba(0, 0, 0, 0.18);
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  will-change: transform, opacity;
-}
-
-.heroContent {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  padding: 0 40px;
-  z-index: 20;
-  text-align: center;
-  pointer-events: none;
-  /* Let clicks pass through to deck if needed */
-}
-
-.heroTitle {
-  font-size: clamp(5rem, 7vw, 9rem);
-  font-weight: 700;
-  line-height: 0.9;
-  letter-spacing: -0.05em;
-  color: #1D1830;
-  margin-bottom: 24px;
-  position: relative;
-  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-}
-
-.heroSubtitle {
-  font-size: clamp(1.1rem, 1.4vw, 1.3rem);
-  font-weight: 400;
-  color: #1D1830;
-  /* Darker for legibility over cards */
-  max-width: 600px;
-  line-height: 1.6;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  padding: 10px 20px;
-  border-radius: 99px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.hcCenter {
-  left: 50%;
-  top: 38%;
-}
-
-.hcLeft {
-  left: calc(50% - 180px);
-  top: 42%;
-}
-
-.hcRight {
-  left: calc(50% + 180px);
-  top: 42%;
-}
 
 /* Narrative Navigation */
 .departmentBar {
@@ -1165,7 +1010,7 @@
 }
 
 .recentlyAddedSection {
-  padding: 80px 0;
+  padding: 80px 0 20px 0;
   background: #FAF8F6;
 }
 
