@@ -4,11 +4,11 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import {
 
-  ChevronDown, 
-  Search, 
-  Heart, 
-  ShoppingBag, 
-  User, 
+  ChevronDown,
+  Search,
+  Heart,
+  ShoppingBag,
+  User,
   Settings,
   ArrowRight
 } from "lucide-react";
@@ -218,7 +218,7 @@ export default function HomeTwoNavbar() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className={styles.dropdownLinks}>
                     {!user ? (
                       <>
@@ -254,14 +254,14 @@ export default function HomeTwoNavbar() {
                           }}
                         >
                           <div className={styles.linkIcon} style={{ background: 'rgba(255, 77, 77, 0.1)', color: '#ff4d4d' }}>
-                             <ArrowRight size={14} />
+                            <ArrowRight size={14} />
                           </div>
                           <span>LOGOUT</span>
                         </button>
                       </>
                     )}
                   </div>
-                  
+
                   <div className={styles.dropdownFooter}>
                     <button className={styles.supportButton}>NEED HELP?</button>
                   </div>

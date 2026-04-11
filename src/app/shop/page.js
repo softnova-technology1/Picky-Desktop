@@ -14,7 +14,8 @@ import {
   Book,
   Home,
   Gift,
-  Layers
+  Layers,
+  Candy
 } from "lucide-react";
 import Shop from "@/Components/shop";
 
@@ -35,7 +36,8 @@ export default function AllProductsPage() {
     "Fashion": <Shirt size={16} />,
     "Books": <Book size={16} />,
     "Home Decor": <Home size={16} />,
-    "Gifts": <Gift size={16} />
+    "Gifts": <Gift size={16} />,
+    "Chocolates": <Candy size={16} />
   };
 
   const categoryCounts = useMemo(() => {
@@ -161,12 +163,7 @@ export default function AllProductsPage() {
             <div className={styles.backdrop} onClick={() => setIsMobileSidebarOpen(false)} />
           )}
           <aside className={`${styles.sidebar} ${isMobileSidebarOpen ? styles.sidebarOpen : ""}`}>
-            <div className={styles.sidebarHeader}>
-              <h3 className={styles.filterTitle}>Filters</h3>
-              <button className={styles.closeBtn} onClick={() => setIsMobileSidebarOpen(false)}>
-                <X size={20} />
-              </button>
-            </div>
+
 
             <div className={styles.filterSection}>
               <h3 className={styles.filterTitle}>Departments</h3>
@@ -197,27 +194,7 @@ export default function AllProductsPage() {
               </div>
             </div>
 
-            <div className={styles.filterSection}>
-              <h3 className={styles.filterTitle}>Price Range</h3>
-              <div className={styles.priceInputs}>
-                <input
-                  type="number"
-                  placeholder="Min"
-                  className={styles.priceBox}
-                  value={priceRange.min}
-                  onChange={(e) => setPriceRange({ ...priceRange, min: Number(e.target.value) })}
-                />
-                <span>-</span>
-                <input
-                  type="number"
-                  placeholder="Max"
-                  className={styles.priceBox}
-                  value={priceRange.max}
-                  onChange={(e) => setPriceRange({ ...priceRange, max: Number(e.target.value) })}
-                />
-              </div>
-            </div>
-
+        
             <div className={styles.filterSection}>
               <p className={styles.tipText}>
                 Tip: Use keywords like "Mobile" or "Aura" for faster discovery.
@@ -233,12 +210,7 @@ export default function AllProductsPage() {
               </div>
 
               <div className={styles.sortWrapper}>
-                <button
-                  className={styles.mobileFilterBtn}
-                  onClick={() => setIsMobileSidebarOpen(true)}
-                >
-                  <Layers size={16} /> FILTERS
-                </button>
+
                 <span className={styles.sortLabel}>SORT BY:</span>
                 <select
                   className={styles.sortSelect}

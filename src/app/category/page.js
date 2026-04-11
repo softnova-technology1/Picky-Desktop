@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import styles from "./categories.module.css";
-import { ArrowRight, ChevronRight, Truck, Headphones, RotateCcw, ShieldCheck, Shield, Lock, Lamp, Shirt, Sofa, Cookie, BookOpen } from "lucide-react";
+import { ArrowRight, ChevronRight, Truck, Headphones, RotateCcw, ShieldCheck, Shield, Lock, Lamp, Shirt, Sofa, Cookie, BookOpen, Candy } from "lucide-react";
 import Link from 'next/link';
 import { getAllCategories, products, getSubcategories, getSubcategoryImage } from "@/lib/data";
 import ProductCard from "@/Components/ProductCard";
@@ -155,7 +155,7 @@ export default function CategoriesPage() {
               { id: "Fashion", label: "Clothes", icon: <Shirt size={22} /> },
               { id: "Home Decor", label: "Home Accessories", icon: <Sofa size={22} /> },
               { id: "Books", label: "Books", icon: <BookOpen size={22} /> },
-              { id: "Chocolates", label: "Chocolates", icon: <Cookie size={22} /> }
+              { id: "Chocolates", label: "Chocolates", icon: <Candy size={22} /> }
             ].map((cat) => (
               <div
                 key={cat.id}

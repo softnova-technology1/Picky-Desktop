@@ -22,22 +22,6 @@ const AppSection = () => {
                     <p className={styles.appSubtitle}>
                         Take the world's most curated marketplace with you. Experience seamless browsing, instant notifications, and exclusive in-app drops.
                     </p>
-                    <div className={styles.appStores}>
-                        <button className={styles.appBtn}>
-                            <Apple size={20} fill="currentColor" />
-                            <div className={styles.btnText}>
-                                <span className={styles.btnSm}>Download on</span>
-                                <span className={styles.btnLg}>App Store</span>
-                            </div>
-                        </button>
-                        <button className={styles.appBtn}>
-                            <Star size={20} fill="currentColor" />
-                            <div className={styles.btnText}>
-                                <span className={styles.btnSm}>Get it on</span>
-                                <span className={styles.btnLg}>Play Store</span>
-                            </div>
-                        </button>
-                    </div>
                 </div>
                 <div className={styles.appMockup}>
                     <div className={styles.mockupContainer}>
