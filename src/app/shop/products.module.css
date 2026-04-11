@@ -17,7 +17,7 @@
   letter-spacing: 0.1em;
   color: rgba(0, 0, 0, 0.4);
   margin-bottom: 15px;
-  margin-top: 15px;
+  margin-top: 70px;
 }
 
 .breadcrumb a {
@@ -136,8 +136,8 @@
   scrollbar-width: none;
   display: flex;
   justify-content: center;
-  position: sticky;
-  top: 90px;
+  position: fixed;
+  top: 130px;
   z-index: 100;
   width: 100%;
 }
