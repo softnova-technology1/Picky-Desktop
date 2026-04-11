@@ -1101,3 +1101,50 @@
   filter: brightness(1.1);
 }
 
+.quickActions {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.actionIconBtn {
+  flex: 1;
+  height: 56px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.actionIconBtn:hover {
+  background: #f8fafc;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+}
+
+.btnText {
+  display: block;
+}
+
+.btnIconCentral {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+}

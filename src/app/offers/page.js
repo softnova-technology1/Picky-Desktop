@@ -8,8 +8,10 @@ import OfferCard from './OfferCard';
 import { offersData } from './offersData';
 import styles from './Offers.module.css';
 import { useCart } from '@/context/CartContext';
+import { useRouter } from 'next/navigation';
 
 export default function OffersPage() {
+  const router = useRouter();
   const { triggerNotification } = useCart();
   const [timeLeft, setTimeLeft] = useState({ hours: 2, minutes: 45, seconds: 18 });
 
@@ -61,8 +63,8 @@ export default function OffersPage() {
               Your premium lifestyle, now more affordable.
             </p>
             <div className={styles.heroActions}>
-              <button className={styles.primaryBtn}>Shop The Collection</button>
-              <button className={styles.secondaryBtn}>View All Offers</button>
+              <button className={styles.primaryBtn} onClick={() => router.push('/shop')}>Shop The Collection</button>
+              <button className={styles.secondaryBtn} onClick={() => router.push('/offers')}>View All Offers</button>
             </div>
           </div>
 

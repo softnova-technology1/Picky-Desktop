@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import AuthPopup from "@/Components/AuthPopup";
 import CartNotification from "./CartNotification";
+import QuickCart from "./QuickCart";
 
 export default function NavbarWrapper({ children }) {
   const { user } = useAuth();
@@ -51,6 +52,9 @@ export default function NavbarWrapper({ children }) {
         product={notification.product}
         onClose={() => setNotification(prev => ({ ...prev, show: false }))}
       />
+
+      {/* Global Quick Cart Feature */}
+      <QuickCart />
     </>
   );
 }

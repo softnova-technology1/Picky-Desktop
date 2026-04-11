@@ -10,7 +10,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 2001;
+  z-index: 2000;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -520,4 +520,307 @@
 
 .navSpacer {
   height: 134px;
+}
+
+/* Cart Drawer Styles */
+.cartDrawerContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.drawerBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 10000 !important;
+}
+
+.cartDrawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 570px;
+  height: 100%;
+  background: white;
+  box-shadow: -10px 0 50px rgba(0, 0, 0, 0.1);
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (max-width: 500px) {
+  .cartDrawer {
+    width: 100%;
+  }
+}
+
+.drawerHeader {
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  
+}
+
+.drawerTitleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  
+}
+
+.drawerTitle {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--foreground);
+  letter-spacing: 1px;
+}
+
+.drawerItemCount {
+  font-size: 11px;
+  font-weight: 800;
+  color: #999;
+  letter-spacing: 1px;
+  
+}
+
+.closeDrawerBtn {
+  background: #f8f9fa;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #333;
+}
+
+.closeDrawerBtn:hover {
+  background: #eee;
+  transform: rotate(90deg);
+}
+
+.drawerContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px;
+}
+
+/* Scrollbar Style */
+.drawerContent::-webkit-scrollbar {
+  width: 5px;
+}
+.drawerContent::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.drawerContent::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 10px;
+}
+.drawerContent::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+.drawerItemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.drawerItem {
+  display: flex;
+  gap: 20px;
+  padding-bottom: 0px;
+}
+
+.drawerItemImage {
+  width: 100px;
+  height: 120px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f8f9fa;
+  flex-shrink: 0;
+  border: 1px solid #f0f0f0;
+}
+
+.drawerItemImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.drawerItemInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.drawerItemName {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--foreground);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.drawerItemMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.drawerItemPrice {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--primary);
+}
+
+.drawerItemQty {
+  font-size: 10px;
+  font-weight: 800;
+  color: #999;
+  background: #f8f9fa;
+  padding: 4px 10px;
+  border-radius: 99px;
+  letter-spacing: 0.5px;
+}
+
+.emptyDrawer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.emptyIconWrapper {
+  width: 120px;
+  height: 120px;
+  background: rgba(100, 61, 151, 0.05);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  color: var(--primary);
+  opacity: 0.3;
+}
+
+.emptyDrawerTitle {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--foreground);
+  margin-bottom: 12px;
+}
+
+.emptyDrawerText {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.shopNowBtn {
+  background: var(--primary);
+  color: white;
+  padding: 16px 40px;
+  border-radius: 16px;
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.shopNowBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(100, 61, 151, 0.2);
+}
+
+.drawerFooter {
+  padding: 30px;
+  background: #fdfdfd;
+  border-top: 1px solid #f0f0f0;
+}
+
+.drawerSubtotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 10px;
+}
+
+.subtotalLabel {
+  font-size: 14px;
+  font-weight: 800;
+  color: #999;
+  letter-spacing: 1px;
+}
+
+.subtotalValue {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--foreground);
+}
+
+.drawerTaxNote {
+  font-size: 12px;
+  color: #aaa;
+  margin-bottom: 25px;
+}
+
+.drawerActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.drawerPrimaryBtn, .drawerSecondaryBtn {
+  width: 100%;
+  padding: 18px;
+  border-radius: 18px;
+  font-size: 12px;
+  font-weight: 900;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  letter-spacing: 1px;
+}
+
+.drawerPrimaryBtn {
+  background: var(--primary);
+  color: white;
+  border: none;
+}
+
+.drawerPrimaryBtn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(100, 61, 151, 0.3);
+}
+
+.drawerSecondaryBtn {
+  background: #f8f9fa;
+  color: var(--foreground);
+  border: 1px solid #eee;
+}
+
+.drawerSecondaryBtn:hover {
+  background: #eee;
+  transform: translateY(-2px);
 }
