@@ -22,11 +22,11 @@ export default function SubcategoryPage({ params }) {
   };
 
   const mapping = {
-      "electronics": "Electronics",
-      "fashion": "Fashion",
-      "books": "Books",
-      "home-decor": "Home Decor",
-      "gifts": "Gifts"
+    "electronics": "Electronics",
+    "fashion": "Fashion",
+    "books": "Books",
+    "home-decor": "Home Decor",
+    "gifts": "Gifts"
   };
 
   const categoryName = mapping[catPath.toLowerCase()] || formatName(catPath);
@@ -59,7 +59,7 @@ export default function SubcategoryPage({ params }) {
               <h1 className={styles.title}>{subcategoryName}</h1>
               <p className={styles.count}>{filteredProducts.length} items curated for you</p>
             </div>
-            <button 
+            <button
               className={styles.filterBtn}
               onClick={() => setIsMobileSidebarOpen(true)}
             >
@@ -70,8 +70,8 @@ export default function SubcategoryPage({ params }) {
 
         <div className={styles.shopLayout}>
           <div className={styles.sidebarColumn}>
-            <SmartStyleAssistant 
-              onFilterChange={handleAssistantFilterChange} 
+            <SmartStyleAssistant
+              onFilterChange={handleAssistantFilterChange}
               isMobileOpen={isMobileSidebarOpen}
               onClose={() => setIsMobileSidebarOpen(false)}
               category={categoryName}

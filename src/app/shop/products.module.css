@@ -195,19 +195,22 @@
 /* Sidebar - Sticky again as it is in the flow */
 .sidebar {
   position: sticky;
-  top: 160px;
-  /* Precise locking position */
+  top: 140px;
   width: 350px;
   flex-shrink: 0;
-  height: auto;
-  max-height: calc(100vh - 180px);
+  max-height: calc(100vh - 160px);
   overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   background: white;
   padding: 35px;
   border-radius: 30px;
   border: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
-  scrollbar-width: none;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -358,6 +361,39 @@
   gap: 15px;
 }
 
+.mobileFilterBtn {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.sidebarHeader {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.closeBtn:hover {
+  opacity: 1;
+}
+
 .sortLabel {
   font-size: 0.8rem;
   opacity: 0.5;
@@ -468,9 +504,50 @@
     flex-direction: column;
   }
 
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+  }
+
+  .mobileFilterBtn {
+    display: flex;
+  }
+
+  .sidebarHeader {
+    display: flex;
+  }
+
   .sidebar {
-    position: static;
-    max-height: none;
-    margin-bottom: 40px;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 350px;
+    height: 100vh;
+    max-height: 100vh;
+    z-index: 1000;
+    margin: 0;
+    border-radius: 0;
+    transition: left 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 20px 0 50px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebarOpen {
+    left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+  }
+
+  .title {
+    font-size: 2.5rem;
   }
 }
