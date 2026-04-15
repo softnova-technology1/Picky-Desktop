@@ -427,6 +427,7 @@
     background: #f8f9fa;
     flex-shrink: 0;
     border: 1px solid #f0f0f0;
+    position: relative;
 }
 
 .drawerItemImage img {
@@ -563,11 +564,25 @@
     background: #f8f9fa;
     color: #1a1a1a;
     border: 1px solid #eee;
-  .container {
-    padding: 0 1.5rem;
-  }
-
-  .searchContainer {
-    display: none;
-  }
 }
+
+.drawerRemoveBtn {
+    background: none;
+    border: none;
+    color: #ff4d4d;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    width: fit-content;
+}
+
+.drawerRemoveBtn:hover {
+    color: #d32f2f;
+    text-decoration: underline;
+    transform: translateX(2px);
+}

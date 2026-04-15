@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import styles from "./categories.module.css";
-import { ArrowRight, ChevronRight, Truck, Headphones, RotateCcw, ShieldCheck, Shield, Lock, Lamp, Shirt, Sofa, Cookie, BookOpen } from "lucide-react";
+import { ArrowRight, ChevronRight, Truck, Headphones, RotateCcw, ShieldCheck, Shield, Lock, Lamp, Shirt, Sofa, Cookie, BookOpen, Candy } from "lucide-react";
 import Link from 'next/link';
 import { getAllCategories, products, getSubcategories, getSubcategoryImage } from "@/lib/data";
 import ProductCard from "@/Components/ProductCard";
@@ -76,6 +76,70 @@ export default function CategoriesPage() {
 
   return (
     <div className={styles.main}>
+      {/* SECTION: PREMIUM CATEGORY HERO */}
+      <section className={styles.elevateHero}>
+        <div className="container">
+          <div className={styles.heroTopRow}>
+            <div className={styles.videoCircle}>
+             
+            </div>
+
+            <h1 className={styles.heroTitleMain}>
+              Elevate Your Style With<br />
+              <span>Bold Fashion</span>
+            </h1>
+          </div>
+
+          <div className={styles.heroGrid}>
+            <div className={styles.gridCol}>
+              <div className={`${styles.gridItem} ${styles.itemLarge} ${styles.bgOrange}`}>
+                <Image src="https://i.pinimg.com/1200x/50/4d/97/504d9766a2264d4b1d5ebc1069f4f004.jpg" alt="Model" fill style={{ objectFit: 'cover' }} />
+              </div>
+              <div className={`${styles.gridItem} ${styles.itemSmall} ${styles.bgYellow}`}>
+                <Image src="https://i.pinimg.com/736x/d5/cd/97/d5cd97580cf45014a2526f138b7f2f47.jpg" alt="Model" fill style={{ objectFit: 'cover' }} />
+              </div>
+            </div>
+
+            <div className={styles.gridCol}>
+              <div className={`${styles.gridItem} ${styles.itemFull} ${styles.bgGreen}`}>
+                <Image src="https://i.pinimg.com/736x/e3/c7/ba/e3c7badab8868f4740a2ab42a3546863.jpg" alt="Model" fill style={{ objectFit: 'cover' }} />
+              </div>
+            </div>
+
+            <div className={styles.gridCol}>
+               <div className={styles.centerColDecor}>
+                 <svg viewBox="0 0 100 100" className={styles.centerIcon}>
+                   <path d="M50 0L60 40L100 50L60 60L50 100L40 60L0 50L40 40Z" fill="#ff7a00" />
+                 </svg>
+               </div>
+              <div className={`${styles.gridItem} ${styles.itemMedium} ${styles.bgYellowCenter}`}>
+                <Image src="https://i.pinimg.com/736x/03/cc/13/03cc13b683399508090b26059f4480cf.jpg" alt="Model" fill style={{ objectFit: 'cover' }} />
+              </div>
+               <div className={`${styles.gridItem} ${styles.itemMedium} ${styles.bgYellowCenter}`}>
+                <Image src="https://i.pinimg.com/1200x/9f/d3/a1/9fd3a1d5d822ba883672ab535ac0af48.jpg" alt="Model" fill style={{ objectFit: 'cover' }} />
+              </div>
+              <Link href="/shop" className={styles.exploreBtn}>
+                Explore Collections <span>↗</span>
+              </Link>
+            </div>
+
+            <div className={styles.gridCol}>
+              <div className={`${styles.gridItem} ${styles.itemFull} ${styles.bgBlue}`}>
+                <Image src="https://i.pinimg.com/1200x/68/ee/46/68ee4614b08856e48032757f1b961599.jpg" alt="Model" fill style={{ objectFit: 'cover' }} />
+              </div>
+            </div>
+
+            <div className={styles.gridCol}>
+              <div className={`${styles.gridItem} ${styles.itemLarge} ${styles.bgGreenRight}`}>
+                <Image src="https://i.pinimg.com/736x/3f/bd/0d/3fbd0d20660b5fd5a064c7c8f97f3d0c.jpg" alt="Model" fill style={{ objectFit: 'cover' }} />
+              </div>
+              <div className={`${styles.gridItem} ${styles.itemSmall} ${styles.bgDarkGreen}`}>
+                <Image src="https://i.pinimg.com/736x/27/7e/78/277e78aecd7f02a83ec6bb53d195295e.jpg" alt="Model" fill style={{ objectFit: 'cover' }} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
 
       {/* Sticky Department Bar */}
@@ -87,7 +151,7 @@ export default function CategoriesPage() {
               { id: "Fashion", label: "Clothes", icon: <Shirt size={22} /> },
               { id: "Home Decor", label: "Home Accessories", icon: <Sofa size={22} /> },
               { id: "Books", label: "Books", icon: <BookOpen size={22} /> },
-              { id: "Chocolates", label: "Chocolates", icon: <Cookie size={22} /> }
+              { id: "Chocolates", label: "Chocolates", icon: <Candy size={22} /> }
             ].map((cat) => (
               <div
                 key={cat.id}

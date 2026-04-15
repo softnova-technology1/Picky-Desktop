@@ -10,6 +10,7 @@ import { useState, useEffect } from "react";
 import AuthPopup from "@/Components/AuthPopup";
 import CartNotification from "./CartNotification";
 import QuickCart from "./QuickCart";
+import CartDrawer from "./CartDrawer";
 
 export default function NavbarWrapper({ children }) {
   const { user } = useAuth();
@@ -36,6 +37,7 @@ export default function NavbarWrapper({ children }) {
   
   return (
     <>
+      <CartDrawer />
       {showHomeTwoNavbar ? <HomeTwoNavbar /> : <Navbar />}
       {children}
       <Footer />

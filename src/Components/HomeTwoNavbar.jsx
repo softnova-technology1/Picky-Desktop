@@ -4,11 +4,11 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import {
 
-  ChevronDown, 
-  Search, 
-  Heart, 
-  ShoppingBag, 
-  User, 
+  ChevronDown,
+  Search,
+  Heart,
+  ShoppingBag,
+  User,
   Settings,
   ArrowRight,
   X
@@ -19,17 +19,16 @@ import { useAuth } from "@/context/AuthContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useCart } from "@/context/CartContext";
 import AuthPopup from "@/Components/AuthPopup";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function HomeTwoNavbar() {
   const { user, logout } = useAuth();
   const { wishlistItems } = useWishlist();
-  const { totalItems, cartItems, subtotal } = useCart();
-  // const { totalItems } = useCart();
+  const { totalItems, cartItems, subtotal, removeFromCart, prepareCheckout, clearCart, isCartOpen, setIsCartOpen, openCart, closeCart, toggleCart } = useCart();
   const pathname = usePathname();
   const [userName, setUserName] = useState("Member");
   const [showUserDropdown, setShowUserDropdown] = useState(false);
-  const [showCartDrawer, setShowCartDrawer] = useState(false);
   const [showAuthPopup, setShowAuthPopup] = useState(false);
   const [authTab, setAuthTab] = useState('login');
 
@@ -196,113 +195,17 @@ export default function HomeTwoNavbar() {
             </Link>
             <div 
               className={styles.cartDrawerContainer}
-              onMouseEnter={() => setShowCartDrawer(true)}
+              onMouseEnter={openCart}
             >
               <button 
                 className={styles.iconBtn}
-                onClick={() => setShowCartDrawer(true)}
+                onClick={toggleCart}
               >
                 <div className={styles.iconWrapper}>
                   <ShoppingBag size={22} />
                   {totalItems > 0 && <span className={`${styles.badge} ${styles.cartBadge}`}>{totalItems}</span>}
                 </div>
               </button>
-
-              <AnimatePresence>
-                {showCartDrawer && (
-                  <>
-                    <motion.div 
-                      className={styles.drawerBackdrop}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      onClick={() => setShowCartDrawer(false)}
-                    />
-                    <motion.div 
-                      className={styles.cartDrawer}
-                      initial={{ x: "100%" }}
-                      animate={{ x: 0 }}
-                      exit={{ x: "100%" }}
-                      transition={{ type: "tween", duration: 0.3, ease: "easeOut" }}
-                    >
-                      <div className={styles.drawerHeader}>
-                        <div className={styles.drawerTitleGroup}>
-                          <h2 className={styles.drawerTitle}>YOUR CART</h2>
-                          <span className={styles.drawerItemCount}>{totalItems} ITEMS</span>
-                        </div>
-                        <button 
-                          className={styles.closeDrawerBtn} 
-                          onClick={() => setShowCartDrawer(false)}
-                        >
-                          <X size={24} />
-                        </button>
-                      </div>
-
-                      <div className={styles.drawerContent}>
-                        {cartItems.length > 0 ? (
-                          <div className={styles.drawerItemsList}>
-                            {cartItems.map((item) => (
-                              <div key={item.id} className={styles.drawerItem}>
-                                <div className={styles.drawerItemImage}>
-                                  <img src={item.image?.src || item.image || item.img?.src || item.img || "/images/placeholder.png"} alt={item.name} />
-                                </div>
-                                <div className={styles.drawerItemInfo}>
-                                  <h3 className={styles.drawerItemName}>{item.name}</h3>
-                                  <div className={styles.drawerItemMeta}>
-                                    <span className={styles.drawerItemPrice}>${item.price}</span>
-                                    <span className={styles.drawerItemQty}>QTY: {item.quantity}</span>
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        ) : (
-                          <div className={styles.emptyDrawer}>
-                            <div className={styles.emptyIconWrapper}>
-                              <ShoppingBag size={60} strokeWidth={1} />
-                            </div>
-                            <h3 className={styles.emptyDrawerTitle}>Your cart is empty</h3>
-                            <p className={styles.emptyDrawerText}>Looks like you haven't added anything to your cart yet.</p>
-                            <Link 
-                              href="/shop" 
-                              className={styles.shopNowBtn}
-                              onClick={() => setShowCartDrawer(false)}
-                            >
-                              START SHOPPING
-                            </Link>
-                          </div>
-                        )}
-                      </div>
-
-                      {cartItems.length > 0 && (
-                        <div className={styles.drawerFooter}>
-                          <div className={styles.drawerSubtotal}>
-                            <span className={styles.subtotalLabel}>SUBTOTAL</span>
-                            <span className={styles.subtotalValue}>${subtotal.toFixed(2)}</span>
-                          </div>
-                          <p className={styles.drawerTaxNote}>Shipping & taxes calculated at checkout</p>
-                          <div className={styles.drawerActions}>
-                            <Link 
-                              href="/cart" 
-                              className={styles.drawerSecondaryBtn}
-                              onClick={() => setShowCartDrawer(false)}
-                            >
-                              VIEW CART
-                            </Link>
-                            <Link 
-                              href="/checkout" 
-                              className={styles.drawerPrimaryBtn}
-                              onClick={() => setShowCartDrawer(false)}
-                            >
-                              CHECKOUT NOW
-                            </Link>
-                          </div>
-                        </div>
-                      )}
-                    </motion.div>
-                  </>
-                )}
-              </AnimatePresence>
             </div>
 
             <div className={styles.userDropdownContainer}>
@@ -326,7 +229,7 @@ export default function HomeTwoNavbar() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className={styles.dropdownLinks}>
                     {!user ? (
                       <>
@@ -362,14 +265,14 @@ export default function HomeTwoNavbar() {
                           }}
                         >
                           <div className={styles.linkIcon} style={{ background: 'rgba(255, 77, 77, 0.1)', color: '#ff4d4d' }}>
-                             <ArrowRight size={14} />
+                            <ArrowRight size={14} />
                           </div>
                           <span>LOGOUT</span>
                         </button>
                       </>
                     )}
                   </div>
-                  
+
                   <div className={styles.dropdownFooter}>
                     <button className={styles.supportButton}>NEED HELP?</button>
                   </div>
