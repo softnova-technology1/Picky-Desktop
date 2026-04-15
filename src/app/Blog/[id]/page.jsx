@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './BlogDetail.module.css';
 import Link from 'next/link';
 import { blogPosts } from '@/data/blogData';
-import { Home, ChevronRight } from 'lucide-react';
+import { Home, ChevronRight, Search, User, Calendar } from 'lucide-react';
 
 const BlogDetail = async ({ params }) => {
     // Correctly accessing params in Next.js 15
@@ -23,9 +23,9 @@ const BlogDetail = async ({ params }) => {
 
     return (
         <div className={styles.blogDetailPage}>
-            <div className={styles.container}>
-                {/* Main Content Area */}
-                <main className={styles.mainContent}>
+            {/* Sticky Navigation Header */}
+            <div className={styles.stickyNav}>
+                <div className={styles.stickyNavContainer}>
                     <div className={styles.breadcrumb}>
                         <Link href="/" className={styles.breadcrumbLink}>
                             <Home size={14} className={styles.breadcrumbIcon} /> 
@@ -36,6 +36,23 @@ const BlogDetail = async ({ params }) => {
                         <ChevronRight size={14} className={styles.breadcrumbSeparator} />
                         <span className={styles.breadcrumbCurrent}>{post.title}</span>
                     </div>
+
+                    <div className={styles.searchBoxHeader}>
+                        <div className={styles.searchWrapper}>
+                            <input type="text" placeholder="Search Here" className={styles.searchInput} />
+                            <button className={styles.searchBtn}>
+                                <Search size={18} color="#666" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div className={styles.stickyNavSpacer}></div>
+
+            <div className={styles.container}>
+                {/* Main Content Area */}
+                <main className={styles.mainContent}>
 
                     <header className={styles.header}>
                         <h1 className={styles.title}>
@@ -50,8 +67,14 @@ const BlogDetail = async ({ params }) => {
                             className={styles.heroImage}
                         />
                         <div className={styles.metaBadge}>
-                            <span className={styles.metaItem}>👤 By {post.author}</span>
-                            <span className={styles.metaItem}>📅 {post.dateLong}</span>
+                            <span className={styles.metaItem}>
+                                <User size={14} className={styles.metaIcon} />
+                                By {post.author}
+                            </span>
+                            <span className={styles.metaItem}>
+                                <Calendar size={14} className={styles.metaIcon} />
+                                {post.dateLong}
+                            </span>
                         </div>
                     </div>
 
@@ -78,10 +101,6 @@ const BlogDetail = async ({ params }) => {
 
                 {/* Sidebar */}
                 <aside className={styles.sidebar}>
-                    <div className={styles.searchBox}>
-                        <input type="text" placeholder="Search Here" className={styles.searchInput} />
-                        <button className={styles.searchBtn}>🔍</button>
-                    </div>
 
                     <div className={styles.sidebarSection}>
                         <h2 className={styles.sectionTitle}>Recent Posts</h2>
@@ -90,7 +109,10 @@ const BlogDetail = async ({ params }) => {
                                 <Link href={`/Blog/${item.id}`} key={item.id} className={styles.recentPostItem}>
                                     <img src={item.image} alt={item.title} className={styles.recentThumb} />
                                     <div className={styles.recentInfo}>
-                                        <span className={styles.recentDate}>📅 {item.dateLong}</span>
+                                        <span className={styles.recentDate}>
+                                            <Calendar size={12} className={styles.metaIcon} />
+                                            {item.dateLong}
+                                        </span>
                                         <p className={styles.recentTitle}>{item.title}</p>
                                     </div>
                                 </Link>

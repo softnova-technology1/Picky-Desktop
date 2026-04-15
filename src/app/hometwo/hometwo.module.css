@@ -2226,10 +2226,16 @@
   }
 }
 
+.trustSectionMaster {
+    background: var(--white);
+    padding: 20px 0;
+    overflow-x: hidden;
+}
+
 /* CUSTOMER VOICES - Architectural Step Carousel */
 .reviewSectionMaster {
     background: var(--white);
-    padding: 50px 0;
+    padding: 30px 0;
     position: relative;
     border-top: 1px solid var(--border);
 }
@@ -2605,8 +2611,7 @@
 
 .blogSectionMaster {
     background: var(--white);
-    padding: 0px 0 60 0;
-    /* margin-top: -10px; */
+    padding: 30px 0;
 }
 
 .blogSectionHeader {
@@ -2961,7 +2966,7 @@
 
 .newsOverCardContainer {
   position: relative;
-  top: -230px;
+  top: -100px;
   z-index: 5;
   display: flex;
   justify-content: center;
@@ -3060,8 +3065,9 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 0;
-  margin-top: -150px;
-  margin-bottom: 50px;
+  /* Changed from negative to positive margin to fix overlap with above section */
+  margin-top: 10px;
+  margin-bottom: 30px;
 }
 
 .trustPod {

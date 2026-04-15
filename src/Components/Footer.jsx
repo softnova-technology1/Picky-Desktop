@@ -33,11 +33,12 @@ const Footer = () => {
             <div className={styles.contactList}>
               <div className={styles.contactItem}>
                 <MapPin size={18} className={styles.contactIcon} /> 
-                <span>123 Fashion Avenue, Tech City, NY 10012</span>
+                <span>1st Floor, Softnova Appartment, SNV Mahal back side,
+                Near SBI bank, Peravurani.</span>
               </div>
               <div className={styles.contactItem}>
                 <Phone size={18} className={styles.contactIcon} /> 
-                <span>+1 (800) 123-4567</span>
+                <span>+91 63851 18083</span>
               </div>
               <div className={styles.contactItem}>
                 <Mail size={18} className={styles.contactIcon} /> 
