@@ -3194,3 +3194,196 @@
     justify-content: center;
   }
 }
+
+/* --- Responsive View for Tablets (iPad/Portrait) --- */
+@media (max-width: 1024px) {
+  .ribbonContainer {
+    padding: 0 20px;
+    gap: 5px;
+  }
+  
+  .ribbonItem {
+    min-width: 80px;
+  }
+
+  .magLayoutSplit {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .magTitleSidebar {
+    flex: none;
+    width: 100%;
+  }
+
+  .magStickyContent {
+    position: static;
+  }
+
+  .magProductFlowMedium {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .spLayoutGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .podiumHeroCard {
+    flex-direction: column;
+  }
+
+  .podiumVisual {
+    height: 400px;
+  }
+
+  .refFlashGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .curatedGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Hero adjustments for tablet */
+  .carousel {
+    height: 60vh;
+  }
+
+ 
+
+  .brandLabel {
+    height: 90px;
+    margin-bottom: 10px;
+  }
+
+  .brandSolid {
+    font-size: 48px;
+    letter-spacing: -2px;
+  }
+
+  .brandOutline {
+    font-size: 56px;
+    transform: translate(-49%, -45%);
+  }
+
+  .offerText {
+    font-size: 36px;
+    letter-spacing: -1px;
+  }
+
+  .moreText {
+    font-size: 16px;
+    letter-spacing: 8px;
+  }
+
+  .slideCTA {
+    margin-top: 20px;
+    padding: 14px 35px;
+    font-size: 11px;
+  }
+
+  .navControls {
+    bottom: 20px;
+    gap: 15px;
+    left: 45%;
+  }
+
+  .navArrow {
+    width: 32px;
+    height: 32px;
+  }
+
+  .carouselDots {
+    gap: 8px;
+  }
+
+  .dot {
+    width: 25px;
+    height: 3px;
+  }
+
+  .dotActive {
+    width: 40px;
+  }
+}
+
+
+
+/* --- Professional 4K & Ultra-Wide System Support --- */
+@media (min-width: 2000px) {
+  .carousel {
+    height: 60vh;
+  }
+
+  .brandSolid {
+    font-size: 140px;
+  }
+
+  .brandOutline {
+    font-size: 160px;
+  }
+
+  .offerText {
+    font-size: 80px;
+  }
+
+  .moreText {
+    font-size: 40px;
+  }
+
+  .title {
+    font-size: 6rem;
+  }
+
+  .sectionTitle, .spHeading, .magMainHeading, .blogMainHeading {
+    font-size: 5rem;
+  }
+
+  .ribbonItem {
+    min-width: 120px;
+  }
+
+  .ribbonIconWrapper {
+    width: 70px;
+    height: 70px;
+  }
+
+  .ribbonName {
+    font-size: 18px;
+  }
+
+  .refCardBody h3, .spMiniTitle, .magProdName {
+    font-size: 24px;
+  }
+
+  .refPriceNow, .spMiniBtn, .magProdPrice {
+    font-size: 22px;
+  }
+
+  .podiumTitle {
+    font-size: 48px;
+  }
+
+  .podiumDesc {
+    font-size: 20px;
+    max-width: 800px;
+  }
+
+  .podiumPrice {
+    font-size: 36px;
+  }
+
+  .newsHeroHeading {
+    font-size: 64px;
+  }
+
+  .newsInputPremium {
+    font-size: 24px;
+  }
+
+  .newsSubmitBtnGradient {
+    font-size: 20px;
+    padding: 25px 60px;
+  }
+}
+

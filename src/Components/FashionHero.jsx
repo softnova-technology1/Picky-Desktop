@@ -1,146 +1,204 @@
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
+'use client';
+
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './FashionHero.module.css';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import snacks from "@/images/home/snacks.png";
-import electronics from "@/images/home/elec.png";
-import fashion from "@/images/home/cloth.png";
-import home from "@/images/home/decor.png";
-import gifts from "@/images/home/gift.png";
 
-import Link from 'next/link';
+const CARDS_DATA = [
+  {
+    id: 1,
+    subtitle: 'Classic Fashion',
+    title: 'LUXURY CLOTHING',
+    description: 'Explore our curated collection of high-end designer apparel. From timeless classics to modern silhouettes, experience the pinnacle of sartorial excellence and premium fabrics. Our collection features hand-stitched details, ethically sourced Italian silks, and a legacy of craftsmanship that spans three generations of master tailors.',
+    image: '/images/cloth.jpg',
+    link: '/category/fashion'
+  },
+  {
+    id: 2,
+    subtitle: 'Sweet Gastronomy',
+    title: 'GOURMET TREATS',
+    description: 'A symphony of flavors crafted by world-class pâtissiers. Discover organic ingredients, artisanal preparation, and a dining experience that transcends the ordinary. Every creation is a masterpiece of texture and taste, using rare Criollo cocoa beans and fresh mountain dairy to create moments of pure indulgence.',
+    image: '/images/choco.jpg',
+    link: '/category/chocolates'
+  },
+  {
+    id: 3,
+    subtitle: 'Future Tech',
+    title: 'SMART DEVICES',
+    description: 'Pushing the boundaries of innovation with cutting-edge technology. Experience seamless connectivity, powerful performance, and sleek designs that define the future. Our latest ecosystem integrates artificial intelligence with neural processing to anticipate your needs before you even think of them.',
+    image: '/images/elct.jpg',
+    link: '/category/electronics'
+  },
+  {
+    id: 4,
+    subtitle: 'Timeless Stories',
+    title: 'CLASSIC READS',
+    description: 'Dive into worlds of imagination and wisdom. Our selection of premium editions and rare finds offers a tactile journey through history, philosophy, and great literature. Each volume is bound in genuine goatskin leather with 24-karat gold gilding, preserving the world\'s greatest thoughts for centuries to come.',
+    image: '/images/book.jpg',
+    link: '/category/books'
+  },
+  {
+    id: 5,
+    subtitle: 'High-End Style',
+    title: 'DESIGNER EDIT',
+    description: 'Experience the art of fashion with our collection of master-crafted pieces. Luxury engineering meets timeless elegance in every intricate detail. This limited edition selection is available only to our private members, featuring avant-garde designs that challenge the conventions of modern haute couture.',
+    image: '/images/clothing.png',
+    link: '/category/fashion'
+  },
+  {
+    id: 6,
+    subtitle: 'Interior Design',
+    title: 'MODERN HOME',
+    description: 'Transform your living space into a sanctuary of style. Our curated collection of modern furniture and minimalist decor combines functionality with aesthetic perfection to create a home that truly reflects your personality.',
+    image: '/images/gifts.jpg',
+    link: '/category/home-decor'
+  }
+];
 
-const FashionHero = () => {
-    const [categories, setCategories] = useState([
-        { id: 1, src: electronics, alt: "Electronics", title: "Electronics", label: "Tech", path: "/category/electronics" },
-        { id: 2, src: fashion, alt: "Fashion", title: "Fashion" , label: "Style", path: "/category/fashion" },
-        { id: 3, src: gifts, alt: "Books", title: "Books", label: "Knowledge", path: "/category/books" },
-        { id: 4, src: home, alt: "Home Decor", title: "Home Decor", label: "Living", path: "/category/home-decor" },
-        { id: 5, src: gifts, alt: "Gifts", title: "Gifts", label: "Celebration", path: "/category/gifts" },
-    ]);
+export default function CardSlider() {
+  const router = useRouter();
+  const [items, setItems] = useState(CARDS_DATA);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [direction, setDirection] = useState('');
+  const [progress, setProgress] = useState(0);
 
-    const [isPaused, setIsPaused] = useState(false);
+  const handleNext = useCallback(() => {
+    if (isAnimating) return;
+    setDirection('next');
+    setIsAnimating(true);
+    
+    setItems((prev) => {
+      const newItems = [...prev];
+      const first = newItems.shift();
+      newItems.push(first);
+      return newItems;
+    });
 
-    useEffect(() => {
-        if (isPaused) return;
-        const interval = setInterval(() => {
-            setCategories((prev) => {
-                const next = [...prev];
-                const first = next.shift();
-                next.push(first);
-                return next;
-            });
-        }, 2000);
-        return () => clearInterval(interval);
-    }, [isPaused]);
+    setTimeout(() => setIsAnimating(false), 800);
+  }, [isAnimating]);
 
-    const getCardClass = (index) => {
-        if (index === 2) return styles.big;
-        if (index === 1 || index === 3) return styles.medium;
-        return styles.small;
+  const handlePrev = useCallback(() => {
+    if (isAnimating) return;
+    setDirection('prev');
+    setIsAnimating(true);
+    
+    setItems((prev) => {
+      const newItems = [...prev];
+      const last = newItems.pop();
+      newItems.unshift(last);
+      return newItems;
+    });
+
+    setTimeout(() => setIsAnimating(false), 800);
+  }, [isAnimating]);
+
+  const handleCardClick = (index) => {
+    if (isAnimating || index < 2) return; // Only thumbnails are clickable to change
+    
+    setDirection('next');
+    setIsAnimating(true);
+    
+    setItems((prev) => {
+      const newItems = [...prev];
+      // We want the clicked thumbnail (index k) to become the active item (index 1)
+      // This requires shifting the array k-1 times.
+      for (let i = 0; i < index - 1; i++) {
+        const first = newItems.shift();
+        newItems.push(first);
+      }
+      return newItems;
+    });
+
+    setTimeout(() => setIsAnimating(false), 800);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(handleNext, 4000); // Slowed down slightly for interactivity
+    return () => clearInterval(timer);
+  }, [handleNext]);
+
+  useEffect(() => {
+    let startTime = Date.now();
+    let animationFrame;
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const currentProgress = (elapsed / 4000) * 100;
+      setProgress(Math.min(currentProgress, 100));
+
+      if (currentProgress < 100) {
+        animationFrame = requestAnimationFrame(animate);
+      }
     };
 
-    return (
-        <section className={styles.heroWrapper}>
-            <div className={styles.container}>
-                {/* Headline Section */}
-                <div className={styles.headlineSection}>
-                    <motion.div
-                        className={styles.avatarGroup}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                    >
-                        <div className={styles.avatars}>
-                            <div className={styles.avatar}>A</div>
-                            <div className={styles.avatar}>B</div>
-                            <div className={styles.avatar}>C</div>
-                        </div>
-                    </motion.div>
+    animationFrame = requestAnimationFrame(animate);
 
-                    <motion.h1
-                        className={styles.title}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                        Find the perfect pick for <br />
-                        <span className={styles.light}>your lifestyle</span>
-                    </motion.h1>
+    return () => cancelAnimationFrame(animationFrame);
+  }, [items]);
 
-                    <motion.p
-                        className={styles.description}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                    >
-                        Experience the modern marketplace with premium curated products and verified <br />
-                        vendors delivered to your doorstep.
-                    </motion.p>
+  return (
+    <div className={`${styles.container} ${direction ? styles[direction] : ''}`}>
+      <div className={styles.slider}>
+        {items.map((item, index) => (
+          <div 
+            key={item.id}
+            className={styles.item}
+            style={{ backgroundImage: `url(${item.image})` }}
+            onClick={() => handleCardClick(index)}
+          >
+            <div className={styles.content}>
+              <div className={styles.subtitle}>{item.subtitle}</div>
+              <div className={styles.title}>{item.title}</div>
+              <div className={styles.description}>{item.description}</div>
+              <div className={styles.buttonWrapper}>
+                <div className={styles.bookmark}>
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
+                  </svg>
                 </div>
-
-                {/* Image Grid */}
-                <div
-                    className={styles.grid}
-                    onMouseEnter={() => setIsPaused(true)}
-                    onMouseLeave={() => setIsPaused(false)}
+                <button 
+                  className={styles.discoverBtn}
+                  onClick={() => router.push(item.link || '/category')}
                 >
-                    <AnimatePresence mode="popLayout">
-                        {categories.map((item, index) => (
-                            <motion.div
-                                key={item.id}
-                                layout
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                                transition={{
-                                    layout: { duration: 0.8, ease: "easeInOut" },
-                                    duration: 0.4
-                                }}
-                                className={`${styles.card} ${getCardClass(index)}`}
-                            >
-                                <div className={styles.mainContent}>
-                                    <div className={index === 2 ? styles.imageInnerMain : styles.imageInner}>
-                                        <Image src={item.src} alt={item.alt} fill style={{ objectFit: 'cover' }} />
-                                    </div>
-                                    {index === 2 && (
-                                        <motion.div
-                                            className={styles.focusedContent}
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: 0.3 }}
-                                        >
-                                            <span className={styles.focusedLabel}>{item.label}</span>
-                                            <Link href={item.path} className={styles.cta}>
-                                                <span>Explore {item.title}</span>
-                                                <div className={styles.ctaArrow}>
-                                                    <ArrowRight size={18} />
-                                                </div>
-                                            </Link>
-                                        </motion.div>
-                                    )}
-                                </div>
-                            </motion.div>
-                        ))}
-                    </AnimatePresence>
-                </div>
-
-                {/* Footer Section */}
-                <div className={styles.heroFooter}>
-                    <div className={styles.testimonial}>
-                        <p className={styles.quote}>"The most curated fashion house I've experienced. Every piece tells a story of elegance."</p>
-                    </div>
-                    <div className={styles.indicator}>
-                        <span className={styles.number}>01</span>
-                        <div className={styles.indicatorText}>
-                            <strong>Lifestyle</strong>
-                            <p>Discover the art of living.</p>
-                        </div>
-                    </div>
-                </div>
+                  EXPLORE MORE
+                </button>
+              </div>
             </div>
-        </section>
-    );
-};
+            
+            {index > 0 && (
+              <div className={styles.thumbnailContent}>
+                <div className={styles.thumbLine}></div>
+                <div className={styles.thumbSubtitle}>{item.subtitle}</div>
+                <div className={styles.thumbTitle}>{item.title}</div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
 
-export default FashionHero;
+      <div className={styles.controls}>
+        <div className={styles.progressSection}>
+          <div className={styles.progressBar}>
+            <div 
+              className={styles.progressFill} 
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+        </div>
+
+        <div className={styles.arrows}>
+          <button className={styles.arrowBtn} onClick={(e) => { e.stopPropagation(); handlePrev(); }}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </button>
+          <button className={styles.arrowBtn} onClick={(e) => { e.stopPropagation(); handleNext(); }}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 18l6-6-6-6"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
