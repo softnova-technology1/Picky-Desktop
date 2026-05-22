@@ -704,82 +704,59 @@ export default function Home2() {
         </div>
       </section>
 
-      {/* CUSTOMER VOICES - Architectural Step Carousel */}
-      <section className={`${styles.reviewSectionMaster} ${styles.revealSection}`}>
+      <section className={styles.trustSectionMaster}>
         <div className="container">
-          <div className={styles.reviewHeader}>
-            <span className={styles.revTag}>TESTIMONIALS</span>
-            <h2 className={styles.revHeading}>Customer Voices</h2>
-            <div className={styles.revStatLine}>
-              <div className={styles.revAverage}>4.9/5</div>
-              <div className={styles.revStars}>
-                {[1, 2, 3, 4, 5].map(s => <Star key={s} size={14} fill="#4C0519" color="#4C0519" />)}
+          <div className={styles.trustGrid}>
+            {[
+              { icon: <Truck size={32} />, title: "Free Delivery", desc: "For all orders above ₹2000. Seamless & fast." },
+              { icon: <RotateCcw size={32} />, title: "Easy Returns", desc: "30-day hassle-free policy for your peace of mind." },
+              { icon: <Lock size={32} />, title: "Secure Payment", desc: "100% SSL encrypted checkout for safe shopping." },
+              { icon: <Headphones size={32} />, title: "24/7 Support", desc: "Dedicated team available round the clock for you." }
+            ].map((pod, i) => (
+              <div key={i} className={styles.trustPod}>
+                <div className={styles.trustIconBox}>{pod.icon}</div>
+                <div className={styles.trustContent}>
+                  <h4 className={styles.trustTitle}>{pod.title}</h4>
+                  <p className={styles.trustDesc}>{pod.desc}</p>
+                </div>
               </div>
-              <div className={styles.revCount}>Based on 12,020+ Reviews</div>
-            </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.newsSectionMaster}>
+        <div className={styles.newsHeroBg}>
+          <Image
+            src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974"
+            alt="Newsletter Background"
+            fill
+            className={styles.newsHeroImg}
+          />
+          <div className={styles.newsHeroOverlay}></div>
+          <div className={styles.newsHeroContent}>
+            <span className={styles.newsUpperTag}>GET NEWSLETTER</span>
+            <h2 className={styles.newsHeroHeading}>Sign Up to Newsletter</h2>
           </div>
         </div>
 
-        <div className={styles.revCarouselWrapper}>
-          <div className={styles.revCarouselTrack}>
-            {[
-              { name: "Sarah J.", role: "Verified Buyer", text: "The quality of the premium wireless headphones is unmatched. The deep wine color is stunning!", product: "Premium Wireless Pro", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1976" },
-              { name: "David M.", role: "Verified Buyer", text: "Fast delivery and the packaging was pure luxury. My Modernist Chronograph is my daily essential.", product: "Modernist Chronograph", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974" },
-              { name: "Elena R.", role: "Verified Buyer", text: "I've tried many luxury totes, but this leather tote has the best balance. A masterpiece of design.", product: "Luxe Leather Tote", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070" },
-              { name: "Alex K.", role: "Verified Buyer", text: "Stunning craftsmanship on the smartwatch band. The attention to detail is evident. Fast shipping!", product: "SmartWatch Pro", img: "https://images.unsplash.com/photo-1541647376583-d6c5ca910171?q=80&w=1974" },
-              { name: "Jessica L.", role: "Verified Buyer", text: "The Smart Buds changed my commute. Noise cancellation is perfect and they look so stylish.", product: "Aria Smart Buds", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974" },
-              { name: "Michael T.", role: "Verified Buyer", text: "The desk lamp is exactly what my studio needed. The light is very easy on the eyes.", product: "Studio Desk Lamp", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070" }
-            ].map((rev, i) => (
-              <div key={i} className={styles.revCardPremium}>
-                <div className={styles.revQuoteIcon}><Quote size={30} fill="#4C0519" opacity={0.05} /></div>
-                <div className={styles.revUser}>
-                  <div className={styles.revAvatar}>
-                    <Image src={rev.img} alt={rev.name} fill className={styles.revAvatarImg} />
-                  </div>
-                  <div className={styles.revUserInfo}>
-                    <h4 className={styles.revUserName}>{rev.name}</h4>
-                    <span className={styles.revUserRole}>{rev.role}</span>
-                  </div>
-                </div>
-                <div className={styles.revStarsMini}>
-                  {[1, 2, 3, 4, 5].map(s => <Star key={s} size={12} fill="#FFD700" color="#FFD700" />)}
-                </div>
-                <p className={styles.revText}>"{rev.text}"</p>
-
-                <div className={styles.revProductHighlight}>
-                  <span className={styles.revBoughtTag}>PURCHASED:</span>
-                  <span className={styles.revBoughtName}>{rev.product}</span>
+        <div className="container">
+          <div className={styles.newsOverCardContainer}>
+            <div className={styles.newsOverCard}>
+              <div className={styles.newsOverIconGroup}>
+                <div className={styles.newsPaperPlane}>
+                  <ShoppingCart size={40} strokeWidth={2} />
                 </div>
               </div>
-            ))}
 
-            {/* Duplicate for seamless infinite step loop */}
-            {[
-              { name: "Sarah J.", role: "Verified Buyer", text: "The quality of the premium wireless headphones is unmatched.", product: "Premium Wireless Pro", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1976" },
-              { name: "David M.", role: "Verified Buyer", text: "Fast delivery and the packaging was pure luxury.", product: "Modernist Chronograph", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974" },
-              { name: "Elena R.", role: "Verified Buyer", text: "I've tried many luxury totes, but this leather tote has the best balance.", product: "Luxe Leather Tote", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070" }
-            ].map((rev, i) => (
-              <div key={i + 10} className={styles.revCardPremium}>
-                <div className={styles.revQuoteIcon}><Quote size={30} fill="#4C0519" opacity={0.05} /></div>
-                <div className={styles.revUser}>
-                  <div className={styles.revAvatar}>
-                    <Image src={rev.img} alt={rev.name} fill className={styles.revAvatarImg} />
-                  </div>
-                  <div className={styles.revUserInfo}>
-                    <h4 className={styles.revUserName}>{rev.name}</h4>
-                    <span className={styles.revUserRole}>{rev.role}</span>
-                  </div>
-                </div>
-                <div className={styles.revStarsMini}>
-                  {[1, 2, 3, 4, 5].map(s => <Star key={s} size={12} fill="#FFD700" color="#FFD700" />)}
-                </div>
-                <p className={styles.revText}>"{rev.text}"</p>
-                <div className={styles.revProductHighlight}>
-                  <span className={styles.revBoughtTag}>PURCHASED:</span>
-                  <span className={styles.revBoughtName}>{rev.product}</span>
-                </div>
+              <div className={styles.newsInputGroupPremium}>
+                <input type="email" placeholder="Enter Your Email" className={styles.newsInputPremium} />
+                <button className={styles.newsSubmitBtnGradient}>
+                  SUBSCRIBE NOW <ArrowRight size={18} />
+                </button>
               </div>
-            ))}
+              <p className={styles.newsPrivacyNotice}>* By subscribing, you agree with our Privacy Policy and Terms of Service.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -826,56 +803,78 @@ export default function Home2() {
         </div>
       </section>
 
-      <section className={styles.newsSectionMaster}>
-        <div className={styles.newsHeroBg}>
-          <Image
-            src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974"
-            alt="Newsletter Background"
-            fill
-            className={styles.newsHeroImg}
-          />
-          <div className={styles.newsHeroOverlay}></div>
-          <div className={styles.newsHeroContent}>
-            <span className={styles.newsUpperTag}>GET NEWSLETTER</span>
-            <h2 className={styles.newsHeroHeading}>Sign Up to Newsletter</h2>
-          </div>
-        </div>
-
+      <section className={`${styles.reviewSectionMaster} ${styles.revealSection}`}>
         <div className="container">
-          <div className={styles.newsOverCardContainer}>
-            <div className={styles.newsOverCard}>
-              <div className={styles.newsOverIconGroup}>
-                <div className={styles.newsPaperPlane}>
-                  <ShoppingCart size={40} strokeWidth={2} />
-                </div>
+          <div className={styles.reviewHeader}>
+            <span className={styles.revTag}>TESTIMONIALS</span>
+            <h2 className={styles.revHeading}>Customer Voices</h2>
+            <div className={styles.revStatLine}>
+              <div className={styles.revAverage}>4.9/5</div>
+              <div className={styles.revStars}>
+                {[1, 2, 3, 4, 5].map(s => <Star key={s} size={14} fill="#4C0519" color="#4C0519" />)}
               </div>
-
-              <div className={styles.newsInputGroupPremium}>
-                <input type="email" placeholder="Enter Your Email" className={styles.newsInputPremium} />
-                <button className={styles.newsSubmitBtnGradient}>
-                  SUBSCRIBE NOW <ArrowRight size={18} />
-                </button>
-              </div>
-              <p className={styles.newsPrivacyNotice}>* By subscribing, you agree with our Privacy Policy and Terms of Service.</p>
+              <div className={styles.revCount}>Based on 12,020+ Reviews</div>
             </div>
           </div>
         </div>
-      </section>
 
-      <section className={styles.trustSectionMaster}>
-        <div className="container">
-          <div className={styles.trustGrid}>
+        <div className={styles.revCarouselWrapper}>
+          <div className={styles.revCarouselTrack}>
             {[
-              { icon: <Truck size={32} />, title: "Free Delivery", desc: "For all orders above ₹2000. Seamless & fast." },
-              { icon: <RotateCcw size={32} />, title: "Easy Returns", desc: "30-day hassle-free policy for your peace of mind." },
-              { icon: <Lock size={32} />, title: "Secure Payment", desc: "100% SSL encrypted checkout for safe shopping." },
-              { icon: <Headphones size={32} />, title: "24/7 Support", desc: "Dedicated team available round the clock for you." }
-            ].map((pod, i) => (
-              <div key={i} className={styles.trustPod}>
-                <div className={styles.trustIconBox}>{pod.icon}</div>
-                <div className={styles.trustContent}>
-                  <h4 className={styles.trustTitle}>{pod.title}</h4>
-                  <p className={styles.trustDesc}>{pod.desc}</p>
+              { name: "Sarah J.", role: "Verified Buyer", text: "The quality of the premium wireless headphones is unmatched. The deep wine color is stunning!", product: "Premium Wireless Pro", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1976" },
+              { name: "David M.", role: "Verified Buyer", text: "Fast delivery and the packaging was pure luxury. My Modernist Chronograph is my daily essential.", product: "Modernist Chronograph", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974" },
+              { name: "Elena R.", role: "Verified Buyer", text: "I've tried many luxury totes, but this leather tote has the best balance. A masterpiece of design.", product: "Luxe Leather Tote", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070" },
+              { name: "Alex K.", role: "Verified Buyer", text: "Stunning craftsmanship on the smartwatch band. The attention to detail is evident. Fast shipping!", product: "SmartWatch Pro", img: "https://images.unsplash.com/photo-1541647376583-d6c5ca910171?q=80&w=1974" },
+              { name: "Jessica L.", role: "Verified Buyer", text: "The Smart Buds changed my commute. Noise cancellation is perfect and they look so stylish.", product: "Aria Smart Buds", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974" },
+              { name: "Michael T.", role: "Verified Buyer", text: "The desk lamp is exactly what my studio needed. The light is very easy on the eyes.", product: "Studio Desk Lamp", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070" }
+            ].map((rev, i) => (
+              <div key={i} className={styles.revCardPremium}>
+                <div className={styles.revQuoteIcon}><Quote size={30} fill="#4C0519" opacity={0.05} /></div>
+                <div className={styles.revUser}>
+                  <div className={styles.revAvatar}>
+                    <Image src={rev.img} alt={rev.name} fill className={styles.revAvatarImg} />
+                  </div>
+                  <div className={styles.revUserInfo}>
+                    <h4 className={styles.revUserName}>{rev.name}</h4>
+                    <span className={styles.revUserRole}>{rev.role}</span>
+                  </div>
+                </div>
+                <div className={styles.revStarsMini}>
+                  {[1, 2, 3, 4, 5].map(s => <Star key={s} size={12} fill="#FFD700" color="#FFD700" />)}
+                </div>
+                <p className={styles.revText}>{rev.text}</p>
+
+                <div className={styles.revProductHighlight}>
+                  <span className={styles.revBoughtTag}>PURCHASED:</span>
+                  <span className={styles.revBoughtName}>{rev.product}</span>
+                </div>
+              </div>
+            ))}
+
+            {/* Duplicate for seamless infinite step loop */}
+            {[
+              { name: "Sarah J.", role: "Verified Buyer", text: "The quality of the premium wireless headphones is unmatched.", product: "Premium Wireless Pro", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1976" },
+              { name: "David M.", role: "Verified Buyer", text: "Fast delivery and the packaging was pure luxury.", product: "Modernist Chronograph", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974" },
+              { name: "Elena R.", role: "Verified Buyer", text: "I've tried many luxury totes, but this leather tote has the best balance.", product: "Luxe Leather Tote", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070" }
+            ].map((rev, i) => (
+              <div key={i + 10} className={styles.revCardPremium}>
+                <div className={styles.revQuoteIcon}><Quote size={30} fill="#4C0519" opacity={0.05} /></div>
+                <div className={styles.revUser}>
+                  <div className={styles.revAvatar}>
+                    <Image src={rev.img} alt={rev.name} fill className={styles.revAvatarImg} />
+                  </div>
+                  <div className={styles.revUserInfo}>
+                    <h4 className={styles.revUserName}>{rev.name}</h4>
+                    <span className={styles.revUserRole}>{rev.role}</span>
+                  </div>
+                </div>
+                <div className={styles.revStarsMini}>
+                  {[1, 2, 3, 4, 5].map(s => <Star key={s} size={12} fill="#FFD700" color="#FFD700" />)}
+                </div>
+                <p className={styles.revText}>{rev.text}</p>
+                <div className={styles.revProductHighlight}>
+                  <span className={styles.revBoughtTag}>PURCHASED:</span>
+                  <span className={styles.revBoughtName}>{rev.product}</span>
                 </div>
               </div>
             ))}

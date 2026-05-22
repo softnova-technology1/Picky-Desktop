@@ -25,20 +25,45 @@
     gap: 40px;
 }
 
-/* Breadcrumb */
+/* Fixed Nav Header */
+.stickyNav {
+    position: fixed;
+   
+    left: 0;
+    width: 100%;
+    background: #fff; /* Solid white to ensure visibility */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    z-index: 9999; /* Higher priority */
+    border-bottom: 1px solid #eee;
+    padding: 12px 0;
+    transition: all 0.3s ease;
+}
+
+.stickyNavSpacer {
+    height: 70px; /* Adjust based on stickyNav height */
+}
+
+.stickyNavContainer {
+    width: 100%;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Breadcrumb override */
 .breadcrumb {
     display: flex;
     align-items: center;
     gap: 12px;
     font-size: 0.85rem;
     color: #666;
-    margin-bottom: 30px;
-    background: #f8f9fa;
-    padding: 12px 20px;
-    border-radius: 50px;
-    width: fit-content;
-    border: 1px solid #eaeaea;
+    margin-bottom: 0; /* Removed margin here */
+    background: transparent; /* No bg in sticky nav */
+    padding: 0;
 }
+
+/* Breadcrumb */
 
 .breadcrumbLink {
     color: #555;
@@ -117,7 +142,25 @@
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
 
-/* Article Body */
+.metaItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.metaIcon {
+    opacity: 0.9;
+}
+
+.recentDate {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    color: #df213a;
+    display: block;
+    margin-bottom: 5px;
+}
 .articleBody {
     display: flex;
     flex-direction: column;
@@ -161,19 +204,23 @@
 }
 
 /* Sidebar Elements */
-.searchBox {
+.searchBoxHeader {
+    width: 350px;
+}
+
+.searchWrapper {
     position: relative;
     width: 100%;
 }
 
 .searchInput {
     width: 100%;
-    padding: 15px 20px;
-    padding-right: 50px;
+    padding: 10px 15px; /* Reduced padding */
+    padding-right: 40px;
     border: 1px solid #e0e0e0;
-    border-radius: 12px;
+    border-radius: 50px; /* Fully rounded */
     font-family: inherit;
-    font-size: 0.95rem;
+    font-size: 0.85rem; /* Slightly smaller font */
     outline: none;
     transition: border-color 0.3s ease;
 }
@@ -187,9 +234,11 @@
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: none;
     border: none;
-    font-size: 1.25rem;
     cursor: pointer;
 }
 
@@ -272,5 +321,15 @@
     
     .title {
         font-size: 1.75rem;
+    }
+
+    .stickyNavContainer {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .searchBoxHeader {
+        width: 100%;
     }
 }
