@@ -7,7 +7,7 @@ import styles from "./categories.module.css";
 import { ArrowRight, ChevronRight, Truck, Headphones, RotateCcw, ShieldCheck, Shield, Lock, Lamp, Shirt, Sofa, Cookie, BookOpen, Candy } from "lucide-react";
 import Link from 'next/link';
 import { getAllCategories, products, getSubcategories, getSubcategoryImage } from "@/lib/data";
-import ProductCard from "@/Components/ProductCard";
+import ProductCard from "@/components/ProductCard";
 
 import electronics from "@/images/home/elec.png"
 import fashion from "@/images/home/fashion.png"

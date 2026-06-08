@@ -2,9 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
-import CategoryCard from '@/Components/CategoryCard';
+import CategoryCard from '@/components/CategoryCard';
 import { getAllCategories } from '@/lib/data';
-import styles from '@/Stylesheet/CuratedCategory.module.css';
+import styles from './CuratedCategory.module.css';
 
 const CuratedCategory = () => {
     const categories = getAllCategories();

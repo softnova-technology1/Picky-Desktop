@@ -1,9 +1,9 @@
 "use client";
 
 import React from 'react';
-import ProductCard from '@/Components/ProductCard';
+import ProductCard from '@/components/ProductCard';
 import { products } from '@/lib/data';
-import styles from '@/stylesheet/trending.module.css';
+import styles from './trending.module.css';
 
 const Trending = () => {
     return (

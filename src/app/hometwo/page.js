@@ -32,7 +32,7 @@ import {
   Headphones,
   ShoppingCart
 } from "lucide-react";
-import AuthPopup from "@/Components/AuthPopup";
+import AuthPopup from "@/components/AuthPopup";
 import { blogPosts } from "@/data/blogData";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";

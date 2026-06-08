@@ -1,9 +1,9 @@
 "use client"
-import styles from '../../../Stylesheet/CreateAccount.module.css';
+import styles from './CreateAccount.module.css';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import AuthBackground from '@/Components/AuthBackground';
+import AuthBackground from '@/components/AuthBackground';
 
 import { useAuth } from '@/context/AuthContext';
 

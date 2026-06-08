@@ -6,7 +6,7 @@ import Link from "next/link";
 import { getProductById, products } from "@/lib/data";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
-import ProductCard from "@/Components/ProductCard";
+import ProductCard from "@/components/ProductCard";
 import styles from "./product.module.css";
 import { Star, Truck, ShieldCheck, RefreshCw, Minus, Plus, Heart, Share2, ChevronRight, Sparkles, Zap, X, Search, Maximize2, ShoppingCart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";

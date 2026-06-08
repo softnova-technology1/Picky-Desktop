@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Star } from 'lucide-react';
-import styles from '@/Stylesheet/TestimonialSection.module.css';
+import styles from './TestimonialSection.module.css';
 
 const TestimonialSection = () => {
     const testimonials = [

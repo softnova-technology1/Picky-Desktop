@@ -2,12 +2,12 @@
 
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
-import Navbar from "@/Components/Navbar";
-import HomeTwoNavbar from "@/Components/HomeTwoNavbar";
-import Footer from "@/Components/Footer";
+import Navbar from "@/components/Navbar";
+import HomeTwoNavbar from "@/components/HomeTwoNavbar";
+import Footer from "@/components/Footer";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
-import AuthPopup from "@/Components/AuthPopup";
+import AuthPopup from "@/components/AuthPopup";
 import CartNotification from "./CartNotification";
 import QuickCart from "./QuickCart";
 import CartDrawer from "./CartDrawer";

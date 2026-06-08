@@ -4,13 +4,13 @@ import { useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import styles from "./page.module.css";
-import FashionHero from "@/Components/FashionHero";
-import CuratedCategory from "@/Components/CuratedCategory";
-import Seasonal from "@/Components/Seasonal";
-import Trending from "@/Components/trending";
-import FeaturedVendorS from "@/Components/FeaturedVendorS";
-import TestimonialSection from "@/Components/TestimonialSection";
-import AppSection from "@/Components/AppSection";
+import FashionHero from "@/components/FashionHero";
+import CuratedCategory from "@/components/CuratedCategory";
+import Seasonal from "@/components/Seasonal";
+import Trending from "@/components/Trending";
+import FeaturedVendorS from "@/components/FeaturedVendorS";
+import TestimonialSection from "@/components/TestimonialSection";
+import AppSection from "@/components/AppSection";
 
 export default function Home() {
   const { user } = useAuth();

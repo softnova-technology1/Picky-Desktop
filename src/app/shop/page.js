@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from "react";
 import { products, categories } from "@/lib/data";
-import ProductCard from "@/Components/ProductCard";
+import ProductCard from "@/components/ProductCard";
 import styles from "./products.module.css";
 import Link from "next/link";
 import {
@@ -17,7 +17,7 @@ import {
   Layers,
   Candy
 } from "lucide-react";
-import Shop from "@/Components/shop";
+import Shop from "@/components/Shop";
 
 export default function AllProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");

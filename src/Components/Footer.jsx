@@ -1,5 +1,5 @@
 "use client"
-import styles from '../Stylesheet/Footer.module.css';
+import styles from './Footer.module.css';
 import Image from 'next/image';
 import { MapPin, Phone, Mail } from "lucide-react";
 

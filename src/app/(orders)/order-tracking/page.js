@@ -14,7 +14,7 @@ import {
   Package,
   XCircle
 } from 'lucide-react';
-import CancelOrderPopup from '@/Components/CancelOrderPopup';
+import CancelOrderPopup from '@/components/CancelOrderPopup';
 
 export default function OrderTrackingPage() {
   const [isCancelPopupOpen, setIsCancelPopupOpen] = React.useState(false);

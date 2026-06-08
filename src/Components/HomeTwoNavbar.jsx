@@ -19,7 +19,7 @@ import styles from "./HomeTwoNavbar.module.css";
 import { useAuth } from "@/context/AuthContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useCart } from "@/context/CartContext";
-import AuthPopup from "@/Components/AuthPopup";
+import AuthPopup from "@/components/AuthPopup";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 

@@ -1,8 +1,8 @@
 "use client"
-import styles from '../../../Stylesheet/ForgotPassword.module.css';
+import styles from './ForgotPassword.module.css';
 import Link from 'next/link';
 import { useState } from 'react';
-import AuthBackground from '@/Components/AuthBackground';
+import AuthBackground from '@/components/AuthBackground';
 
 const ForgotPassword = () => {
     const [activeTab, setActiveTab] = useState('email');

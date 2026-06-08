@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
-import styles from '@/stylesheet/Seasonal.module.css';
+import styles from './Seasonal.module.css';
 
 const Seasonal = () => {
     return (    

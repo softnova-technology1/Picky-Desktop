@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import styles from '../Stylesheet/AuthBackground.module.css'
+import styles from './AuthBackground.module.css'
 
 const AuthBackground = () => {
     return (

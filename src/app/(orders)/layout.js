@@ -11,7 +11,7 @@ import {
   XOctagon,
   RotateCcw
 } from "lucide-react";
-import OrderAIChat from "@/Components/OrderAIChat/OrderAIChat";
+import OrderAIChat from "@/components/OrderAIChat/OrderAIChat";
 
 export default function OrdersLayout({ children }) {
   const pathname = usePathname();

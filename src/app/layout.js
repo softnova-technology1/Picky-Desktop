@@ -3,9 +3,9 @@ import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
 import { WishlistProvider } from "@/context/WishlistContext";
-import NavbarWrapper from "@/Components/NavbarWrapper";
-import Navbar from "@/Components/Navbar";
-import Footer from "@/Components/Footer";
+import NavbarWrapper from "@/components/NavbarWrapper";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
