@@ -167,7 +167,8 @@
 /* Product Grid */
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 270px));
+  justify-content: center;
   gap: 3rem 2rem;
   margin-bottom: 10rem;
 }
@@ -187,6 +188,9 @@
   overflow: hidden;
   text-align: center;
   cursor: pointer;
+  max-width: 270px;
+  width: 100%;
+  margin-inline: auto;
 }
 
 .card:hover {
@@ -402,7 +406,7 @@
 
 /* Responsiveness */
 @media (max-width: 1200px) {
-  .grid { grid-template-columns: repeat(3, 1fr); }
+  .grid { grid-template-columns: repeat(3, minmax(0, 270px)); justify-content: center; }
   .heroContent, .editorialText { padding: 3rem; }
   .heroTitle { font-size: 3.5rem; }
 }
@@ -410,11 +414,11 @@
 @media (max-width: 900px) {
   .heroSection, .editorialSection { grid-template-columns: 1fr; height: auto; }
   .heroImageContainer, .editorialImage { height: 400px; }
-  .grid { grid-template-columns: repeat(2, 1fr); }
+  .grid { grid-template-columns: repeat(2, minmax(0, 270px)); justify-content: center; }
 }
 
 @media (max-width: 600px) {
-  .grid { grid-template-columns: 1fr; }
+  .grid { grid-template-columns: minmax(0, 270px); justify-content: center; }
   .container { padding: 0 1.5rem; }
   .heroTitle { font-size: 2.8rem; }
   .sectionHeader { flex-direction: column; align-items: flex-start; gap: 2rem; }

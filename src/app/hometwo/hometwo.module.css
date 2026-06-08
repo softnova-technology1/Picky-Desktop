@@ -273,10 +273,10 @@
 
 /* Home 2 Section Styles (Original from Hometwo.module.css) */
 .welcomeSection {
-  padding: 60px 0;
+  padding: 20px 0;
   background: white;
   border-radius: 0 0 60px 60px;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
 }
 
 .welcomeHeader {
@@ -362,12 +362,12 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  margin-bottom: 80px;
+  margin-bottom: 30px;
 }
 
 .curatedItem {
   position: relative;
-  height: 400px;
+  height: 300px;
   border-radius: 32px;
   overflow: hidden;
   cursor: pointer;
@@ -848,7 +848,7 @@
 /* Reference-Matched Flash Deals Section */
 .refFlashSection {
   background: var(--white);
-  padding: 40px 0;
+  padding: 20px 0;
 }
 
 .refFlashHeader {
@@ -956,6 +956,9 @@
   overflow: hidden;
   transition: all 0.3s ease;
   cursor: pointer;
+  max-width: 100%;
+  width: 100%;
+  margin-inline: auto;
 }
 
 .refCard:hover {
@@ -965,7 +968,7 @@
 
 .refImgWrapper {
   position: relative;
-  height: 280px;
+  height: 180px;
   background: var(--background);
 }
 
@@ -1058,37 +1061,37 @@
 }
 
 .refCardBody {
-  padding: 20px;
+  padding: 15px;
 }
 
 .refProdCat {
-  font-size: 12px;
+  font-size: 11px;
   color: #888;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
 }
 
 .refProdName {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 800;
   color: var(--foreground);
   line-height: 1.4;
-  height: 45px;
+  height: 40px;
   overflow: hidden;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .refPricing {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .refPriceNow {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 900;
   color: var(--primary);
 }
@@ -1120,7 +1123,7 @@
 /* Promotional Banners */
 .refBannerSection {
   background: var(--white);
-  padding-bottom: 80px;
+  padding-bottom: 30px;
 }
 
 .refBannerGrid {
@@ -1131,7 +1134,7 @@
 
 .refBannerItem {
   position: relative;
-  height: 320px;
+  height: 280px;
   border-radius: 24px;
   overflow: hidden;
 }
@@ -1182,24 +1185,38 @@
 
 @media (max-width: 1200px) {
 
-  .refFlashGrid,
+  .refFlashGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    justify-content: center !important;
+  }
   .refBannerGrid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .magProductFlowMedium {
+    grid-template-columns: repeat(2, 1fr) !important;
+    justify-content: center !important;
   }
 }
 
 @media (max-width: 768px) {
 
-  .refFlashGrid,
+  .refFlashGrid {
+    grid-template-columns: 1fr !important;
+    justify-content: center !important;
+  }
   .refBannerGrid {
     grid-template-columns: 1fr;
+  }
+  .magProductFlowMedium {
+    grid-template-columns: 1fr !important;
+    justify-content: center !important;
   }
 }
 
 /* SPECIAL OFFERS - High-Conversion Deep Wine Theme */
 .specialDealsMaster {
   background: var(--background);
-  padding: 50px 0;
+  padding: 20px 0;
 }
 
 .spHeader {
@@ -1378,7 +1395,7 @@
 .spCardsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 25px;
+  gap: 20px;
 }
 
 .spMiniCard {
@@ -1388,6 +1405,9 @@
   transition: all 0.4s ease;
   border: 1px solid var(--border);
   cursor: pointer;
+  max-width: 100%;
+  width: 100%;
+  margin-inline: auto;
 }
 
 .spMiniCard:hover {
@@ -1397,7 +1417,7 @@
 
 .spMiniVisual {
   position: relative;
-  height: 180px;
+  height: 120px;
 }
 
 .spMiniImg {
@@ -1417,31 +1437,31 @@
 }
 
 .spMiniBody {
-  padding: 20px;
+  padding: 12px;
 }
 
 .spMiniTitle {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 800;
   color: var(--primary);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .spMiniDesc {
-  font-size: 13px;
+  font-size: 11px;
   color: var(--text-muted);
-  margin-bottom: 15px;
+  margin-bottom: 8px;
   line-height: 1.4;
 }
 
 .spMiniBtn {
   width: 100%;
-  padding: 10px;
+  padding: 6px 10px;
   background: var(--background);
   border: 1px solid var(--border);
   border-radius: 12px;
   color: var(--primary);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 800;
   cursor: pointer;
   transition: all 0.3s;
@@ -1479,7 +1499,7 @@
 /* THE MAG-GRID: Architectural New Arrivals */
 .magArrivalsMaster {
   background: var(--white);
-  padding: 120px 0;
+  padding: 40px 0;
 }
 
 .magLayoutSplit {
@@ -1543,7 +1563,7 @@
 .magSideBanner {
   margin-top: 60px;
   position: relative;
-  height: 500px;
+  height: 460px;
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 40px 80px rgba(76, 5, 25, 0.12);
@@ -1627,12 +1647,13 @@
   position: relative;
   transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   cursor: pointer;
+  width: 100%;
 }
 
 .magImageFrameMedium {
   position: relative;
   width: 100%;
-  height: 350px;
+  height: 270px;
   /* MEDIUM SIZE */
   overflow: hidden;
   background: var(--background);
@@ -1797,11 +1818,13 @@
 .spotlightMaster {
   background: var(--background);
   /* Linked to Special Offers theme */
-  padding: 20px 0;
+  padding: 15px 0;
+  max-height: 100vh;
+  box-sizing: border-box;
 }
 
 .spTitleHeader {
-  margin-bottom: 70px;
+  margin-bottom: 20px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -1833,7 +1856,7 @@
 .spLayoutGrid {
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 30px;
 }
 
 .spTitleSide {
@@ -1897,30 +1920,46 @@
 /* Duplicate the map content in JSX for true infinite, but for 6 items 30s is a long slow pan */
 
 .trendingMiniCard {
-  flex: 0 0 350px;
-  /* Consistent Medium Width */
+  flex: 0 0 220px;
+  display: flex;
+  flex-direction: column;
   background: var(--white);
-  border-radius: 32px;
-  padding: 15px;
-  /* transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); */
+  border-radius: 20px;
+  padding: 10px;
   cursor: pointer;
+  height: 285px;
 }
 
-/* PODIUM HERO - THE NO. 1 SELLER */
-.podiumHeroCard {
+.podiumGrid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* PODIUM HERO - THE NO. 1 & NO. 2 SELLER */
+.podiumHeroCard {
+  display: flex;
+  flex-direction: column;
   background: var(--white);
-  border-radius: 40px;
+  border-radius: 32px;
   overflow: hidden;
-  box-shadow: 0 40px 100px rgba(100, 61, 151, 0.15);
-  min-height: 550px;
+  box-shadow: 0 30px 60px rgba(100, 61, 151, 0.08);
+  height: 355px;
+  width: 100%;
+  max-width: 100%;
   cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.podiumHeroCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 40px 80px rgba(100, 61, 151, 0.15);
 }
 
 .podiumVisual {
   position: relative;
-  height: 100%;
+  height: 185px;
+  width: 100%;
 }
 
 .podiumImg {
@@ -1929,98 +1968,106 @@
 
 .podiumRankDigit {
   position: absolute;
-  top: 40px;
-  left: 40px;
-  font-size: 160px;
+  top: 25px;
+  right: 25px;
+  font-size: 80px;
   font-weight: 1000;
-  color: rgba(18, 18, 18, 0.04);
-  line-height: 1;
+  background: linear-gradient(135deg, rgba(100, 61, 151, 0.03) 0%, rgba(100, 61, 151, 0.08) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 0.8;
   pointer-events: none;
-  z-index: 10;
+  font-family: var(--font-oswald);
 }
 
 .podiumBadge {
   position: absolute;
-  top: 30px;
-  right: 30px;
-  background: #FFD700;
-  color: #1a1a1a;
-  padding: 10px 20px;
-  font-size: 12px;
-  font-weight: 900;
-  border-radius: 99px;
-  box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+  top: 25px;
+  left: 25px;
+  background: var(--primary);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 1000;
+  letter-spacing: 1px;
+  box-shadow: 0 10px 20px rgba(100, 61, 151, 0.2);
   display: flex;
   align-items: center;
-  gap: 8px;
-  z-index: 11;
+  gap: 6px;
+  text-transform: uppercase;
 }
 
 .podiumBody {
-  padding: 60px;
+  padding: 10px 15px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   background: #fff;
+  flex: 1;
+  gap: 4px;
 }
 
 .podiumTrust {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 20px;
+  gap: 10px;
 }
 
 .podiumStars {
   display: flex;
-  gap: 4px;
+  gap: 2px;
 }
 
 .podiumReviews {
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 800;
   color: #bbb;
   letter-spacing: 0.5px;
 }
 
 .podiumTitle {
-  font-size: 48px;
+  font-size: 14px;
   font-weight: 1000;
   color: #1a1a1a;
-  margin-bottom: 20px;
-  line-height: 1.1;
-  letter-spacing: -2px;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  margin: 0;
 }
 
 .podiumDesc {
-  font-size: 15px;
+  font-size: 10px;
   color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 45px;
+  line-height: 1.4;
+  margin: 0;
   opacity: 0.8;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* Heat Area - Popularity Indicator */
 .podiumHeatArea {
-  margin-bottom: 50px;
-  padding-top: 20px;
+  margin-top: auto;
+  padding-top: 3px;
   border-top: 1px solid #f2f2f2;
 }
 
 .heatLabel {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 900;
   color: var(--primary);
-  margin-bottom: 12px;
+  margin-bottom: 3px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  letter-spacing: 1px;
+  gap: 6px;
+  letter-spacing: 0.5px;
 }
 
 .heatBar {
   width: 100%;
-  height: 8px;
+  height: 6px;
   background: #f8f8f8;
   border-radius: 99px;
   overflow: hidden;
@@ -2036,36 +2083,36 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 30px;
-  margin-top: auto;
+  gap: 15px;
+  margin-top: 2px;
 }
 
 .podiumPrice {
-  font-size: 38px;
+  font-size: 15px;
   font-weight: 1000;
   color: var(--primary);
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
 }
 
 .podiumAddBtn {
-  padding: 18px 40px;
+  padding: 5px 10px;
   background: var(--primary);
   color: white;
   border: none;
-  border-radius: 16px;
-  font-size: 13px;
+  border-radius: 10px;
+  font-size: 9px;
   font-weight: 900;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
   transition: all 0.3s;
 }
 
 .podiumAddBtn:hover {
   background: #000;
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 /* Trending Flow Grid */
@@ -2075,25 +2122,18 @@
   gap: 30px;
 }
 
-.trendingMiniCard {
-  background: #fff;
-  border-radius: 32px;
-  padding: 15px;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
 .trendingMiniCard:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 30px 60px rgba(76, 5, 25, 0.1);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(100, 61, 151, 0.1);
 }
 
 .trendingImgWrapper {
   position: relative;
-  height: 280px;
-  border-radius: 24px;
+  height: 120px;
+  border-radius: 14px;
   overflow: hidden;
   background: #f8f8f8;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 
 .tImg {
@@ -2107,9 +2147,9 @@
 
 .trendingRank {
   position: absolute;
-  bottom: -15px;
-  right: -15px;
-  font-size: 100px;
+  bottom: -10px;
+  right: -10px;
+  font-size: 70px;
   font-weight: 1000;
   color: rgba(100, 61, 151, 0.05);
   pointer-events: none;
@@ -2132,67 +2172,138 @@
 }
 
 .trendingInfo {
-  padding: 0 15px 15px;
+  padding: 0 8px 8px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 4px;
 }
 
-.trendingInfo h4 {
-  font-size: 18px;
+.tTrust {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.tStars {
+  display: flex;
+  gap: 2px;
+}
+
+.tReviews {
+  font-size: 11px;
   font-weight: 800;
-  color: var(--foreground);
-  margin-bottom: 8px;
+  color: #bbb;
+  letter-spacing: 0.5px;
 }
 
-.tPrice {
-  font-size: 16px;
+.tProdName {
+  font-size: 13px;
+  font-weight: 1000;
+  color: #1a1a1a;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+.tProdDesc {
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0;
+  opacity: 0.8;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tHeatArea {
+  margin-top: auto;
+  padding-top: 5px;
+  border-top: 1px solid #f2f2f2;
+}
+
+.tHeatLabel {
+  font-size: 10px;
   font-weight: 900;
   color: var(--primary);
-  margin-bottom: 20px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  letter-spacing: 0.5px;
 }
 
-.tHeatMini {
+.tHeatBar {
   width: 100%;
-  height: 4px;
-  background: var(--border);
-  border-radius: 10px;
-  margin-bottom: 20px;
+  height: 5px;
+  background: #f8f8f8;
+  border-radius: 99px;
+  overflow: hidden;
 }
 
 .tHeatFill {
   height: 100%;
   background: var(--primary);
-  opacity: 0.3;
+  border-radius: 99px;
+}
+
+.tAction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.tPrice {
+  font-size: 14px;
+  font-weight: 1000;
+  color: var(--primary);
+  letter-spacing: -0.5px;
+  margin: 0;
 }
 
 .tQuickBtn {
-  width: 100%;
-  padding: 12px;
-  border: 1.5px solid var(--border);
-  background: transparent;
-  color: var(--foreground);
-  font-size: 11px;
+  padding: 5px 8px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 8px;
   font-weight: 900;
-  border-radius: 12px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   transition: all 0.3s;
+  text-transform: uppercase;
 }
 
-.trendingMiniCard:hover .tQuickBtn {
-  background: var(--primary);
-  color: var(--white);
-  border-color: var(--primary);
+.tQuickBtn:hover {
+  background: #000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 1100px) {
+  .podiumGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
   .podiumHeroCard {
-    grid-template-columns: 1fr;
+    height: auto;
   }
 
   .podiumVisual {
-    height: 400px;
+    height: 300px;
   }
 
   .podiumBody {
-    padding: 40px;
+    padding: 20px;
   }
 }
 
@@ -2204,14 +2315,15 @@
 
 .trustSectionMaster {
     background: var(--white);
-    padding: 20px 0;
+    padding: 10px 0;
     overflow-x: hidden;
+    margin-top: 50px;
 }
 
 /* CUSTOMER VOICES - Architectural Step Carousel */
 .reviewSectionMaster {
     background: var(--white);
-    padding: 30px 0;
+    padding: 15px 0;
     position: relative;
     border-top: 1px solid var(--border);
 }
@@ -2328,13 +2440,14 @@
   flex: 0 0 420px;
   /* Medium Size as requested */
   background: #fff;
-  padding: 50px;
+  padding: 10px;
   border-radius: 40px;
   position: relative;
   overflow: hidden;
   transition: all 0.5s ease;
   /* Deep Wine Border as requested */
   border: 2px solid rgba(100, 61, 151, 0.08);
+  height: 250px;
 }
 
 .revCardPremium:hover {
@@ -2441,16 +2554,15 @@
 .newsSectionMaster {
   background: #fff;
   position: relative;
-  /* padding-bottom: 10px; */
+  margin-bottom: -50px;
 }
 
 .newsHeroBg {
-  height: 380px;
+  height: 150px;
   width: 100%;
   position: relative;
-  border-radius: 60px;
-  margin: 40px auto;
-  width: calc(100% - 80px);
+  border-radius: 20px;
+  margin: 10px auto;
   overflow: hidden;
 }
 
@@ -2462,13 +2574,12 @@
 .newsHeroOverlay {
   position: absolute;
   inset: 0;
-  /* Deep Wine to Rose Gradient Overlay replaced with primary */
   background: linear-gradient(135deg, rgba(100, 61, 151, 0.9) 0%, rgba(126, 96, 191, 0.6) 100%);
 }
 
 .newsHeroContent {
   position: absolute;
-  top: 27%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -2477,25 +2588,25 @@
 }
 
 .newsUpperTag {
-  font-size: 13px;
+  font-size: 9px;
   font-weight: 1000;
   color: rgba(255, 255, 255, 0.7);
-  letter-spacing: 4px;
+  letter-spacing: 2px;
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 3px;
   text-transform: uppercase;
 }
 
 .newsHeroHeading {
-  font-size: 52px;
+  font-size: 22px;
   font-weight: 1000;
   color: #fff;
-  letter-spacing: -2px;
+  letter-spacing: -0.5px;
 }
 
 .newsOverCardContainer {
   position: relative;
-  top: -230px;
+  top: -70px;
   z-index: 5;
   display: flex;
   justify-content: center;
@@ -2504,24 +2615,23 @@
 .newsOverCard {
   background: #fff;
   width: 100%;
-  max-width: 1100px;
-  padding: 50px 80px;
-  border-radius: 50px;
-  box-shadow: 0 40px 100px rgba(100, 61, 151, 0.12);
+  max-width: 600px;
+  padding: 20px 30px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(100, 61, 151, 0.06);
   position: relative;
   overflow: hidden;
-  /* Subtle topographical pattern using CSS */
   background-image:
     radial-gradient(circle at 100% 150%, #fff 24%, rgba(100, 61, 151, 0.02) 25%, rgba(100, 61, 151, 0.02) 28%, #fff 29%),
     radial-gradient(circle at 0% 150%, #fff 24%, rgba(100, 61, 151, 0.02) 25%, rgba(100, 61, 151, 0.02) 28%, #fff 29%);
-  background-size: 80px 80px;
+  background-size: 50px 50px;
   text-align: center;
 }
 
 .newsOverIconGroup {
   display: flex;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 12px;
 }
 
 .newsPaperPlane {
@@ -2540,9 +2650,9 @@
   background: #fff;
   border: 1.5px solid rgba(100, 61, 151, 0.15);
   border-radius: 50px;
-  padding: 10px;
+  padding: 4px;
   width: 100%;
-  max-width: 800px;
+  max-width: 500px;
   margin: 0 auto;
   transition: all 0.4s;
 }
@@ -2556,8 +2666,8 @@
   flex: 1;
   border: none;
   outline: none;
-  padding: 0 30px;
-  font-size: 15px;
+  padding: 0 15px;
+  font-size: 13px;
   font-weight: 600;
   color: #1a1a1a;
 }
@@ -2566,28 +2676,28 @@
   background: linear-gradient(90deg, #F97316 0%, #E11D48 100%);
   color: #fff;
   border: none;
-  padding: 18px 40px;
+  padding: 8px 18px;
   border-radius: 40px;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 1000;
   letter-spacing: 1px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   cursor: pointer;
   transition: all 0.4s;
-  box-shadow: 0 10px 20px rgba(225, 29, 72, 0.3);
+  box-shadow: 0 8px 15px rgba(225, 29, 72, 0.15);
 }
 
 .newsSubmitBtnGradient:hover {
-  transform: scale(1.05) translateX(5px);
-  box-shadow: 0 15px 30px rgba(225, 29, 72, 0.4);
+  transform: scale(1.03) translateX(3px);
+  box-shadow: 0 12px 25px rgba(225, 29, 72, 0.25);
 }
 
 .newsPrivacyNotice {
-  font-size: 11px;
+  font-size: 10px;
   color: #999;
-  margin-top: 30px;
+  margin-top: 10px;
   font-weight: 600;
 }
 
@@ -2624,7 +2734,7 @@
 
 .blogSectionMaster {
     background: var(--white);
-    padding: 30px 0;
+    padding: 15px 0;
 }
 
 .blogSectionHeader {
@@ -2670,23 +2780,27 @@
 .blogGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  justify-content: center;
+  gap: 20px;
 }
 
 .blogCard {
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: 100%;
+  width: 100%;
+  margin-inline: auto;
 }
 
 .blogCard:hover {
-  transform: translateY(-15px);
+  transform: translateY(-10px);
 }
 
 .blogCardVisual {
   position: relative;
-  height: 380px;
-  border-radius: 40px;
+  height: 200px;
+  border-radius: 20px;
   overflow: hidden;
-  margin-bottom: 30px;
+  margin-bottom: 12px;
 }
 
 .blogImg {
@@ -2700,12 +2814,12 @@
 
 .blogDateBadge {
   position: absolute;
-  top: 30px;
-  left: 30px;
+  top: 15px;
+  left: 15px;
   background: var(--primary);
   color: var(--white);
-  padding: 12px 18px;
-  border-radius: 18px;
+  padding: 8px 12px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2723,8 +2837,8 @@
 .trustPod {
   display: flex;
   align-items: center;
-  gap: 25px;
-  padding: 30px 40px;
+  gap: 12px;
+  padding: 15px 20px;
   position: relative;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: default;
@@ -2738,7 +2852,7 @@
   top: 50%;
   transform: translateY(-50%);
   width: 1px;
-  height: 60px;
+  height: 40px;
   background: var(--border);
 }
 
@@ -2746,8 +2860,8 @@
   color: var(--primary);
   background: rgba(100, 61, 151, 0.05);
   /* Soft starting background */
-  width: 65px;
-  height: 65px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -2757,6 +2871,11 @@
   position: relative;
   overflow: hidden;
   z-index: 1;
+}
+
+.trustIconBox svg {
+  width: 20px !important;
+  height: 20px !important;
 }
 
 /* The Liquid/Water Element */
@@ -2790,17 +2909,17 @@
 }
 
 .trustTitle {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 1000;
   color: var(--foreground);
-  margin-bottom: 6px;
+  margin-bottom: 3px;
   letter-spacing: -0.5px;
 }
 
 .trustDesc {
-  font-size: 13px;
+  font-size: 11px;
   color: var(--text-muted);
-  line-height: 1.5;
+  line-height: 1.4;
   font-weight: 500;
 }
 
@@ -2846,42 +2965,42 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 18px;
+  margin-bottom: 10px;
 }
 
 .blogAuthor {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 1000;
   color: var(--primary);
 }
 
 .blogTitle {
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 1000;
   color: var(--foreground);
-  margin-bottom: 15px;
+  margin-bottom: 8px;
   letter-spacing: -0.5px;
 }
 
 .blogSnippet {
-  font-size: 14px;
+  font-size: 12px;
   color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 30px;
+  line-height: 1.4;
+  margin-bottom: 15px;
   font-weight: 500;
 }
 
 .blogReadBtn {
-  padding: 15px 35px;
-  border-radius: 30px;
+  padding: 8px 20px;
+  border-radius: 20px;
   background: transparent;
   border: 1.5px solid var(--foreground);
   color: var(--foreground);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 1000;
   letter-spacing: 1px;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
   transition: all 0.4s;
 }
@@ -2942,15 +3061,15 @@
 .newsSectionMaster {
   background: #fff;
   position: relative;
+  margin-bottom: -50px;
 }
 
 .newsHeroBg {
-  height: 380px;
+  height: 150px;
   width: 100%;
   position: relative;
-  border-radius: 60px;
-  margin: 40px auto;
-  width: calc(100% - 80px);
+  border-radius: 20px;
+  margin: 10px auto;
   overflow: hidden;
 }
 
@@ -2967,7 +3086,7 @@
 
 .newsHeroContent {
   position: absolute;
-  top: 27%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -2976,25 +3095,25 @@
 }
 
 .newsUpperTag {
-  font-size: 13px;
+  font-size: 9px;
   font-weight: 1000;
   color: rgba(255, 255, 255, 0.7);
-  letter-spacing: 4px;
+  letter-spacing: 2px;
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 3px;
   text-transform: uppercase;
 }
 
 .newsHeroHeading {
-  font-size: 52px;
+  font-size: 22px;
   font-weight: 1000;
   color: #fff;
-  letter-spacing: -2px;
+  letter-spacing: -0.5px;
 }
 
 .newsOverCardContainer {
   position: relative;
-  top: -100px;
+  top: -70px;
   z-index: 5;
   display: flex;
   justify-content: center;
@@ -3003,23 +3122,23 @@
 .newsOverCard {
   background: #fff;
   width: 100%;
-  max-width: 1100px;
-  padding: 50px 80px;
-  border-radius: 50px;
-  box-shadow: 0 40px 100px rgba(100, 61, 151, 0.12);
+  max-width: 600px;
+  padding: 20px 30px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(100, 61, 151, 0.06);
   position: relative;
   overflow: hidden;
   background-image:
     radial-gradient(circle at 100% 150%, #fff 24%, rgba(100, 61, 151, 0.02) 25%, rgba(100, 61, 151, 0.02) 28%, #fff 29%),
     radial-gradient(circle at 0% 150%, #fff 24%, rgba(100, 61, 151, 0.02) 25%, rgba(100, 61, 151, 0.02) 28%, #fff 29%);
-  background-size: 80px 80px;
+  background-size: 50px 50px;
   text-align: center;
 }
 
 .newsOverIconGroup {
   display: flex;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 12px;
 }
 
 .newsPaperPlane {
@@ -3038,9 +3157,9 @@
   background: #fff;
   border: 1.5px solid rgba(100, 61, 151, 0.15);
   border-radius: 50px;
-  padding: 10px;
+  padding: 4px;
   width: 100%;
-  max-width: 800px;
+  max-width: 500px;
   margin: 0 auto;
   transition: all 0.4s;
 }
@@ -3054,8 +3173,8 @@
   flex: 1;
   border: none;
   outline: none;
-  padding: 0 30px;
-  font-size: 15px;
+  padding: 0 15px;
+  font-size: 13px;
   font-weight: 600;
   color: #1a1a1a;
 }
@@ -3064,29 +3183,29 @@
   background: linear-gradient(90deg, #F97316 0%, #E11D48 100%);
   color: #fff;
   border: none;
-  padding: 18px 40px;
+  padding: 8px 18px;
   border-radius: 40px;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 1000;
   letter-spacing: 1px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   cursor: pointer;
   transition: all 0.4s;
-  box-shadow: 0 10px 20px rgba(225, 29, 72, 0.2);
+  box-shadow: 0 8px 15px rgba(225, 29, 72, 0.15);
 }
 
 .newsSubmitBtnGradient:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 15px 30px rgba(225, 29, 72, 0.3);
+  transform: scale(1.03) translateX(3px);
+  box-shadow: 0 12px 25px rgba(225, 29, 72, 0.25);
 }
 
 .newsPrivacyNotice {
-  font-size: 12px;
-  color: #888;
-  margin-top: 20px;
-  font-weight: 500;
+  font-size: 10px;
+  color: #999;
+  margin-top: 10px;
+  font-weight: 600;
 }
 
 .trustGrid {
@@ -3101,8 +3220,8 @@
 .trustPod {
   display: flex;
   align-items: center;
-  gap: 25px;
-  padding: 30px 40px;
+  gap: 12px;
+  padding: 15px 20px;
   position: relative;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: default;
@@ -3115,15 +3234,15 @@
   top: 50%;
   transform: translateY(-50%);
   width: 1px;
-  height: 60px;
+  height: 40px;
   background: var(--border, #eee);
 }
 
 .trustIconBox {
   color: var(--primary);
   background: rgba(100, 61, 151, 0.05);
-  width: 65px;
-  height: 65px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -3133,6 +3252,11 @@
   position: relative;
   overflow: hidden;
   z-index: 1;
+}
+
+.trustIconBox svg {
+  width: 20px !important;
+  height: 20px !important;
 }
 
 .trustIconBox::before {
@@ -3161,17 +3285,17 @@
 }
 
 .trustTitle {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 1000;
   color: var(--foreground);
-  margin-bottom: 6px;
+  margin-bottom: 3px;
   letter-spacing: -0.5px;
 }
 
 .trustDesc {
-  font-size: 13px;
+  font-size: 11px;
   color: var(--text-muted, #666);
-  line-height: 1.5;
+  line-height: 1.4;
   font-weight: 500;
 }
 
@@ -3186,6 +3310,10 @@
 }
 
 @media (max-width: 768px) {
+  .podiumGrid {
+    grid-template-columns: 1fr !important;
+  }
+
   .trustGrid {
     grid-template-columns: 1fr;
   }
