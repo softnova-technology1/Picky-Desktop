@@ -56,7 +56,7 @@ export default function SubcategoryPage({ params }) {
 
           <div className={styles.titleRow}>
             <div>
-              <h1 className={styles.title}>{subcategoryName}</h1>
+              <h1 className={styles.title} style={{ marginBottom: '12px' }}>{subcategoryName}</h1>
               <p className={styles.count}>{filteredProducts.length} items curated for you</p>
             </div>
 

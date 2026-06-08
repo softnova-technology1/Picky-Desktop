@@ -233,15 +233,15 @@ export default function PaymentPage() {
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
             <div>
-              <h1 style={{ fontSize: '2.5rem', fontWeight: '900', color: 'var(--foreground)' }}>Complete Payment</h1>
-              <p style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: '500' }}>Choose your preferred payment method</p>
+              <h1 style={{ fontSize: '2rem', fontWeight: '900', color: 'var(--foreground)', marginBottom: '0.5rem' }}>Complete Payment</h1>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', fontWeight: '500' }}>Choose your preferred payment method</p>
             </div>
             <Link href="/checkout/address" style={{ color: 'var(--primary)', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <ChevronLeft size={20} /> Back
             </Link>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.3fr) minmax(0, 1fr)', gap: '2.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.3fr) minmax(0, 1fr)', gap: '2rem' }}>
             
             {/* Payment Details */}
             <div style={{ display: 'grid', gap: '2rem' }}>
@@ -263,13 +263,27 @@ export default function PaymentPage() {
                         {method.icon}
                       </div>
                       <div style={{ flex: 1, marginLeft: '1.25rem' }}>
-                        <p style={{ fontWeight: '700', fontSize: '1.1rem', color: selectedPayment === method.id ? 'var(--primary)' : 'inherit' }}>{method.name}</p>
+                        <p style={{ fontWeight: '700', fontSize: '1rem', color: selectedPayment === method.id ? 'var(--primary)' : 'inherit' }}>{method.name}</p>
                         <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{method.description}</p>
                       </div>
                       {selectedPayment === method.id && (
-                        <div style={{ backgroundColor: 'var(--primary)', color: 'white', padding: '4px', borderRadius: '50%' }}>
-                          <Check size={14} />
-                        </div>
+                        <motion.div 
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          style={{ 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            justifyContent: 'center',
+                            backgroundColor: 'var(--primary)', 
+                            color: 'white', 
+                            width: '24px', 
+                            height: '24px', 
+                            borderRadius: '50%',
+                            boxShadow: '0 4px 10px rgba(100, 61, 151, 0.2)'
+                          }}
+                        >
+                          <Check size={14} strokeWidth={3} />
+                        </motion.div>
                       )}
                     </motion.div>
                   ))}
@@ -329,7 +343,7 @@ export default function PaymentPage() {
                   </div>
                   <div style={{ borderTop: '2px dashed var(--border)', paddingTop: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                      <span style={{ fontSize: '1.1rem', fontWeight: '900' }}>Total Amount</span>
-                     <span style={{ fontSize: '2.2rem', fontWeight: '900', color: 'var(--primary)' }}>${finalTotal.toFixed(2)}</span>
+                     <span style={{ fontSize: '1.8rem', fontWeight: '900', color: 'var(--primary)' }}>${finalTotal.toFixed(2)}</span>
                   </div>
                 </div>
 

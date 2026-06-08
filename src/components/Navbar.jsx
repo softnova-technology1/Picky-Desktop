@@ -101,7 +101,6 @@ const Navbar = () => {
 
                         <div 
                             className={styles.cartDrawerContainer} 
-                            onMouseEnter={openCart}
                             onClick={toggleCart}
                         >
                             <button 

@@ -2,7 +2,7 @@
   background-color: #fbfcff;
   min-height: 100vh;
   padding-bottom: 40px;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-body);
 }
 
 .container {
@@ -13,15 +13,15 @@
 
 /* Header Section */
 .header {
-  margin: 50px 0;
+  margin: 30px 0;
 }
 
 .title {
-  font-family: 'Playfair Display', serif;
-  font-size: 3.5rem;
-  font-weight: 500;
+  font-family: var(--font-heading);
+  font-size: 2.8rem;
+  font-weight: 800;
   color: #1a1a1a;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 .subtitle {
@@ -33,7 +33,7 @@
 
 /* Enhanced Filter & Search Row */
 .controlsRow {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .filterRow {
@@ -121,7 +121,7 @@
   border: 1px solid #eee;
   border-radius: 16px;
   overflow: hidden;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -159,10 +159,10 @@
 
 /* Card Content */
 .cardContent {
-  padding: 30px;
+  padding: 20px 30px;
   display: grid;
   grid-template-columns: auto 1fr auto;
-  gap: 40px;
+  gap: 20px;
   align-items: start;
 }
 

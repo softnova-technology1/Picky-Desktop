@@ -44,6 +44,18 @@
   border-color: rgba(100, 61, 151, 0.1);
 }
 
+.quoteIcon {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  font-size: 8rem;
+  font-family: var(--font-heading);
+  color: var(--primary);
+  opacity: 0.05;
+  line-height: 1;
+  pointer-events: none;
+}
+
 .testiQuote {
   font-size: 0.95rem;
   line-height: 1.65;

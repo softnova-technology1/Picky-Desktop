@@ -1,4 +1,5 @@
 .profileWrapper {
+  font-family: var(--font-body);
   background-color: #fbfcff;
   height: 100vh; /* Lock the wrapper height */
   display: flex;
@@ -16,7 +17,7 @@
 /* Sidebar Styling - Sticky Left Side */
 .sidebar {
   width: 320px;
-  padding: 60px 40px;
+  padding: 40px 30px;
   background-color: #fff;
   border-right: 1px solid #f0f0f5;
   display: flex;
@@ -35,7 +36,7 @@
 
 .userCard {
   text-align: left;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   padding-left: 20px;
 }
 
@@ -79,7 +80,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 18px 25px;
+  padding: 12px 20px;
   border-radius: 0;
   font-size: 0.75rem;
   font-weight: 700;
@@ -120,14 +121,14 @@
 }
 
 .logoutBtn {
-  margin-top: 20px;
+  margin-top: 10px;
   color: #ff4d4f;
   font-weight: 700;
   text-transform: uppercase;
   font-size: 0.75rem;
   letter-spacing: 1.5px;
   cursor: pointer;
-  padding: 18px 25px;
+  padding: 12px 20px;
   transition: opacity 0.3s;
 }
 
