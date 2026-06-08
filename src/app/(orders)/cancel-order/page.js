@@ -10,7 +10,7 @@ import {
   Clock, 
   ChevronRight 
 } from 'lucide-react';
-import CancelOrderPopup from '@/Components/CancelOrderPopup';
+import CancelOrderPopup from '@/components/CancelOrderPopup';
 
 export default function CancelOrderPage() {
   const [showPopup, setShowPopup] = React.useState(false);

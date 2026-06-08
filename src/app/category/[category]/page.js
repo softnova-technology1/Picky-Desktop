@@ -4,7 +4,7 @@ import { use } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getSubcategories, getProductsByCategory, getSubcategoryImage } from "@/lib/data";
-import ProductCard from "@/Components/ProductCard";
+import ProductCard from "@/components/ProductCard";
 import styles from "./category.module.css";
 import { ChevronRight, ArrowRight } from "lucide-react";
 

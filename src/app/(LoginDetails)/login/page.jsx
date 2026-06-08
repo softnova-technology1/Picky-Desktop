@@ -1,10 +1,10 @@
 "use client"
-import styles from '../../../Stylesheet/Login.module.css';
+import styles from './Login.module.css';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
-import AuthBackground from '@/Components/AuthBackground';
+import AuthBackground from '@/components/AuthBackground';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);

@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
-import styles from '@/Stylesheet/FeaturedVendorS.module.css';
+import styles from './FeaturedVendorS.module.css';
 
 const FeaturedVendorS = () => {
     const vendors = [

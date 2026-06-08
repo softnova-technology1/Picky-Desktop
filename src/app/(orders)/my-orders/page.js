@@ -15,7 +15,7 @@ import {
   ExternalLink,
   ShoppingBag
 } from 'lucide-react';
-import ReturnItemPopup from '@/Components/ReturnItemPopup';
+import ReturnItemPopup from '@/components/ReturnItemPopup';
 
 export default function MyOrdersPage() {
   const [activeTab, setActiveTab] = useState('All Orders');

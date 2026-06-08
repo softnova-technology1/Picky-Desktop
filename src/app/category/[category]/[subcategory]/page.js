@@ -2,12 +2,12 @@
 
 import React, { useState, use } from "react";
 import { getProductsBySubcategory } from "@/lib/data";
-import ProductCard from "@/Components/ProductCard";
+import ProductCard from "@/components/ProductCard";
 import styles from "./products.module.css";
 import Link from "next/link";
 import { ChevronRight, Filter } from "lucide-react";
 
-import SmartStyleAssistant from "@/Components/SmartStyleAssistant/SmartStyleAssistant";
+import SmartStyleAssistant from "@/components/SmartStyleAssistant/SmartStyleAssistant";
 
 export default function SubcategoryPage({ params }) {
   const resolvedParams = use(params);

@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Smartphone, Apple, Star } from 'lucide-react';
 import appMockup from "@/images/home/app-mockup.png";
-import styles from '@/stylesheet/AppSection.module.css';
+import styles from './AppSection.module.css';
 
 const AppSection = () => {
     return (

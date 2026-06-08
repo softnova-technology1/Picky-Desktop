@@ -1,5 +1,5 @@
 import React from 'react';
-import BlogSection from '@/Components/BlogDetails/BlogSection';
+import BlogSection from '@/components/BlogDetails/BlogSection';
 
 export const metadata = {
     title: 'Picky Blog | Premium Insights',
