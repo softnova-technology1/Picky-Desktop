@@ -2,7 +2,7 @@
   background-color: #fdebfd ;
   color: #1a1a1a;
   min-height: 100vh;
-  font-family: var(--font-geist-sans), sans-serif;
+  font-family: var(--font-body);
   overflow-x: hidden;
 }
 
@@ -129,7 +129,7 @@
   font-size: 2rem;
   font-weight: 500;
   margin-bottom: 1.5rem;
-  font-family: serif;
+  font-family: var(--font-heading);
 }
 
 .infoBlock p {

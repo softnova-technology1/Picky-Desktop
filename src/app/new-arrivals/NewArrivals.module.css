@@ -10,7 +10,7 @@
   min-height: 100vh;
   padding: 4rem 0 0;
   background-color: white;
-  font-family: var(--font-geist-sans), sans-serif;
+  font-family: var(--font-body);
   color: var(--editorial-text);
   overflow-x: hidden;
   
@@ -84,7 +84,7 @@
   line-height: 1;
   margin-bottom: 2rem;
   letter-spacing: -0.04em;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
 }
 
 .heroDescription {

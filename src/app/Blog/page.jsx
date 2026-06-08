@@ -9,8 +9,9 @@ export const metadata = {
 const BlogMainPage = () => {
     return (
         <main style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
-            <div style={{ padding: '120px 0 60px', textAlign: 'center' }}>
+            <div style={{ padding: '60px 0 30px', textAlign: 'center' }}>
                 <h1 style={{ 
+                    fontFamily: 'var(--font-heading)',
                     fontSize: '3.5rem', 
                     fontWeight: '900', 
                     color: '#1a1a1a', 
@@ -20,6 +21,7 @@ const BlogMainPage = () => {
                     Our Journal
                 </h1>
                 <p style={{ 
+                    fontFamily: 'var(--font-body)',
                     fontSize: '1.2rem', 
                     color: '#666', 
                     maxWidth: '600px', 
@@ -33,7 +35,7 @@ const BlogMainPage = () => {
             {/* The blog list section */}
             <BlogSection />
             
-            <div style={{ height: '100px' }}></div>
+            <div style={{ height: '40px' }}></div>
         </main>
     );
 };

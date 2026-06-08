@@ -1,9 +1,9 @@
 .chatWrapper {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 110px;
+  right: 28px;
   z-index: 9999;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -362,7 +362,7 @@
   }
 
   .chatWrapper {
-    bottom: 20px;
-    right: 20px;
+    bottom: 110px;
+    right: 23px;
   }
 }

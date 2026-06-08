@@ -1,0 +1,26 @@
+.scrollTopBtn {
+    position: fixed;
+    bottom: 110px; /* Keeps it above the QuickCart */
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary, #643d97);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 9999;
+}
+
+@media (max-width: 500px) {
+    .scrollTopBtn {
+        bottom: 100px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+    }
+}

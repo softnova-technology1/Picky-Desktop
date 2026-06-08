@@ -23,12 +23,14 @@ const QuickCart = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ type: "spring", stiffness: 260, damping: 20 }}
             >
-                <ShoppingCart size={28} strokeWidth={1.5} />
+                <div className={styles.shimmerContainer} />
+                <ShoppingCart size={28} strokeWidth={1.5} style={{ position: 'relative', zIndex: 2 }} />
                 {totalItems > 0 && (
                     <motion.span 
                         className={styles.badge}
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
+                        style={{ zIndex: 3 }}
                         key={totalItems} // Re-animate on count change
                     >
                         {totalItems}
