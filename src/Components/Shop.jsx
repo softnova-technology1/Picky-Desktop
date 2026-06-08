@@ -133,11 +133,6 @@ export default function Shop() {
                 ))}
             </div>
 
-            {/* Back Home Floating Button */}
-            <Link href="/" className={styles.backBtn}>
-                <ArrowRight size={20} style={{ transform: 'rotate(180deg)', marginRight: '8px' }} />
-                <span>BACK HOME</span>
-            </Link>
         </main>
     );
 }

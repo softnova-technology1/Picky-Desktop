@@ -17,6 +17,10 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
 }
 
+.navSpacer {
+  height: 90px;
+}
+
 .container {
   max-width: 1600px;
   width: 100%;

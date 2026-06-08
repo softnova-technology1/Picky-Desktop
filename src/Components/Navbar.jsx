@@ -164,6 +164,7 @@ const Navbar = () => {
                     )}
                 </AnimatePresence>
             </nav>
+            <div className={styles.navSpacer}></div>
 
 
             <AuthPopup

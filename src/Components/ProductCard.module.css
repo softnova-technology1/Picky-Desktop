@@ -121,7 +121,7 @@
   padding: 16px 20px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   align-items: flex-start;
   text-align: left;
   flex: 1;
@@ -140,17 +140,51 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-top: 4px;
-  margin-bottom: 8px;
+  margin-top: 2px;
+  margin-bottom: 0px;
 }
 
 .title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #1e1e1e;
-  line-height: 1.4;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #1a1a1a;
   margin: 0;
-  transition: color 0.3s;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.stockStatus {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  margin-top: 0px;
+  margin-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.inStock {
+  color: #059669; /* Green */
+}
+.inStock .dot {
+  background-color: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.outOfStock {
+  color: #dc2626; /* Red */
+}
+.outOfStock .dot {
+  background-color: #ef4444;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
 }
 
 .titleLink:hover .title {

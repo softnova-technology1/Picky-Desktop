@@ -67,7 +67,7 @@
 .shopLayout {
   display: grid;
   grid-template-columns: 380px 1fr;
-  gap: 40px;
+  gap: 20px; /* Reduced from 40px to compensate for mainContent left padding */
   /* Removed align-items: start to allow columns to stretch to the same height */
 }
 
@@ -82,23 +82,14 @@
   height: 0; /* Hack to prevent it from expanding the grid row height */
   min-height: 100%; /* Stretch to the grid row height defined by sidebar */
   overflow-y: auto;
-  padding-right: 15px; /* Add some padding for the scrollbar */
-  padding-bottom: 30px; /* Add a gap so cards don't touch the bottom edge when scrolled fully */
+  padding: 20px 15px 30px 20px; /* Top: 20px, Right: 15px, Bottom: 30px, Left: 20px */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
 }
 
-/* Custom scrollbar for products */
+/* Hide scrollbar for Chrome, Safari and Opera */
 .mainContent::-webkit-scrollbar {
-  width: 6px;
-}
-.mainContent::-webkit-scrollbar-track {
-  background: transparent;
-}
-.mainContent::-webkit-scrollbar-thumb {
-  background: rgba(100, 61, 151, 0.2);
-  border-radius: 10px;
-}
-.mainContent::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
+  display: none;
 }
 
 .grid {

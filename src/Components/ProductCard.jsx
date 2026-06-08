@@ -27,6 +27,9 @@ const ProductCard = ({ product }) => {
   const productImgSrc = product.image || product.img || product.thumb || 'https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=800';
   const encodedImg = encodeURIComponent(typeof productImgSrc === 'string' ? productImgSrc : (productImgSrc?.src || productImgSrc));
 
+  // Determine stock status (defaults to true if not specified in data)
+  const inStock = product.inStock !== false && product.stock !== 0;
+
   const handleBuyNow = () => {
     setCheckoutItems([{ ...product, quantity: 1 }]);
     router.push('/checkout');
@@ -110,6 +113,14 @@ const ProductCard = ({ product }) => {
             <span className={styles.price}>${product.price}</span>
             <span className={styles.originalPrice}>${originalPrice}</span>
           </div>
+        </div>
+
+        <div className={`${styles.stockStatus} ${inStock ? styles.inStock : styles.outOfStock}`}>
+          {inStock ? (
+            <><span className={styles.dot}></span> IN STOCK</>
+          ) : (
+            <><span className={styles.dot}></span> OUT OF STOCK</>
+          )}
         </div>
 
         <Link href={`/product/${product.id}?img=${encodedImg}`} className={styles.shopNowBtn}>
