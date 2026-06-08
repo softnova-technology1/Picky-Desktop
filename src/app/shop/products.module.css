@@ -5,9 +5,9 @@
 
 /* SECTION 1: HERO */
 .heroSection {
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   text-align: left;
-  margin-top: 10%;
+  margin-top: 20px;
 }
 
 .breadcrumb {
@@ -18,7 +18,7 @@
   letter-spacing: 0.1em;
   color: rgba(0, 0, 0, 0.4);
   margin-bottom: 15px;
-  margin-top: 70px;
+  margin-top: 10px;
 }
 
 .breadcrumb a {

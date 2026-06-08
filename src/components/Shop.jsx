@@ -133,7 +133,10 @@ export default function Shop() {
                 ))}
             </div>
 
+<<<<<<< HEAD
           
+=======
+>>>>>>> e3f88dc89be8d61ce7bb097a37565774fba034a6
         </main>
     );
 }
