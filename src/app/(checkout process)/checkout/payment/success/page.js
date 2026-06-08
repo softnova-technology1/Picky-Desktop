@@ -112,7 +112,7 @@ export default function PaymentSuccessPage() {
             delay: 0.2 
           }}
         >
-          <CheckCircle2 size={56} strokeWidth={2.5} />
+          <CheckCircle2 size={40} strokeWidth={2.5} />
         </motion.div>
 
         <motion.h1 className={styles.title} variants={itemVariants}>
@@ -120,7 +120,7 @@ export default function PaymentSuccessPage() {
         </motion.h1>
 
         <motion.p 
-          style={{ color: 'var(--text-muted)', fontSize: '1.2rem', marginBottom: '1rem' }}
+          style={{ color: 'var(--text-muted)', fontSize: '1rem', marginBottom: '2rem' }}
           variants={itemVariants}
         >
           Thank you for choosing <span style={{ fontWeight: '800', color: 'var(--primary)' }}>Picky</span>. 
@@ -157,14 +157,14 @@ export default function PaymentSuccessPage() {
                 <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: '600' }}>Amount Paid</p>
                 <span style={{ fontWeight: '800', fontSize: '1.3rem' }}>Total</span>
               </div>
-              <span style={{ fontWeight: '900', fontSize: '1.8rem', color: 'var(--primary)' }}>
+              <span style={{ fontWeight: '900', fontSize: '1.5rem', color: 'var(--primary)' }}>
                 ${(checkoutSubtotal * 1.08).toFixed(2)}
               </span>
             </div>
           </div>
         </motion.div>
 
-        <motion.div style={{ display: 'grid', gap: '1.2rem' }} variants={itemVariants}>
+        <motion.div style={{ display: 'grid', gap: '1rem', marginTop: '1.5rem' }} variants={itemVariants}>
           <Link href="/new-arrivals" style={{ textDecoration: 'none' }}>
             <motion.button 
               className={styles.ctaButton}

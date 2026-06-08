@@ -69,26 +69,26 @@ export default function CheckoutPage() {
           </div>
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
           <div>
-            <h1 style={{ fontSize: '2.5rem', fontWeight: '900', color: 'var(--foreground)' }}>Checkout Summary</h1>
-            <p style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: '500' }}>Review your items before proceeding</p>
+            <h1 style={{ fontSize: '2rem', fontWeight: '900', color: 'var(--foreground)', marginBottom: '0.5rem' }}>Checkout Summary</h1>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', fontWeight: '500' }}>Review your items before proceeding</p>
           </div>
-          <Link href="/" style={{ color: 'var(--primary)', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <ChevronLeft size={20} /> Continue Shopping
+          <Link href="/" style={{ color: 'var(--primary)', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.95rem' }}>
+            <ChevronLeft size={18} /> Continue Shopping
           </Link>
         </div>
 
         <div className={styles.layout}>
           
           {/* Order Details */}
-          <div style={{ display: 'grid', gap: '2rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <motion.div className={styles.card} variants={itemVariants}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-                <div style={{ backgroundColor: 'rgba(100, 61, 151, 0.08)', padding: '12px', borderRadius: '12px', color: 'var(--primary)' }}>
-                  <ShoppingBag size={24} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                <div style={{ backgroundColor: 'rgba(100, 61, 151, 0.08)', padding: '10px', borderRadius: '10px', color: 'var(--primary)' }}>
+                  <ShoppingBag size={20} />
                 </div>
-                <h2 style={{ fontSize: '1.5rem', fontWeight: '800' }}>Your Items</h2>
+                <h2 style={{ fontSize: '1.35rem', fontWeight: '800' }}>Your Items</h2>
               </div>
               
               <div className={styles.productList}>
@@ -149,7 +149,7 @@ export default function CheckoutPage() {
           {/* Sidebar Summary */}
           <motion.div variants={itemVariants}>
             <div className={styles.summaryCard}>
-              <h2 style={{ marginBottom: '2rem', fontSize: '1.5rem', fontWeight: '800' }}>Order Summary</h2>
+              <h2 style={{ marginBottom: '1.5rem', fontSize: '1.35rem', fontWeight: '800' }}>Order Summary</h2>
               
               <div style={{ display: 'grid', gap: '1.25rem' }}>
                 <div className={styles.summaryRow}>

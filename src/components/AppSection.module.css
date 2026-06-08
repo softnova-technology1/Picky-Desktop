@@ -1,7 +1,7 @@
 .appSection {
   background: radial-gradient(circle at 0% 0%, var(--primary) 0%, #0b0927 100%);
   border-radius: 60px;
-  padding: 100px;
+  padding: 40px 60px;
   display: flex;
   align-items: center;
   color: white;

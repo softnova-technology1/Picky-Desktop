@@ -101,7 +101,6 @@ const Navbar = () => {
 
                         <div 
                             className={styles.cartDrawerContainer} 
-                            onMouseEnter={openCart}
                             onClick={toggleCart}
                         >
                             <button 
@@ -165,6 +164,7 @@ const Navbar = () => {
                     )}
                 </AnimatePresence>
             </nav>
+            <div className={styles.navSpacer}></div>
 
 
             <AuthPopup

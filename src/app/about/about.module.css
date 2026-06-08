@@ -5,7 +5,8 @@
 
 .aboutContainer {
     width: 100%;
-    padding: 10rem 0rem;
+    padding-top: 7rem;
+    padding-bottom: 4rem;
     display: flex;
     justify-content: center;
     position: relative;
@@ -40,7 +41,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .subheadingWrapper {
@@ -65,7 +66,7 @@
 }
 
 .heading {
-    font-size: 4rem;
+    font-size: 3.2rem;
     color: var(--foreground);
     line-height: 1.1;
     font-weight: 700;
@@ -81,7 +82,7 @@
 .description {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     color: black;
     font-size: 1.15rem;
     line-height: 1.8;
@@ -134,8 +135,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 3rem;
-    margin-top: 3rem;
-    padding-top: 3rem;
+    margin-top: 1rem;
+    padding-top: 2rem;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -260,7 +261,8 @@
 /* Why Choose Us Section Styling */
 .whyChooseSection {
     background: linear-gradient(90deg, #f8faf8 65%, #e9d6ff 65%);
-    padding: 10rem 0rem;
+    padding-top: 7rem;
+    padding-bottom: 4rem;   
     position: relative;
     overflow: hidden;
     display: flex;
@@ -359,9 +361,10 @@
     max-width: 600px;
     max-height: 600px;
     object-fit: cover;
-    border-radius: 250px 0px 250px 250px; /* Elegant Arch Shape */
+    border-radius: 250px 0px 250px 250px;
+    /* Elegant Arch Shape */
     border: 10px solid white;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15);
     filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
     animation: floating 6s ease-in-out infinite;
 }

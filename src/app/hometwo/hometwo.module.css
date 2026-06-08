@@ -312,7 +312,7 @@
 }
 
 .italic {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   /* Or something similar for contrast */
   font-style: italic;
   font-weight: 400;

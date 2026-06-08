@@ -23,32 +23,28 @@ const BlogDetail = async ({ params }) => {
 
     return (
         <div className={styles.blogDetailPage}>
-            {/* Sticky Navigation Header */}
-            <div className={styles.stickyNav}>
-                <div className={styles.stickyNavContainer}>
-                    <div className={styles.breadcrumb}>
-                        <Link href="/" className={styles.breadcrumbLink}>
-                            <Home size={14} className={styles.breadcrumbIcon} /> 
-                            <span>Home</span>
-                        </Link>
-                        <ChevronRight size={14} className={styles.breadcrumbSeparator} />
-                        <Link href="/Blog" className={styles.breadcrumbLink}>Blog</Link>
-                        <ChevronRight size={14} className={styles.breadcrumbSeparator} />
-                        <span className={styles.breadcrumbCurrent}>{post.title}</span>
-                    </div>
+            {/* Top Navigation Bar */}
+            <div className={styles.topBarContainer}>
+                <div className={styles.breadcrumb}>
+                    <Link href="/" className={styles.breadcrumbLink}>
+                        <Home size={14} className={styles.breadcrumbIcon} /> 
+                        <span>Home</span>
+                    </Link>
+                    <ChevronRight size={14} className={styles.breadcrumbSeparator} />
+                    <Link href="/Blog" className={styles.breadcrumbLink}>Blog</Link>
+                    <ChevronRight size={14} className={styles.breadcrumbSeparator} />
+                    <span className={styles.breadcrumbCurrent}>{post.title}</span>
+                </div>
 
-                    <div className={styles.searchBoxHeader}>
-                        <div className={styles.searchWrapper}>
-                            <input type="text" placeholder="Search Here" className={styles.searchInput} />
-                            <button className={styles.searchBtn}>
-                                <Search size={18} color="#666" />
-                            </button>
-                        </div>
+                <div className={styles.searchBoxHeader}>
+                    <div className={styles.searchWrapper}>
+                        <input type="text" placeholder="Search Here" className={styles.searchInput} />
+                        <button className={styles.searchBtn}>
+                            <Search size={18} color="#666" />
+                        </button>
                     </div>
                 </div>
             </div>
-            
-            <div className={styles.stickyNavSpacer}></div>
 
             <div className={styles.container}>
                 {/* Main Content Area */}

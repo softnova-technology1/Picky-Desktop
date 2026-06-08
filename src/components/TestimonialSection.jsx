@@ -36,21 +36,20 @@ const TestimonialSection = () => {
                 <div className={styles.tGrid}>
                     {testimonials.map((t, idx) => (
                         <div key={idx} className={styles.testiCard}>
-                            <div className={styles.quoteIcon}>“</div>
-                            <p className={styles.testiQuote}>{t.quote}</p>
+                            <div className={styles.testiStars}>
+                                {[...Array(5)].map((_, i) => (
+                                    <Star key={i} size={14} fill="var(--primary)" color="var(--primary)" />
+                                ))}
+                            </div>
+                            <p className={styles.testiQuote}>"{t.quote}"</p>
                             <div className={styles.testiUser}>
                                 <div className={styles.avatarWrapper}>
-                                    <Image src={t.img} alt={t.name} width={50} height={50} className={styles.avatarImg} />
+                                    <Image src={t.img} alt={t.name} width={40} height={40} className={styles.avatarImg} />
                                 </div>
                                 <div className={styles.testiMeta}>
                                     <span className={styles.testiName}>{t.name}</span>
                                     <span className={styles.testiRole}>{t.role}</span>
                                 </div>
-                            </div>
-                            <div className={styles.testiStars}>
-                                {[...Array(5)].map((_, i) => (
-                                    <Star key={i} size={12} fill="var(--primary)" color="var(--primary)" />
-                                ))}
                             </div>
                         </div>
                     ))}

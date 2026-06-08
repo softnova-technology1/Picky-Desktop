@@ -140,8 +140,8 @@ export default function AddressPage() {
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2.5rem' }}>
           <div>
-            <h1 style={{ fontSize: '2.5rem', fontWeight: '900', color: 'var(--foreground)' }}>Shipping Information</h1>
-            <p style={{ color: 'var(--text-muted)', fontSize: '1rem', fontWeight: '500' }}>Where should we send your order?</p>
+            <h1 style={{ fontSize: '2rem', fontWeight: '900', color: 'var(--foreground)', marginBottom: '0.5rem' }}>Shipping Information</h1>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', fontWeight: '500' }}>Where should we send your order?</p>
           </div>
           <Link href="/checkout" style={{ color: 'var(--primary)', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <ChevronLeft size={20} /> Back

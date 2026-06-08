@@ -27,6 +27,9 @@ const ProductCard = ({ product }) => {
   const productImgSrc = product.image || product.img || product.thumb || 'https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=800';
   const encodedImg = encodeURIComponent(typeof productImgSrc === 'string' ? productImgSrc : (productImgSrc?.src || productImgSrc));
 
+  // Determine stock status (defaults to true if not specified in data)
+  const inStock = product.inStock !== false && product.stock !== 0;
+
   const handleBuyNow = () => {
     setCheckoutItems([{ ...product, quantity: 1 }]);
     router.push('/checkout');
@@ -51,7 +54,7 @@ const ProductCard = ({ product }) => {
               src={productImgSrc}
               alt={product.name}
               fill
-              style={{ objectFit: 'contain' }}
+              style={{ objectFit: 'cover' }}
               className={styles.image}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
               onError={(e) => {
@@ -91,20 +94,33 @@ const ProductCard = ({ product }) => {
       </div>
 
       <div className={styles.content}>
-        <Link href={`/product/${product.id}?img=${encodedImg}`} className={styles.titleLink}>
-          <h3 className={styles.title}>{product.name}</h3>
-        </Link>
-        <div className={styles.priceContainer}>
-          <span className={styles.price}>${product.price}</span>
-          <span className={styles.originalPrice}>${originalPrice}</span>
+        <div className={styles.titleWrapper}>
+          <Link href={`/product/${product.id}?img=${encodedImg}`} className={styles.titleLink}>
+            <h3 className={styles.title}>{product.name}</h3>
+          </Link>
         </div>
-        <div className={styles.ratingContainer}>
-          <div className={styles.stars}>
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} size={14} fill={i < Math.floor(rating) ? "#FFC107" : "none"} color={i < Math.floor(rating) ? "#FFC107" : "#E0E0E0"} />
-            ))}
+        
+        <div className={styles.metaRow}>
+          <div className={styles.ratingContainer}>
+            <div className={styles.stars}>
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={12} fill={i < Math.floor(rating) ? "#FFC107" : "none"} color={i < Math.floor(rating) ? "#FFC107" : "#E0E0E0"} />
+              ))}
+            </div>
+            <span className={styles.reviewCount}>({reviewCount})</span>
           </div>
-          <span className={styles.reviewCount}>({reviewCount})</span>
+          <div className={styles.priceContainer}>
+            <span className={styles.price}>${product.price}</span>
+            <span className={styles.originalPrice}>${originalPrice}</span>
+          </div>
+        </div>
+
+        <div className={`${styles.stockStatus} ${inStock ? styles.inStock : styles.outOfStock}`}>
+          {inStock ? (
+            <><span className={styles.dot}></span> IN STOCK</>
+          ) : (
+            <><span className={styles.dot}></span> OUT OF STOCK</>
+          )}
         </div>
 
         <Link href={`/product/${product.id}?img=${encodedImg}`} className={styles.shopNowBtn}>

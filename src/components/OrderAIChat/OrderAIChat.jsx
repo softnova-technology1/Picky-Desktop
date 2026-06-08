@@ -103,12 +103,12 @@ const OrderAIChat = () => {
                 Order Support • Online
               </p>
             </div>
-            {/* <button 
+            <button 
               className={styles.closeHeaderBtn} 
               onClick={() => setIsOpen(false)}
             >
               <X size={18} />
-            </button> */}
+            </button>
           </div>
 
           <div className={styles.messagesArea} ref={scrollRef}>

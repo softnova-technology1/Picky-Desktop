@@ -53,8 +53,8 @@ const NewArrivalsCard = ({ product, index, onAddToCart }) => {
           <Image 
             src={product.image} 
             alt={product.name} 
-            width={400}
-            height={480}
+            width={200}
+            height={280}
             className={styles.image}
             priority={index < 4}
           />

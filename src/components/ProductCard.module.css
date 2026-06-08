@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  text-align: center;
+  text-align: left;
 }
 
 .card::before {
@@ -35,7 +35,7 @@
 .imageWrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 4/3;
   background: white;
   overflow: hidden;
   display: flex;
@@ -46,7 +46,7 @@
   position: relative;
   width: 100%;
   flex: 1;
-  padding: 30px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -118,23 +118,73 @@
 
 
 .content {
-  padding: 24px 20px;
+  padding: 16px 20px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  align-items: center;
+  gap: 4px;
+  align-items: flex-start;
+  text-align: left;
   flex: 1;
   background: white;
   position: relative;
 }
 
+.titleWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 2px;
+  margin-bottom: 0px;
+}
+
 .title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #1e1e1e;
-  line-height: 1.4;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #1a1a1a;
   margin: 0;
-  transition: color 0.3s;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.stockStatus {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  margin-top: 0px;
+  margin-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.inStock {
+  color: #059669; /* Green */
+}
+.inStock .dot {
+  background-color: #10b981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.outOfStock {
+  color: #dc2626; /* Red */
+}
+.outOfStock .dot {
+  background-color: #ef4444;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
 }
 
 .titleLink:hover .title {
@@ -144,8 +194,7 @@
 .priceContainer {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-top: -2px;
+  justify-content: flex-end;
 }
 
 .price {
@@ -156,13 +205,15 @@
 }
 
 .shopNowBtn {
-  margin-top: 8px;
+  margin-top: auto;
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.15em;
   color: #1a1a1a;
-  padding: 14px 28px;
+  padding: 12px 28px;
   border: 1px solid #eaeaea;
+  border-radius: 12px;
+  text-align: center;
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   width: 100%;
   display: block;
@@ -209,10 +260,8 @@
 .ratingContainer {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 2px;
-  margin-bottom: 4px;
+  justify-content: flex-start;
+  gap: 6px;
 }
 
 .stars {
@@ -227,9 +276,9 @@
 }
 
 .originalPrice {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: #a0a0a0;
   text-decoration: line-through;
-  margin-left: 10px;
+  margin-left: 8px;
   font-weight: 600;
 }

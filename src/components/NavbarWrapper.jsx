@@ -11,6 +11,8 @@ import AuthPopup from "@/components/AuthPopup";
 import CartNotification from "./CartNotification";
 import QuickCart from "./QuickCart";
 import CartDrawer from "./CartDrawer";
+import OrderAIChat from "@/components/OrderAIChat/OrderAIChat";
+import ScrollToTop from "./ScrollToTop";
 
 export default function NavbarWrapper({ children }) {
   const { user } = useAuth();
@@ -57,6 +59,12 @@ export default function NavbarWrapper({ children }) {
 
       {/* Global Quick Cart Feature */}
       <QuickCart />
+
+      {/* Scroll to Top Button */}
+      <ScrollToTop />
+
+      {/* Global AI Chat */}
+      <OrderAIChat />
     </>
   );
 }
