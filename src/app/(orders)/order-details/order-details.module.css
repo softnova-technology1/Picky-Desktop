@@ -2,7 +2,7 @@
   background-color: #fdfbff;
   min-height: 100vh;
   padding-bottom: 80px;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-body);
 }
 
 .container {
@@ -16,13 +16,13 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .title {
-  font-family: 'Playfair Display', serif;
-  font-size: 3.5rem;
-  font-weight: 500;
+  font-family: var(--font-heading);
+  font-size: 2.8rem;
+  font-weight: 800;
   color: #1a1a1a;
   margin-bottom: 12px;
 }
@@ -68,7 +68,7 @@
 
 .estimateDate {
   display: block;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 1.6rem;
   color: var(--primary);
   font-weight: 600;
@@ -158,12 +158,12 @@
 .detailsGrid {
   display: grid;
   grid-template-columns: 1fr 340px;
-  gap: 40px;
+  gap: 20px;
   align-items: start;
 }
 
 .sectionTitle {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 1.8rem;
   color: #1a1a1a;
   margin-bottom: 25px;
@@ -202,7 +202,7 @@
 
 .itemDetails h4 {
   font-size: 1.2rem;
-  font-weight: 500;
+  font-weight: 800;
   color: #1a1a1a;
   margin-bottom: 6px;
 }
@@ -249,7 +249,7 @@
   padding: 35px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 20px;
 }
 
 .sideSection label {
@@ -339,7 +339,7 @@
 }
 
 .totalRow span {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 2rem;
   font-weight: 700;
   color: var(--primary);

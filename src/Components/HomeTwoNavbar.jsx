@@ -220,7 +220,6 @@ export default function HomeTwoNavbar() {
             </Link>
             <div 
               className={styles.cartDrawerContainer}
-              onMouseEnter={openCart}
             >
               <button 
                 className={styles.iconBtn}
@@ -272,10 +271,6 @@ export default function HomeTwoNavbar() {
                         <Link href="/profile" className={styles.dropdownLink} onClick={() => setShowUserDropdown(false)}>
                           <div className={styles.linkIcon}><User size={14} /></div>
                           <span>PROFILE</span>
-                        </Link>
-                        <Link href="/account-settings" className={styles.dropdownLink} onClick={() => setShowUserDropdown(false)}>
-                          <div className={styles.linkIcon}><Settings size={14} /></div>
-                          <span>SETTINGS</span>
                         </Link>
                         <div className={styles.dropdownDivider}></div>
                         <Link href="/my-orders" className={styles.dropdownLink} onClick={() => setShowUserDropdown(false)}>

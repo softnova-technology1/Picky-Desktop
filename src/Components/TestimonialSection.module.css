@@ -49,7 +49,7 @@
   top: 40px;
   left: 40px;
   font-size: 8rem;
-  font-family: serif;
+  font-family: var(--font-heading);
   color: var(--primary);
   opacity: 0.05;
   line-height: 1;

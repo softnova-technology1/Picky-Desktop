@@ -3,9 +3,9 @@
 }
 
 .header {
-  padding: 120px 0 40px;
+  padding: 40px 0 40px;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .breadcrumb {
@@ -68,7 +68,7 @@
   display: grid;
   grid-template-columns: 380px 1fr;
   gap: 40px;
-  align-items: start;
+  /* Removed align-items: start to allow columns to stretch to the same height */
 }
 
 .sidebarColumn {
@@ -79,6 +79,26 @@
 .mainContent {
   flex: 1;
   min-width: 0;
+  height: 0; /* Hack to prevent it from expanding the grid row height */
+  min-height: 100%; /* Stretch to the grid row height defined by sidebar */
+  overflow-y: auto;
+  padding-right: 15px; /* Add some padding for the scrollbar */
+  padding-bottom: 30px; /* Add a gap so cards don't touch the bottom edge when scrolled fully */
+}
+
+/* Custom scrollbar for products */
+.mainContent::-webkit-scrollbar {
+  width: 6px;
+}
+.mainContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+.mainContent::-webkit-scrollbar-thumb {
+  background: rgba(100, 61, 151, 0.2);
+  border-radius: 10px;
+}
+.mainContent::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
 }
 
 .grid {
@@ -94,6 +114,12 @@
 
   .sidebarColumn {
     display: none;
+  }
+  
+  .mainContent {
+    height: auto;
+    min-height: auto;
+    overflow-y: visible;
   }
 }
 

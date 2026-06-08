@@ -51,7 +51,7 @@ const ProductCard = ({ product }) => {
               src={productImgSrc}
               alt={product.name}
               fill
-              style={{ objectFit: 'contain' }}
+              style={{ objectFit: 'cover' }}
               className={styles.image}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
               onError={(e) => {
@@ -91,20 +91,25 @@ const ProductCard = ({ product }) => {
       </div>
 
       <div className={styles.content}>
-        <Link href={`/product/${product.id}?img=${encodedImg}`} className={styles.titleLink}>
-          <h3 className={styles.title}>{product.name}</h3>
-        </Link>
-        <div className={styles.priceContainer}>
-          <span className={styles.price}>${product.price}</span>
-          <span className={styles.originalPrice}>${originalPrice}</span>
+        <div className={styles.titleWrapper}>
+          <Link href={`/product/${product.id}?img=${encodedImg}`} className={styles.titleLink}>
+            <h3 className={styles.title}>{product.name}</h3>
+          </Link>
         </div>
-        <div className={styles.ratingContainer}>
-          <div className={styles.stars}>
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} size={14} fill={i < Math.floor(rating) ? "#FFC107" : "none"} color={i < Math.floor(rating) ? "#FFC107" : "#E0E0E0"} />
-            ))}
+        
+        <div className={styles.metaRow}>
+          <div className={styles.ratingContainer}>
+            <div className={styles.stars}>
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={12} fill={i < Math.floor(rating) ? "#FFC107" : "none"} color={i < Math.floor(rating) ? "#FFC107" : "#E0E0E0"} />
+              ))}
+            </div>
+            <span className={styles.reviewCount}>({reviewCount})</span>
           </div>
-          <span className={styles.reviewCount}>({reviewCount})</span>
+          <div className={styles.priceContainer}>
+            <span className={styles.price}>${product.price}</span>
+            <span className={styles.originalPrice}>${originalPrice}</span>
+          </div>
         </div>
 
         <Link href={`/product/${product.id}?img=${encodedImg}`} className={styles.shopNowBtn}>

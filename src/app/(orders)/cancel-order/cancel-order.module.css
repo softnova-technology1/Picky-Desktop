@@ -2,7 +2,7 @@
   background-color: #fbfcff;
   min-height: 100vh;
   padding-bottom: 60px;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-body);
 }
 
 .container {
@@ -16,13 +16,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 .title {
-  font-family: 'Playfair Display', serif;
-  font-size: 3.5rem;
-  font-style: italic;
+  font-family: var(--font-heading);
+  font-size: 2.8rem;
+  font-style: normal;
   font-weight: 700;
   color: #1a1a1a;
   margin-bottom: 10px;
@@ -69,10 +69,10 @@
 }
 
 .sectionTitle {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 1.4rem;
-  font-style: italic;
-  font-weight: 600;
+  font-style: normal;
+  font-weight: 800;
   color: #1a1a1a;
   margin-bottom: 25px;
   padding-bottom: 15px;
@@ -108,7 +108,7 @@
 }
 
 .itemInfo h4 {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 1.25rem;
   color: #1a1a1a;
   margin-bottom: 6px;
@@ -127,16 +127,16 @@
 }
 
 .itemPrice {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 1.15rem;
-  font-style: italic;
-  font-weight: 500;
+  font-style: normal;
+  font-weight: 800;
   color: #1a1a1a;
 }
 
 /* Reason Selection */
 .reasonSection {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .helperText {
@@ -166,7 +166,7 @@
 .commentsSection h3 {
   font-size: 1rem;
   font-weight: 700;
-  font-style: italic;
+  font-style: normal;
   color: #1a1a1a;
   margin-bottom: 20px;
 }
@@ -192,13 +192,13 @@
 .sidePanel {
   background-color: #f9f7ff;
   border-radius: 20px;
-  padding: 40px;
+  padding: 20px 30px;
 }
 
 .refundHeader {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 1.8rem;
-  font-style: italic;
+  font-style: normal;
   font-weight: 600;
   color: var(--primary);
   margin-bottom: 35px;
@@ -250,7 +250,7 @@
 }
 
 .totalValue {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 700;
   color: #1a1a1a;
