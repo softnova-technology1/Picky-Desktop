@@ -1,5 +1,5 @@
 .navbar {
-  position: fixed;
+  position:fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -585,4 +585,4 @@
     color: #d32f2f;
     text-decoration: underline;
     transform: translateX(2px);
-}
+}
