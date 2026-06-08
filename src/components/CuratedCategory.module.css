@@ -1,5 +1,5 @@
 .categories {
-  padding: 100px 0;
+  padding: 40px 0;
   position: relative;
   z-index: 5;
   background: white;
@@ -38,6 +38,6 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 30px;
-  max-width: 1400px;
+  max-width: 1100px;
   margin: 0 auto;
 }

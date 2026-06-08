@@ -1,11 +1,11 @@
 .vendorsArea {
-  padding: 100px 0;
+  padding: 40px 0;
   background-color: rgb(250, 246, 255);
   /* border-radius: 60px; */
 }
 
 .vendorHeader {
-  margin-bottom: 60px;
+  margin-bottom: 30px;
   text-align: center;
 }
 

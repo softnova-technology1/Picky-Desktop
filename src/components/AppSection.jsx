@@ -8,7 +8,7 @@ import styles from './AppSection.module.css';
 
 const AppSection = () => {
     return (
-        <section className="container" style={{ marginBottom: '100px' }}>
+        <section className="container" style={{ marginTop: '60px', marginBottom: '40px' }}>
             <div className={styles.appSection}>
                 <div className={styles.appContent}>
                     <div className={styles.appBadge}>
