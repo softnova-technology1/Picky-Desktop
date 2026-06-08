@@ -37,20 +37,22 @@ import { blogPosts } from "@/data/blogData";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, X } from "lucide-react";
+import { Check, X, LogOut } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 export default function Home2() {
-  const [userName, setUserName] = useState("Member");
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [activeCategory, setActiveCategory] = useState("For You");
-  const [showUserDropdown, setShowUserDropdown] = useState(false);
-  const [showAuthPopup, setShowAuthPopup] = useState(false);
-  const [authTab, setAuthTab] = useState('login');
-  
   const router = useRouter();
+  const { user } = useAuth();
   const { addToCart, triggerNotification, setCheckoutItems } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
-  
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [activeCategory, setActiveCategory] = useState("For You");
+  const [showAuthPopup, setShowAuthPopup] = useState(false);
+  const [authTab, setAuthTab] = useState('login');
+
+  const userName = user?.name || user?.email || "Member";
+
   // Local notification state for Wishlist (to support custom titles without modifying global component)
   const [localNotif, setLocalNotif] = useState({ show: false, product: null, title: "" });
 
@@ -100,47 +102,36 @@ export default function Home2() {
 
   const promoSlides = [
     {
-      brand: "ZARA",
-      offer: "60% OFF",
-      image: "https://i.pinimg.com/1200x/28/56/34/28563432c82fb689e5537b23e45f30fd.jpg",
-      bg: "#f3f3f3"
+      label: "EXCLUSIVELY OUR",
+      brand: "BRAND",
+      offer: "50% OFF",
+      imageLeft: "https://i.pinimg.com/1200x/fa/c6/11/fac611cd46ac95127d507094ed621a22.jpg",
+      imageRight: "https://i.pinimg.com/1200x/40/f4/9a/40f49ab5c366d2de33862ca42957f3c4.jpg",
     },
     {
-      brand: "GUCCI",
+      label: "PREMIUM SELECTION",
+      brand: "URBAN",
       offer: "30% OFF",
-      image: "https://i.pinimg.com/1200x/1d/f3/c3/1df3c39405253649603248231357d0d2.jpg",
-      bg: "#e9ecef"
+      imageLeft: "https://i.pinimg.com/736x/b5/e8/f4/b5e8f40f058cd41615d062827cf768ee.jpg",
+      imageRight: "https://i.pinimg.com/1200x/bb/7f/66/bb7f66aac9f9563526fd0e2fa2f1550d.jpg",
     },
     {
-      brand: "PRADA",
+      label: "NEW ARRIVALS",
+      brand: "LUXE",
       offer: "NEW DROP",
-      image: "https://i.pinimg.com/1200x/13/86/b1/1386b1f8a086570c65c445c4987527d3.jpg",
-      bg: "#f8f9fa"
+      imageLeft: "https://i.pinimg.com/1200x/44/a7/a9/44a7a90cb765d8880e1896c39fa71ab9.jpg",
+      imageRight: "https://i.pinimg.com/1200x/8d/69/43/8d69436f5c78995241d147b62a78b2fa.jpg",
     }
   ];
 
   useEffect(() => {
-    const savedName = localStorage.getItem('userName');
-    if (savedName) setUserName(savedName);
-
     // Carousel Timer
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % promoSlides.length);
     }, 8000); // 8 seconds per slide
 
     return () => clearInterval(timer);
-  }, []);
-
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (showUserDropdown && !event.target.closest(`.${styles.userDropdownContainer}`)) {
-        setShowUserDropdown(false);
-      }
-    };
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, [showUserDropdown]);
+  }, [promoSlides.length]);
 
   // Entrance Scroll Animation Observer
   useEffect(() => {
@@ -149,8 +140,6 @@ export default function Home2() {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add(styles.activeReveal);
-            // Optional: stop observing once revealed
-            observer.unobserve(entry.target);
           }
         });
       },
@@ -166,7 +155,7 @@ export default function Home2() {
   // Magnetic Button Effect
   useEffect(() => {
     const magneticBtns = document.querySelectorAll(`.${styles.magneticBtn}`);
-    
+
     const handleMouseMove = (e) => {
       const btn = e.currentTarget;
       const rect = btn.getBoundingClientRect();
@@ -193,11 +182,6 @@ export default function Home2() {
     };
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('userName');
-    window.location.href = '/';
-  };
 
   const categoryRibbon = [
     { name: "For You", icon: ShoppingBag },
@@ -219,58 +203,52 @@ export default function Home2() {
   return (
     <main className={styles.main}>
 
-      {/* Promo Carousel (Full Width Hero) */}
+      {/* Hero Split Slider - Matched to Image 2 Reference */}
       <section className={styles.promoContainer}>
-        <div className={styles.carousel}>
+        <div className={styles.heroSlider}>
           {promoSlides.map((slide, index) => (
             <div
               key={index}
-              className={`${styles.slide} ${currentSlide === index ? styles.slideActive : ''}`}
+              className={`${styles.splitSlide} ${currentSlide === index ? styles.slideActive : ''}`}
             >
-              <div className={styles.slideImage}>
-                <Image
-                  src={slide.image}
-                  alt={slide.brand}
-                  fill
-                  style={{ objectFit: "cover" }}
-                />
+              <div className={styles.leftPane}>
+                <Image src={slide.imageLeft} alt="Model Left" fill className={styles.heroPaneImg} />
               </div>
-              <div className={styles.slideContent}>
-                <div className={styles.brandLabel}>
-                  <h2 className={styles.brandSolid}>{slide.brand}</h2>
-                  <h2 className={styles.brandOutline}>{slide.brand}</h2>
+              <div className={styles.rightPane}>
+                <Image src={slide.imageRight} alt="Model Right" fill className={styles.heroPaneImg} />
+                <div className={styles.paneOverlay} />
+              </div>
+
+              <div className={styles.centerCard}>
+                <div className={styles.cardInner}>
+                  <p className={styles.cardLabel}>{slide.label}</p>
+                  <h2 className={styles.cardBrand}>{slide.brand}</h2>
+                  <h3 className={styles.cardOffer}>{slide.offer}</h3>
+                  <div className={styles.cardDivider} />
+                  <Link href="/shop" className={styles.cardCta}>
+                    SHOP NOW <ArrowRight size={14} />
+                  </Link>
                 </div>
-                <h3 className={styles.offerText}>{slide.offer}</h3>
-                <p className={styles.moreText}>+MORE</p>
-                <button className={`${styles.slideCTA} ${styles.magneticBtn}`}>SHOP COLLECTION</button>
               </div>
             </div>
           ))}
 
-          <div className={styles.navControls}>
-            <button
-              className={styles.navArrow}
-              onClick={() => setCurrentSlide((prev) => (prev - 1 + promoSlides.length) % promoSlides.length)}
-            >
-              <ChevronLeft size={24} />
-            </button>
+          {/* Navigation Controls */}
+          <button className={`${styles.slideNav} ${styles.prevBtn}`} onClick={() => setCurrentSlide((prev) => (prev - 1 + promoSlides.length) % promoSlides.length)}>
+            <ChevronLeft size={24} />
+          </button>
+          <button className={`${styles.slideNav} ${styles.nextBtn}`} onClick={() => setCurrentSlide((prev) => (prev + 1) % promoSlides.length)}>
+            <ChevronRight size={24} />
+          </button>
 
-            <div className={styles.carouselDots}>
-              {promoSlides.map((_, index) => (
-                <button
-                  key={index}
-                  className={`${styles.dot} ${currentSlide === index ? styles.dotActive : ''}`}
-                  onClick={() => setCurrentSlide(index)}
-                />
-              ))}
-            </div>
-
-            <button
-              className={styles.navArrow}
-              onClick={() => setCurrentSlide((prev) => (prev + 1) % promoSlides.length)}
-            >
-              <ChevronRight size={24} />
-            </button>
+          <div className={styles.sliderDots}>
+            {promoSlides.map((_, idx) => (
+              <div
+                key={idx}
+                className={`${styles.heroDot} ${currentSlide === idx ? styles.heroDotActive : ''}`}
+                onClick={() => setCurrentSlide(idx)}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -362,7 +340,7 @@ export default function Home2() {
                     <span className={styles.refPriceNow}>{prod.price}</span>
                     <span className={styles.refPriceOld}>{prod.old}</span>
                   </div>
-                  <button 
+                  <button
                     className={styles.refAddToCart}
                     onClick={(e) => handleBuyNow(e, { ...prod, id: prodId })}
                   >
@@ -505,7 +483,7 @@ export default function Home2() {
                   <div className={styles.spMiniBody}>
                     <h4 className={styles.spMiniTitle}>{card.title}</h4>
                     <p className={styles.spMiniDesc}>{card.desc}</p>
-                    <button 
+                    <button
                       className={styles.spMiniBtn}
                       onClick={(e) => handleBuyNow(e, { ...card, name: card.title, image: card.img, price: "₹0" })}
                     >
@@ -647,7 +625,7 @@ export default function Home2() {
 
                 <div className={styles.podiumAction}>
                   <div className={styles.podiumPrice}>₹4,999</div>
-                  <button 
+                  <button
                     className={`${styles.podiumAddBtn} ${styles.magneticBtn}`}
                     onClick={(e) => handleAddToCart(e, { id: "best-01", name: "Nexus Stealth Edition", price: "₹4,999", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999" })}
                   >
@@ -864,7 +842,7 @@ export default function Home2() {
                 <div className={styles.revStarsMini}>
                   {[1, 2, 3, 4, 5].map(s => <Star key={s} size={12} fill="#FFD700" color="#FFD700" />)}
                 </div>
-                <p className={styles.revText}>"{rev.text}"</p>
+                <p className={styles.revText}>{rev.text}</p>
 
                 <div className={styles.revProductHighlight}>
                   <span className={styles.revBoughtTag}>PURCHASED:</span>
@@ -893,7 +871,7 @@ export default function Home2() {
                 <div className={styles.revStarsMini}>
                   {[1, 2, 3, 4, 5].map(s => <Star key={s} size={12} fill="#FFD700" color="#FFD700" />)}
                 </div>
-                <p className={styles.revText}>"{rev.text}"</p>
+                <p className={styles.revText}>{rev.text}</p>
                 <div className={styles.revProductHighlight}>
                   <span className={styles.revBoughtTag}>PURCHASED:</span>
                   <span className={styles.revBoughtName}>{rev.product}</span>
@@ -915,7 +893,7 @@ export default function Home2() {
       <AnimatePresence>
         {localNotif.show && (
           <div className={styles.notifOverlay}>
-            <motion.div 
+            <motion.div
               className={styles.notifCard}
               initial={{ opacity: 0, y: 50, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -934,9 +912,9 @@ export default function Home2() {
               </div>
               <div className={styles.notifBody}>
                 <div className={styles.notifImgBox}>
-                  <Image 
-                    src={localNotif.product.image?.src || localNotif.product.image || localNotif.product.img || ""} 
-                    alt={localNotif.product.name} 
+                  <Image
+                    src={localNotif.product?.image || localNotif.product?.img || "/images/placeholder.png"}
+                    alt={localNotif.product?.name || "Product"}
                     fill
                     style={{ objectFit: 'cover' }}
                   />

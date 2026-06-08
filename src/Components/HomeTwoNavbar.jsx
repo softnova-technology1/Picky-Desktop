@@ -11,6 +11,7 @@ import {
   User,
   Settings,
   ArrowRight,
+  MapPin,
   X
 } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -74,6 +75,30 @@ export default function HomeTwoNavbar() {
               <div className={styles.tickerDot}></div>
             </div>
           ))}
+        </div>
+        <div className={styles.topLocation}>
+          <MapPin size={12} strokeWidth={3} />
+          <span className={styles.topLocationText}>Peravurani - Thanjavur, India</span>
+          <div className={styles.indiaFlag}>
+            <svg viewBox="0 0 640 480" width="16" height="12">
+              <path fill="#ff9933" d="M0 0h640v160H0z" />
+              <path fill="#ffffff" d="M0 160h640v160H0z" />
+              <path fill="#128807" d="M0 320h640v160H0z" />
+              <g transform="translate(320 240)">
+                <circle r="40" fill="#000080" />
+                <circle r="35" fill="#ffffff" />
+                <circle r="5" fill="#000080" />
+                {[...Array(24)].map((_, j) => (
+                  <path
+                    key={j}
+                    fill="#000080"
+                    d="M0-35L1.5 0 0 35-1.5 0z"
+                    transform={`rotate(${j * 15})`}
+                  />
+                ))}
+              </g>
+            </svg>
+          </div>
         </div>
       </div>
       <nav className={styles.navbar}>
@@ -221,7 +246,7 @@ export default function HomeTwoNavbar() {
                   <div className={styles.dropdownHeader}>
                     <div className={styles.headerTop}>
                       <div className={styles.miniAvatar}>
-                        <img src="/images/amber.png" alt="User" />
+                        <Image src="/images/amber.png" alt="User" width={50} height={50} />
                       </div>
                       <div className={styles.headerInfo}>
                         <span className={styles.dropdownWelcome}>{userName}</span>
