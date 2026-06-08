@@ -10,7 +10,7 @@
   min-height: 100vh;
   padding: 4rem 0 0;
   background-color: white;
-  font-family: var(--font-geist-sans), sans-serif;
+  font-family: var(--font-body);
   color: var(--editorial-text);
   overflow-x: hidden;
   
@@ -29,7 +29,7 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 0;
   align-items: center;
-  margin-bottom: 8rem;
+  margin-bottom: 4rem;
   background: linear-gradient(135deg, #643d97 0%, var(--editorial-bg) 100%);
   border-radius: 40px;
   overflow: visible; /* Changed from hidden to allow shadow to overflow */
@@ -84,7 +84,7 @@
   line-height: 1;
   margin-bottom: 2rem;
   letter-spacing: -0.04em;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
 }
 
 .heroDescription {
@@ -121,8 +121,8 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 4rem;
-  padding-bottom: 2rem;
+  margin-bottom: 10px;
+  padding-bottom: 1rem;
   border-bottom: 1px solid var(--editorial-border);
 }
 
@@ -168,8 +168,8 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 3rem 2rem;
-  margin-bottom: 10rem;
+  gap: 2rem 2rem;
+  margin-bottom: 5rem;
 }
 
 /* Card Styling - Restored Original Layout */
@@ -181,7 +181,7 @@
   transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
   border: 1px solid #f2f2f2;
-  height: 100%;
+  height: 380px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -221,9 +221,10 @@
 }
 
 .image {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
+  object-fit: contain;
+  width: 85%;
+  height: 85%;
+  margin: auto;
 }
 
 .badge {
@@ -310,24 +311,31 @@
 }
 
 .content {
-  padding: 24px 20px;
+  padding: 10px 14px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   align-items: center;
   text-align: center;
+  justify-content: center;
+  height: 110px;
 }
 
 .name {
-  font-size: 1.15rem;
-  font-weight: 100;
+  font-size: 0.95rem;
+  font-weight: 600;
   color: var(--editorial-text);
-  line-height: 1.4;
+  line-height: 1.2;
   margin: 0;
+  height: 2.4rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .price {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: 950;
   color: #643d97;
   letter-spacing: -0.02em;

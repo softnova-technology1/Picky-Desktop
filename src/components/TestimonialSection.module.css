@@ -1,11 +1,11 @@
 .testimonialArea {
-  padding: 80px 0;
+  padding: 40px 0;
     background-color: rgb(250, 246, 255);
 }
 
 .tHeader {
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 }
 
 .tTitle {
@@ -21,26 +21,26 @@
 .tGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  max-width: 1300px;
+  gap: 30px;
+  max-width: 1440px !important;
   margin: 0 auto;
 }
 
 .testiCard {
   background: white;
-  padding: 60px 50px;
-  border-radius: 40px;
+  padding: 24px;
+  border-radius: 20px;
   position: relative;
-  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
-  border: 1px solid #f8f8f8;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f0f0f0;
   display: flex;
   flex-direction: column;
 }
 
 .testiCard:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 40px 80px rgba(100, 61, 151, 0.08);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(100, 61, 151, 0.06);
   border-color: rgba(100, 61, 151, 0.1);
 }
 
@@ -49,7 +49,7 @@
   top: 40px;
   left: 40px;
   font-size: 8rem;
-  font-family: serif;
+  font-family: var(--font-heading);
   color: var(--primary);
   opacity: 0.05;
   line-height: 1;
@@ -57,10 +57,10 @@
 }
 
 .testiQuote {
-  font-size: 1.25rem;
-  line-height: 1.8;
+  font-size: 0.95rem;
+  line-height: 1.65;
   color: #444;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   font-style: italic;
   position: relative;
   z-index: 2;
@@ -69,17 +69,19 @@
 .testiUser {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   margin-top: auto;
+  border-top: 1px solid #f5f5f5;
+  padding-top: 16px;
 }
 
 .avatarWrapper {
-  width: 56px;
-  height: 56px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1.5px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .avatarImg {
@@ -96,19 +98,19 @@
 .testiName {
   font-weight: 800;
   color: #1a1a1a;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
 }
 
 .testiRole {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
 }
 
 .testiStars {
   display: flex;
   gap: 3px;
-  margin-top: 24px;
+  margin-bottom: 16px;
 }

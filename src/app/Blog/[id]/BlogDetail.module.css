@@ -1,7 +1,7 @@
 .blogDetailPage {
     padding: 0px 20px;
     /* background-color: #fff; */
-    font-family: 'Outfit', sans-serif;
+    font-family: var(--font-heading);
     color: #171717;
     margin-bottom:3%;
 }
@@ -25,30 +25,15 @@
     gap: 40px;
 }
 
-/* Fixed Nav Header */
-.stickyNav {
-    position: fixed;
-   
-    left: 0;
-    width: 100%;
-    background: #fff; /* Solid white to ensure visibility */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    z-index: 9999; /* Higher priority */
-    border-bottom: 1px solid #eee;
-    padding: 12px 0;
-    transition: all 0.3s ease;
-}
-
-.stickyNavSpacer {
-    height: 70px; /* Adjust based on stickyNav height */
-}
-
-.stickyNavContainer {
-    width: 100%;
-    padding: 0 40px;
+/* Top Navigation Bar */
+.topBarContainer {
+    max-width: 1200px;
+    margin: 20px auto 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid #eee;
 }
 
 /* Breadcrumb override */
@@ -76,7 +61,7 @@
 }
 
 .breadcrumbLink:hover {
-    color: #df213a;
+    color: var(--primary);
 }
 
 .breadcrumbIcon {
@@ -84,7 +69,7 @@
 }
 
 .breadcrumbLink:hover .breadcrumbIcon {
-    color: #df213a;
+    color: var(--primary);
 }
 
 .breadcrumbSeparator {
@@ -94,7 +79,7 @@
 }
 
 .breadcrumbCurrent {
-    color: #df213a;
+    color: var(--primary);
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
@@ -105,8 +90,9 @@
 
 /* Header & Meta */
 .title {
+    font-family: var(--font-heading);
     font-size: 2.25rem;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 1.2;
     margin-bottom: 30px;
 }
@@ -131,7 +117,7 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    background: #df213a;
+    background: var(--primary);
     padding: 10px 20px;
     border-radius: 10px;
     color: white;
@@ -157,17 +143,19 @@
     align-items: center;
     gap: 6px;
     font-size: 0.8rem;
-    color: #df213a;
+    color: var(--primary);
     display: block;
     margin-bottom: 5px;
 }
 .articleBody {
+    font-family: var(--font-body);
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    line-height: 1.7;
+    gap: 30px;
+    line-height: 1.8;
     font-size: 1.05rem;
-    color: #444;
+    color: #2c2c2c;
+    max-width: 800px;
 }
 
 .imageGrid {
@@ -185,13 +173,17 @@
 }
 
 .quote {
-    background: #fdf2f3;
-    padding: 40px;
+    background: rgba(100, 61, 151, 0.04);
+    padding: 40px 50px;
     border-radius: 20px;
     position: relative;
     font-style: italic;
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    line-height: 1.6;
     color: #171717;
-    margin: 20px 0;
+    margin: 30px 0;
+    border-left: 4px solid var(--primary);
 }
 
 .quoteIcon {
@@ -199,7 +191,7 @@
     position: absolute;
     top: -20px;
     left: 20px;
-    color: #df213a;
+    color: var(--primary);
     opacity: 0.3;
 }
 
@@ -226,7 +218,7 @@
 }
 
 .searchInput:focus {
-    border-color: #df213a;
+    border-color: var(--primary);
 }
 
 .searchBtn {
@@ -243,8 +235,9 @@
 }
 
 .sectionTitle {
+    font-family: var(--font-heading);
     font-size: 1.25rem;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 25px;
     position: relative;
 }
@@ -265,13 +258,14 @@
 
 .recentDate {
     font-size: 0.8rem;
-    color: #df213a;
+    color: var(--primary);
     display: block;
     margin-bottom: 5px;
 }
 
 .recentTitle {
-    font-weight: 600;
+    font-family: var(--font-heading);
+    font-weight: 700;
     font-size: 0.95rem;
     line-height: 1.4;
 }
@@ -294,7 +288,7 @@
 }
 
 .topicTag:hover {
-    background: #df213a;
+    background: var(--primary);
     color: white;
 }
 
@@ -323,7 +317,7 @@
         font-size: 1.75rem;
     }
 
-    .stickyNavContainer {
+    .topBarContainer {
         flex-direction: column;
         gap: 15px;
         align-items: flex-start;

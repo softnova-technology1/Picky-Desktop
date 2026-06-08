@@ -7,7 +7,7 @@
     /* background-color: #ffffff; Soft ambient grey */
     padding: 20px;
     /* margin-top: 3em; */
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
 }
 
 .sliderWrapper {
