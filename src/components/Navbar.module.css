@@ -586,3 +586,8 @@
     text-decoration: underline;
     transform: translateX(2px);
 }
+
+.navSpacer {
+  height: var(--navbar-height, 90px);
+}
+
