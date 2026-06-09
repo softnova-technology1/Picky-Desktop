@@ -19,7 +19,8 @@ const ACCORDION_DATA = [
         price: "$45.00",
         img: lux,
         gradient: "linear-gradient(135deg, #ddbef7ff 0%, #f7d8b5 100%)",
-        textColor: "#83431bff"
+        textColor: "#83431bff",
+        link: "/category/books"
     },{
         id: 2,
         title: "Electronics",
@@ -28,7 +29,8 @@ const ACCORDION_DATA = [
         price: "$899.00",
         img: shirt,
         gradient: "linear-gradient(135deg, #f0eaf5ff 0%, #ddbef7ff 100%)",
-        textColor: "#0f4f5f7c"
+        textColor: "#0f4f5f7c",
+        link: "/category/electronics"
     },
     {
         id: 3,
@@ -38,7 +40,8 @@ const ACCORDION_DATA = [
         price: "$120.00",
         img: lux,
         gradient: "linear-gradient(135deg, #eaf5eb 0%, #ddbef7ff 100%)",
-        textColor: "#1e2c20"
+        textColor: "#1e2c20",
+        link: "/category/chocolates"
     },
     {
         id: 4,
@@ -48,7 +51,8 @@ const ACCORDION_DATA = [
         price: "$350.00",
         img: shirt,
         gradient: "linear-gradient(135deg, #ddbef7ff 0%, #f7d1d1 100%)",
-        textColor: "#5e2e2e"
+        textColor: "#5e2e2e",
+        link: "/category/home-decor"
     },
     {
         id: 5,
@@ -58,7 +62,8 @@ const ACCORDION_DATA = [
         price: "$210.00",
         img: lux,
         gradient: "linear-gradient(135deg, #eaedfc 0%, #ddbef7ff 100%)",
-        textColor: "#2e325e"
+        textColor: "#2e325e",
+        link: "/category/fashion"
     }
 ];
 
@@ -120,12 +125,18 @@ export default function Shop() {
                                     <div className={styles.priceTag}>{item.price}</div>
                                     <h2 className={styles.expandedTitle}>{item.title}</h2>
                                     <p className={styles.expandedDesc}>{item.desc}</p>
-                                    <button 
+                                    <Link 
+                                        href={item.link}
                                         className={styles.buyBtn} 
-                                        style={{ backgroundColor: item.textColor, color: '#fff' }}
+                                        style={{ 
+                                            backgroundColor: item.textColor, 
+                                            color: '#fff',
+                                            display: 'inline-block',
+                                            textDecoration: 'none'
+                                        }}
                                     >
                                         BUY NOW
-                                    </button>
+                                    </Link>
                                 </motion.div>
                             )}
                         </AnimatePresence>
