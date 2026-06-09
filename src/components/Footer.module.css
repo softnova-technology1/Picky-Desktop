@@ -1,6 +1,7 @@
 /* Footer Module Styles */
 .footer {
-  background: #111827; /* Rich dark background */
+  background: #111827;
+  /* Rich dark background */
   color: #f1f5f9;
   padding: 0;
   font-family: inherit;
@@ -130,7 +131,7 @@
 
 .newsletterBtn {
   padding: 0 20px;
-  background:  #E4B1F0;
+  background: #E4B1F0;
   color: #111827;
   font-weight: 700;
   border: none;
@@ -164,7 +165,7 @@
 }
 
 .socialIcon:hover {
-  background:  #E4B1F0;
+  background: #E4B1F0;
   color: #111827;
   border-color: #fbbf24;
   transform: translateY(-3px);
@@ -277,10 +278,12 @@
   .footerMainGrid {
     grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
   }
+
   .footerColNewsletter {
     grid-column: span 4;
     margin-top: 20px;
   }
+
   .newsletterBox {
     max-width: 400px;
   }
@@ -292,7 +295,9 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
   }
-  .footerColBrand, .footerColNewsletter {
+
+  .footerColBrand,
+  .footerColNewsletter {
     grid-column: span 2;
   }
   .newsletterBox {
@@ -304,14 +309,18 @@
   .footerMainGrid {
     grid-template-columns: 1fr;
   }
-  .footerColBrand, .footerColNewsletter {
+
+  .footerColBrand,
+  .footerColNewsletter {
     grid-column: span 1;
   }
+
   .footerBottomContent {
     flex-direction: column;
     text-align: center;
     justify-content: center;
   }
+
   .paymentMethods {
     justify-content: center;
   }

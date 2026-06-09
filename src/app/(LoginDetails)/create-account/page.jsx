@@ -1,6 +1,7 @@
 "use client"
 import styles from './CreateAccount.module.css';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AuthBackground from '@/components/AuthBackground';
@@ -9,16 +10,32 @@ import { useAuth } from '@/context/AuthContext';
 
 const CreateAccount = () => {
     const [showPassword, setShowPassword] = useState(false);
-    const { login } = useAuth();
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [password, setPassword] = useState("");
+    const [agreed, setAgreed] = useState(false);
+    const [error, setError] = useState("");
+    
+    const { register } = useAuth();
     const router = useRouter();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const name = e.target[0].value;
-        const email = e.target[1].value;
-        // Simulate register success
-        login({ email, name });
-        router.push('/hometwo');
+        setError("");
+
+        if (!agreed) {
+            setError("You must agree to the Terms of Service and Privacy Policy");
+            return;
+        }
+
+        try {
+            register(name, email, password);
+            sessionStorage.setItem('picky_registration_success', 'true');
+            router.push('/login');
+        } catch (err) {
+            setError(err.message);
+        }
     };
 
     return (
@@ -27,11 +44,8 @@ const CreateAccount = () => {
             <div className={styles.card}>
                 {/* Image/Blue Side */}
                 <div className={styles.visualSide}>
-                    <div className={styles.logo}>
-                         <div className={styles.logoIcon}>
-                             <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M4 4h7v7H4V4zm0 9h7v7H4v-7zm9-9h7v7h-7V4zm0 9h7v7h-7v-7z"/></svg>
-                         </div>
-                         <span className={styles.logoName}>Picky</span>
+                    <div className={styles.logo} style={{ display: 'flex', alignItems: 'center' }}>
+                         <Image src="/logos.png" alt="Picky Logo" width={110} height={36} priority style={{ objectFit: 'contain' }} />
                     </div>
 
                     <div className={styles.heroContent}>
@@ -62,12 +76,21 @@ const CreateAccount = () => {
                         <p className={styles.subtitle}>Join Picky and start exploring the possibilities.</p>
                     </div>
 
+                    {error && <div className={styles.errorMessage}>{error}</div>}
+
                     <form className={styles.form} onSubmit={handleSubmit}>
                         <div className={styles.field}>  
                             <label className={styles.label}>Full Name</label>
                             <div className={styles.inputWrapper}>
                                 <svg className={styles.fieldIcon} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                                <input type="text" placeholder="John Doe" className={styles.input} required />
+                                <input 
+                                    type="text" 
+                                    placeholder="John Doe" 
+                                    className={styles.input} 
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    required 
+                                />
                             </div>
                         </div>
 
@@ -75,7 +98,14 @@ const CreateAccount = () => {
                             <label className={styles.label}>Email Address</label>
                             <div className={styles.inputWrapper}>
                                 <svg className={styles.fieldIcon} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                                <input type="email" placeholder="john@example.com" className={styles.input} required />
+                                <input 
+                                    type="email" 
+                                    placeholder="john@example.com" 
+                                    className={styles.input} 
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required 
+                                />
                             </div>
                         </div>
 
@@ -83,7 +113,14 @@ const CreateAccount = () => {
                             <label className={styles.label}>Mobile Number</label>
                             <div className={styles.inputWrapper}>
                                 <svg className={styles.fieldIcon} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-                                <input type="text" placeholder="+1 (555) 000-0000" className={styles.input} required />
+                                <input 
+                                    type="text" 
+                                    placeholder="+1 (555) 000-0000" 
+                                    className={styles.input} 
+                                    value={phone}
+                                    onChange={(e) => setPhone(e.target.value)}
+                                    required 
+                                />
                             </div>
                         </div>
 
@@ -91,7 +128,14 @@ const CreateAccount = () => {
                             <label className={styles.label}>Password</label>
                             <div className={styles.inputWrapper}>
                                 <svg className={styles.fieldIcon} width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                                <input type={showPassword ? 'text' : 'password'} placeholder="••••••••" className={styles.input} required />
+                                <input 
+                                    type={showPassword ? 'text' : 'password'} 
+                                    placeholder="••••••••" 
+                                    className={styles.input} 
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required 
+                                />
                                 <button type="button" className={styles.eyeBtn} onClick={() => setShowPassword(!showPassword)}>
                                      {showPassword ? (
                                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
@@ -103,7 +147,14 @@ const CreateAccount = () => {
                         </div>
 
                         <div className={styles.termsWrapper}>
-                            <input type="checkbox" id="terms" className={styles.checkbox} required />
+                            <input 
+                                type="checkbox" 
+                                id="terms" 
+                                className={styles.checkbox} 
+                                checked={agreed}
+                                onChange={(e) => setAgreed(e.target.checked)}
+                                required 
+                            />
                             <label htmlFor="terms" className={styles.checkboxLabel}>
                                 I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
                             </label>
@@ -140,3 +191,4 @@ const CreateAccount = () => {
 };
 
 export default CreateAccount;
+

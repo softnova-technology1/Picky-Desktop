@@ -660,3 +660,34 @@
 .title    { font-size: 22px; font-weight: 800; color: #fff; }
 .imagePanel { display: none; }
 .formPanel  { display: none; }
+
+.errorMessage {
+  background-color: #fee2e2;
+  color: #dc2626;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+  text-align: center;
+  border: 1px solid #fca5a5;
+  animation: errorFadeIn 0.3s ease;
+}
+
+.successMessage {
+  background-color: #ecfdf5;
+  color: #059669;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+  text-align: center;
+  border: 1px solid #a7f3d0;
+  animation: errorFadeIn 0.3s ease;
+}
+
+@keyframes errorFadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
