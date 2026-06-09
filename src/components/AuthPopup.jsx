@@ -13,13 +13,15 @@ const TAB_IMAGES = {
 
 const AuthPopup = ({ isOpen, onClose, initialTab = 'login' }) => {
   const router  = useRouter();
-  const { login } = useAuth();
+  const { login, register } = useAuth();
 
   const [activeTab, setActiveTab]   = useState(initialTab);
   const [email,     setEmail]       = useState('');
   const [password,  setPassword]    = useState('');
   const [name,      setName]        = useState('');
   const [agreed,    setAgreed]      = useState(false);
+  const [error,     setError]       = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   /* 
    * isSwapped = false → Login:  image LEFT  | form RIGHT
@@ -43,6 +45,8 @@ const AuthPopup = ({ isOpen, onClose, initialTab = 'login' }) => {
       setActiveTab(initialTab);
       setIsSwapped(initialTab === 'signup');
       setCurrentImg(TAB_IMAGES[initialTab]);
+      setError('');
+      setSuccessMessage('');
     }
   }, [isOpen, initialTab]);
 
@@ -59,6 +63,9 @@ const AuthPopup = ({ isOpen, onClose, initialTab = 'login' }) => {
   /* ── tab switch handler — panels swap + image cross-fades ── */
   const handleTabSwitch = (tab) => {
     if (tab === activeTab) return;
+
+    setError('');
+    setSuccessMessage('');
 
     /* 1. Fade image out */
     setImgFading(true);
@@ -77,9 +84,32 @@ const AuthPopup = ({ isOpen, onClose, initialTab = 'login' }) => {
   /* ── form submit ── */
   const handleSubmit = (e) => {
     e.preventDefault();
-    login({ name: name || email.split('@')[0], email, id: Date.now() });
-    onClose();
-    router.push('/hometwo');
+    setError('');
+    setSuccessMessage('');
+
+    if (activeTab === 'login') {
+      try {
+        login(email, password);
+        onClose();
+        router.push('/hometwo');
+      } catch (err) {
+        setError(err.message);
+      }
+    } else {
+      if (!agreed) {
+        setError('You must agree to the Terms of Service and Privacy Policy');
+        return;
+      }
+      try {
+        register(name, email, password);
+        handleTabSwitch('login');
+        setPassword('');
+        setError('');
+        setSuccessMessage('Account created successfully! Please log in.');
+      } catch (err) {
+        setError(err.message);
+      }
+    }
   };
 
   if (!isOpen) return null;
@@ -167,6 +197,10 @@ const AuthPopup = ({ isOpen, onClose, initialTab = 'login' }) => {
                   : 'Join thousands of curated lifestyle members'}
               </p>
             </div>
+
+            {/* Error & Success Messages */}
+            {error && <div className={styles.errorMessage}>{error}</div>}
+            {successMessage && <div className={styles.successMessage}>{successMessage}</div>}
 
             {/* Pill toggle */}
             <div className={styles.tabs} ref={tabsRef} role="tablist">

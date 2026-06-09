@@ -195,11 +195,13 @@
 
 /* Sidebar - Sticky again as it is in the flow */
 .sidebar {
+  position: -webkit-sticky;
   position: sticky;
-  top: calc(var(--navbar-scrolled-height, 75px) + 50px);
+  top: 130px;
+  align-self: flex-start;
   width: 350px;
   flex-shrink: 0;
-  max-height: calc(100vh - var(--navbar-scrolled-height, 75px) - 80px);
+  max-height: calc(100vh - 150px);
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;

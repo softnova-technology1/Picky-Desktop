@@ -34,7 +34,6 @@ body {
   background-color: var(--background);
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
 /* --- Premium Custom Scrollbar with Dynamic Effect --- */

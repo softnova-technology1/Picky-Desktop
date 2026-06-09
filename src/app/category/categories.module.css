@@ -55,14 +55,13 @@
 .departmentBar {
   padding-block: clamp(15px, 2vw, 30px);
   border-top: 1px solid #eee;
-  border-bottom: none;
+  border-bottom: 1px solid #eee;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
   position: sticky;
-  top: 80px;
+  top: 90px;
   z-index: 100;
-  padding: 0px;
-  margin: -15px;
+  width: 100%;
 }
 
 .navInner {

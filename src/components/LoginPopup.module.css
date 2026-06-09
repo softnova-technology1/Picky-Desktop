@@ -204,3 +204,17 @@
   from { transform: translateY(30px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
+
+.errorMessage {
+  background-color: #fee2e2;
+  color: #dc2626;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  text-align: center;
+  border: 1px solid #fca5a5;
+  animation: fadeIn 0.3s ease;
+}
+

@@ -260,7 +260,13 @@ export default function Home2() {
             <div
               key={idx}
               className={`${styles.ribbonItem} ${activeCategory === item.name ? styles.ribbonActive : ''}`}
-              onClick={() => setActiveCategory(item.name)}
+              onClick={() => {
+                setActiveCategory(item.name);
+                if (item.name === "Fashion") router.push('/category/fashion');
+                else if (item.name === "Mobiles" || item.name === "Electronics" || item.name === "Appliances") router.push('/category/electronics');
+                else if (item.name === "Home" || item.name === "Furniture") router.push('/category/home-decor');
+                else if (item.name !== "For You") router.push('/category');
+              }}
             >
               <div className={styles.ribbonIconWrapper}>
                 <item.icon size={26} strokeWidth={1.5} className={styles.ribbonIcon} />
@@ -288,7 +294,7 @@ export default function Home2() {
                 <div className={styles.timerUnitBox}>55</div>
               </div>
             </div>
-            <Link href="#" className={styles.refViewAll}>View All <ChevronRight size={18} /></Link>
+            <Link href="/offers" className={styles.refViewAll}>View All <ChevronRight size={18} /></Link>
           </div>
 
           <div className={styles.refFlashGrid}>
@@ -524,7 +530,12 @@ export default function Home2() {
                     <div className={styles.sbTag}>LIMITED</div>
                     <div className={styles.sbTitle}>Elevated Essentials</div>
                     <div className={styles.sbOffer}>-20% OFF</div>
-                    <button className={`${styles.sbBtn} ${styles.magneticBtn}`}>CLAIM NOW</button>
+                    <button 
+                      className={`${styles.sbBtn} ${styles.magneticBtn}`}
+                      onClick={() => router.push('/offers')}
+                    >
+                      CLAIM NOW
+                    </button>
                   </div>
                 </div>
               </div>
@@ -808,7 +819,13 @@ export default function Home2() {
 
               <div className={styles.newsInputGroupPremium}>
                 <input type="email" placeholder="Enter Your Email" className={styles.newsInputPremium} />
-                <button className={styles.newsSubmitBtnGradient}>
+                <button 
+                  className={styles.newsSubmitBtnGradient}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    alert("Thank you for subscribing to our newsletter!");
+                  }}
+                >
                   SUBSCRIBE NOW <ArrowRight size={18} />
                 </button>
               </div>
