@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
-import { X, ShoppingBag, ShoppingCart, ArrowRight, Minus, Plus } from 'lucide-react';
+import { X, ShoppingBag, ShoppingCart, ArrowRight, Minus, Plus, Trash2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from './CartDrawer.module.css';
 
@@ -72,36 +72,33 @@ const CartDrawer = () => {
                                         return (
                                             <div key={item.id || idx} className={styles.item}>
                                                 <div className={styles.itemImage}>
-                                                    <Image src={itemImg} alt={item.name} fill style={{ objectFit: 'contain' }} />
+                                                    <Image src={itemImg} alt={item.name} fill style={{ objectFit: 'cover' }} />
                                                 </div>
                                                 <div className={styles.itemInfo}>
                                                     <h4 className={styles.itemName}>{item.name}</h4>
-                                                    
-                                                    <div className={styles.itemMeta}>
-                                                        <span className={styles.itemPrice}>${(Number(item.price) || 0).toFixed(2)}</span>
-                                                        
-                                                        <div className={styles.qtyControl}>
-                                                            <button 
-                                                                className={styles.qtyBtn}
-                                                                onClick={() => updateQuantity(item.id, (item.quantity || 1) - 1)}
-                                                            >
-                                                                <Minus size={14} />
-                                                            </button>
-                                                            <span className={styles.qtyValue}>{item.quantity || 1}</span>
-                                                            <button 
-                                                                className={styles.qtyBtn}
-                                                                onClick={() => updateQuantity(item.id, (item.quantity || 1) + 1)}
-                                                            >
-                                                                <Plus size={14} />
-                                                            </button>
-                                                        </div>
-                                                    </div>
-
+                                                    <span className={styles.itemPrice}>${(Number(item.price) || 0).toFixed(2)}</span>
                                                     <button 
                                                         className={styles.removeBtn}
                                                         onClick={() => removeFromCart(item.id)}
                                                     >
-                                                        Remove
+                                                        <Trash2 size={11} />
+                                                        <span>Remove</span>
+                                                    </button>
+                                                </div>
+                                                
+                                                <div className={styles.qtyControl}>
+                                                    <button 
+                                                        className={styles.qtyBtn}
+                                                        onClick={() => updateQuantity(item.id, (item.quantity || 1) - 1)}
+                                                    >
+                                                        <Minus size={12} />
+                                                    </button>
+                                                    <span className={styles.qtyValue}>{item.quantity || 1}</span>
+                                                    <button 
+                                                        className={styles.qtyBtn}
+                                                        onClick={() => updateQuantity(item.id, (item.quantity || 1) + 1)}
+                                                    >
+                                                        <Plus size={12} />
                                                     </button>
                                                 </div>
                                             </div>

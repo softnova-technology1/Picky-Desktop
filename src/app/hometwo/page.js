@@ -592,53 +592,98 @@ export default function Home2() {
             </div>
             <div className={styles.spTitleSide}>
               <p className={styles.spSubtitleHero}>The most coveted pieces of the season, ranked by you.</p>
-              <Link href="#" className={styles.spViewTrend}>View All Collection <ChevronRight size={18} /></Link>
             </div>
           </div>
 
           <div className={styles.spLayoutGrid}>
 
-            {/* RANK #1 - THE PODIUM HERO (Remains Fixed Spotlight) */}
-            <div 
-              className={styles.podiumHeroCard}
-              onClick={() => router.push(`/product/electronics-wearables-1?img=${encodeURIComponent("https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999")}`)}
-            >
-              <div className={styles.podiumVisual}>
-                <Image src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999" alt="Top Seller" fill className={styles.podiumImg} />
-                <div className={styles.podiumRankDigit}>01</div>
-                <div className={styles.podiumBadge}><Trophy size={14} fill="#1a1a1a" /> TOP RANKED</div>
-              </div>
-              <div className={styles.podiumBody}>
-                <div className={styles.podiumTrust}>
-                  <div className={styles.podiumStars}>
-                    {[1, 2, 3, 4, 5].map(s => <Star key={s} size={16} fill="#FFD700" color="#FFD700" />)}
+            {/* RANK #1 to #4 - THE BEST SELLERS */}
+            <div className={styles.podiumGrid}>
+              {[
+                {
+                  rank: "01",
+                  id: "electronics-wearables-1",
+                  name: "Nexus Stealth Edition",
+                  price: "₹4,999",
+                  reviews: "500+",
+                  sold: "98%",
+                  desc: "The definitive timepiece for the modern architect of style. Uncompromising precision.",
+                  img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999"
+                },
+                {
+                  rank: "02",
+                  id: "electronics-audio-1",
+                  name: "Aria Wireless Pro",
+                  price: "₹8,450",
+                  reviews: "420+",
+                  sold: "94%",
+                  desc: "Studio-grade listening experience with active hybrid noise canceling. Ultimate comfort.",
+                  img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070"
+                },
+                {
+                  rank: "03",
+                  id: "fashion-handbags-2",
+                  name: "Luxe Leather Tote",
+                  price: "₹1,999",
+                  reviews: "380+",
+                  sold: "89%",
+                  desc: "Handcrafted Italian leather offering functional elegance and enduring style.",
+                  img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=2069"
+                },
+                {
+                  rank: "04",
+                  id: "fashion-footwear-2",
+                  name: "Vibe Mesh Runner",
+                  price: "₹2,299",
+                  reviews: "480+",
+                  sold: "92%",
+                  desc: "Engineered mesh running shoes with advanced impact cushioning technology.",
+                  img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070"
+                }
+              ].map((prod, idx) => (
+                <div 
+                  key={idx}
+                  className={styles.podiumHeroCard}
+                  onClick={() => router.push(`/product/${prod.id}?img=${encodeURIComponent(prod.img)}`)}
+                >
+                  <div className={styles.podiumVisual}>
+                    <Image src={prod.img} alt={prod.name} fill className={styles.podiumImg} />
+                    <div className={styles.podiumRankDigit}>{prod.rank}</div>
+                    <div className={styles.podiumBadge}><Trophy size={14} fill="#1a1a1a" /> RANKED {prod.rank}</div>
                   </div>
-                  <span className={styles.podiumReviews}>500+ Reviews</span>
-                </div>
-                <h3 className={styles.podiumTitle}>Nexus Stealth Edition</h3>
-                <p className={styles.podiumDesc}>The definitive timepiece for the modern architect of style. Uncompromising precision and elegance.</p>
+                  <div className={styles.podiumBody}>
+                    <div className={styles.podiumTrust}>
+                      <div className={styles.podiumStars}>
+                        {[1, 2, 3, 4, 5].map(s => <Star key={s} size={14} fill="#FFD700" color="#FFD700" />)}
+                      </div>
+                      <span className={styles.podiumReviews}>{prod.reviews} Reviews</span>
+                    </div>
+                    <h3 className={styles.podiumTitle}>{prod.name}</h3>
+                    <p className={styles.podiumDesc}>{prod.desc}</p>
 
-                <div className={styles.podiumHeatArea}>
-                  <div className={styles.heatLabel}><Flame size={14} color="#4C0519" fill="#4C0519" /> HIGH DEMAND: 98% SOLD</div>
-                  <div className={styles.heatBar}><div className={styles.heatFill} style={{ width: '98%' }}></div></div>
-                </div>
+                    <div className={styles.podiumHeatArea}>
+                      <div className={styles.heatLabel}><Flame size={12} color="#4C0519" fill="#4C0519" /> {prod.sold} SOLD</div>
+                      <div className={styles.heatBar}><div className={styles.heatFill} style={{ width: prod.sold }}></div></div>
+                    </div>
 
-                <div className={styles.podiumAction}>
-                  <div className={styles.podiumPrice}>₹4,999</div>
-                  <button
-                    className={`${styles.podiumAddBtn} ${styles.magneticBtn}`}
-                    onClick={(e) => handleAddToCart(e, { id: "best-01", name: "Nexus Stealth Edition", price: "₹4,999", img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999" })}
-                  >
-                    <ShoppingBag size={18} /> ADDTOCART
-                  </button>
+                    <div className={styles.podiumAction}>
+                      <div className={styles.podiumPrice}>{prod.price}</div>
+                      <button
+                        className={`${styles.podiumAddBtn} ${styles.magneticBtn}`}
+                        onClick={(e) => handleAddToCart(e, { id: prod.id, name: prod.name, price: prod.price, img: prod.img })}
+                      >
+                        <ShoppingBag size={16} /> ADD
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
 
             {/* AUTOMATIC TRENDING MARQUEE - Seamless Infinite Scroll */}
             <div className={styles.trendingMarqueeWrapper}>
               <div className={styles.trendingMarqueeTrack}>
-                {[
+                                {[
                   { rank: "02", id: "electronics-audio-2", name: "Premium Wireless Pro", price: "₹8,450", desc: "Cinema-grade audio with active cancellation.", rating: 5, reviews: 312, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070", heat: "85%" },
                   { rank: "03", id: "fashion-handbags-2", name: "Luxe Leather Tote", price: "₹1,999", desc: "Handcrafted Italian leather for daily grace.", rating: 4, reviews: 145, img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=2069", heat: "72%" },
                   { rank: "04", id: "fashion-footwear-2", name: "Vibe Mesh Runner", price: "₹2,299", desc: "Ultra-breathable tech for high performance.", rating: 5, reviews: 290, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070", heat: "91%" },
@@ -646,12 +691,12 @@ export default function Home2() {
                   { rank: "06", id: "fashion-watches-3", name: "Modernist Chronograph", price: "₹5,200", desc: "Precision movement in a matte finish.", rating: 5, reviews: 210, img: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1988", heat: "88%" },
                   { rank: "07", id: "home-decor-lighting-2", name: "Studio Desk Lamp", price: "₹1,850", desc: "Dual-spectrum light for 12hr workdays.", rating: 4, reviews: 95, img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=1974", heat: "55%" },
                 ].concat([
-                  { rank: "02", id: "electronics-audio-2", name: "Premium Wireless Pro", price: "₹8,450", desc: "Cinema-grade audio.", rating: 5, reviews: 312, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070", heat: "85%" },
-                  { rank: "03", id: "fashion-handbags-2", name: "Luxe Leather Tote", price: "₹1,999", desc: "Handcrafted Italian leather.", rating: 4, reviews: 145, img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=2069", heat: "72%" },
-                  { rank: "04", id: "fashion-footwear-2", name: "Vibe Mesh Runner", price: "₹2,299", desc: "Ultra-breathable tech.", rating: 5, reviews: 290, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070", heat: "91%" },
-                  { rank: "05", id: "electronics-audio-3", name: "Aria Smart Buds", price: "₹3,450", desc: "Intelligent noise masking.", rating: 4, reviews: 180, img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=2070", heat: "64%" },
-                  { rank: "06", id: "fashion-watches-3", name: "Modernist Chronograph", price: "₹5,200", desc: "Precision movement.", rating: 5, reviews: 210, img: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1988", heat: "88%" },
-                  { rank: "07", id: "home-decor-lighting-2", name: "Studio Desk Lamp", price: "₹1,850", desc: "Dual-spectrum light.", rating: 4, reviews: 95, img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=1974", heat: "55%" },
+                  { rank: "02", id: "electronics-audio-2", name: "Premium Wireless Pro", price: "₹8,450", desc: "Cinema-grade audio with active cancellation.", rating: 5, reviews: 312, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070", heat: "85%" },
+                  { rank: "03", id: "fashion-handbags-2", name: "Luxe Leather Tote", price: "₹1,999", desc: "Handcrafted Italian leather for daily grace.", rating: 4, reviews: 145, img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=2069", heat: "72%" },
+                  { rank: "04", id: "fashion-footwear-2", name: "Vibe Mesh Runner", price: "₹2,299", desc: "Ultra-breathable tech for high performance.", rating: 5, reviews: 290, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070", heat: "91%" },
+                  { rank: "05", id: "electronics-audio-3", name: "Aria Smart Buds", price: "₹3,450", desc: "Intelligent noise masking for focus.", rating: 4, reviews: 180, img: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=2070", heat: "64%" },
+                  { rank: "06", id: "fashion-watches-3", name: "Modernist Chronograph", price: "₹5,200", desc: "Precision movement in a matte finish.", rating: 5, reviews: 210, img: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1988", heat: "88%" },
+                  { rank: "07", id: "home-decor-lighting-2", name: "Studio Desk Lamp", price: "₹1,850", desc: "Dual-spectrum light for 12hr workdays.", rating: 4, reviews: 95, img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?q=80&w=1974", heat: "55%" },
                 ]).map((item, i) => (
                   <div 
                     key={i} 
@@ -680,20 +725,32 @@ export default function Home2() {
                       </div>
                     </div>
                     <div className={styles.trendingInfo}>
-                      <div className={styles.tRatingLine}>
-                        <Star size={12} fill="#FFD700" color="#FFD700" />
-                        <span className={styles.tRatingVal}>4.9/5</span>
-                        <span className={styles.tReviewCount}>({item.reviews})</span>
+                      <div className={styles.tTrust}>
+                        <div className={styles.tStars}>
+                          {[1, 2, 3, 4, 5].map(s => <Star key={s} size={12} fill="#FFD700" color="#FFD700" />)}
+                        </div>
+                        <span className={styles.tReviews}>{item.reviews} Reviews</span>
                       </div>
                       <h4 className={styles.tProdName}>{item.name}</h4>
                       <p className={styles.tProdDesc}>{item.desc}</p>
-                      <div className={styles.tPrice}>{item.price}</div>
-                      <div className={styles.tHeatMini}>
-                        <div className={styles.tHeatFill} style={{ width: item.heat }}></div>
+                      
+                      <div className={styles.tHeatArea}>
+                        <div className={styles.tHeatLabel}>
+                          <Flame size={12} color="#4C0519" fill="#4C0519" /> {item.heat} SOLD
+                        </div>
+                        <div className={styles.tHeatBar}>
+                          <div className={styles.tHeatFill} style={{ width: item.heat }}></div>
+                        </div>
                       </div>
-                      <div className={styles.tActions}>
-                        <button className={`${styles.tQuickBtn} ${styles.magneticBtn}`}>EXPLORE</button>
-                       
+
+                      <div className={styles.tAction}>
+                        <div className={styles.tPrice}>{item.price}</div>
+                        <button 
+                          className={`${styles.tQuickBtn} ${styles.magneticBtn}`}
+                          onClick={(e) => handleAddToCart(e, { id: item.id, name: item.name, price: item.price, img: item.img })}
+                        >
+                          <ShoppingBag size={14} /> ADD
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -726,21 +783,21 @@ export default function Home2() {
       </section>
 
       <section className={styles.newsSectionMaster}>
-        <div className={styles.newsHeroBg}>
-          <Image
-            src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974"
-            alt="Newsletter Background"
-            fill
-            className={styles.newsHeroImg}
-          />
-          <div className={styles.newsHeroOverlay}></div>
-          <div className={styles.newsHeroContent}>
-            <span className={styles.newsUpperTag}>GET NEWSLETTER</span>
-            <h2 className={styles.newsHeroHeading}>Sign Up to Newsletter</h2>
-          </div>
-        </div>
-
         <div className="container">
+          <div className={styles.newsHeroBg}>
+            <Image
+              src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=1974"
+              alt="Newsletter Background"
+              fill
+              className={styles.newsHeroImg}
+            />
+            <div className={styles.newsHeroOverlay}></div>
+            <div className={styles.newsHeroContent}>
+              <span className={styles.newsUpperTag}>GET NEWSLETTER</span>
+              <h2 className={styles.newsHeroHeading}>Sign Up to Newsletter</h2>
+            </div>
+          </div>
+
           <div className={styles.newsOverCardContainer}>
             <div className={styles.newsOverCard}>
               <div className={styles.newsOverIconGroup}>
@@ -843,19 +900,17 @@ export default function Home2() {
                   {[1, 2, 3, 4, 5].map(s => <Star key={s} size={12} fill="#FFD700" color="#FFD700" />)}
                 </div>
                 <p className={styles.revText}>{rev.text}</p>
-
-                <div className={styles.revProductHighlight}>
-                  <span className={styles.revBoughtTag}>PURCHASED:</span>
-                  <span className={styles.revBoughtName}>{rev.product}</span>
-                </div>
               </div>
             ))}
 
             {/* Duplicate for seamless infinite step loop */}
             {[
-              { name: "Sarah J.", role: "Verified Buyer", text: "The quality of the premium wireless headphones is unmatched.", product: "Premium Wireless Pro", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1976" },
-              { name: "David M.", role: "Verified Buyer", text: "Fast delivery and the packaging was pure luxury.", product: "Modernist Chronograph", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974" },
-              { name: "Elena R.", role: "Verified Buyer", text: "I've tried many luxury totes, but this leather tote has the best balance.", product: "Luxe Leather Tote", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070" }
+              { name: "Sarah J.", role: "Verified Buyer", text: "The quality of the premium wireless headphones is unmatched. The deep wine color is stunning!", product: "Premium Wireless Pro", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1976" },
+              { name: "David M.", role: "Verified Buyer", text: "Fast delivery and the packaging was pure luxury. My Modernist Chronograph is my daily essential.", product: "Modernist Chronograph", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974" },
+              { name: "Elena R.", role: "Verified Buyer", text: "I've tried many luxury totes, but this leather tote has the best balance. A masterpiece of design.", product: "Luxe Leather Tote", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070" },
+              { name: "Alex K.", role: "Verified Buyer", text: "Stunning craftsmanship on the smartwatch band. The attention to detail is evident. Fast shipping!", product: "SmartWatch Pro", img: "https://images.unsplash.com/photo-1541647376583-d6c5ca910171?q=80&w=1974" },
+              { name: "Jessica L.", role: "Verified Buyer", text: "The Smart Buds changed my commute. Noise cancellation is perfect and they look so stylish.", product: "Aria Smart Buds", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974" },
+              { name: "Michael T.", role: "Verified Buyer", text: "The desk lamp is exactly what my studio needed. The light is very easy on the eyes.", product: "Studio Desk Lamp", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070" }
             ].map((rev, i) => (
               <div key={i + 10} className={styles.revCardPremium}>
                 <div className={styles.revQuoteIcon}><Quote size={30} fill="#4C0519" opacity={0.05} /></div>
@@ -872,10 +927,6 @@ export default function Home2() {
                   {[1, 2, 3, 4, 5].map(s => <Star key={s} size={12} fill="#FFD700" color="#FFD700" />)}
                 </div>
                 <p className={styles.revText}>{rev.text}</p>
-                <div className={styles.revProductHighlight}>
-                  <span className={styles.revBoughtTag}>PURCHASED:</span>
-                  <span className={styles.revBoughtName}>{rev.product}</span>
-                </div>
               </div>
             ))}
           </div>

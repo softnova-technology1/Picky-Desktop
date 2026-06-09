@@ -4,56 +4,46 @@
 }
 
 .container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 40px;
+  width: min(100%, 1650px);
+  margin-inline: auto;
+  padding-inline: clamp(20px, 2vw, 40px);
 }
 
-@media (min-width: 1920px) {
-  .container {
-    max-width: 1750px;
-  }
-}
-
-@media (min-width: 2560px) {
-  .container {
-    max-width: 2100px;
-  }
-}
-
-@media (min-width: 3840px) {
-  .container {
-    max-width: 2500px;
-  }
-}
+/* Container max-width capped at 1650px globally to avoid horizontal stretching on 4K */
 
 
 
 /* Standardized Product Grid */
 .productGrid {
   display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  gap: clamp(20px, 1.5vw, 36px) !important;
-  max-width: 1600px !important;
-  margin: 60px auto !important;
+  grid-template-columns: repeat(4, minmax(0, 270px)) !important;
+  justify-content: center !important;
+  gap: clamp(15px, 1.2vw, 25px) !important;
+  max-width: 100% !important;
+  margin: clamp(40px, 4vw, 60px) auto !important;
   width: 100% !important;
 }
 
-.productGrid :global(.productCard) {
-  max-width: 340px !important;
+.productGrid [class*="ProductCard_card"] {
+  max-width: 270px !important;
   width: 100% !important;
   margin-inline: auto !important;
 }
 
 /* Enforce Card Image Sizing */
-.productGrid :global(.productCard) :global(.productImg),
-.recentlyAddedSection .productGrid :global(.productCard) :global(.productImg),
-.collectionSection .productGrid :global(.productCard) :global(.productImg) {
-  height: clamp(260px, 18vw, 340px) !important;
+.productGrid [class*="ProductCard_card"] [class*="ProductCard_imageWrapper"] {
+  aspect-ratio: auto !important;
 }
 
-.productGrid :global(.productCard) :global(.productImg) img,
-.productGrid :global(.productCard) :global(.imageWrapper) img {
+.recommendedSection [class*="ProductCard_card"] [class*="ProductCard_imageWrapper"],
+.famousProductsSection [class*="ProductCard_card"] [class*="ProductCard_imageWrapper"],
+.recentlyAddedSection [class*="ProductCard_card"] [class*="ProductCard_imageWrapper"] {
+  height: 14vw !important;
+  min-height: 200px !important;
+  max-height: 260px !important;
+}
+
+.productGrid [class*="ProductCard_card"] [class*="ProductCard_imageWrapper"] img {
   object-fit: cover !important;
   border-radius: inherit !important;
 }
@@ -63,14 +53,16 @@
 
 /* Narrative Navigation */
 .departmentBar {
-  padding: 30px 0;
+  padding-block: clamp(15px, 2vw, 30px);
   border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  border-bottom: none;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
   position: sticky;
   top: 80px;
   z-index: 100;
+  padding: 0px;
+  margin: -15px;
 }
 
 .navInner {
@@ -166,6 +158,22 @@
   z-index: 200;
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .megaDropdownWrapper {
+    min-width: 100%;
+    width: 95vw;
+    max-width: 100vw;
+  }
+  .megaDropdown {
+    width: 100%;
+    padding: 20px;
+    gap: 20px;
+  }
+  .megaLeft {
+    column-gap: 20px;
+  }
 }
 
 .hoverBridge {
@@ -318,7 +326,7 @@
 
 /* Magazine Grid */
 .magazineSection {
-  padding: 120px 0;
+  padding-block: clamp(60px, 5vw, 100px);
 }
 
 .magGrid {
@@ -380,7 +388,7 @@
 }
 
 .magTitle {
-  font-size: 3rem;
+  font-size: clamp(1.8rem, 3vw, 3rem);
   font-weight: 900;
   line-height: 1;
   margin-bottom: 12px;
@@ -394,7 +402,7 @@
 
 /* Collection List (The Edit) */
 .collectionSection {
-  padding: 100px 0;
+  padding-block: clamp(60px, 5vw, 100px);
   background: linear-gradient(180deg, #F5F1FF 0%, #ECE6FF 100%);
   color: #1E1830;
   position: relative;
@@ -424,7 +432,7 @@
 }
 
 .sectionHeader h2 {
-  font-size: 4rem;
+  font-size: clamp(2.2rem, 4vw, 4rem);
   font-weight: 900;
   color: #1E1830;
 }
@@ -462,7 +470,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
-  padding: 120px 0;
+  padding-block: clamp(60px, 5vw, 100px);
 }
 
 .promoCard {
@@ -476,7 +484,7 @@
 }
 
 .promoTitle {
-  font-size: 3rem;
+  font-size: clamp(1.8rem, 3vw, 3rem);
   font-weight: 900;
   line-height: 1.1;
   margin-bottom: 24px;
@@ -497,8 +505,9 @@
 
 /* Top Collection */
 .topCollectionSection {
-  padding: 100px 0;
+  padding-block: clamp(60px, 5vw, 100px);
   background: #fdfdfd;
+  margin-top: -50px;
 }
 
 .sectionTitleTop {
@@ -545,7 +554,7 @@
 
 .topColTitle {
   color: white;
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 3.8vw, 3.5rem);
   font-weight: 900;
   line-height: 1.1;
   margin-bottom: 30px;
@@ -562,8 +571,9 @@
 }
 
 .topColStack {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 20px;
   height: 500px;
 }
@@ -588,7 +598,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
+  background: linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
 }
 
 .smallImg {
@@ -601,54 +612,68 @@
 }
 
 .smallLabel {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 800;
   color: #8b5cf6;
-  letter-spacing: 0.1em;
-  margin-bottom: 5px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
 }
 
 .smallTitle {
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 2.2rem;
+  font-weight: 900;
   color: #1a1a1a;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
 }
 
 /* Specific Card Palettes */
+.topColStack .topColSmall:nth-child(1) {
+  grid-column: span 2;
+}
+
+.topColStack .topColSmall:nth-child(1) .smallContent {
+  background: linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+  justify-content: center;
+}
+
 .topColStack .topColSmall:nth-child(1) .smallTitle {
-  color: #2D1F1A;
-  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.4);
+  font-size: 2.8rem;
+  color: #111;
+  text-shadow: none;
 }
 
 .topColStack .topColSmall:nth-child(1) .smallLabel {
-  color: #A06A4B;
+  color: #ff5722;
 }
 
 .topColStack .topColSmall:nth-child(2) .smallTitle {
-  color: #243128;
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+  color: #111;
+  text-shadow: none;
 }
 
 .topColStack .topColSmall:nth-child(2) .smallLabel {
-  color: #6B8C72;
+  color: #4CAF50;
 }
 
 .topColStack .topColSmall:nth-child(3) .smallContent {
-  background: rgba(255, 248, 240, 0.55);
-  backdrop-filter: blur(5px);
+  background: linear-gradient(to top, rgba(255, 248, 240, 0.95) 0%, rgba(255, 248, 240, 0.5) 60%, transparent 100%);
 }
 
 .topColStack .topColSmall:nth-child(3) .smallTitle {
-  color: #3B2418;
+  color: #111;
+  text-shadow: none;
 }
 
 .topColStack .topColSmall:nth-child(3) .smallLabel {
-  color: #9B6A47;
+  color: #9c27b0;
 }
 
 /* Category Spotlight */
 .spotlightSection {
-  padding: 100px 0;
+  padding-block: clamp(40px, 4vw, 70px);
+  margin: -50px 0;
 }
 
 .spotlightGrid {
@@ -658,26 +683,44 @@
 }
 
 .spotBanner {
-  grid-column: span 2;
-  border-radius: 40px;
-  padding: 60px 50px;
-  height: clamp(320px, 28vw, 420px);
+  border-radius: 24px;
+  padding: 30px;
+  min-height: 380px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   position: relative;
   overflow: hidden;
   text-decoration: none;
   transition: all 0.5s ease;
 }
 
+.spotBanner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+  z-index: 2;
+  transition: all 0.5s ease;
+}
+
+.spotBanner:hover::before {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 100%);
+}
+
 .spotBanner:hover {
-  transform: scale(1.02);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
 }
 
 .sbContent {
   position: relative;
-  z-index: 2;
-  max-width: 50%;
+  z-index: 3;
+  width: 100%;
+  max-width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .sbBlue {
@@ -697,77 +740,82 @@
 }
 
 .spotTitle {
-  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+  font-size: clamp(1.2rem, 1.8vw, 1.8rem);
   font-weight: 900;
-  color: #1D1830;
-  margin-bottom: 15px;
+  color: #ffffff;
+  margin-bottom: 8px;
   line-height: 1.1;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 .spotDiscount {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 800;
-  color: #8B5CFF;
-  margin-bottom: 30px;
+  color: #e0e0e0;
+  margin-bottom: 16px;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.5);
 }
 
 .spotBtn {
-  height: 42px;
-  padding: 0 22px;
+  height: 36px;
+  padding: 0 24px;
   border-radius: 999px;
-  font-size: 0.92rem;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.72);
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(139, 92, 255, 0.18);
-  color: #3A2A5F;
-  box-shadow: 0 8px 24px rgba(139, 92, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #111;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   width: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   cursor: pointer;
+  margin-top: auto;
+  align-self: center;
+  margin-bottom: 10px;
 }
 
 .spotBtn:hover {
   background: linear-gradient(90deg, #8B5CFF 0%, #A97CFF 100%);
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(139, 92, 255, 0.24);
+  box-shadow: 0 12px 30px rgba(139, 92, 246, 0.24);
   border-color: transparent;
 }
 
 .sbImg {
   position: absolute;
-  right: 0;
-  bottom: -20px;
-  width: 45% !important;
-  height: auto !important;
-  object-fit: contain;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
   transition: transform 0.6s ease;
+  z-index: 1;
 }
 
 .spotBanner:hover .sbImg {
-  transform: scale(1.08) rotate(-5deg);
+  transform: scale(1.1);
 }
 
 /* Recommended For You */
 .recommendedSection {
-  padding: 100px 0 150px;
+  padding-block: clamp(60px, 5vw, 100px) clamp(80px, 6vw, 130px);
+  padding: 20px 0;
 }
 
 .recommendBox {
-  background: linear-gradient(180deg, rgba(22, 17, 38, 0.18) 0%, rgba(34, 24, 59, 0.18) 40%, rgba(44, 35, 80, 0.18) 100%);
   border-radius: 40px;
-  padding: 80px;
+  padding: 30px;
   text-align: center;
   color: #1D1830;
 }
 
 .recommendHeader {
-  margin-bottom: 50px;
+  margin-bottom: -28px;
 }
 
 .recommendTitle {
@@ -882,12 +930,13 @@
 }
 
 .famousProductsSection {
-  padding: 80px 0;
+  padding-block: clamp(50px, 4vw, 80px);
   background: white;
+  padding: 20px 0;
 }
 
 .featuredCollectionsSection {
-  padding: 120px 0;
+  padding: 40px 0;
   background: linear-gradient(180deg, #F6F3FF 0%, #EEE7FF 100%);
   color: #1E1830;
   position: relative;
@@ -920,14 +969,14 @@
 .featuredGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: 100px;
 }
 
 .featuredCard {
   position: relative;
   border-radius: 40px;
   overflow: hidden;
-  height: 450px;
+  height: 300px;
   display: flex;
   align-items: flex-end;
   padding: 30px;
@@ -1010,7 +1059,8 @@
 }
 
 .recentlyAddedSection {
-  padding: 80px 0 20px 0;
+  padding-top: clamp(30px, 4vw, 50px);
+  padding-bottom: 20px;
   background: #FAF8F6;
 }
 
@@ -1034,7 +1084,7 @@
 
 /* Premium Feature Bar (Centered Pill) */
 .featureBarWrapper {
-  margin: 50px 0 30px;
+  margin-block: clamp(30px, 3vw, 50px) 30px;
   display: flex;
   justify-content: center;
   position: relative;
@@ -1043,14 +1093,17 @@
 
 .featureBar {
   background: white;
-  padding: 35px 70px;
+  padding: clamp(20px, 2.5vw, 35px) clamp(30px, 5vw, 70px);
   border-radius: 100px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 50px;
-  width: fit-content;
+  gap: clamp(20px, 3vw, 50px);
+  width: 100%;
+  max-width: fit-content;
+  margin-inline: auto;
   border: 1px solid rgba(0, 0, 0, 0.02);
 }
 
@@ -1083,7 +1136,8 @@
 .luxuryFooter {
   background: #1D1830;
   color: white;
-  padding: 120px 0 60px;
+  padding-top: clamp(60px, 5vw, 100px);
+  padding-bottom: 40px;
 }
 
 .footerInner {
@@ -1199,12 +1253,16 @@
   }
 
   .productGrid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, minmax(0, 270px)) !important;
+    justify-content: center !important;
   }
 
-  .featureInner {
+  .featureBar {
     flex-wrap: wrap;
     justify-content: center;
+    border-radius: 30px;
+    padding: 20px;
+    gap: 30px;
   }
 }
 
@@ -1226,23 +1284,35 @@
   }
 
   .productGrid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, minmax(0, 270px)) !important;
+    justify-content: center !important;
   }
 
-  .featureInner {
+  .featureBar {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
+    border-radius: 24px;
+    padding: 25px 20px;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .fbItem {
+    justify-content: center;
+    width: 100%;
   }
 }
 /* NEW HEADER BANNER */
 .categoryHeader {
   width: 100%;
-  padding: 40px 0;
+  padding-block: clamp(20px, 3vw, 40px);
   background-color: #fdfdfd;
 }
 
 .headerBanner {
-  max-width: 1400px;
+  width: 100%;
+  max-width: 1650px;
   margin: 0 auto;
   height: 450px;
   background-color: #3b8ba2; /* Teal base */
@@ -1252,6 +1322,17 @@
   display: flex;
   align-items: center;
   box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 1730px) {
+  .headerBanner {
+    max-width: calc(100% - 80px);
+  }
+}
+@media (max-width: 768px) {
+  .headerBanner {
+    max-width: calc(100% - 40px);
+  }
 }
 
 .bannerNotch {
@@ -1282,7 +1363,7 @@
 }
 
 .springTitle {
-  font-size: 7.5rem;
+  font-size: clamp(3.5rem, 7vw, 7.5rem);
   font-weight: 900;
   margin: 0;
   line-height: 0.8;
@@ -1291,7 +1372,7 @@
 }
 
 .collectionsTitle {
-  font-size: 4rem;
+  font-size: clamp(2.2rem, 4vw, 4rem);
   font-weight: 300;
   margin: 5px 0 0 0;
   opacity: 0.9;
@@ -1317,11 +1398,7 @@
   object-position: bottom right;
 }
 
-@media (max-width: 1440px) {
-  .headerBanner {
-    max-width: 90%;
-  }
-}
+/* Replaced by responsive width calculation above */
 
 @media (max-width: 1200px) {
   .headerBanner {
@@ -1362,8 +1439,10 @@
 
 /* NEW ELEVATE HERO SECTION */
 .elevateHero {
-  padding: 80px 0;
- background-color: #f6f1fc;
+  padding-block: clamp(80px, 6vw, 140px);
+  background-color: #f6f1fc;
+  margin-bottom: -70px;
+  padding-top: 50px;
 }
 
 .heroTopRow {
@@ -1421,7 +1500,7 @@
 }
 
 .heroTitleMain {
-  font-size: 4.5rem;
+  font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 900;
   text-align: center;
   line-height: 1.1;
@@ -1478,8 +1557,7 @@
   justify-content: center;
   align-items: flex-end;
   gap: 20px;
-  height: 650px;
-  
+  height: 500px;
 }
 
 .gridCol {

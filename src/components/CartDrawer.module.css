@@ -116,19 +116,22 @@
 
 .item {
     display: flex;
-    gap: 20px;
-    background: rgba(255, 255, 255, 0.5);
-    padding: 20px;
-    border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    transition: all 0.3s ease;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(10px);
+    padding: 12px;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    align-items: center;
     animation: slideIn 0.4s ease forwards;
 }
 
 .item:hover {
     background: #ffffff;
-    transform: translateX(-4px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+    border-color: var(--primary-light);
+    box-shadow: 0 12px 30px rgba(100, 61, 151, 0.08);
 }
 
 @keyframes slideIn {
@@ -137,100 +140,113 @@
 }
 
 .itemImage {
-    width: 110px;
-    height: 130px;
-    border-radius: 20px;
+    width: 90px;
+    height: 90px;
+    border-radius: 12px;
     overflow: hidden;
-    background: #fff;
+    background: #f8fafc;
     flex-shrink: 0;
     position: relative;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+    border: 1px solid #f1f5f9;
+}
+
+.itemImage img {
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.item:hover .itemImage img {
+    transform: scale(1.08);
 }
 
 .itemInfo {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 4px;
+    justify-content: center;
+    align-self: stretch;
 }
 
 .itemName {
-    font-size: 15px;
-    font-weight: 700;
-    color: #000;
-    line-height: 1.4;
-    margin-bottom: 8px;
-    font-family: var(--font-heading);
-}
-
-.itemMeta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+    line-height: 1.35;
+    margin: 0;
+    font-family: var(--font-body);
 }
 
 .itemPrice {
-    font-size: 17px;
-    font-weight: 950;
-    color: #5a0d99;
-    letter-spacing: -0.5px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary);
+    font-family: var(--font-heading);
 }
 
 .qtyControl {
     display: flex;
     align-items: center;
-    gap: 12px;
-    background: #f8f9fa;
-    padding: 6px 12px;
-    border-radius: 14px;
-    border: 1px solid #eee;
+    gap: 4px;
+    background: #f1f5f9;
+    padding: 2px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    align-self: center;
 }
 
 .qtyBtn {
     background: none;
     border: none;
     cursor: pointer;
-    color: #999;
+    color: #64748b;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     padding: 0;
-    transition: color 0.2s;
 }
 
 .qtyBtn:hover {
-    color: #5a0d99;
+    color: var(--primary);
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .qtyValue {
     font-size: 12px;
-    font-weight: 900;
-    color: #000;
-    min-width: 15px;
+    font-weight: 600;
+    color: #0f172a;
+    min-width: 20px;
     text-align: center;
+    user-select: none;
 }
 
 .removeBtn {
-    background: rgba(255, 77, 77, 0.08);
+    background: transparent;
     border: none;
-    color: #ff4d4d;
-    font-size: 9px;
-    font-weight: 900;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 500;
     cursor: pointer;
-    padding: 6px 14px;
-    border-radius: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    padding: 4px 6px;
+    margin-left: -6px;
+    margin-top: 4px;
+    border-radius: 6px;
     transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-transform: none;
+    letter-spacing: normal;
     width: fit-content;
-    margin-top: 15px;
 }
 
 .removeBtn:hover {
-    background: #ff4d4d;
-    color: #fff;
-    transform: translateY(-2px);
+    color: #ef4444;
+    background: #fef2f2;
 }
 
 .emptyState {

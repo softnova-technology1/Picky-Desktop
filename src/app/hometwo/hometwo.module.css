@@ -273,10 +273,10 @@
 
 /* Home 2 Section Styles (Original from Hometwo.module.css) */
 .welcomeSection {
-  padding: 60px 0;
+  padding: 20px 0;
   background: white;
   border-radius: 0 0 60px 60px;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
 }
 
 .welcomeHeader {
@@ -362,12 +362,12 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
-  margin-bottom: 80px;
+  margin-bottom: 30px;
 }
 
 .curatedItem {
   position: relative;
-  height: 400px;
+  height: 300px;
   border-radius: 32px;
   overflow: hidden;
   cursor: pointer;
@@ -457,7 +457,7 @@
 .heroSlider {
   position: relative;
   width: 100%;
-  height: 460px;
+  height: 550px;
   background: #f8f9fa;
   overflow: hidden;
 }
@@ -848,7 +848,7 @@
 /* Reference-Matched Flash Deals Section */
 .refFlashSection {
   background: var(--white);
-  padding: 40px 0;
+  padding: 20px 0;
 }
 
 .refFlashHeader {
@@ -879,8 +879,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
-  /* padding-bottom: 20px; */
+  margin-bottom: 25px;
+  padding-bottom: 15px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -956,6 +956,9 @@
   overflow: hidden;
   transition: all 0.3s ease;
   cursor: pointer;
+  max-width: 100%;
+  width: 100%;
+  margin-inline: auto;
 }
 
 .refCard:hover {
@@ -965,7 +968,7 @@
 
 .refImgWrapper {
   position: relative;
-  height: 280px;
+  height: 220px;
   background: var(--background);
 }
 
@@ -1058,37 +1061,37 @@
 }
 
 .refCardBody {
-  padding: 20px;
+  padding: 15px;
 }
 
 .refProdCat {
-  font-size: 12px;
+  font-size: 11px;
   color: #888;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
 }
 
 .refProdName {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 800;
   color: var(--foreground);
   line-height: 1.4;
-  height: 45px;
+  height: 40px;
   overflow: hidden;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .refPricing {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .refPriceNow {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 900;
   color: var(--primary);
 }
@@ -1101,13 +1104,13 @@
 
 .refAddToCart {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   background: transparent;
   border: 1.5px solid var(--primary);
   color: var(--primary);
   border-radius: 10px;
   font-weight: 800;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -1120,7 +1123,7 @@
 /* Promotional Banners */
 .refBannerSection {
   background: var(--white);
-  padding-bottom: 80px;
+  padding-bottom: 30px;
 }
 
 .refBannerGrid {
@@ -1131,7 +1134,7 @@
 
 .refBannerItem {
   position: relative;
-  height: 320px;
+  height: 280px;
   border-radius: 24px;
   overflow: hidden;
 }
@@ -1182,24 +1185,38 @@
 
 @media (max-width: 1200px) {
 
-  .refFlashGrid,
+  .refFlashGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    justify-content: center !important;
+  }
   .refBannerGrid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .magProductFlowMedium {
+    grid-template-columns: repeat(2, 1fr) !important;
+    justify-content: center !important;
   }
 }
 
 @media (max-width: 768px) {
 
-  .refFlashGrid,
+  .refFlashGrid {
+    grid-template-columns: 1fr !important;
+    justify-content: center !important;
+  }
   .refBannerGrid {
     grid-template-columns: 1fr;
+  }
+  .magProductFlowMedium {
+    grid-template-columns: 1fr !important;
+    justify-content: center !important;
   }
 }
 
 /* SPECIAL OFFERS - High-Conversion Deep Wine Theme */
 .specialDealsMaster {
   background: var(--background);
-  padding: 50px 0;
+  padding: 20px 0;
 }
 
 .spHeader {
@@ -1231,8 +1248,8 @@
 
 .spHeroBanner {
   position: relative;
-  /* height: 600px; */
-  border-radius: 32px 0px 0px 32px;
+  height: 480px;
+  border-radius: 32px;
   overflow: hidden;
   box-shadow: 0 30px 60px rgba(76, 5, 25, 0.15);
 }
@@ -1378,7 +1395,7 @@
 .spCardsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 25px;
+  gap: 20px;
 }
 
 .spMiniCard {
@@ -1388,6 +1405,9 @@
   transition: all 0.4s ease;
   border: 1px solid var(--border);
   cursor: pointer;
+  max-width: 100%;
+  width: 100%;
+  margin-inline: auto;
 }
 
 .spMiniCard:hover {
@@ -1417,26 +1437,26 @@
 }
 
 .spMiniBody {
-  padding: 20px;
+  padding: 12px;
 }
 
 .spMiniTitle {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 800;
   color: var(--primary);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .spMiniDesc {
-  font-size: 13px;
+  font-size: 11px;
   color: var(--text-muted);
-  margin-bottom: 15px;
+  margin-bottom: 8px;
   line-height: 1.4;
 }
 
 .spMiniBtn {
   width: 100%;
-  padding: 10px;
+  padding: 8px 10px;
   background: var(--background);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -1479,7 +1499,7 @@
 /* THE MAG-GRID: Architectural New Arrivals */
 .magArrivalsMaster {
   background: var(--white);
-  padding: 120px 0;
+  padding: 40px 0;
 }
 
 .magLayoutSplit {
@@ -1508,12 +1528,12 @@
 }
 
 .magMainHeading {
-  font-size: 64px;
-  line-height: 0.9;
-  font-weight: 1000;
+  font-size: 48px;
+  line-height: 1.1;
+  font-weight: 900;
   color: var(--foreground);
-  margin-bottom: 30px;
-  letter-spacing: -3px;
+  margin-bottom: 20px;
+  letter-spacing: -2px;
 }
 
 .magSidebarDesc {
@@ -1541,9 +1561,9 @@
 
 /* Sidebar Architectural Banner Overlay */
 .magSideBanner {
-  margin-top: 60px;
+  margin-top: 30px;
   position: relative;
-  height: 500px;
+  height: 380px;
   border-radius: 24px;
   overflow: hidden;
   box-shadow: 0 40px 80px rgba(76, 5, 25, 0.12);
@@ -1627,16 +1647,27 @@
   position: relative;
   transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   cursor: pointer;
+  width: 100%;
+  background: var(--white);
+  border-radius: 24px;
+  padding: 15px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+.magCardMedium:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
 }
 
 .magImageFrameMedium {
   position: relative;
   width: 100%;
-  height: 350px;
-  /* MEDIUM SIZE */
+  height: 220px;
+  /* Adjusted for card padding */
   overflow: hidden;
   background: var(--background);
-  border-radius: 30px 10px 30px 10px;
+  border-radius: 16px;
 }
 
 .magActualImg {
@@ -1747,18 +1778,20 @@
 }
 
 .magProductMeta {
-  padding-top: 20px;
+  padding-top: 15px;
+  padding-bottom: 5px;
+  text-align: center;
 }
 
 .magProdName {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 800;
   color: var(--foreground);
   margin-bottom: 5px;
 }
 
 .magProdPrice {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--primary);
   font-weight: 900;
 }
@@ -1797,11 +1830,13 @@
 .spotlightMaster {
   background: var(--background);
   /* Linked to Special Offers theme */
-  padding: 20px 0;
+  padding: 15px 0;
+  max-height: 100vh;
+  box-sizing: border-box;
 }
 
 .spTitleHeader {
-  margin-bottom: 70px;
+  margin-bottom: 20px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -1833,7 +1868,7 @@
 .spLayoutGrid {
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 30px;
 }
 
 .spTitleSide {
@@ -1897,30 +1932,48 @@
 /* Duplicate the map content in JSX for true infinite, but for 6 items 30s is a long slow pan */
 
 .trendingMiniCard {
-  flex: 0 0 350px;
-  /* Consistent Medium Width */
+  flex: 0 0 285px;
+  display: flex;
+  flex-direction: column;
   background: var(--white);
-  border-radius: 32px;
+  border-radius: 24px;
   padding: 15px;
-  /* transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); */
   cursor: pointer;
+  height: 360px;
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.02);
 }
 
-/* PODIUM HERO - THE NO. 1 SELLER */
-.podiumHeroCard {
+.podiumGrid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* PODIUM HERO - THE NO. 1 & NO. 2 SELLER */
+.podiumHeroCard {
+  display: flex;
+  flex-direction: column;
   background: var(--white);
-  border-radius: 40px;
+  border-radius: 32px;
   overflow: hidden;
-  box-shadow: 0 40px 100px rgba(100, 61, 151, 0.15);
-  min-height: 550px;
+  box-shadow: 0 30px 60px rgba(100, 61, 151, 0.08);
+  height: 420px;
+  width: 100%;
+  max-width: 100%;
   cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.podiumHeroCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 40px 80px rgba(100, 61, 151, 0.15);
 }
 
 .podiumVisual {
   position: relative;
-  height: 100%;
+  height: 220px;
+  width: 100%;
 }
 
 .podiumImg {
@@ -1929,51 +1982,55 @@
 
 .podiumRankDigit {
   position: absolute;
-  top: 40px;
-  left: 40px;
-  font-size: 160px;
+  top: 25px;
+  right: 25px;
+  font-size: 80px;
   font-weight: 1000;
-  color: rgba(18, 18, 18, 0.04);
-  line-height: 1;
+  background: linear-gradient(135deg, rgba(100, 61, 151, 0.03) 0%, rgba(100, 61, 151, 0.08) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 0.8;
   pointer-events: none;
-  z-index: 10;
+  font-family: var(--font-oswald);
 }
 
 .podiumBadge {
   position: absolute;
-  top: 30px;
-  right: 30px;
-  background: #FFD700;
-  color: #1a1a1a;
-  padding: 10px 20px;
-  font-size: 12px;
-  font-weight: 900;
-  border-radius: 99px;
-  box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+  top: 25px;
+  left: 25px;
+  background: var(--primary);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 1000;
+  letter-spacing: 1px;
+  box-shadow: 0 10px 20px rgba(100, 61, 151, 0.2);
   display: flex;
   align-items: center;
-  gap: 8px;
-  z-index: 11;
+  gap: 6px;
+  text-transform: uppercase;
 }
 
 .podiumBody {
-  padding: 60px;
+  padding: 10px 15px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   background: #fff;
+  flex: 1;
+  gap: 4px;
 }
 
 .podiumTrust {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 20px;
+  gap: 10px;
 }
 
 .podiumStars {
   display: flex;
-  gap: 4px;
+  gap: 2px;
 }
 
 .podiumReviews {
@@ -1984,43 +2041,47 @@
 }
 
 .podiumTitle {
-  font-size: 48px;
+  font-size: 18px;
   font-weight: 1000;
   color: #1a1a1a;
-  margin-bottom: 20px;
-  line-height: 1.1;
-  letter-spacing: -2px;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  margin: 0;
 }
 
 .podiumDesc {
-  font-size: 15px;
+  font-size: 13px;
   color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 45px;
+  line-height: 1.4;
+  margin: 0;
   opacity: 0.8;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* Heat Area - Popularity Indicator */
 .podiumHeatArea {
-  margin-bottom: 50px;
-  padding-top: 20px;
+  margin-top: auto;
+  padding-top: 3px;
   border-top: 1px solid #f2f2f2;
 }
 
 .heatLabel {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 900;
   color: var(--primary);
-  margin-bottom: 12px;
+  margin-bottom: 3px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  letter-spacing: 1px;
+  gap: 6px;
+  letter-spacing: 0.5px;
 }
 
 .heatBar {
   width: 100%;
-  height: 8px;
+  height: 6px;
   background: #f8f8f8;
   border-radius: 99px;
   overflow: hidden;
@@ -2036,36 +2097,36 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 30px;
-  margin-top: auto;
+  gap: 15px;
+  margin-top: 2px;
 }
 
 .podiumPrice {
-  font-size: 38px;
+  font-size: 20px;
   font-weight: 1000;
   color: var(--primary);
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
 }
 
 .podiumAddBtn {
-  padding: 18px 40px;
+  padding: 8px 16px;
   background: var(--primary);
   color: white;
   border: none;
-  border-radius: 16px;
-  font-size: 13px;
+  border-radius: 10px;
+  font-size: 12px;
   font-weight: 900;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
   transition: all 0.3s;
 }
 
 .podiumAddBtn:hover {
   background: #000;
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 /* Trending Flow Grid */
@@ -2075,25 +2136,18 @@
   gap: 30px;
 }
 
-.trendingMiniCard {
-  background: #fff;
-  border-radius: 32px;
-  padding: 15px;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
 .trendingMiniCard:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 30px 60px rgba(76, 5, 25, 0.1);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(100, 61, 151, 0.1);
 }
 
 .trendingImgWrapper {
   position: relative;
-  height: 280px;
-  border-radius: 24px;
+  height: 150px;
+  border-radius: 16px;
   overflow: hidden;
   background: #f8f8f8;
-  margin-bottom: 25px;
+  margin-bottom: 12px;
 }
 
 .tImg {
@@ -2107,9 +2161,9 @@
 
 .trendingRank {
   position: absolute;
-  bottom: -15px;
-  right: -15px;
-  font-size: 100px;
+  bottom: -10px;
+  right: -10px;
+  font-size: 70px;
   font-weight: 1000;
   color: rgba(100, 61, 151, 0.05);
   pointer-events: none;
@@ -2132,67 +2186,138 @@
 }
 
 .trendingInfo {
-  padding: 0 15px 15px;
+  padding: 0 5px 5px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 6px;
 }
 
-.trendingInfo h4 {
-  font-size: 18px;
+.tTrust {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.tStars {
+  display: flex;
+  gap: 2px;
+}
+
+.tReviews {
+  font-size: 13px;
   font-weight: 800;
-  color: var(--foreground);
-  margin-bottom: 8px;
+  color: #bbb;
+  letter-spacing: 0.5px;
 }
 
-.tPrice {
+.tProdName {
   font-size: 16px;
+  font-weight: 1000;
+  color: #1a1a1a;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+.tProdDesc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0;
+  opacity: 0.8;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.tHeatArea {
+  margin-top: auto;
+  padding-top: 5px;
+  border-top: 1px solid #f2f2f2;
+}
+
+.tHeatLabel {
+  font-size: 12px;
   font-weight: 900;
   color: var(--primary);
-  margin-bottom: 20px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  letter-spacing: 0.5px;
 }
 
-.tHeatMini {
+.tHeatBar {
   width: 100%;
-  height: 4px;
-  background: var(--border);
-  border-radius: 10px;
-  margin-bottom: 20px;
+  height: 5px;
+  background: #f8f8f8;
+  border-radius: 99px;
+  overflow: hidden;
 }
 
 .tHeatFill {
   height: 100%;
   background: var(--primary);
-  opacity: 0.3;
+  border-radius: 99px;
+}
+
+.tAction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.tPrice {
+  font-size: 18px;
+  font-weight: 1000;
+  color: var(--primary);
+  letter-spacing: -0.5px;
+  margin: 0;
 }
 
 .tQuickBtn {
-  width: 100%;
-  padding: 12px;
-  border: 1.5px solid var(--border);
-  background: transparent;
-  color: var(--foreground);
+  padding: 8px 14px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
   font-size: 11px;
   font-weight: 900;
-  border-radius: 12px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   transition: all 0.3s;
+  text-transform: uppercase;
 }
 
-.trendingMiniCard:hover .tQuickBtn {
-  background: var(--primary);
-  color: var(--white);
-  border-color: var(--primary);
+.tQuickBtn:hover {
+  background: #000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 1100px) {
+  .podiumGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
   .podiumHeroCard {
-    grid-template-columns: 1fr;
+    height: auto;
   }
 
   .podiumVisual {
-    height: 400px;
+    height: 300px;
   }
 
   .podiumBody {
-    padding: 40px;
+    padding: 20px;
   }
 }
 
@@ -2204,14 +2329,15 @@
 
 .trustSectionMaster {
     background: var(--white);
-    padding: 20px 0;
+    padding: 10px 0;
     overflow-x: hidden;
+    margin-top: 50px;
 }
 
 /* CUSTOMER VOICES - Architectural Step Carousel */
 .reviewSectionMaster {
     background: var(--white);
-    padding: 30px 0;
+    padding: 15px 0;
     position: relative;
     border-top: 1px solid var(--border);
 }
@@ -2273,68 +2399,33 @@
 
 .revCarouselTrack {
   display: flex;
-  gap: 40px;
-  /* Precise Gap as requested */
+  gap: 20px;
   width: max-content;
-  /* Step Animation: (4s stay + 1s move) * 6 cards = 30s total */
-  animation: revStepScroll 30s cubic-bezier(0.8, 0, 0.2, 1) infinite;
+  animation: revContinuousScroll 30s linear infinite;
+  padding: 20px 0;
 }
 
 .revCarouselTrack:hover {
   animation-play-state: paused;
 }
 
-@keyframes revStepScroll {
-
-  /* 1 card = 16.66% width of original set [Actually calculation needs to be relative to total track including duplicates] */
-  /* Let's simplify for 6 cards (total 100% represents the first 6) */
-  0%,
-  13.3% {
-    transform: translateX(0);
-  }
-
-  16.6%,
-  30.0% {
-    transform: translateX(calc(-460px * 1));
-  }
-
-  /* Card + Gap */
-  33.3%,
-  46.6% {
-    transform: translateX(calc(-460px * 2));
-  }
-
-  50.0%,
-  63.3% {
-    transform: translateX(calc(-460px * 3));
-  }
-
-  66.6%,
-  80.0% {
-    transform: translateX(calc(-460px * 4));
-  }
-
-  83.3%,
-  96.6% {
-    transform: translateX(calc(-460px * 5));
-  }
-
-  100% {
-    transform: translateX(calc(-460px * 6));
-  }
+@keyframes revContinuousScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-340px * 6)); }
 }
 
 .revCardPremium {
-  flex: 0 0 420px;
-  /* Medium Size as requested */
+  flex: 0 0 320px;
   background: #fff;
-  padding: 50px;
-  border-radius: 40px;
+  padding: 25px;
+  border-radius: 20px;
   position: relative;
   overflow: hidden;
   transition: all 0.5s ease;
-  /* Deep Wine Border as requested */
-  border: 2px solid rgba(100, 61, 151, 0.08);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
 }
 
 .revCardPremium:hover {
@@ -2346,21 +2437,21 @@
 
 .revQuoteIcon {
   position: absolute;
-  top: 40px;
-  right: 40px;
-  opacity: 0.1;
+  top: 20px;
+  right: 20px;
+  opacity: 0.05;
 }
 
 .revUser {
   display: flex;
   align-items: center;
-  gap: 20px;
-  margin-bottom: 35px;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 .revAvatar {
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   position: relative;
   border-radius: 50%;
   overflow: hidden;
@@ -2374,15 +2465,15 @@
 }
 
 .revUserName {
-  font-size: 19px;
+  font-size: 15px;
   font-weight: 1000;
   color: var(--foreground);
-  line-height: 1;
-  margin-bottom: 5px;
+  line-height: 1.2;
+  margin-bottom: 2px;
 }
 
 .revUserRole {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 900;
   color: var(--primary);
   opacity: 0.6;
@@ -2390,30 +2481,29 @@
 
 .revStarsMini {
   display: flex;
-  gap: 5px;
-  margin-bottom: 25px;
+  gap: 3px;
+  margin-bottom: 15px;
 }
 
 .revText {
-  font-size: 17px;
+  font-size: 14px;
   color: var(--text-muted);
-  line-height: 1.7;
-  margin-bottom: 45px;
+  line-height: 1.6;
+  margin-bottom: 5px;
   font-style: italic;
-  min-height: 85px;
-  /* Ensures text alignment */
+  flex-grow: 1;
 }
 
 .revProductHighlight {
-  padding-top: 25px;
-  border-top: 1px solid #f8f8f8;
+  padding-top: 15px;
+  border-top: 1px solid #f0f0f0;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .revBoughtTag {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 900;
   color: var(--text-muted);
   letter-spacing: 1px;
@@ -2441,16 +2531,15 @@
 .newsSectionMaster {
   background: #fff;
   position: relative;
-  /* padding-bottom: 10px; */
+  margin-bottom: -50px;
 }
 
 .newsHeroBg {
-  height: 380px;
+  height: 250px;
   width: 100%;
   position: relative;
-  border-radius: 60px;
-  margin: 40px auto;
-  width: calc(100% - 80px);
+  border-radius: 20px;
+  margin: 10px auto;
   overflow: hidden;
 }
 
@@ -2462,13 +2551,12 @@
 .newsHeroOverlay {
   position: absolute;
   inset: 0;
-  /* Deep Wine to Rose Gradient Overlay replaced with primary */
   background: linear-gradient(135deg, rgba(100, 61, 151, 0.9) 0%, rgba(126, 96, 191, 0.6) 100%);
 }
 
 .newsHeroContent {
   position: absolute;
-  top: 27%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -2477,25 +2565,25 @@
 }
 
 .newsUpperTag {
-  font-size: 13px;
+  font-size: 9px;
   font-weight: 1000;
   color: rgba(255, 255, 255, 0.7);
-  letter-spacing: 4px;
+  letter-spacing: 2px;
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 3px;
   text-transform: uppercase;
 }
 
 .newsHeroHeading {
-  font-size: 52px;
+  font-size: 22px;
   font-weight: 1000;
   color: #fff;
-  letter-spacing: -2px;
+  letter-spacing: -0.5px;
 }
 
 .newsOverCardContainer {
   position: relative;
-  top: -230px;
+  top: -70px;
   z-index: 5;
   display: flex;
   justify-content: center;
@@ -2504,24 +2592,23 @@
 .newsOverCard {
   background: #fff;
   width: 100%;
-  max-width: 1100px;
-  padding: 50px 80px;
-  border-radius: 50px;
-  box-shadow: 0 40px 100px rgba(100, 61, 151, 0.12);
+  max-width: 600px;
+  padding: 20px 30px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(100, 61, 151, 0.06);
   position: relative;
   overflow: hidden;
-  /* Subtle topographical pattern using CSS */
   background-image:
     radial-gradient(circle at 100% 150%, #fff 24%, rgba(100, 61, 151, 0.02) 25%, rgba(100, 61, 151, 0.02) 28%, #fff 29%),
     radial-gradient(circle at 0% 150%, #fff 24%, rgba(100, 61, 151, 0.02) 25%, rgba(100, 61, 151, 0.02) 28%, #fff 29%);
-  background-size: 80px 80px;
+  background-size: 50px 50px;
   text-align: center;
 }
 
 .newsOverIconGroup {
   display: flex;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 12px;
 }
 
 .newsPaperPlane {
@@ -2540,9 +2627,9 @@
   background: #fff;
   border: 1.5px solid rgba(100, 61, 151, 0.15);
   border-radius: 50px;
-  padding: 10px;
+  padding: 4px;
   width: 100%;
-  max-width: 800px;
+  max-width: 500px;
   margin: 0 auto;
   transition: all 0.4s;
 }
@@ -2556,8 +2643,8 @@
   flex: 1;
   border: none;
   outline: none;
-  padding: 0 30px;
-  font-size: 15px;
+  padding: 0 15px;
+  font-size: 13px;
   font-weight: 600;
   color: #1a1a1a;
 }
@@ -2566,28 +2653,28 @@
   background: linear-gradient(90deg, #F97316 0%, #E11D48 100%);
   color: #fff;
   border: none;
-  padding: 18px 40px;
+  padding: 8px 18px;
   border-radius: 40px;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 1000;
   letter-spacing: 1px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   cursor: pointer;
   transition: all 0.4s;
-  box-shadow: 0 10px 20px rgba(225, 29, 72, 0.3);
+  box-shadow: 0 8px 15px rgba(225, 29, 72, 0.15);
 }
 
 .newsSubmitBtnGradient:hover {
-  transform: scale(1.05) translateX(5px);
-  box-shadow: 0 15px 30px rgba(225, 29, 72, 0.4);
+  transform: scale(1.03) translateX(3px);
+  box-shadow: 0 12px 25px rgba(225, 29, 72, 0.25);
 }
 
 .newsPrivacyNotice {
-  font-size: 11px;
+  font-size: 10px;
   color: #999;
-  margin-top: 30px;
+  margin-top: 10px;
   font-weight: 600;
 }
 
@@ -2624,7 +2711,7 @@
 
 .blogSectionMaster {
     background: var(--white);
-    padding: 30px 0;
+    padding: 15px 0;
 }
 
 .blogSectionHeader {
@@ -2670,23 +2757,33 @@
 .blogGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  justify-content: center;
+  gap: 20px;
 }
 
 .blogCard {
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: 100%;
+  width: 100%;
+  margin-inline: auto;
 }
 
 .blogCard:hover {
-  transform: translateY(-15px);
+  transform: translateY(-10px);
 }
 
 .blogCardVisual {
   position: relative;
-  height: 380px;
-  border-radius: 40px;
+  height: 280px;
+  border-radius: 20px;
   overflow: hidden;
-  margin-bottom: 30px;
+  margin-bottom: 12px;
+}
+
+.blogCardBody {
+  padding: 15px 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 .blogImg {
@@ -2700,12 +2797,12 @@
 
 .blogDateBadge {
   position: absolute;
-  top: 30px;
-  left: 30px;
+  top: 15px;
+  left: 15px;
   background: var(--primary);
   color: var(--white);
-  padding: 12px 18px;
-  border-radius: 18px;
+  padding: 8px 12px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2723,8 +2820,8 @@
 .trustPod {
   display: flex;
   align-items: center;
-  gap: 25px;
-  padding: 30px 40px;
+  gap: 12px;
+  padding: 15px 20px;
   position: relative;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: default;
@@ -2738,7 +2835,7 @@
   top: 50%;
   transform: translateY(-50%);
   width: 1px;
-  height: 60px;
+  height: 40px;
   background: var(--border);
 }
 
@@ -2746,8 +2843,8 @@
   color: var(--primary);
   background: rgba(100, 61, 151, 0.05);
   /* Soft starting background */
-  width: 65px;
-  height: 65px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -2757,6 +2854,11 @@
   position: relative;
   overflow: hidden;
   z-index: 1;
+}
+
+.trustIconBox svg {
+  width: 20px !important;
+  height: 20px !important;
 }
 
 /* The Liquid/Water Element */
@@ -2790,16 +2892,14 @@
 }
 
 .trustTitle {
-  font-size: 18px;
-  font-weight: 1000;
-  color: var(--foreground);
-  margin-bottom: 6px;
-  letter-spacing: -0.5px;
+  font-size: 19px !important;
+  font-weight: 800;
+  margin-bottom: 3px;
+
 }
 
 .trustDesc {
-  font-size: 13px;
-  color: var(--text-muted);
+  font-size: 12px !important;
   line-height: 1.5;
   font-weight: 500;
 }
@@ -2846,44 +2946,48 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 18px;
+  margin-bottom: 10px;
 }
 
 .blogAuthor {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 1000;
   color: var(--primary);
 }
 
 .blogTitle {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 1000;
   color: var(--foreground);
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   letter-spacing: -0.5px;
+  line-height: 1.3;
 }
 
 .blogSnippet {
-  font-size: 14px;
+  font-size: 12px;
   color: var(--text-muted);
-  line-height: 1.6;
-  margin-bottom: 30px;
+  line-height: 1.4;
+  margin-bottom: 15px;
   font-weight: 500;
 }
 
 .blogReadBtn {
-  padding: 15px 35px;
-  border-radius: 30px;
+  padding: 10px 24px;
+  border-radius: 50px;
   background: transparent;
   border: 1.5px solid var(--foreground);
   color: var(--foreground);
   font-size: 11px;
   font-weight: 1000;
   letter-spacing: 1px;
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
+  align-self: flex-start;
+  gap: 8px;
   cursor: pointer;
   transition: all 0.4s;
+  text-transform: uppercase;
 }
 
 .blogReadBtn:hover {
@@ -2942,15 +3046,14 @@
 .newsSectionMaster {
   background: #fff;
   position: relative;
+  margin-bottom: -50px;
 }
 
 .newsHeroBg {
-  height: 380px;
   width: 100%;
   position: relative;
-  border-radius: 60px;
-  margin: 40px auto;
-  width: calc(100% - 80px);
+  border-radius: 20px;
+  margin: 10px auto;
   overflow: hidden;
 }
 
@@ -2967,7 +3070,7 @@
 
 .newsHeroContent {
   position: absolute;
-  top: 27%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -2976,20 +3079,20 @@
 }
 
 .newsUpperTag {
-  font-size: 13px;
+  font-size: 9px;
   font-weight: 1000;
   color: rgba(255, 255, 255, 0.7);
-  letter-spacing: 4px;
+  letter-spacing: 2px;
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 3px;
   text-transform: uppercase;
 }
 
 .newsHeroHeading {
-  font-size: 52px;
+  font-size: 22px;
   font-weight: 1000;
   color: #fff;
-  letter-spacing: -2px;
+  letter-spacing: -0.5px;
 }
 
 .newsOverCardContainer {
@@ -3003,23 +3106,23 @@
 .newsOverCard {
   background: #fff;
   width: 100%;
-  max-width: 1100px;
-  padding: 50px 80px;
-  border-radius: 50px;
-  box-shadow: 0 40px 100px rgba(100, 61, 151, 0.12);
+  max-width: 600px;
+  padding: 20px 30px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(100, 61, 151, 0.06);
   position: relative;
   overflow: hidden;
   background-image:
     radial-gradient(circle at 100% 150%, #fff 24%, rgba(100, 61, 151, 0.02) 25%, rgba(100, 61, 151, 0.02) 28%, #fff 29%),
     radial-gradient(circle at 0% 150%, #fff 24%, rgba(100, 61, 151, 0.02) 25%, rgba(100, 61, 151, 0.02) 28%, #fff 29%);
-  background-size: 80px 80px;
+  background-size: 50px 50px;
   text-align: center;
 }
 
 .newsOverIconGroup {
   display: flex;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 12px;
 }
 
 .newsPaperPlane {
@@ -3038,9 +3141,9 @@
   background: #fff;
   border: 1.5px solid rgba(100, 61, 151, 0.15);
   border-radius: 50px;
-  padding: 10px;
+  padding: 4px;
   width: 100%;
-  max-width: 800px;
+  max-width: 500px;
   margin: 0 auto;
   transition: all 0.4s;
 }
@@ -3054,8 +3157,8 @@
   flex: 1;
   border: none;
   outline: none;
-  padding: 0 30px;
-  font-size: 15px;
+  padding: 0 15px;
+  font-size: 13px;
   font-weight: 600;
   color: #1a1a1a;
 }
@@ -3064,29 +3167,29 @@
   background: linear-gradient(90deg, #F97316 0%, #E11D48 100%);
   color: #fff;
   border: none;
-  padding: 18px 40px;
+  padding: 8px 18px;
   border-radius: 40px;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 1000;
   letter-spacing: 1px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   cursor: pointer;
   transition: all 0.4s;
-  box-shadow: 0 10px 20px rgba(225, 29, 72, 0.2);
+  box-shadow: 0 8px 15px rgba(225, 29, 72, 0.15);
 }
 
 .newsSubmitBtnGradient:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 15px 30px rgba(225, 29, 72, 0.3);
+  transform: scale(1.03) translateX(3px);
+  box-shadow: 0 12px 25px rgba(225, 29, 72, 0.25);
 }
 
 .newsPrivacyNotice {
-  font-size: 12px;
-  color: #888;
-  margin-top: 20px;
-  font-weight: 500;
+  font-size: 10px;
+  color: #999;
+  margin-top: 10px;
+  font-weight: 600;
 }
 
 .trustGrid {
@@ -3101,8 +3204,8 @@
 .trustPod {
   display: flex;
   align-items: center;
-  gap: 25px;
-  padding: 30px 40px;
+  gap: 12px;
+  padding: 15px 20px;
   position: relative;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: default;
@@ -3115,15 +3218,15 @@
   top: 50%;
   transform: translateY(-50%);
   width: 1px;
-  height: 60px;
+  height: 40px;
   background: var(--border, #eee);
 }
 
 .trustIconBox {
   color: var(--primary);
   background: rgba(100, 61, 151, 0.05);
-  width: 65px;
-  height: 65px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -3133,6 +3236,11 @@
   position: relative;
   overflow: hidden;
   z-index: 1;
+}
+
+.trustIconBox svg {
+  width: 20px !important;
+  height: 20px !important;
 }
 
 .trustIconBox::before {
@@ -3161,17 +3269,17 @@
 }
 
 .trustTitle {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 1000;
   color: var(--foreground);
-  margin-bottom: 6px;
+  margin-bottom: 3px;
   letter-spacing: -0.5px;
 }
 
 .trustDesc {
-  font-size: 13px;
+  font-size: 11px;
   color: var(--text-muted, #666);
-  line-height: 1.5;
+  line-height: 1.4;
   font-weight: 500;
 }
 
@@ -3186,6 +3294,10 @@
 }
 
 @media (max-width: 768px) {
+  .podiumGrid {
+    grid-template-columns: 1fr !important;
+  }
+
   .trustGrid {
     grid-template-columns: 1fr;
   }

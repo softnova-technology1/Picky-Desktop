@@ -38,7 +38,10 @@ export default function NavbarWrapper({ children }) {
   const showHomeTwoNavbar = user || pathname === "/hometwo";
   
   return (
-    <>
+    <div style={{
+      '--navbar-height': showHomeTwoNavbar ? '134px' : '90px',
+      '--navbar-scrolled-height': showHomeTwoNavbar ? '134px' : '75px'
+    }}>
       <CartDrawer />
       {showHomeTwoNavbar ? <HomeTwoNavbar /> : <Navbar />}
       {children}
@@ -65,6 +68,6 @@ export default function NavbarWrapper({ children }) {
 
       {/* Global AI Chat */}
       <OrderAIChat />
-    </>
+    </div>
   );
 }
