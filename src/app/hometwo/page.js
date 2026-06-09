@@ -592,7 +592,6 @@ export default function Home2() {
             </div>
             <div className={styles.spTitleSide}>
               <p className={styles.spSubtitleHero}>The most coveted pieces of the season, ranked by you.</p>
-              <Link href="#" className={styles.spViewTrend}>View All Collection <ChevronRight size={18} /></Link>
             </div>
           </div>
 
@@ -901,19 +900,17 @@ export default function Home2() {
                   {[1, 2, 3, 4, 5].map(s => <Star key={s} size={12} fill="#FFD700" color="#FFD700" />)}
                 </div>
                 <p className={styles.revText}>{rev.text}</p>
-
-                <div className={styles.revProductHighlight}>
-                  <span className={styles.revBoughtTag}>PURCHASED:</span>
-                  <span className={styles.revBoughtName}>{rev.product}</span>
-                </div>
               </div>
             ))}
 
             {/* Duplicate for seamless infinite step loop */}
             {[
-              { name: "Sarah J.", role: "Verified Buyer", text: "The quality of the premium wireless headphones is unmatched.", product: "Premium Wireless Pro", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1976" },
-              { name: "David M.", role: "Verified Buyer", text: "Fast delivery and the packaging was pure luxury.", product: "Modernist Chronograph", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974" },
-              { name: "Elena R.", role: "Verified Buyer", text: "I've tried many luxury totes, but this leather tote has the best balance.", product: "Luxe Leather Tote", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070" }
+              { name: "Sarah J.", role: "Verified Buyer", text: "The quality of the premium wireless headphones is unmatched. The deep wine color is stunning!", product: "Premium Wireless Pro", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1976" },
+              { name: "David M.", role: "Verified Buyer", text: "Fast delivery and the packaging was pure luxury. My Modernist Chronograph is my daily essential.", product: "Modernist Chronograph", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1974" },
+              { name: "Elena R.", role: "Verified Buyer", text: "I've tried many luxury totes, but this leather tote has the best balance. A masterpiece of design.", product: "Luxe Leather Tote", img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070" },
+              { name: "Alex K.", role: "Verified Buyer", text: "Stunning craftsmanship on the smartwatch band. The attention to detail is evident. Fast shipping!", product: "SmartWatch Pro", img: "https://images.unsplash.com/photo-1541647376583-d6c5ca910171?q=80&w=1974" },
+              { name: "Jessica L.", role: "Verified Buyer", text: "The Smart Buds changed my commute. Noise cancellation is perfect and they look so stylish.", product: "Aria Smart Buds", img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974" },
+              { name: "Michael T.", role: "Verified Buyer", text: "The desk lamp is exactly what my studio needed. The light is very easy on the eyes.", product: "Studio Desk Lamp", img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070" }
             ].map((rev, i) => (
               <div key={i + 10} className={styles.revCardPremium}>
                 <div className={styles.revQuoteIcon}><Quote size={30} fill="#4C0519" opacity={0.05} /></div>
@@ -930,10 +927,6 @@ export default function Home2() {
                   {[1, 2, 3, 4, 5].map(s => <Star key={s} size={12} fill="#FFD700" color="#FFD700" />)}
                 </div>
                 <p className={styles.revText}>{rev.text}</p>
-                <div className={styles.revProductHighlight}>
-                  <span className={styles.revBoughtTag}>PURCHASED:</span>
-                  <span className={styles.revBoughtName}>{rev.product}</span>
-                </div>
               </div>
             ))}
           </div>

@@ -24,7 +24,7 @@ const newArrivalsData = [
     name: "Signature Scent Candle Set",
     price: 59.00,
     tag: "New",
-    image: "https://images.unsplash.com/photo-1603006905393-c35f297926cc?q=80&w=1974&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1581783898377-1c85bf937427?q=80&w=1915&auto=format&fit=crop"
   },
   {
     id: "na4",
@@ -38,7 +38,7 @@ const newArrivalsData = [
     name: "Premium Linen Throw Pillow",
     price: 45.00,
     tag: "Best Seller",
-    image: "https://images.unsplash.com/photo-1579656335342-5ef351e77df5?q=80&w=1974&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?q=80&w=2072&auto=format&fit=crop"
   },
   {
     id: "na6",

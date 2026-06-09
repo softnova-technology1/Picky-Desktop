@@ -226,37 +226,43 @@ export default function CategoriesPage() {
       {/* Top Collection Section */}
       <section className={styles.topCollectionSection}>
         <div className={styles.container}>
-          <h2 className={styles.sectionTitleTop}>Top Collection</h2>
-          <div className={styles.topColGrid}>
-            <Link href="/category/electronics" className={styles.topColLarge}>
-              <div className={styles.topColLabel}>PREMIUM TECH</div>
-              <h3 className={styles.topColTitle}>Electronics<br />Deals</h3>
-              <div className={styles.topBtn}>Shop Now</div>
-              <Image src={electronics} alt="Electronics" width={300} height={300} className={styles.topLargeImg} />
+          <div className={styles.innovativeHeader}>
+            <h2 className={styles.sectionTitleTop} style={{ marginBottom: 0 }}>Top Collection</h2>
+            <div className={styles.headerLine}></div>
+          </div>
+          <div className={styles.spotlightGrid}>
+            <Link href="/category/electronics" className={`${styles.spotBanner} ${styles.sbBlue}`}>
+              <div className={styles.sbContent}>
+                <h3 className={styles.spotTitle}>Electronics Deals</h3>
+                <div className={styles.spotDiscount}>PREMIUM TECH</div>
+                <div className={styles.spotBtn}>Shop Now</div>
+              </div>
+              <Image src={electronics} alt="Electronics" width={300} height={300} className={styles.sbImg} />
             </Link>
-            <div className={styles.topColStack}>
-              <Link href="/category/fashion" className={styles.topColSmall}>
-                <Image src={fashion} alt="Fashion" fill style={{ objectFit: 'cover' }} className={styles.smallImg} />
-                <div className={styles.smallContent}>
-                  <div className={styles.smallLabel}>TRENDING STYLES</div>
-                  <h3 className={styles.smallTitle}>Fashion Picks</h3>
-                </div>
-              </Link>
-              <Link href="/category/home-decor" className={styles.topColSmall}>
-                <Image src={homeDecor} alt="Decor" fill style={{ objectFit: 'cover' }} className={styles.smallImg} />
-                <div className={styles.smallContent}>
-                  <div className={styles.smallLabel}>MINIMALIST DECOR</div>
-                  <h3 className={styles.smallTitle}>Home Essentials</h3>
-                </div>
-              </Link>
-              <Link href="/category/chocolates" className={styles.topColSmall}>
-                <Image src={snacks} alt="Snacks" fill style={{ objectFit: 'cover' }} className={styles.smallImg} />
-                <div className={styles.smallContent}>
-                  <div className={styles.smallLabel}>LUXURY TREATS</div>
-                  <h3 className={styles.smallTitle}>Chocolate Specials</h3>
-                </div>
-              </Link>
-            </div>
+            <Link href="/category/fashion" className={`${styles.spotBanner} ${styles.sbGreen}`}>
+              <div className={styles.sbContent}>
+                <h3 className={styles.spotTitle}>Fashion Picks</h3>
+                <div className={styles.spotDiscount}>TRENDING STYLES</div>
+                <div className={styles.spotBtn}>Shop Now</div>
+              </div>
+              <Image src={fashion} alt="Fashion" width={300} height={300} className={styles.sbImg} />
+            </Link>
+            <Link href="/category/home-decor" className={`${styles.spotBanner} ${styles.sbBeige}`}>
+              <div className={styles.sbContent}>
+                <h3 className={styles.spotTitle}>Home Essentials</h3>
+                <div className={styles.spotDiscount}>MINIMALIST DECOR</div>
+                <div className={styles.spotBtn}>Shop Now</div>
+              </div>
+              <Image src={homeDecor} alt="Decor" width={300} height={300} className={styles.sbImg} />
+            </Link>
+            <Link href="/category/chocolates" className={`${styles.spotBanner} ${styles.sbPink}`}>
+              <div className={styles.sbContent}>
+                <h3 className={styles.spotTitle}>Chocolate Specials</h3>
+                <div className={styles.spotDiscount}>LUXURY TREATS</div>
+                <div className={styles.spotBtn}>Shop Now</div>
+              </div>
+              <Image src={snacks} alt="Snacks" width={300} height={300} className={styles.sbImg} />
+            </Link>
           </div>
         </div>
       </section>
