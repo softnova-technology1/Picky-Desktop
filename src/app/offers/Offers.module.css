@@ -1,11 +1,9 @@
-:root {
+.pageWrapper {
   --offers-primary: #7d44ef;
   --offers-secondary: #590bf5;
   --offers-gradient: linear-gradient(135deg, #7d44ef, #590bf5);
   --offers-soft-bg: #f8fafc;
-}
 
-.pageWrapper {
   min-height: 100vh;
   padding: 2rem 0 6rem;
   background-color: var(--background);
@@ -53,11 +51,11 @@
 .heroImage {
   width: 90%;
   height: 90%;
-  object-fit: contain;
+  object-fit: cover;
   transform: rotate(-5deg) translateY(20px);
   filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
   animation: float 8s ease-in-out infinite;
-  border-radius: 200px 0 200 0px;
+  border-radius: 200px 0 200px 0;
   border: #ffffff 10px solid;
 }
 

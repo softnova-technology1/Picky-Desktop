@@ -414,3 +414,17 @@
   .input { padding-left: 44px; }
   .fieldIcon { left: 16px; }
 }
+
+.errorMessage {
+  background-color: #fee2e2;
+  color: #dc2626;
+  padding: 12px 18px;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 24px 0;
+  text-align: center;
+  border: 1px solid #fca5a5;
+  animation: fadeIn 0.3s ease;
+}
+

@@ -36,7 +36,8 @@
 }
 
 .recommendedSection [class*="ProductCard_card"] [class*="ProductCard_imageWrapper"],
-.famousProductsSection [class*="ProductCard_card"] [class*="ProductCard_imageWrapper"] {
+.famousProductsSection [class*="ProductCard_card"] [class*="ProductCard_imageWrapper"],
+.recentlyAddedSection [class*="ProductCard_card"] [class*="ProductCard_imageWrapper"] {
   height: 14vw !important;
   min-height: 200px !important;
   max-height: 260px !important;

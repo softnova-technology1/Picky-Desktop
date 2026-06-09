@@ -132,7 +132,6 @@ export default function Shop() {
                     </motion.div>
                 ))}
             </div>
-
         </main>
     );
 }

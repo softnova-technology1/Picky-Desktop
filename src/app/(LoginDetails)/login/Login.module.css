@@ -227,3 +227,31 @@
   .page { padding: 0; background: white; }
   .card { padding: 40px 24px; box-shadow: none; min-height: 100dvh; display: flex; flex-direction: column; justify-content: center; border-radius: 0; }
 }
+
+.errorMessage {
+  background-color: #fee2e2;
+  color: #dc2626;
+  padding: 12px 18px;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 24px 0;
+  text-align: center;
+  border: 1px solid #fca5a5;
+  animation: fadeIn 0.3s ease;
+}
+
+.successMessage {
+  background-color: #ecfdf5;
+  color: #059669;
+  padding: 12px 18px;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 24px 0;
+  text-align: center;
+  border: 1px solid #a7f3d0;
+  animation: fadeIn 0.3s ease;
+}
+
+

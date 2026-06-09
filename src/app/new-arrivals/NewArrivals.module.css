@@ -1,19 +1,16 @@
-:root {
+.pageWrapper {
   --editorial-bg: #f9f9f7;
   --editorial-accent: #e5e5df;
   --editorial-text: #1a1a1a;
   --editorial-text-light: #6b7280;
   --editorial-border: #eeeeee;
-}
 
-.pageWrapper {
   min-height: 100vh;
   padding: 4rem 0 0;
   background-color: white;
   font-family: var(--font-body);
   color: var(--editorial-text);
   overflow-x: hidden;
-  
 }
 
 .container {
