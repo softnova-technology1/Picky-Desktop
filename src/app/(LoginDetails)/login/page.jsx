@@ -1,6 +1,7 @@
 "use client"
 import styles from './Login.module.css';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
@@ -24,11 +25,8 @@ const Login = () => {
             <AuthBackground />
             <div className={styles.card}>
                 <header className={styles.header}>
-                    <Link href="/" className={styles.logo}>
-                        <div className={styles.logoIcon}>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M4 4h7v7H4V4zm0 9h7v7H4v-7zm9-9h7v7h-7V4zm0 9h7v7h-7v-7z"/></svg>
-                        </div>
-                        <span className={styles.logoText}>Picky</span>
+                    <Link href="/" className={styles.logo} style={{ display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>
+                        <Image src="/logos.png" alt="Picky Logo" width={120} height={40} priority style={{ objectFit: 'contain' }} />
                     </Link>
                     <h1 className={styles.title}>Welcome Back</h1>
                     <p className={styles.subtitle}>Sign in to your account to continue.</p>

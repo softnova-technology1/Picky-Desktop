@@ -59,7 +59,7 @@ const Navbar = () => {
                 <div className={styles.container}>
                     {/* Logo (Left) */}
                     <Link href="/" className={styles.logo}>
-                        <span className={styles.logoText}>Picky</span>
+                        <Image src="/logos.png" alt="Picky Logo" width={120} height={36} priority className={styles.logoImg} />
                     </Link>
 
                     {/* Desktop Nav (Center) */}

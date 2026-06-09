@@ -127,11 +127,20 @@
 }
 
 .logo {
-  font-size: 32px;
-  font-weight: 900;
-  color: var(--primary);
+  display: flex;
+  align-items: center;
   text-decoration: none;
-  font-family: var(--font-heading);
+}
+
+.logoImg {
+  object-fit: contain;
+  height: 45px;
+  width: auto;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logo:hover .logoImg {
+  transform: scale(1.03);
 }
 
 .navLinks {
@@ -427,19 +436,20 @@
 
 .userDropdown {
   position: absolute;
-  top: calc(100% + 20px);
+  top: calc(100% + 15px);
   right: -10px;
-  width: 280px;
-  background: #1a1a1e;
-  /* Deep Obsidian */
-  backdrop-filter: blur(20px);
-  border-radius: 28px;
-  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+  width: 300px;
+  background: linear-gradient(135deg, rgba(26, 26, 30, 0.96) 0%, rgba(18, 18, 22, 0.98) 100%);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-radius: 24px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 
+              0 0 40px rgba(125, 68, 239, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 24px 0 0;
   z-index: 5000;
   transform-origin: top right;
-  animation: dropdownAnim 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: dropdownAnim 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
 }
 
@@ -467,18 +477,38 @@
 }
 
 .miniAvatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 15px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
   overflow: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  background: #1a1a1e;
+  position: relative;
+  padding: 2px;
+  background: linear-gradient(135deg, #7d44ef, #a079f5, #ff5252, #7d44ef);
+  background-size: 300% 300%;
+  box-shadow: 0 4px 15px rgba(125, 68, 239, 0.25);
+  flex-shrink: 0;
+  animation: avatarBorderCycle 4s ease infinite;
+}
+
+@keyframes avatarBorderCycle {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .miniAvatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 50%;
+  background: #1a1a1e;
+  border: 1px solid #1a1a1e;
 }
 
 .headerInfo {
@@ -487,58 +517,95 @@
 }
 
 .dropdownWelcome {
-  font-size: 16px;
-  font-weight: 800;
+  font-size: 17px;
+  font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
 .memberStatus {
   font-size: 9px;
   font-weight: 900;
-  color: var(--primary-light);
+  color: #ffffff;
   letter-spacing: 1.5px;
-  background: rgba(160, 121, 245, 0.15);
-  padding: 2px 8px;
-  border-radius: 4px;
-  margin-top: 4px;
+  background: linear-gradient(90deg, #7d44ef 0%, #590bf5 100%);
+  padding: 3px 10px;
+  border-radius: 6px;
+  margin-top: 6px;
   width: fit-content;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px rgba(125, 68, 239, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.memberStatus::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: badgeShimmer 3s infinite ease-in-out;
+}
+
+@keyframes badgeShimmer {
+  0% {
+    left: -100%;
+  }
+  30% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 .dropdownLinks {
   display: flex;
   flex-direction: column;
-  padding: 10px 12px;
+  padding: 12px 10px;
+  gap: 4px;
 }
 
 .dropdownLink {
   width: 100%;
-  padding: 12px 14px;
-  color: #e0e0e0;
+  padding: 10px 14px;
+  color: #b3b3b8;
   display: flex;
   align-items: center;
   gap: 16px;
   border: none;
   background: none;
-  font-size: 13.5px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   text-align: left;
   text-decoration: none;
   border-radius: 16px;
 }
 
 .linkIcon {
-  width: 45px;
-  height: 45px;
-  background: rgba(255, 255, 255, 0.04);
-  border-radius: 12px;
+  width: 42px;
+  height: 42px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
-  transition: all 0.3s ease;
+  color: #a0a0a5;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dropdownLink:hover {
@@ -548,42 +615,120 @@
 }
 
 .dropdownLink:hover .linkIcon {
-  background: var(--primary);
-  transform: scale(1.1);
-  box-shadow: 0 4px 15px rgba(103, 65, 153, 0.4);
+  background: linear-gradient(135deg, #7d44ef, #590bf5);
+  border-color: rgba(125, 68, 239, 0.4);
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(125, 68, 239, 0.3);
   color: white;
+}
+
+.dropdownLink:hover .linkIcon svg {
+  animation: iconPulse 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes iconPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15) translateY(-2px);
+  }
+  100% {
+    transform: scale(1.1) translateY(-1px);
+  }
 }
 
 .dropdownDivider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.05);
-  margin: 8px 14px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  margin: 6px 14px;
 }
 
 .logoutText {
-  color: #ff4d4d !important;
+  color: #ff5252 !important;
+}
+
+.dropdownLink.logoutText:hover {
+  background: rgba(255, 82, 82, 0.06) !important;
+  color: #ff5252 !important;
+}
+
+.dropdownLink.logoutText:hover .linkIcon {
+  background: linear-gradient(135deg, #ff5252, #e04040) !important;
+  border-color: rgba(255, 82, 82, 0.3) !important;
+  box-shadow: 0 6px 15px rgba(255, 82, 82, 0.25) !important;
+  color: white !important;
+}
+
+.dropdownLink.logoutText:hover .linkIcon svg {
+  animation: logoutArrowSlide 0.6s ease infinite;
+}
+
+@keyframes logoutArrowSlide {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(3px);
+  }
 }
 
 .dropdownFooter {
-  background: #8046dd;
-  padding: 15px;
+  background: transparent;
+  padding: 16px 20px 20px;
   text-align: center;
-  color: white;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .supportButton {
-  background: none;
-  border: none;
-  color: #fdf9f9;
+  width: 100%;
+  background: linear-gradient(90deg, #7d44ef 0%, #590bf5 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
   font-size: 11px;
   font-weight: 800;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   cursor: pointer;
-  transition: color 0.3s ease;
+  padding: 14px 24px;
+  border-radius: 99px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-transform: uppercase;
+  box-shadow: 0 4px 15px rgba(125, 68, 239, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.supportButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-20deg);
+  transition: all 0.75s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.supportButton:hover::before {
+  left: 150%;
 }
 
 .supportButton:hover {
-  color: #fff;
+  letter-spacing: 2.5px;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(125, 68, 239, 0.5);
+  color: #ffffff;
 }
 
 

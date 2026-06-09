@@ -103,7 +103,9 @@ export default function HomeTwoNavbar() {
       </div>
       <nav className={styles.navbar}>
         <div className={styles.leftSection}>
-          <Link href="/" className={styles.logo}>Picky</Link>
+          <Link href="/" className={styles.logo}>
+            <Image src="/logos.png" alt="Picky Logo" width={120} height={36} priority className={styles.logoImg} />
+          </Link>
           <div className={styles.navLinks}>
             <Link href="/" className={`${styles.navLink} ${isActive('/') ? styles.active : ''}`}>HOME</Link>
             <Link href="/shop" className={`${styles.navLink} ${isActive('/shop') ? styles.active : ''}`}>SHOP</Link>
@@ -240,64 +242,72 @@ export default function HomeTwoNavbar() {
                 <User size={22} />
               </button>
 
-              {showUserDropdown && (
-                <div className={styles.userDropdown}>
-                  <div className={styles.dropdownHeader}>
-                    <div className={styles.headerTop}>
-                      <div className={styles.miniAvatar}>
-                        <Image src="/images/amber.png" alt="User" width={50} height={50} />
-                      </div>
-                      <div className={styles.headerInfo}>
-                        <span className={styles.dropdownWelcome}>{userName}</span>
-                        <span className={styles.memberStatus}>PREMIUM MEMBER</span>
+              <AnimatePresence>
+                {showUserDropdown && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                    transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                    className={styles.userDropdown}
+                  >
+                    <div className={styles.dropdownHeader}>
+                      <div className={styles.headerTop}>
+                        <div className={styles.miniAvatar}>
+                          <Image src="/images/amber.png" alt="User" width={50} height={50} />
+                        </div>
+                        <div className={styles.headerInfo}>
+                          <span className={styles.dropdownWelcome}>{userName}</span>
+                          <span className={styles.memberStatus}>PREMIUM MEMBER</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className={styles.dropdownLinks}>
-                    {!user ? (
-                      <>
-                        <button onClick={() => openAuth('login')} className={styles.dropdownLink}>
-                          <div className={styles.linkIcon}><User size={14} /></div>
-                          <span>LOGIN</span>
-                        </button>
-                        <button onClick={() => openAuth('signup')} className={styles.dropdownLink}>
-                          <div className={styles.linkIcon}><Settings size={14} /></div>
-                          <span>SIGN UP</span>
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <Link href="/profile" className={styles.dropdownLink} onClick={() => setShowUserDropdown(false)}>
-                          <div className={styles.linkIcon}><User size={14} /></div>
-                          <span>PROFILE</span>
-                        </Link>
-                        <div className={styles.dropdownDivider}></div>
-                        <Link href="/my-orders" className={styles.dropdownLink} onClick={() => setShowUserDropdown(false)}>
-                          <div className={styles.linkIcon}><ShoppingBag size={14} /></div>
-                          <span>MY ORDERS</span>
-                        </Link>
-                        <button
-                          className={`${styles.dropdownLink} ${styles.logoutText}`}
-                          onClick={() => {
-                            handleLogout();
-                            setShowUserDropdown(false);
-                          }}
-                        >
-                          <div className={styles.linkIcon} style={{ background: 'rgba(255, 77, 77, 0.1)', color: '#ff4d4d' }}>
-                            <ArrowRight size={14} />
-                          </div>
-                          <span>LOGOUT</span>
-                        </button>
-                      </>
-                    )}
-                  </div>
+                    <div className={styles.dropdownLinks}>
+                      {!user ? (
+                        <>
+                          <button onClick={() => openAuth('login')} className={styles.dropdownLink}>
+                            <div className={styles.linkIcon}><User size={14} /></div>
+                            <span>LOGIN</span>
+                          </button>
+                          <button onClick={() => openAuth('signup')} className={styles.dropdownLink}>
+                            <div className={styles.linkIcon}><Settings size={14} /></div>
+                            <span>SIGN UP</span>
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <Link href="/profile" className={styles.dropdownLink} onClick={() => setShowUserDropdown(false)}>
+                            <div className={styles.linkIcon}><User size={14} /></div>
+                            <span>PROFILE</span>
+                          </Link>
+                          <div className={styles.dropdownDivider}></div>
+                          <Link href="/my-orders" className={styles.dropdownLink} onClick={() => setShowUserDropdown(false)}>
+                            <div className={styles.linkIcon}><ShoppingBag size={14} /></div>
+                            <span>MY ORDERS</span>
+                          </Link>
+                          <button
+                            className={`${styles.dropdownLink} ${styles.logoutText}`}
+                            onClick={() => {
+                              handleLogout();
+                              setShowUserDropdown(false);
+                            }}
+                          >
+                            <div className={styles.linkIcon} style={{ background: 'rgba(255, 77, 77, 0.1)', color: '#ff4d4d' }}>
+                              <ArrowRight size={14} />
+                            </div>
+                            <span>LOGOUT</span>
+                          </button>
+                        </>
+                      )}
+                    </div>
 
-                  <div className={styles.dropdownFooter}>
-                    <button className={styles.supportButton}>NEED HELP?</button>
-                  </div>
-                </div>
-              )}
+                    <div className={styles.dropdownFooter}>
+                      <button className={styles.supportButton}>NEED HELP?</button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>
