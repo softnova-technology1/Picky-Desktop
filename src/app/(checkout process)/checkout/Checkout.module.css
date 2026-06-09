@@ -224,17 +224,94 @@
   background-color: var(--primary-light);
 }
 
-@media (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1023px) {
+
+  /* 7. Checkout Page — Tablet Fixes */
+
+  /* Layout: single column, no side-by-side cramping */
   .layout {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Remove sticky from summary card on tablet — avoids height issues */
+  .summaryCard {
+    position: static;
+  }
+
+  /* 7a. Progress container — center and prevent overflow */
+  .progressContainer {
+    padding: 0 0.5rem;
+    overflow-x: auto;          /* Fallback if labels still collide */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    margin-bottom: 2rem;
+  }
+
+  .progressContainer::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 7b. Step line — shorter connector, prevent overflow */
+  .stepLine {
+    width: 48px;               /* Was 100px — reduce to prevent overflow */
+    min-width: 32px;
+    margin: 0 6px;
+    flex-shrink: 1;            /* Allow shrinking under tight widths */
+  }
+
+  /* 7c. Step circle — slightly smaller on tablet */
+  .stepCircle {
+    width: 34px;
+    height: 34px;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  /* 7d. Step label — prevent collision */
+  .stepLabel {
+    font-size: 0.65rem;        /* Smaller to prevent overlap */
+    top: 50px;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  /* Step wrapper gives each step breathing room */
+  .stepWrapper {
+    min-width: 0;
+    flex-shrink: 1;
+  }
+
+  .step {
+    min-width: 48px;           /* Enough space for circle + label */
+  }
+
+  /* Card padding — comfortable on 768px+ */
+  .card,
+  .summaryCard {
+    padding: 1.75rem;
   }
 }
 
-@media (max-width: 768px) {
-  .stepLine {
-    width: 50px;
+@media (max-width: 767px) {
+  .layout {
+    grid-template-columns: 1fr;
   }
-  
+  .stepLine {
+    width: 40px;
+    margin: 0 4px;
+  }
+  .stepLabel {
+    font-size: 0.65rem;
+    top: 44px;
+  }
+  .stepCircle {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+  }
   .card, .summaryCard {
     padding: 1.5rem;
   }

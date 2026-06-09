@@ -446,7 +446,50 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-@media (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Tablet: side-panel drawer — NOT a bottom sheet (that is mobile-only) */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: 300px;          /* Slightly narrower to avoid cramping content */
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 28px 0 0 28px;
+    z-index: 1000;
+    padding: 24px;
+    gap: 24px;
+    overflow-y: auto;
+    /* Ensure no bottom-sheet positioning leaks in */
+    bottom: 0;
+    top: 0;
+  }
+
+  /* Compact the style grid on narrower panel */
+  .styleGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .styleCard {
+    height: 120px;
+  }
+
+  /* Chips wrap naturally */
+  .chipGrid {
+    gap: 8px;
+  }
+
+  /* Summary panel stays pinned to bottom of sidebar */
+  .summaryPanel {
+    margin: 0 -24px -24px -24px;
+    padding: 16px 24px;
+  }
+}
+
+@media (max-width: 767px) {
   .sidebar {
     position: fixed;
     bottom: 0;

@@ -107,3 +107,17 @@
   font-weight: 500;
   opacity: 0.8;
 }
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .vendorFlex {
+    gap: 20px;
+  }
+  .newVendorCard {
+    min-width: calc(50% - 10px);
+    padding: 16px 20px;
+    gap: 15px;
+  }
+  .sectionTitle {
+    font-size: 2rem;
+  }
+}

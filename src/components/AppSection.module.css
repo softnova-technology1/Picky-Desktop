@@ -150,3 +150,27 @@
   opacity: 0.3;
   z-index: -1;
 }
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .appSection {
+    flex-direction: column;
+    padding: 40px 30px;
+    border-radius: 40px;
+    text-align: center;
+    gap: 40px;
+  }
+  .appContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .appSubtitle {
+    max-width: 100%;
+    margin-bottom: 30px;
+  }
+  .mockupContainer {
+    width: 300px;
+    height: 300px;
+  }
+}
+

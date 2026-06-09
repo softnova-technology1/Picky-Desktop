@@ -678,7 +678,7 @@
 
 .closeDrawerBtn {
   background: #f8f9fa;
-  border: none;
+  border: 2px solid transparent;
   width: 45px;
   height: 45px;
   border-radius: 50%;
@@ -686,13 +686,19 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-  color: #333;
+  color: #555;
+  transform: rotate(0deg);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.3s ease,
+              border-color 0.3s ease,
+              color 0.3s ease;
 }
 
 .closeDrawerBtn:hover {
-  background: #eee;
-  transform: rotate(90deg);
+  background: #fff0f0;
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: rotate(360deg);
 }
 
 .drawerContent {
@@ -930,3 +936,187 @@
   text-decoration: underline;
   transform: translateX(2px);
 }
+
+/* Tablet Viewport Optimization */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .navbar {
+    padding: 0 20px;
+    height: 80px;
+  }
+  .leftSection {
+    gap: 15px;
+  }
+  .logo {
+    font-size: 24px;
+  }
+  .navLinks {
+    gap: 10px;
+  }
+  .navLink {
+    font-size: 10px;
+    letter-spacing: 0.2px;
+  }
+  .searchContainer {
+    margin: 0 10px;
+    max-width: 250px;
+  }
+  .searchBox {
+    padding: 8px 16px;
+  }
+  .navIcons {
+    gap: 12px;
+  }
+  .topLocation {
+    padding: 0 15px 0 25px;
+  }
+  .topLocationText {
+    font-size: 11px;
+  }
+  .tickerItem {
+    padding: 0 30px;
+  }
+  .megaMenu {
+    top: 124px;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 30px 40px;
+    gap: 20px;
+    height: calc(100vh - 124px);
+    overflow-y: auto;
+  }
+  .navSpacer {
+    height: 124px;
+  }
+  .cartDrawer {
+    width: 450px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 800px) {
+  .cartDrawer {
+    width: 380px !important;
+  }
+}
+
+.menuToggle {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .navLinks {
+    display: none !important;
+  }
+  .menuToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid rgba(100, 61, 151, 0.15);
+    background: rgba(100, 61, 151, 0.03);
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  .menuToggle:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(100, 61, 151, 0.15);
+  }
+}
+
+.mobileMenuBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+}
+
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 350px;
+  height: 100vh;
+  background: white;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.1);
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+}
+
+@media (max-width: 500px) {
+  .mobileMenu {
+    width: 100%;
+  }
+}
+
+.mobileMenuHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 30px;
+}
+
+.mobileMenuLogo {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--primary);
+  font-family: var(--font-heading);
+}
+
+.mobileMenuCloseBtn {
+  background: #f8f9fa;
+  border: 2px solid transparent;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #555;
+}
+
+.mobileMenuCloseBtn:hover {
+  background: #fff0f0;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.mobileLinksList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mobileLink {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--foreground);
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.mobileLink:hover {
+  background: rgba(100, 61, 151, 0.05);
+  color: var(--primary);
+  padding-left: 20px;
+  border-color: rgba(100, 61, 151, 0.1);
+}
+
+
+

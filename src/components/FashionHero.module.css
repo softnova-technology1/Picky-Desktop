@@ -524,3 +524,46 @@
     left: calc(50% + 400px);
   }
 }
+
+/* Dedicated Tablet Viewport Optimization */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    height: 600px;
+  }
+  .content {
+    left: 30px;
+    width: calc(100% - 60px);
+    max-width: 550px;
+  }
+  .title {
+    font-size: 40px;
+  }
+  .subtitle {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  .description {
+    font-size: 13px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    max-width: 400px;
+  }
+  .item {
+    width: 140px;
+    height: 220px;
+  }
+  .slider .item:nth-child(3) {
+    left: 50%;
+  }
+  .slider .item:nth-child(4) {
+    left: calc(50% + 160px);
+  }
+  .slider .item:nth-child(5) {
+    left: calc(50% + 320px);
+  }
+  .slider .item:nth-child(6) {
+    left: calc(50% + 480px);
+  }
+}
+

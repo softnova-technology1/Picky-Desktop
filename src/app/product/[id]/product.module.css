@@ -637,7 +637,7 @@
   min-height: 100vh;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .bentoContainer {
     grid-template-columns: 1fr;
   }
@@ -646,7 +646,7 @@
     grid-row: auto;
   }
   .heroImageCard {
-    min-height: 500px;
+    min-height: 380px;
     padding: 20px;
   }
   .watermarkText {
@@ -667,6 +667,133 @@
     grid-template-columns: 1fr;
     gap: 40px;
     padding: 30px;
+  }
+
+  .reviewsSplit {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .descSplitLayout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .completeInfoSection {
+    padding: 25px;
+  }
+
+  .bottomTabsHeader {
+    gap: 20px;
+    overflow-x: auto;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ── Tablet-only: 768px – 1023px ── */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+  /* 5a. Hero Image Card — reduce excessive height, prevent overflow */
+  .heroImageCard {
+    min-height: 320px;       /* Prevent excessively tall hero on 768px */
+    max-height: 420px;
+    overflow: hidden;
+  }
+
+  .mainImageWrapper {
+    min-height: 280px;
+  }
+
+  /* Bento container: single column stacking */
+  .bentoContainer {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .cinemaWrapper {
+    padding: 24px 1rem;      /* Reduce side padding to prevent overflow */
+    overflow-x: hidden;
+  }
+
+  /* 5b. Reviews split — single column, no cramping */
+  .reviewsSplit {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* Tighten the rating sidebar */
+  .writeReviewBox {
+    padding: 20px;
+  }
+
+  /* 5c. Description split — single column */
+  .descSplitLayout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* Complete info section — proportional padding */
+  .completeInfoSection {
+    padding: 20px;
+    margin: 40px auto 0;
+  }
+
+  /* Tabs scroll horizontally on tablet */
+  .bottomTabsHeader {
+    gap: 16px;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    /* Prevent layout from expanding viewport */
+    max-width: 100%;
+  }
+
+  /* Dynamic section wrapper */
+  .dynamicSectionWrapper {
+    margin: 40px auto 0;
+  }
+
+  .dynamicBentoRow {
+    grid-template-columns: 1fr;
+  }
+
+  /* Related products scroller */
+  .cinemaRelated {
+    margin: 80px auto 0;
+  }
+
+  /* Thumbnail lane — allow scroll, prevent overflow */
+  .thumbnailLane {
+    overflow-x: auto;
+    padding: 0 16px 16px;
+    justify-content: flex-start;
+    scrollbar-width: none;
+  }
+
+  .thumbnailLane::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Perk badges — wrap on tablet */
+  .perksList {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .perkBadge {
+    font-size: 0.75rem;
+    padding: 10px 12px;
+  }
+
+  /* Title sizing */
+  .bentoTitle {
+    font-size: 1.8rem;
+  }
+
+  .relatedHeadline h2 {
+    font-size: 1.8rem;
   }
 }
 

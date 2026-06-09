@@ -192,7 +192,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .grid-cols-4 {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -201,7 +201,23 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@media (max-width: 768px) {
+/* Dedicated Tablet Breakpoint */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+  .section {
+    padding: 4.5rem 0;
+  }
+  .section-title {
+    font-size: 2.6rem;
+  }
+  .section-subtitle {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 767px) {
   .grid-cols-3,
   .grid-cols-4 {
     grid-template-columns: 1fr;

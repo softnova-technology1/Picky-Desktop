@@ -160,7 +160,7 @@
   justify-content: center;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   .megaDropdownWrapper {
     min-width: 100%;
     width: 95vw;

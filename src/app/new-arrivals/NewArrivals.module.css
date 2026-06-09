@@ -459,6 +459,31 @@
   .heroTitle { font-size: 3.5rem; }
 }
 
+/* Dedicated Tablet Viewport Optimization */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 270px));
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .heroSection, .editorialSection {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .heroImageContainer, .editorialImage {
+    height: 350px;
+  }
+  .heroContent, .editorialText {
+    padding: 2rem 1.5rem;
+  }
+  .heroTitle, .editorialTitle {
+    font-size: 2rem;
+  }
+  .sectionTitleGroup h2 {
+    font-size: 2rem;
+  }
+}
+
 @media (max-width: 900px) {
   .heroSection, .editorialSection { grid-template-columns: 1fr; height: auto; }
   .heroImageContainer, .editorialImage { height: 400px; }

@@ -149,7 +149,56 @@
 }
 
 
-@media (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1023px) {
+  .layoutInner {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    border-right: none;
+    border-bottom: 1px solid #f0f0f5;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    overflow-x: auto;
+    gap: 20px;
+  }
+  .userCard {
+    display: none;
+  }
+  .navSection {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+  }
+  .footerNav {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    margin-top: 0;
+    align-items: center;
+  }
+  .logoutBtn {
+    margin-top: 0;
+  }
+  .navItem {
+    padding: 10px 15px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+  .activeNavItem::before {
+    left: 50%;
+    bottom: 0;
+    top: auto;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 3px;
+  }
+}
+
+@media (max-width: 767px) {
   .layoutInner {
     flex-direction: column;
   }

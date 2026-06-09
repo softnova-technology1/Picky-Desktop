@@ -1481,12 +1481,13 @@
     height: 500px;
   }
 }
-
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .spCardsGrid {
     grid-template-columns: 1fr;
   }
+}
 
+@media (max-width: 768px) {
   .spBannerOverlay {
     padding: 30px;
   }
@@ -1829,9 +1830,7 @@
 /* THE SPOTLIGHT DISCOVERY: Innovative Best Sellers */
 .spotlightMaster {
   background: var(--background);
-  /* Linked to Special Offers theme */
   padding: 15px 0;
-  max-height: 100vh;
   box-sizing: border-box;
 }
 
@@ -3345,60 +3344,159 @@
 }
 
 /* --- Responsive View for Tablets (iPad/Portrait) --- */
-@media (max-width: 1024px) {
+/* Scoped to TABLET range only: 768px–1023px */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+  /* ── Ribbon / Category Bar ── */
   .ribbonContainer {
     padding: 0 20px;
     gap: 5px;
   }
-  
+
   .ribbonItem {
-    min-width: 80px;
+    min-width: 70px;
   }
 
+  .ribbonIconWrapper {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* ── 1. Special Deals Section ── */
+  .spHeroBanner {
+    height: 340px;           /* Reduce excessive 480px height */
+    border-radius: 24px;
+  }
+
+  .spBannerOverlay {
+    padding: 28px 32px;      /* Prevent content from being cut */
+    align-items: flex-start;
+  }
+
+  .spPromoText {
+    font-size: 32px;         /* Prevent text overflow at 52px */
+    letter-spacing: -1px;
+    line-height: 1.2;
+    margin-bottom: 14px;
+  }
+
+  .spTimeBlock {
+    width: 52px;             /* Tighten time blocks */
+    height: 56px;
+    font-size: 16px;
+    border-radius: 12px;
+  }
+
+  .spCountdown {
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .spPromoSub {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  /* ── 2. New Arrivals / MAG Layout ── */
   .magLayoutSplit {
-    flex-direction: column;
-    gap: 40px;
+    flex-direction: column;  /* Stack sidebar + grid vertically */
+    gap: 32px;
   }
 
   .magTitleSidebar {
-    flex: none;
-    width: 100%;
+    flex: 0 0 auto;
+    width: 100%;             /* Full-width header on tablet */
+    text-align: left;
   }
 
   .magStickyContent {
-    position: static;
+    position: static;        /* Remove sticky on tablet */
+    top: auto;
+  }
+
+  .magSideBanner {
+    height: 240px;           /* Compact sidebar banner */
+    margin-top: 0;
   }
 
   .magProductFlowMedium {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* Clean 2-col product grid */
+    gap: 20px;
   }
 
-  .spLayoutGrid {
-    grid-template-columns: 1fr;
+  .magMainHeading {
+    font-size: 36px !important;
+    letter-spacing: -1px;
+  }
+
+  .magImageFrameMedium {
+    height: 180px;           /* Proportional card images */
+  }
+
+  /* ── 3. Best Sellers / Podium Grid ── */
+  .podiumGrid {
+    grid-template-columns: repeat(2, 1fr) !important; /* 2-col from 4 */
+    gap: 16px;
   }
 
   .podiumHeroCard {
     flex-direction: column;
+    height: auto;            /* Remove fixed 420px height */
+    overflow: hidden;
   }
 
   .podiumVisual {
-    height: 400px;
+    height: 190px;           /* Balanced image area */
+    width: 100%;
   }
 
-  .refFlashGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .curatedGrid {
-    grid-template-columns: repeat(2, 1fr);
+  .podiumTitle {
+    font-size: 15px;         /* Prevent overflow in narrow cards */
+    line-height: 1.3;
+    letter-spacing: -0.3px;
   }
 
-  /* Hero adjustments for tablet */
+  .podiumDesc {
+    font-size: 12px;
+    -webkit-line-clamp: 2;
+  }
+
+  .podiumBody {
+    padding: 10px 12px;
+  }
+
+  /* ── 8. Blog Section ── */
+  .blogGrid {
+    grid-template-columns: repeat(2, 1fr); /* 2-col instead of 3 */
+    gap: 18px;
+  }
+
+  .blogCardVisual {
+    height: 210px;           /* Better image proportions */
+  }
+
+  .blogSectionHeader {
+    flex-direction: column;  /* Stack heading + link vertically */
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .blogMainHeading {
+    font-size: 32px !important;
+    letter-spacing: -1px;
+  }
+
+  /* ── Shared heading scale ── */
+  .spHeading, .revHeading {
+    font-size: 36px !important;
+    letter-spacing: -1.5px;
+  }
+
+  /* ── Hero Carousel ── */
   .carousel {
     height: 60vh;
   }
-
- 
 
   .brandLabel {
     height: 90px;
@@ -3411,12 +3509,12 @@
   }
 
   .brandOutline {
-    font-size: 56px;
-    transform: translate(-49%, -45%);
+    font-size: 44px;
+    transform: translate(-50%, -45%);
   }
 
   .offerText {
-    font-size: 36px;
+    font-size: 28px;
     letter-spacing: -1px;
   }
 
@@ -3434,7 +3532,8 @@
   .navControls {
     bottom: 20px;
     gap: 15px;
-    left: 45%;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .navArrow {
@@ -3453,6 +3552,54 @@
 
   .dotActive {
     width: 40px;
+  }
+
+  /* ── Flash Deals ── */
+  .refFlashGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .refBannerGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .curatedGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* ── Trust Pods ── */
+  .trustPod {
+    padding: 20px 16px;
+  }
+
+  .trustTitle {
+    font-size: 16px;
+  }
+
+  /* ── Newsletter ── */
+  .newsOverCardContainer {
+    top: -50px;
+  }
+
+  .newsSectionMaster {
+    margin-bottom: -30px;
+  }
+
+  /* ── Review Cards ── */
+  .revCardPremium {
+    flex: 0 0 300px;
+    padding: 25px;
+  }
+
+  /* ── Trending Products ── */
+  .trendingMiniCard {
+    flex: 0 0 240px;
+    height: 320px;
+  }
+
+  /* ── Spotlight layout ── */
+  .spLayoutGrid {
+    grid-template-columns: 1fr;
   }
 }
 

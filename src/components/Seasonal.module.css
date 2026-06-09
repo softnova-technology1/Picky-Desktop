@@ -177,3 +177,32 @@
 .eCardSide:hover .eArrowLink {
   transform: translateX(5px);
 }
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .editorialGrid {
+    gap: 15px;
+  }
+  .eCardMain, .eCardSide {
+    height: 280px;
+  }
+  .eTitle {
+    font-size: 1.5rem;
+  }
+  .eDesc {
+    font-size: 0.75rem;
+    max-width: 180px;
+    margin-bottom: 10px;
+  }
+  .eContent {
+    gap: 15px;
+  }
+  .eSideTitle {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+  .eGlassBox {
+    padding: 15px;
+    max-width: 200px;
+  }
+}
+

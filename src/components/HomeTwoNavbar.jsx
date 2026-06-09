@@ -12,6 +12,7 @@ import {
   Settings,
   ArrowRight,
   MapPin,
+  Menu,
   X
 } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -32,6 +33,14 @@ export default function HomeTwoNavbar() {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [showAuthPopup, setShowAuthPopup] = useState(false);
   const [authTab, setAuthTab] = useState('login');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [closeRotation, setCloseRotation] = useState(0);
+
+  const spinCloseBtn = () => setCloseRotation(prev => prev + 360);
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
+
 
   useEffect(() => {
     if (user) {
@@ -299,9 +308,65 @@ export default function HomeTwoNavbar() {
                 </div>
               )}
             </div>
+
+            {/* Mobile Menu Toggler */}
+            <button
+              className={styles.menuToggle}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
       </nav>
+
+      {/* Mobile Menu Drawer (Slides in from the right) */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            <motion.div
+              className={styles.mobileMenuBackdrop}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            <motion.div
+              className={styles.mobileMenu}
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 220 }}
+            >
+              <div className={styles.mobileMenuHeader}>
+                <span className={styles.mobileMenuLogo}>Picky Menu</span>
+                <button 
+                  className={styles.mobileMenuCloseBtn} 
+                  onClick={() => { spinCloseBtn(); setMobileMenuOpen(false); }}
+                  onMouseEnter={spinCloseBtn}
+                  title="Close Menu"
+                  style={{
+                    transform: `rotate(${closeRotation}deg)`,
+                    transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, border-color 0.3s ease, color 0.3s ease'
+                  }}
+                >
+                  <X size={24} />
+                </button>
+              </div>
+              <div className={styles.mobileLinksList}>
+                <Link href="/" className={`${styles.mobileLink} ${isActive('/') ? styles.active : ''}`}>HOME</Link>
+                <Link href="/shop" className={`${styles.mobileLink} ${isActive('/shop') ? styles.active : ''}`}>SHOP</Link>
+                <Link href="/category" className={`${styles.mobileLink} ${isActive('/category') ? styles.active : ''}`}>CATEGORIES</Link>
+                <Link href="/new-arrivals" className={`${styles.mobileLink} ${isActive('/new-arrivals') ? styles.active : ''}`}>NEW ARRIVALS</Link>
+                <Link href="/offers" className={`${styles.mobileLink} ${isActive('/offers') ? styles.active : ''}`}>OFFERS</Link>
+                <Link href="/Blog" className={`${styles.mobileLink} ${isActive('/Blog') ? styles.active : ''}`}>BLOG</Link>
+                <Link href="/about" className={`${styles.mobileLink} ${isActive('/about') ? styles.active : ''}`}>ABOUT US</Link>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
       <div className={styles.navSpacer}></div>
       <AuthPopup
         isOpen={showAuthPopup}

@@ -253,13 +253,27 @@
   transform: translateY(-4px);
 }
 
-@media (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1023px) {
   .cartLayout {
     grid-template-columns: 1fr;
   }
+  .itemImage {
+    width: 120px;
+    height: 120px;
+  }
+  .cartItem {
+    gap: 20px;
+    padding: 20px;
+  }
+  .itemActions {
+    gap: 20px;
+  }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
+  .cartLayout {
+    grid-template-columns: 1fr;
+  }
   .cartItem {
     flex-direction: column;
     text-align: center;
