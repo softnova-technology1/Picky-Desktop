@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 
 const NewArrivalsCard = ({ product, index, onAddToCart }) => {
   const router = useRouter();
-  const { addToCart } = useCart();
+  const { addToCart, setCheckoutItems } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
 
   const isFavorite = isInWishlist(product.id);
@@ -27,6 +27,13 @@ const NewArrivalsCard = ({ product, index, onAddToCart }) => {
     if (onAddToCart) onAddToCart(product);
   };
 
+  const handleBuyNow = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCheckoutItems([{ ...product, quantity: 1 }]);
+    router.push('/checkout');
+  };
+
   const handleCardClick = () => {
     router.push(`/product/${product.id}?img=${encodeURIComponent(product.image)}`);
   };
@@ -40,21 +47,15 @@ const NewArrivalsCard = ({ product, index, onAddToCart }) => {
       onClick={handleCardClick}
     >
       <div className={styles.imageBox}>
-        <motion.div 
-          className={styles.badge}
-          initial={{ x: -20, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ delay: 0.5 + index * 0.1 }}
-        >
-          {product.tag || 'New'}
-        </motion.div>
+
         
         <div className={styles.imageContainer}>
           <Image 
             src={product.image} 
             alt={product.name} 
-            width={200}
-            height={280}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+            style={{ objectFit: 'cover' }}
             className={styles.image}
             priority={index < 4}
           />
@@ -84,7 +85,13 @@ const NewArrivalsCard = ({ product, index, onAddToCart }) => {
 
       <div className={styles.content}>
         <h3 className={styles.name}>{product.name}</h3>
-        <span className={styles.price}>${product.price ? product.price.toFixed(2) : '0.00'}</span>
+        <div className={styles.detailsRow}>
+          <span className={styles.price}>${product.price ? product.price.toFixed(2) : '0.00'}</span>
+          <span className={styles.stockStatus}>In Stock</span>
+        </div>
+        <button className={styles.buyNowBtn} onClick={handleBuyNow}>
+          Buy Now
+        </button>
       </div>
     </motion.div>
   );

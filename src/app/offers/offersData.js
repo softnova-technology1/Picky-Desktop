@@ -5,6 +5,7 @@ export const offersData = [
     originalPrice: 349.00,
     discountPrice: 199.00,
     discountLabel: "43% OFF",
+    description: "Immersive audio with active noise cancellation.",
     image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop"
   },
   {
@@ -13,6 +14,7 @@ export const offersData = [
     originalPrice: 799.00,
     discountPrice: 499.00,
     discountLabel: "38% OFF",
+    description: "Stunning 4K resolution with smart features.",
     image: "https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?q=80&w=2070&auto=format&fit=crop"
   },
   {
@@ -21,6 +23,7 @@ export const offersData = [
     originalPrice: 89.00,
     discountPrice: 45.00,
     discountLabel: "50% OFF",
+    description: "Track your health and workouts anywhere.",
     image: "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?q=80&w=2088&auto=format&fit=crop"
   },
   {
@@ -29,6 +32,7 @@ export const offersData = [
     originalPrice: 159.00,
     discountPrice: 99.00,
     discountLabel: "37% OFF",
+    description: "Professional grade stainless steel knives.",
     image: "https://images.unsplash.com/photo-1593618998160-e34014e67546?q=80&w=1964&auto=format&fit=crop"
   },
   {
@@ -37,6 +41,7 @@ export const offersData = [
     originalPrice: 299.00,
     discountPrice: 179.00,
     discountLabel: "40% OFF",
+    description: "Comfortable support for long working hours.",
     image: "https://images.unsplash.com/photo-1505797149-43b0069ec26b?q=80&w=2072&auto=format&fit=crop"
   },
   {
@@ -45,7 +50,8 @@ export const offersData = [
     originalPrice: 129.00,
     discountPrice: 69.00,
     discountLabel: "46% OFF",
-    image: "https://images.unsplash.com/photo-1608156639585-342c7decf66f?q=80&w=2070&auto=format&fit=crop"
+    description: "Rugged design with 24-hour battery life.",
+    image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1938&auto=format&fit=crop"
   },
   {
     id: "offer7",
@@ -53,6 +59,7 @@ export const offersData = [
     originalPrice: 119.00,
     discountPrice: 75.00,
     discountLabel: "37% OFF",
+    description: "Healthy, oil-free cooking made easy.",
     image: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=2070&auto=format&fit=crop"
   },
   {
@@ -61,6 +68,7 @@ export const offersData = [
     originalPrice: 1299.00,
     discountPrice: 899.00,
     discountLabel: "$400 SAVING",
+    description: "Capture professional-quality photos and video.",
     image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=1938&auto=format&fit=crop"
   }
 ];

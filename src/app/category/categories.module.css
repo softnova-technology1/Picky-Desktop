@@ -54,7 +54,7 @@
 .departmentBar {
   padding-block: clamp(15px, 2vw, 30px);
   border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  border-bottom: none;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
   position: sticky;
@@ -570,8 +570,9 @@
 }
 
 .topColStack {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 20px;
   height: 500px;
 }
@@ -596,7 +597,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
+  background: linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
 }
 
 .smallImg {
@@ -609,49 +611,62 @@
 }
 
 .smallLabel {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 800;
   color: #8b5cf6;
-  letter-spacing: 0.1em;
-  margin-bottom: 5px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
 }
 
 .smallTitle {
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 2.2rem;
+  font-weight: 900;
   color: #1a1a1a;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
 }
 
 /* Specific Card Palettes */
+.topColStack .topColSmall:nth-child(1) {
+  grid-column: span 2;
+}
+
+.topColStack .topColSmall:nth-child(1) .smallContent {
+  background: linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+  justify-content: center;
+}
+
 .topColStack .topColSmall:nth-child(1) .smallTitle {
-  color: #2D1F1A;
-  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.4);
+  font-size: 2.8rem;
+  color: #111;
+  text-shadow: none;
 }
 
 .topColStack .topColSmall:nth-child(1) .smallLabel {
-  color: #A06A4B;
+  color: #ff5722;
 }
 
 .topColStack .topColSmall:nth-child(2) .smallTitle {
-  color: #243128;
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+  color: #111;
+  text-shadow: none;
 }
 
 .topColStack .topColSmall:nth-child(2) .smallLabel {
-  color: #6B8C72;
+  color: #4CAF50;
 }
 
 .topColStack .topColSmall:nth-child(3) .smallContent {
-  background: rgba(255, 248, 240, 0.55);
-  backdrop-filter: blur(5px);
+  background: linear-gradient(to top, rgba(255, 248, 240, 0.95) 0%, rgba(255, 248, 240, 0.5) 60%, transparent 100%);
 }
 
 .topColStack .topColSmall:nth-child(3) .smallTitle {
-  color: #3B2418;
+  color: #111;
+  text-shadow: none;
 }
 
 .topColStack .topColSmall:nth-child(3) .smallLabel {
-  color: #9B6A47;
+  color: #9c27b0;
 }
 
 /* Category Spotlight */
@@ -663,30 +678,48 @@
 .spotlightGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 50px;
+  gap: 20px;
 }
 
 .spotBanner {
-  grid-column: span 2;
   border-radius: 24px;
-  padding: 35px 30px;
-  height: clamp(180px, 18vw, 250px);
+  padding: 30px;
+  min-height: 380px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   position: relative;
   overflow: hidden;
   text-decoration: none;
   transition: all 0.5s ease;
 }
 
+.spotBanner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+  z-index: 2;
+  transition: all 0.5s ease;
+}
+
+.spotBanner:hover::before {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 100%);
+}
+
 .spotBanner:hover {
-  transform: scale(1.02);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.08);
 }
 
 .sbContent {
   position: relative;
-  z-index: 2;
-  max-width: 50%;
+  z-index: 3;
+  width: 100%;
+  max-width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .sbBlue {
@@ -708,36 +741,41 @@
 .spotTitle {
   font-size: clamp(1.2rem, 1.8vw, 1.8rem);
   font-weight: 900;
-  color: #1D1830;
+  color: #ffffff;
   margin-bottom: 8px;
   line-height: 1.1;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 .spotDiscount {
   font-size: 1rem;
   font-weight: 800;
-  color: #8B5CFF;
+  color: #e0e0e0;
   margin-bottom: 16px;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.5);
 }
 
 .spotBtn {
   height: 36px;
-  padding: 0 16px;
+  padding: 0 24px;
   border-radius: 999px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.72);
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(139, 92, 255, 0.18);
-  color: #3A2A5F;
-  box-shadow: 0 8px 24px rgba(139, 92, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #111;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   width: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   cursor: pointer;
+  margin-top: auto;
+  align-self: center;
+  margin-bottom: 10px;
 }
 
 .spotBtn:hover {
@@ -750,27 +788,25 @@
 
 .sbImg {
   position: absolute;
-  right: 0;
-  bottom: -15px;
-  width: 42% !important;
-  height: auto !important;
-  object-fit: contain;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
   transition: transform 0.6s ease;
+  z-index: 1;
 }
 
 .spotBanner:hover .sbImg {
-  transform: scale(1.08) rotate(-5deg);
+  transform: scale(1.1);
 }
 
 /* Recommended For You */
 .recommendedSection {
   padding-block: clamp(60px, 5vw, 100px) clamp(80px, 6vw, 130px);
-  margin: -30px 0;
   padding: 20px 0;
 }
 
 .recommendBox {
-  background: linear-gradient(180deg, rgba(22, 17, 38, 0.18) 0%, rgba(34, 24, 59, 0.18) 40%, rgba(44, 35, 80, 0.18) 100%);
   border-radius: 40px;
   padding: 30px;
   text-align: center;
@@ -1405,7 +1441,7 @@
   padding-block: clamp(80px, 6vw, 140px);
   background-color: #f6f1fc;
   margin-bottom: -70px;
-  padding-top: 10px;
+  padding-top: 50px;
 }
 
 .heroTopRow {
@@ -1463,7 +1499,7 @@
 }
 
 .heroTitleMain {
-  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 900;
   text-align: center;
   line-height: 1.1;

@@ -1,7 +1,7 @@
 .scrollTopBtn {
     position: fixed;
-    bottom: 110px; /* Keeps it above the QuickCart */
-    right: 30px;
+    bottom: 30px;
+    left: 30px;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -18,8 +18,8 @@
 
 @media (max-width: 500px) {
     .scrollTopBtn {
-        bottom: 100px;
-        right: 20px;
+        bottom: 20px;
+        left: 20px;
         width: 45px;
         height: 45px;
     }

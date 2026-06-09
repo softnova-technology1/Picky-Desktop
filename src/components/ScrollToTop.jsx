@@ -3,10 +3,17 @@
 import { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import styles from './ScrollToTop.module.css';
 
 const ScrollToTop = () => {
     const [isVisible, setIsVisible] = useState(false);
+    const pathname = usePathname();
+
+    // Scroll to top on route change
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
     useEffect(() => {
         const toggleVisibility = () => {

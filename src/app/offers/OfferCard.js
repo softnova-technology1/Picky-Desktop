@@ -59,8 +59,9 @@ const OfferCard = ({ product, index, onAddToCart }) => {
           <Image 
             src={product.image} 
             alt={product.name} 
-            width={400}
-            height={400}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+            style={{ objectFit: 'cover' }}
             className={styles.image}
             priority={index < 4}
           />
@@ -90,10 +91,14 @@ const OfferCard = ({ product, index, onAddToCart }) => {
 
       <div className={styles.content}>
         <h3 className={styles.name}>{product.name}</h3>
+        {product.description && <p className={styles.description}>{product.description}</p>}
         
-        <div className={styles.priceWrapper}>
-          <span className={styles.priceOriginal}>${product.originalPrice.toFixed(2)}</span>
-          <span className={styles.priceDiscount}>${product.discountPrice.toFixed(2)}</span>
+        <div className={styles.detailsRow}>
+          <div className={styles.priceWrapper}>
+            <span className={styles.priceOriginal}>${product.originalPrice.toFixed(2)}</span>
+            <span className={styles.priceDiscount}>${product.discountPrice.toFixed(2)}</span>
+          </div>
+          <span className={styles.stockStatus}>In Stock</span>
         </div>
       </div>
     </motion.div>
