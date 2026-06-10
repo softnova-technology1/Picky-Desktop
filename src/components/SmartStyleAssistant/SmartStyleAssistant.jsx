@@ -3,6 +3,10 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import minimalist from '@/images/styles/minimalist.png';
+import streetwear from '@/images/styles/streetwear.png';
+import luxury from '@/images/styles/luxury.png';
+import casual from '@/images/styles/casual.png';
 import { 
   Sparkles, 
   Palette, 
@@ -45,10 +49,10 @@ const SmartStyleAssistant = ({ onFilterChange, isMobileOpen, onClose, category }
                         category?.toLowerCase().includes("smart");
 
   const styles_data = [
-    { id: 'min', name: 'Minimal', desc: 'Clean, neutral, timeless', img: '/images/styles/minimalist.png' },
-    { id: 'street', name: 'Streetwear', desc: 'Urban, edgy, vibrant', img: '/images/styles/streetwear.png' },
-    { id: 'luxury', name: 'Luxury', desc: 'Elegant evening wear', img: '/images/styles/luxury.png' },
-    { id: 'casual', name: 'Casual', desc: 'Soft knitwear & denim', img: '/images/styles/casual.png' }
+    { id: 'min', name: 'Minimal', desc: 'Clean, neutral, timeless', img: minimalist },
+    { id: 'street', name: 'Streetwear', desc: 'Urban, edgy, vibrant', img: streetwear },
+    { id: 'luxury', name: 'Luxury', desc: 'Elegant evening wear', img: luxury },
+    { id: 'casual', name: 'Casual', desc: 'Soft knitwear & denim', img: casual }
   ];
 
   const brands = isElectronics ? 
@@ -413,14 +417,14 @@ const SmartStyleAssistant = ({ onFilterChange, isMobileOpen, onClose, category }
         </div>
         <div className={styles.recList}>
           <motion.div className={styles.recItem} whileHover={{ x: 5 }}>
-            <img src="/images/styles/minimalist.png" alt="Rec 1" className={styles.recImage} />
+            <img src={minimalist.src} alt="Rec 1" className={styles.recImage} />
             <div className={styles.recInfo}>
               <span className={styles.recName}>Silk Satin Gown</span>
               <span className={styles.recPrice}>$890</span>
             </div>
           </motion.div>
           <motion.div className={styles.recItem} whileHover={{ x: 5 }}>
-            <img src="/images/styles/luxury.png" alt="Rec 2" className={styles.recImage} />
+            <img src={luxury.src} alt="Rec 2" className={styles.recImage} />
             <div className={styles.recInfo}>
               <span className={styles.recName}>Pearl Blazer Set</span>
               <span className={styles.recPrice}>$1,200</span>

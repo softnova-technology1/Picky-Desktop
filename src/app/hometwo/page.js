@@ -51,6 +51,47 @@ export default function Home2() {
   const [showAuthPopup, setShowAuthPopup] = useState(false);
   const [authTab, setAuthTab] = useState('login');
 
+  // Timer states for Flash Deals and Promo Deals
+  const [flashTimeLeft, setFlashTimeLeft] = useState({ hours: 4, minutes: 21, seconds: 55 });
+  const [promoTimeLeft, setPromoTimeLeft] = useState({ hours: 2, minutes: 45, seconds: 12 });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setFlashTimeLeft(prev => {
+        let { hours, minutes, seconds } = prev;
+        if (seconds > 0) {
+          seconds--;
+        } else if (minutes > 0) {
+          seconds = 59;
+          minutes--;
+        } else if (hours > 0) {
+          seconds = 59;
+          minutes = 59;
+          hours--;
+        }
+        return { hours, minutes, seconds };
+      });
+
+      setPromoTimeLeft(prev => {
+        let { hours, minutes, seconds } = prev;
+        if (seconds > 0) {
+          seconds--;
+        } else if (minutes > 0) {
+          seconds = 59;
+          minutes--;
+        } else if (hours > 0) {
+          seconds = 59;
+          minutes = 59;
+          hours--;
+        }
+        return { hours, minutes, seconds };
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatNumber = (num) => num.toString().padStart(2, '0');
+
   const userName = user?.name || user?.email || "Member";
 
   // Local notification state for Wishlist (to support custom titles without modifying global component)
@@ -287,11 +328,11 @@ export default function Home2() {
                 <p className={styles.refFlashSubtitle}>Don't miss out! Exclusive deals on premium essentials.</p>
               </div>
               <div className={styles.standardTimer}>
-                <div className={styles.timerUnitBox}>04</div>
+                <div className={styles.timerUnitBox}>{formatNumber(flashTimeLeft.hours)}</div>
                 <span className={styles.timerLowSep}>:</span>
-                <div className={styles.timerUnitBox}>21</div>
+                <div className={styles.timerUnitBox}>{formatNumber(flashTimeLeft.minutes)}</div>
                 <span className={styles.timerLowSep}>:</span>
-                <div className={styles.timerUnitBox}>55</div>
+                <div className={styles.timerUnitBox}>{formatNumber(flashTimeLeft.seconds)}</div>
               </div>
             </div>
             <Link href="/offers" className={styles.refViewAll}>View All <ChevronRight size={18} /></Link>
@@ -434,11 +475,11 @@ export default function Home2() {
                   <p className={styles.spPromoSub}>Grab the Deal Now. Exclusive high-fashion collections.</p>
 
                   <div className={styles.spCountdown}>
-                    <div className={styles.spTimeBlock}>02<small>HRS</small></div>
+                    <div className={styles.spTimeBlock}>{formatNumber(promoTimeLeft.hours)}<small>HRS</small></div>
                     <span className={styles.spTimeSep}>:</span>
-                    <div className={styles.spTimeBlock}>45<small>MIN</small></div>
+                    <div className={styles.spTimeBlock}>{formatNumber(promoTimeLeft.minutes)}<small>MIN</small></div>
                     <span className={styles.spTimeSep}>:</span>
-                    <div className={styles.spTimeBlock}>12<small>SEC</small></div>
+                    <div className={styles.spTimeBlock}>{formatNumber(promoTimeLeft.seconds)}<small>SEC</small></div>
                   </div>
 
                   <button 
@@ -851,13 +892,13 @@ export default function Home2() {
           <div className={styles.blogGrid}>
             {blogPosts.slice(0, 3).map((post, i) => (
               <div key={post.id} className={styles.blogCard}>
-                <div className={styles.blogCardVisual}>
+                <Link href={`/Blog/${post.id}`} className={styles.blogCardVisual}>
                   <Image src={post.image} alt={post.title} fill className={styles.blogImg} />
                   <div className={styles.blogDateBadge}>
                     <span className={styles.dateDay}>{post.date.split(' ')[0]}</span>
                     <span className={styles.dateMonth}>{post.date.split(' ')[1]}</span>
                   </div>
-                </div>
+                </Link>
 
                 <div className={styles.blogCardBody}>
                   <div className={styles.blogMeta}>

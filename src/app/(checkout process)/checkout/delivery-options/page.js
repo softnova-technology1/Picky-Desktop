@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Box, Zap, CheckCircle, ArrowRight, ArrowLeft } from 'lucide-react';
+import standardDelivery from '@/images/standard_delivery_boxes.png';
+import expressDelivery from '@/images/express_delivery_van.png';
 
 export default function DeliveryOptionsPage() {
   const router = useRouter();
@@ -16,7 +18,7 @@ export default function DeliveryOptionsPage() {
       time: '3-5 business days',
       price: 'FREE',
       icon: <Box size={24} />,
-      image: '/images/standard_delivery_boxes.png',
+      image: standardDelivery.src,
       description: 'Reliable shipping for your everyday needs.'
     },
     {
@@ -25,7 +27,7 @@ export default function DeliveryOptionsPage() {
       time: '1-2 business days',
       price: '$5.99',
       icon: <Zap size={24} />,
-      image: '/images/express_delivery_van.png',
+      image: expressDelivery.src,
       description: 'Need it fast? Get your order tomorrow with our priority handling.'
     }
   ];

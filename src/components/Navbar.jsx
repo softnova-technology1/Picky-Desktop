@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import logos from '@/images/logos.png';
 import { ShoppingBag, Search, User, Menu, X, Heart, LogOut, ChevronDown } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
@@ -59,7 +60,7 @@ const Navbar = () => {
                 <div className={styles.container}>
                     {/* Logo (Left) */}
                     <Link href="/" className={styles.logo}>
-                        <Image src="/logos.png" alt="Picky Logo" width={120} height={36} priority className={styles.logoImg} />
+                        <Image src={logos} alt="Picky Logo" width={120} height={36} priority className={styles.logoImg} />
                     </Link>
 
                     {/* Desktop Nav (Center) */}

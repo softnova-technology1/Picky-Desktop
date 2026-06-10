@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './profile-layout.module.css';
+import amber from '@/images/amber.png';
 import { 
   User, 
   Settings, 
@@ -38,7 +39,7 @@ export default function ProfileLayout({ children }) {
           <div className={styles.userCard}>
             <div className={styles.avatarWrapper}>
               <img 
-                src="/images/amber.png" 
+                src={amber.src} 
                 alt="User" 
                 className={styles.avatar} 
               />

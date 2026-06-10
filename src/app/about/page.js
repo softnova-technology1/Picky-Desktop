@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from "./about.module.css";
+import abouts from '@/images/abouts.png';
 function About() {
     return (
         <div className={styles.mainWrapper}>
@@ -118,7 +119,7 @@ function About() {
 
                     <div className={styles.centerpieceWrapper}>
                         <img
-                            src="/images/abouts.png"
+                            src={abouts.src}
                             alt="Why Choose Picky"
                             className={styles.centerpieceImage}
                         />

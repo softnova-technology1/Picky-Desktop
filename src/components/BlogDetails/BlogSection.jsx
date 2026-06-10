@@ -11,13 +11,13 @@ const BlogSection = () => {
                 <div className={styles.grid}>
                     {blogPosts.map((post) => (
                         <div key={post.id} className={styles.blogCard}>
-                            <div className={styles.imageWrapper}>
+                            <Link href={`/Blog/${post.id}`} className={styles.imageWrapper}>
                                 <img src={post.image} alt={post.title} className={styles.image} />
                                 <div className={styles.dateBadge}>
                                     <span className={styles.dateDay}>{post.date.split(' ')[0]}</span>
                                     <span className={styles.dateMonth}>{post.date.split(' ')[1]}</span>
                                 </div>
-                            </div>
+                            </Link>
                             <div className={styles.blogInfo}>
                                 <div className={styles.metadata}>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
