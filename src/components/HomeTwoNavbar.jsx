@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import {
-
   ChevronDown,
   Search,
   Heart,
@@ -12,7 +11,8 @@ import {
   Settings,
   ArrowRight,
   MapPin,
-  X
+  X,
+  Menu
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 import styles from "./HomeTwoNavbar.module.css";
@@ -34,6 +34,11 @@ export default function HomeTwoNavbar() {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
   const [showAuthPopup, setShowAuthPopup] = useState(false);
   const [authTab, setAuthTab] = useState('login');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     if (user) {
@@ -311,9 +316,39 @@ export default function HomeTwoNavbar() {
                 )}
               </AnimatePresence>
             </div>
+
+            {/* Mobile/Tablet Menu Toggle */}
+            <button
+              className={styles.menuToggle}
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
       </nav>
+
+      {/* Mobile/Tablet Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            className={styles.mobileMenu}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Link href="/" className={`${styles.mobileLink} ${isActive('/') ? styles.active : ''}`}>HOME</Link>
+            <Link href="/shop" className={`${styles.mobileLink} ${isActive('/shop') ? styles.active : ''}`}>SHOP</Link>
+            <Link href="/category" className={`${styles.mobileLink} ${isActive('/category') ? styles.active : ''}`}>CATEGORIES</Link>
+            <Link href="/new-arrivals" className={`${styles.mobileLink} ${isActive('/new-arrivals') ? styles.active : ''}`}>NEW ARRIVALS</Link>
+            <Link href="/offers" className={`${styles.mobileLink} ${isActive('/offers') ? styles.active : ''}`}>OFFERS</Link>
+            <Link href="/Blog" className={`${styles.mobileLink} ${isActive('/Blog') ? styles.active : ''}`}>BLOG</Link>
+            <Link href="/about" className={`${styles.mobileLink} ${isActive('/about') ? styles.active : ''}`}>ABOUT US</Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className={styles.navSpacer}></div>
       <AuthPopup
         isOpen={showAuthPopup}

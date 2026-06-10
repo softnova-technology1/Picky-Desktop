@@ -282,3 +282,28 @@
   margin-left: 8px;
   font-weight: 600;
 }
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .card {
+    border-radius: 16px;
+  }
+  .content {
+    padding: 12px 15px;
+    gap: 3px;
+  }
+  .title {
+    font-size: 0.85rem;
+  }
+  .price {
+    font-size: 1rem;
+  }
+  .originalPrice {
+    font-size: 0.75rem;
+    margin-left: 6px;
+  }
+  .shopNowBtn {
+    padding: 10px 20px;
+    font-size: 0.7rem;
+    border-radius: 10px;
+  }
+}

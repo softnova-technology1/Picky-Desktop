@@ -64,6 +64,14 @@
   width: 100%;
 }
 
+@media (min-width: 1024px) {
+  .departmentBar {
+    position: relative !important;
+    top: auto !important;
+  }
+}
+
+
 .navInner {
   display: flex;
   justify-content: center;
@@ -1643,4 +1651,182 @@
   .heroTitleMain { font-size: 2.5rem; }
   .heroGrid { flex-wrap: wrap; height: auto; }
   .gridCol { flex: none; width: calc(50% - 10px); height: 300px; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Sticky Department Bar scroll scroll overflow styles */
+  .departmentBar {
+    padding-block: 8px !important; /* Reduced visual height */
+    top: 75px !important; /* Fits scrolled navbar precisely, closing the background gap */
+  }
+  .navInner {
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    padding-inline: 20px !important;
+    gap: 15px !important;
+    padding: 4px 0 !important; /* Reduced vertical padding */
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .navInner::-webkit-scrollbar {
+    display: none !important;
+  }
+  .navItemWrapper {
+    flex-shrink: 0 !important;
+  }
+  .navItemPill {
+    padding: 10px 20px !important;
+    font-size: 0.9rem !important;
+    min-width: 170px !important; /* Refined Visual Balance: Uniform widths */
+    justify-content: center !important; /* Centered content inside pills */
+  }
+
+  /* Hero Section wrapper & layout elements */
+  .elevateHero {
+    padding-block: 30px !important;
+    margin-bottom: -30px !important;
+  }
+  .heroTitleMain {
+    font-size: 2rem !important;
+  }
+  .heroGrid {
+    flex-wrap: wrap !important;
+    height: auto !important;
+    gap: 10px !important;
+  }
+  .gridCol {
+    flex: none !important;
+    width: calc(33.333% - 10px) !important;
+    height: 250px !important;
+  }
+  .gridCol:nth-child(4), .gridCol:nth-child(5) {
+    width: calc(50% - 10px) !important;
+    height: 180px !important;
+  }
+  .exploreBtn {
+    padding: 12px 20px !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* Shared Product Grid layout and wrapper styling */
+  .productGrid {
+    grid-template-columns: repeat(2, minmax(0, 260px)) !important; /* Refined visual card scale */
+    gap: 15px !important;
+    margin: 20px auto !important; /* Reduced margin */
+  }
+  .recommendedSection [class*="ProductCard_card"] [class*="ProductCard_imageWrapper"],
+  .famousProductsSection [class*="ProductCard_card"] [class*="ProductCard_imageWrapper"],
+  .recentlyAddedSection [class*="ProductCard_card"] [class*="ProductCard_imageWrapper"] {
+    height: 200px !important; /* Proportionately balanced image height */
+    min-height: 200px !important;
+    max-height: 240px !important;
+  }
+
+  /* Spotlight 2x2 grids and card banners */
+  .spotlightGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+  }
+  .spotBanner {
+    min-height: 280px !important;
+    padding: 20px !important;
+    border-radius: 16px !important;
+  }
+  .spotTitle {
+    font-size: 1.3rem !important;
+  }
+  .spotDiscount {
+    font-size: 0.85rem !important;
+  }
+  .spotBtn {
+    padding: 0 16px !important;
+    font-size: 0.75rem !important;
+    height: 32px !important;
+  }
+
+  /* Featured collections rows styles */
+  .featuredGrid {
+    gap: 20px !important;
+  }
+  .featuredCard {
+    height: 240px !important;
+    border-radius: 24px !important;
+    padding: 15px !important;
+  }
+  .featuredContent {
+    padding: 15px !important;
+    border-radius: 20px !important;
+  }
+  .featuredContent h3 {
+    font-size: 1.2rem !important;
+  }
+
+  /* Spacing rhythm standard padding specs - Spacing Audit Refined */
+  .magazineSection,
+  .collectionSection,
+  .topCollectionSection,
+  .spotlightSection,
+  .recommendedSection,
+  .famousProductsSection,
+  .featuredCollectionsSection,
+  .recentlyAddedSection {
+    padding-block: 18px !important; /* Tighter padding for vertical rhythm from 25px */
+  }
+
+  .topCollectionSection {
+    margin-top: 0 !important; /* Remove negative margins to prevent header titles clipping */
+  }
+  .spotlightSection {
+    margin: 0 !important; /* Remove negative margins to prevent header titles clipping */
+  }
+
+  .innovativeHeader {
+    margin-bottom: 25px !important;
+  }
+  .sectionHeader {
+    margin-bottom: 25px !important;
+  }
+  .topCollectionSection .sectionTitleTop {
+    margin-bottom: 15px !important;
+  }
+  .featureBarWrapper {
+    margin-block: 20px !important;
+  }
+
+  /* Feature Benefits Bar - Expanded Visual Footprint & Presence */
+  .featureBar {
+    max-width: 100% !important; /* Spans full container width */
+    width: 100% !important;
+    justify-content: space-around !important; /* Even spacing across screen */
+    padding: 20px 30px !important;
+    gap: 15px !important;
+    border-radius: 50px !important;
+  }
+
+  /* Typography scale */
+  .sectionTitleTop, .recommendTitle {
+    font-size: 1.8rem !important;
+    margin-bottom: 15px !important;
+  }
+  .recommendHeader {
+    margin-bottom: 0 !important; /* Remove negative margin to prevent overlap */
+  }
+  .recommendSub {
+    margin-bottom: 10px !important;
+  }
+  .springTitle {
+    font-size: 3.5rem !important;
+  }
+  .collectionsTitle {
+    font-size: 1.8rem !important;
+  }
+  .availableSubtitle {
+    font-size: 1.2rem !important;
+  }
+  .headerBanner {
+    height: 300px !important;
+  }
+  .bannerContent {
+    padding-left: 40px !important;
+  }
 }

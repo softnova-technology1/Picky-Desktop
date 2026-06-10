@@ -131,6 +131,12 @@ const SmartStyleAssistant = ({ onFilterChange, isMobileOpen, onClose, category }
   return (
     <aside className={`${styles.sidebar} ${isMobileOpen ? styles.sidebarActive : ""}`}>
       {/* Mobile Header */}
+      <div className={styles.mobileHeader}>
+        <span className={styles.mobileTitle}>FILTER & STYLE ASSISTANT</span>
+        <button className={styles.closeBtn} onClick={onClose}>
+          <X size={20} />
+        </button>
+      </div>
 
 
       {/* 1. AI STYLE SELECTOR (Fashion Only) */}
