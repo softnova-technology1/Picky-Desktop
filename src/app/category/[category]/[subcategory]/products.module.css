@@ -99,13 +99,114 @@
   gap: 30px;
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+  }
+}
+
+
+.filterToggleBtn {
+  display: none;
+}
+
+.stickyFilterBar {
+  display: none;
+}
+
+.backdrop {
+  display: none;
+}
+
 @media (max-width: 1100px) {
+  .backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 9998;
+  }
+
   .shopLayout {
     flex-direction: column;
   }
 
+  .mainContent {
+    width: 100% !important;
+  }
+
   .sidebarColumn {
-    display: none;
+    display: contents;
+  }
+
+  .stickyFilterBar {
+    display: flex;
+    justify-content: flex-end;
+    position: -webkit-sticky;
+    position: sticky;
+    top: var(--navbar-scrolled-height, 75px);
+    z-index: 990;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    background: var(--background);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .filterToggleBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: white;
+    border: 1px solid var(--primary);
+    border-radius: 99px;
+    font-weight: 800;
+    font-size: 0.75rem;
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(100, 61, 151, 0.08);
+  }
+
+  .filterToggleBtn:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(100, 61, 151, 0.15);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .wrapper {
+    padding-bottom: 50px !important;
+  }
+
+  .header {
+    padding: 24px 0 16px !important;
+    margin-bottom: 15px !important;
+  }
+
+  .breadcrumb {
+    margin-bottom: 16px !important;
+  }
+
+  .title {
+    font-size: 2.2rem !important;
+  }
+
+  .mainContent {
+    padding: 10px 0 20px 0 !important;
+  }
+
+  .filterToggleBtn {
+    padding: 10px 22px !important;
+    background: rgba(100, 61, 151, 0.04) !important;
+    border: 1.5px solid var(--primary) !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.5px !important;
   }
 }
 

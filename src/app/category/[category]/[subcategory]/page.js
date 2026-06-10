@@ -45,6 +45,12 @@ export default function SubcategoryPage({ params }) {
 
   return (
     <div className={styles.wrapper}>
+      {isMobileSidebarOpen && (
+        <div 
+          className={styles.backdrop} 
+          onClick={() => setIsMobileSidebarOpen(false)}
+        />
+      )}
       <div className="container">
         <header className={styles.header}>
           <div className={styles.breadcrumb}>
@@ -59,7 +65,6 @@ export default function SubcategoryPage({ params }) {
               <h1 className={styles.title} style={{ marginBottom: '12px' }}>{subcategoryName}</h1>
               <p className={styles.count}>{filteredProducts.length} items curated for you</p>
             </div>
-
           </div>
         </header>
 
@@ -74,6 +79,17 @@ export default function SubcategoryPage({ params }) {
           </div>
 
           <main className={styles.mainContent}>
+            {/* Sticky Filter Bar for mobile/tablet */}
+            <div className={styles.stickyFilterBar}>
+              <button 
+                className={styles.filterToggleBtn}
+                onClick={() => setIsMobileSidebarOpen(true)}
+              >
+                <Filter size={16} />
+                <span>FILTER OPTIONS</span>
+              </button>
+            </div>
+
             {filteredProducts.length > 0 ? (
               <div className={styles.grid}>
                 {filteredProducts.map((p) => (

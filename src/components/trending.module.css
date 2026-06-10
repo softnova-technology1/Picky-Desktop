@@ -22,3 +22,11 @@
   max-width: 1440px !important;
   margin: 0 auto;
 }
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+  }
+}
+
