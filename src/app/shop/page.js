@@ -7,6 +7,7 @@ import styles from "./products.module.css";
 import Link from "next/link";
 import {
   ChevronRight,
+  ChevronDown,
   X,
   Search,
   Smartphone,
@@ -26,6 +27,7 @@ export default function AllProductsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [visibleItems, setVisibleItems] = useState(24);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [isDepartmentsOpen, setIsDepartmentsOpen] = useState(true);
 
   const handleLoadMore = () => {
     setVisibleItems(prev => prev + 24);
@@ -141,7 +143,7 @@ export default function AllProductsPage() {
             <Link href="/">HOME</Link> <ChevronRight size={14} /> <span>ALL PRODUCTS</span>
           </div>
           <h1 className={styles.title}>All Collections</h1>
-          <p className={styles.subtitle} style={{ color: 'rgba(0,0,0,0.5)', marginBottom: '40px' }}>
+          <p className={styles.subtitle} style={{ color: 'rgba(0,0,0,0.5)', marginBottom: '30px' }}>
             Showing {filteredProducts.length} unique pieces curated for your lifestyle.
           </p>
 
@@ -162,45 +164,62 @@ export default function AllProductsPage() {
           {isMobileSidebarOpen && (
             <div className={styles.backdrop} onClick={() => setIsMobileSidebarOpen(false)} />
           )}
-          <aside className={`${styles.sidebar} ${isMobileSidebarOpen ? styles.sidebarOpen : ""}`}>
+          <div className={styles.tabletFilterRow}>
+            <aside className={`${styles.sidebar} ${isMobileSidebarOpen ? styles.sidebarOpen : ""}`}>
 
 
-            <div className={styles.filterSection}>
-              <h3 className={styles.filterTitle}>Departments</h3>
-              <div className={styles.categoryList}>
-                <div
-                  className={`${styles.filterItem} ${selectedCategory === "All" ? styles.filterItemActive : ""}`}
-                  onClick={() => setSelectedCategory("All")}
-                >
-                  <div className={styles.itemLeft}>
-                    <Layers size={16} />
-                    <span>All Collections</span>
-                  </div>
-                  <span className={styles.count}>{categoryCounts["All"]}</span>
-                </div>
-                {categories.map(cat => (
+              <div className={styles.filterSection}>
+                <h3 className={`${styles.filterTitle} ${styles.departmentsHeader}`} onClick={() => setIsDepartmentsOpen(!isDepartmentsOpen)}>
+                  <span>Departments</span>
+                  <ChevronDown size={16} className={`${styles.chevronIcon} ${isDepartmentsOpen ? styles.chevronOpen : ""}`} />
+                </h3>
+                <div className={`${styles.categoryList} ${isDepartmentsOpen ? styles.categoryListOpen : ""}`}>
                   <div
-                    key={cat}
-                    className={`${styles.filterItem} ${selectedCategory === cat ? styles.filterItemActive : ""}`}
-                    onClick={() => setSelectedCategory(cat)}
+                    className={`${styles.filterItem} ${selectedCategory === "All" ? styles.filterItemActive : ""}`}
+                    onClick={() => setSelectedCategory("All")}
                   >
                     <div className={styles.itemLeft}>
-                      {categoryIcons[cat]}
-                      <span>{cat}</span>
+                      <Layers size={16} />
+                      <span>All Collections</span>
                     </div>
-                    <span className={styles.count}>{categoryCounts[cat]}</span>
+                    <span className={styles.count}>{categoryCounts["All"]}</span>
                   </div>
-                ))}
+                  {categories.map(cat => (
+                    <div
+                      key={cat}
+                      className={`${styles.filterItem} ${selectedCategory === cat ? styles.filterItemActive : ""}`}
+                      onClick={() => setSelectedCategory(cat)}
+                    >
+                      <div className={styles.itemLeft}>
+                        {categoryIcons[cat]}
+                        <span>{cat}</span>
+                      </div>
+                      <span className={styles.count}>{categoryCounts[cat]}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
 
-        
-            <div className={styles.filterSection}>
-              <p className={styles.tipText}>
-                Tip: Use keywords like "Mobile" or "Aura" for faster discovery.
-              </p>
+
+              <div className={styles.filterSection}>
+                <p className={styles.tipText}>
+                  Tip: Use keywords like "Mobile" or "Aura" for faster discovery.
+                </p>
+              </div>
+            </aside>
+
+            {/* Tablet-only search — visible only on tablet, shares same state */}
+            <div className={styles.tabletSearchContainer}>
+              <Search size={16} className={styles.searchIcon} />
+              <input
+                type="text"
+                placeholder="Search in collections..."
+                className={styles.searchInput}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
             </div>
-          </aside>
+          </div>
 
 
           <main className={styles.mainContent}>
@@ -239,7 +258,7 @@ export default function AllProductsPage() {
                 )}
               </div>
 
-              <div className={styles.searchContainer}> 
+              <div className={styles.searchContainer}>
                 <Search size={16} className={styles.searchIcon} />
                 <input
                   type="text"

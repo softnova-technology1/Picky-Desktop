@@ -1,6 +1,8 @@
 import React from 'react';
 import BlogSection from '@/components/BlogDetails/BlogSection';
 
+import styles from './blog.module.css';
+
 export const metadata = {
     title: 'Picky Blog | Premium Insights',
     description: 'Explore the latest in luxury fashion, minimal interiors, and premium lifestyle curated by Picky.'
@@ -9,7 +11,7 @@ export const metadata = {
 const BlogMainPage = () => {
     return (
         <main style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
-            <div style={{ padding: '60px 0 30px', textAlign: 'center' }}>
+            <div className={styles.headerContainer}>
                 <h1 style={{ 
                     fontFamily: 'var(--font-heading)',
                     fontSize: '3.5rem', 

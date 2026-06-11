@@ -467,17 +467,32 @@
     gap: 1.5rem;
   }
   .heroSection, .editorialSection {
-    grid-template-columns: 1fr;
-    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 450px;
   }
   .heroImageContainer, .editorialImage {
-    height: 350px;
+    flex: 1;
+    height: 100%;
+    border-radius: 40px 0 0 40px;
+  }
+  .heroImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .heroContent, .editorialText {
-    padding: 2rem 1.5rem;
+    flex: 1;
+    padding: 2rem;
   }
   .heroTitle, .editorialTitle {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .heroDescription {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
   }
   .sectionTitleGroup h2 {
     font-size: 2rem;

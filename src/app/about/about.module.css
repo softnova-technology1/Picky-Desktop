@@ -452,6 +452,24 @@
         width: 100%;
         max-width: 500px;
     }
+    
+}
+
+/* Tablet-only border removal as requested */
+@media (min-width: 577px) and (max-width: 992px) {
+    .collageDecoration {
+        border: none;
+    }
+    .imageCollage {
+        display: none;
+    }
+    .aboutContainer {
+        padding-top: 10px;
+        padding-bottom: 2rem;
+    }
+    .whyChooseSection {
+        padding-top: 2rem;
+    }
 }
 
 @media (max-width: 576px) {

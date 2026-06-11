@@ -304,7 +304,7 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 992px) {
+@media (min-width: 768px) and (max-width:1023px) {
     .container {
         flex-direction: column;
     }
@@ -318,6 +318,30 @@
     }
 
     .topBarContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .searchBoxHeader {
+        width: 180px;
+    }
+
+    .searchInput {
+        padding: 6px 12px;
+        padding-right: 30px;
+        font-size: 0.8rem;
+    }
+
+    .searchBtn {
+        right: 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    .topBarContainer {
+        display: flex;
         flex-direction: column;
         gap: 15px;
         align-items: flex-start;

@@ -366,3 +366,31 @@
     right: 23px;
   }
 }
+
+/* Tablet view styling to align vertically (stacked) and reduce size */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .chatWrapper {
+    bottom: 90px;
+    right: 15px; /* Stacked above cart, moved slightly to the right */
+  }
+
+  .chatButton {
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
+    border-width: 3px;
+  }
+
+  .chatButton svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .badge {
+    width: 18px;
+    height: 18px;
+    border-width: 2.5px;
+    top: -4px;
+    right: -4px;
+  }
+}

@@ -41,6 +41,17 @@ export default function HomeTwoNavbar() {
     setMobileMenuOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
 
   useEffect(() => {
     if (user) {
@@ -333,47 +344,49 @@ export default function HomeTwoNavbar() {
       {/* Mobile Menu Drawer (Slides in from the right) */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <>
-            <motion.div
-              className={styles.mobileMenuBackdrop}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setMobileMenuOpen(false)}
-            />
-            <motion.div
-              className={styles.mobileMenu}
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 220 }}
-            >
-              <div className={styles.mobileMenuHeader}>
-                <span className={styles.mobileMenuLogo}>Picky Menu</span>
-                <button 
-                  className={styles.mobileMenuCloseBtn} 
-                  onClick={() => { spinCloseBtn(); setMobileMenuOpen(false); }}
-                  onMouseEnter={spinCloseBtn}
-                  title="Close Menu"
-                  style={{
-                    transform: `rotate(${closeRotation}deg)`,
-                    transition: 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, border-color 0.3s ease, color 0.3s ease'
-                  }}
-                >
-                  <X size={24} />
-                </button>
-              </div>
-              <div className={styles.mobileLinksList}>
-                <Link href="/" className={`${styles.mobileLink} ${isActive('/') ? styles.active : ''}`}>HOME</Link>
-                <Link href="/shop" className={`${styles.mobileLink} ${isActive('/shop') ? styles.active : ''}`}>SHOP</Link>
-                <Link href="/category" className={`${styles.mobileLink} ${isActive('/category') ? styles.active : ''}`}>CATEGORIES</Link>
-                <Link href="/new-arrivals" className={`${styles.mobileLink} ${isActive('/new-arrivals') ? styles.active : ''}`}>NEW ARRIVALS</Link>
-                <Link href="/offers" className={`${styles.mobileLink} ${isActive('/offers') ? styles.active : ''}`}>OFFERS</Link>
-                <Link href="/Blog" className={`${styles.mobileLink} ${isActive('/Blog') ? styles.active : ''}`}>BLOG</Link>
-                <Link href="/about" className={`${styles.mobileLink} ${isActive('/about') ? styles.active : ''}`}>ABOUT US</Link>
-              </div>
-            </motion.div>
-          </>
+          <motion.div
+            key="hometwo-backdrop"
+            className={styles.mobileMenuBackdrop}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            onClick={() => setMobileMenuOpen(false)}
+          />
+        )}
+        {mobileMenuOpen && (
+          <motion.div
+            key="hometwo-drawer"
+            className={styles.mobileMenu}
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+          >
+            <div className={styles.mobileMenuHeader}>
+              <span className={styles.mobileMenuLogo}>Picky Menu</span>
+              <motion.button 
+                className={styles.mobileMenuCloseBtn} 
+                onClick={() => setMobileMenuOpen(false)}
+                title="Close Menu"
+                initial={{ rotate: 0 }}
+                animate={{ rotate: 180 }}
+                exit={{ rotate: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                <X size={24} />
+              </motion.button>
+            </div>
+            <div className={styles.mobileLinksList}>
+              <Link href="/" className={`${styles.mobileLink} ${isActive('/') ? styles.active : ''}`}>HOME</Link>
+              <Link href="/shop" className={`${styles.mobileLink} ${isActive('/shop') ? styles.active : ''}`}>SHOP</Link>
+              <Link href="/category" className={`${styles.mobileLink} ${isActive('/category') ? styles.active : ''}`}>CATEGORIES</Link>
+              <Link href="/new-arrivals" className={`${styles.mobileLink} ${isActive('/new-arrivals') ? styles.active : ''}`}>NEW ARRIVALS</Link>
+              <Link href="/offers" className={`${styles.mobileLink} ${isActive('/offers') ? styles.active : ''}`}>OFFERS</Link>
+              <Link href="/Blog" className={`${styles.mobileLink} ${isActive('/Blog') ? styles.active : ''}`}>BLOG</Link>
+              <Link href="/about" className={`${styles.mobileLink} ${isActive('/about') ? styles.active : ''}`}>ABOUT US</Link>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
 

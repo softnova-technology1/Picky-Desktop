@@ -169,7 +169,7 @@
   position: relative;
 }
 
-.active::after {
+.navLink.active::after {
   content: '';
   position: absolute;
   bottom: -4px;
@@ -1102,8 +1102,12 @@
     letter-spacing: 0.2px;
   }
   .searchContainer {
-    margin: 0 10px;
-    max-width: 250px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    max-width: 300px;
+    width: 100%;
   }
   .searchBox {
     padding: 8px 16px;
@@ -1229,12 +1233,14 @@
   justify-content: center;
   cursor: pointer;
   color: #555;
+  transition: transform 0.5s ease-in-out, background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .mobileMenuCloseBtn:hover {
   background: #fff0f0;
   border-color: var(--primary);
   color: var(--primary);
+  transform: rotate(360deg);
 }
 
 .mobileLinksList {
@@ -1261,6 +1267,12 @@
   color: var(--primary);
   padding-left: 20px;
   border-color: rgba(100, 61, 151, 0.1);
+}
+
+.mobileLink.active {
+  background: rgba(100, 61, 151, 0.08) !important;
+  color: var(--primary) !important;
+  border-color: rgba(100, 61, 151, 0.15) !important;
 }
 
 

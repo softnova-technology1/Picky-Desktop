@@ -291,17 +291,23 @@
 
 /* Dedicated Tablet Viewport Optimization */
 @media (min-width: 768px) and (max-width: 1023px) {
+  .footer {
+    padding: 0 40px;
+  }
+
   .footerMainGrid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 30px;
+    padding: 60px 0 40px;
   }
 
   .footerColBrand,
   .footerColNewsletter {
-    grid-column: span 2;
+    grid-column: span 3;
   }
+
   .newsletterBox {
-    max-width: 100%;
+    max-width: 500px;
   }
 }
 

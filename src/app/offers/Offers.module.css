@@ -548,41 +548,61 @@
   /* 6a. Hero — prevent image clipping, reduce fixed 580px height */
   .hero {
     height: auto;            /* Remove fixed height that causes clipping */
-    min-height: 360px;
-    padding: 2.5rem 2.5rem; /* Proportional tablet padding */
+    min-height: 340px;
+    padding: 2rem; /* Proportional tablet padding */
     flex-direction: row;     /* Keep side-by-side on tablet (not column) */
     align-items: center;
     border-radius: 28px;
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   .heroContent {
+    flex: 1;
     max-width: 55%;          /* Give text room without squeezing image */
   }
 
   .heroTitle {
-    font-size: 2.4rem;       /* Scale down from 4.5rem */
-    letter-spacing: -0.03em;
+    font-size: 2.2rem;       /* Scale down from 4.5rem */
+    letter-spacing: -0.02em;
     line-height: 1.1;
+    margin-bottom: 1rem;
   }
 
   .heroSubtitle {
-    font-size: 1rem;
+    font-size: 0.95rem;
     margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .heroActions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 1rem;
+  }
+
+  .primaryBtn, .secondaryBtn {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
   }
 
   /* 6b. Hero Image — prevent clipping at tablet widths */
   .heroImage {
     transform: none !important;  /* Remove rotation that causes overflow */
     width: 100% !important;
-    height: 280px !important;    /* Fixed proportional height */
-    object-fit: contain;         /* Prevent any cropping */
-    border-radius: 120px 0 120px 0;
+    height: 100% !important;    /* Fixed proportional height */
+    max-height: 280px;
+    object-fit: cover;         /* Prevent any cropping */
+    border-radius: 60px 0 60px 0;
   }
 
   .heroImageContainer {
-    max-width: 40%;
-    flex: 0 0 40%;
+    flex: 1;
+    max-width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   /* 6c. Category Grid — 2 columns, proportional card height */
@@ -614,8 +634,9 @@
 
   /* Section header stacks on tablet */
   .sectionHeader {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     gap: 1rem;
   }
 

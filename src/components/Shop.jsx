@@ -115,6 +115,7 @@ export default function Shop() {
                         <AnimatePresence>
                             {hoveredId === item.id && (
                                 <motion.div 
+                                    key={`expanded-${item.id}`}
                                     className={styles.expandedContent}
                                     initial={{ opacity: 0, y: 30 }}
                                     animate={{ opacity: 1, y: 0 }}

@@ -33,6 +33,17 @@ const Navbar = () => {
         setMobileMenuOpen(false);
     }, [pathname]);
 
+    useEffect(() => {
+        if (mobileMenuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [mobileMenuOpen]);
+
     const openAuth = (tab) => {
         setAuthTab(tab);
         setShowAuthPopup(true);
@@ -145,21 +156,50 @@ const Navbar = () => {
                 <AnimatePresence>
                     {mobileMenuOpen && (
                         <motion.div
+                            key="navbar-backdrop"
+                            className={styles.mobileMenuBackdrop}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                            onClick={() => setMobileMenuOpen(false)}
+                        />
+                    )}
+                    {mobileMenuOpen && (
+                        <motion.div
+                            key="navbar-drawer"
                             className={styles.mobileMenu}
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
+                            initial={{ x: "100%" }}
+                            animate={{ x: 0 }}
+                            exit={{ x: "100%" }}
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
                         >
-                            {navLinks.map((link) => (
-                                <Link
-                                    key={link.name}
-                                    href={link.path}
-                                    className={`${styles.mobileLink} ${isActive(link.path) ? styles.active : ''}`}
+                            <div className={styles.mobileMenuHeader}>
+                                <span className={styles.mobileMenuLogo}>Picky Menu</span>
+                                <motion.button 
+                                    className={styles.mobileMenuCloseBtn} 
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    title="Close Menu"
+                                    initial={{ rotate: 0 }}
+                                    animate={{ rotate: 180 }}
+                                    exit={{ rotate: 0 }}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
                                 >
-                                    {link.name}
-                                    {link.hasDropdown && <ChevronDown size={14} className={styles.chevron} />}
-                                </Link>
-                            ))}
+                                    <X size={24} />
+                                </motion.button>
+                            </div>
+                            <div className={styles.mobileLinksList}>
+                                {navLinks.map((link) => (
+                                    <Link
+                                        key={link.name}
+                                        href={link.path}
+                                        className={`${styles.mobileLink} ${isActive(link.path) ? styles.active : ''}`}
+                                    >
+                                        {link.name}
+                                        {link.hasDropdown && <ChevronDown size={14} className={styles.chevron} />}
+                                    </Link>
+                                ))}
+                            </div>
                         </motion.div>
                     )}
                 </AnimatePresence>

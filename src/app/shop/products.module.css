@@ -132,57 +132,57 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   padding: 0;
   margin: 0 0 40px 0;
-  overflow-x: auto;
-  white-space: nowrap;
-  scrollbar-width: none;
-  display: flex;
-  justify-content: center;
   position: sticky;
   top: var(--navbar-scrolled-height, 75px);
   z-index: 100;
   width: 100%;
 }
 
-.categoryNavbar::-webkit-scrollbar {
+.navItems {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  justify-content: flex-start;
+  padding: 10px 0;
+}
+
+.navItems::-webkit-scrollbar {
   display: none;
 }
 
-.navItems {
-  display: flex;
-  gap: 40px;
-  padding: 0 4rem;
-  width: 100%;
-  justify-content: center;
+@media (min-width: 1200px) {
+  .navItems {
+    justify-content: center;
+  }
 }
 
 .navItem {
-  padding: 15px 5px;
+  padding: 8px 18px;
   font-size: 0.85rem;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.6);
   cursor: pointer;
   position: relative;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .navItem:hover {
+  background: rgba(112, 36, 235, 0.08);
+  /* Light tint of primary */
   color: var(--primary);
 }
 
 .navItemActive {
-  color: var(--primary);
+  color: #fff !important;
+  background: var(--primary) !important;
   font-weight: 700;
-}
-
-.navItemActive::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: var(--primary);
-  border-radius: 3px 3px 0 0;
+  box-shadow: 0 4px 12px rgba(112, 36, 235, 0.2);
 }
 
 /* SECTION 2: SHOP LAYOUT */
@@ -469,6 +469,18 @@
   transform: scale(1.05);
 }
 
+.chevronIcon {
+  display: none;
+}
+
+/* Tablet filter row — invisible wrapper on desktop/mobile */
+.tabletFilterRow {
+  display: contents;
+}
+
+.tabletSearchContainer {
+  display: none;
+}
 
 @media (max-width: 1100px) {
   .shopLayout {
@@ -479,5 +491,291 @@
     position: static;
     max-height: none;
     margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    gap: 16px;
+  }
+}
+
+/* Tablet view styling — comprehensive layout system */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+  /* ── 1. OUTER WRAPPER ── */
+  .wrapper {
+    background-color: #fbfbfc;
+  }
+
+  /* ── 2. HERO SECTION ── */
+  .heroSection {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+
+  .breadcrumb {
+    margin-top: 0px;
+  }
+
+  .title {
+    font-size: 2.6rem;
+    margin-bottom: 8px;
+  }
+
+  /* ── 3. SHOP LAYOUT ── */
+  .shopLayout {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: stretch;
+    margin-top: 0;
+  }
+
+  /* ── 3.5 TABLET FILTER ROW: Departments + Search side by side ── */
+  .tabletFilterRow {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
+    margin-top: 45px;
+    margin-bottom: 18px;
+  }
+
+  .tabletSearchContainer {
+    display: flex;
+    flex: 1;
+    position: relative;
+    align-items: center;
+    height: 48px;
+    min-height: 48px;
+    max-height: 48px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  .tabletSearchContainer .searchIcon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.3;
+  }
+
+  .tabletSearchContainer .searchInput {
+    width: 100%;
+    height: 100%;
+    padding: 0 15px 0 36px;
+    font-size: 0.82rem;
+    border-radius: 12px;
+    border: none;
+    background: transparent;
+    outline: none;
+  }
+
+  /* ── 4. DEPARTMENTS SIDEBAR → COMPACT FILTER ── */
+  .sidebar {
+    flex: 1;
+    width: auto;
+    padding: 4px 0;
+    border-radius: 12px;
+    margin-bottom: 0;
+    box-sizing: border-box;
+    position: static;
+    max-height: none;
+    overflow: hidden;
+  }
+
+  .filterSection {
+    margin-bottom: 0;
+    width: 100%;
+  }
+
+  .filterSection:not(:last-child)::after {
+    display: none;
+  }
+
+  .departmentsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 0 !important;
+    padding: 0 16px;
+    height: 44px;
+    min-height: 44px;
+    width: 100%;
+    user-select: none;
+  }
+
+  .departmentsHeader span {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+  .filterTitle {
+    font-size: 0.75rem;
+    margin-bottom: 8px;
+  }
+
+  .chevronIcon {
+    display: block;
+    transition: transform 0.3s ease;
+    color: rgba(0, 0, 0, 0.35);
+    flex-shrink: 0;
+  }
+
+  .chevronOpen {
+    transform: rotate(180deg);
+  }
+
+  .categoryList {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 0;
+    padding: 8px 12px 12px;
+    width: 100%;
+    animation: fadeInDropdown 0.25s ease-out forwards;
+  }
+
+  .categoryListOpen {
+    display: flex !important;
+  }
+
+  .filterItem {
+    font-size: 0.8rem;
+    padding: 9px 12px;
+  }
+
+  .tipText {
+    display: none;
+  }
+
+  /* ── 5. MAIN CONTENT AREA ── */
+  .mainContent {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 24px;
+  }
+
+  /* ── 6. TOOLBAR: Results count + Sort dropdown ── */
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .resultCount {
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .resultCount span {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #000;
+  }
+
+  .sortWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .sortLabel {
+    font-size: 0.72rem;
+    opacity: 0.5;
+    white-space: nowrap;
+  }
+
+  .sortSelect {
+    width: 190px;
+    height: 40px;
+    padding: 0 12px;
+    border: 1.5px solid rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    background: #fff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    appearance: auto;
+  }
+
+  /* ── 7. FILTER SEARCH ROW ── */
+  .filterSearchRow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+
+  .activeFilters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  /* ── 8. SEARCH BAR (original — hidden on tablet) ── */
+  .searchContainer {
+    display: none !important;
+  }
+
+  /* ── 9. PRODUCT GRID ── */
+  .grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    row-gap: 24px !important;
+    justify-items: stretch;
+    margin-top: 0;
+  }
+
+  /* ── 10. LOAD MORE ── */
+  .loadMoreWrapper {
+    margin-top: 32px;
+  }
+
+  .loadMoreBtn {
+    padding: 14px 40px;
+    font-size: 0.85rem;
+  }
+}
+
+@keyframes fadeInDropdown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

@@ -528,42 +528,150 @@
 /* Dedicated Tablet Viewport Optimization */
 @media (min-width: 768px) and (max-width: 1023px) {
   .container {
-    height: 600px;
+    height: 450px;
   }
+  
+  .slider .item:nth-child(2) {
+    display: grid;
+    grid-template-columns: 1fr 140px;
+    gap: 40px; /* Proper gap between text content and side card (32px-48px) */
+    padding: 0 40px;
+    box-sizing: border-box;
+    align-items: center;
+  }
+
   .content {
-    left: 30px;
-    width: calc(100% - 60px);
-    max-width: 550px;
+    display: none;
   }
+
+  .slider .item:nth-child(2) .content {
+    display: block;
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+    z-index: 10;
+    grid-column: 1;
+  }
+
   .title {
-    font-size: 40px;
+    font-size: clamp(34px, 5vw, 40px); /* Reduce hero heading font-size slightly (10-15% max) */
   }
+
   .subtitle {
     font-size: 14px;
     margin-bottom: 10px;
   }
+
   .description {
     font-size: 13px;
     margin-top: 15px;
     margin-bottom: 25px;
     line-height: 1.6;
-    max-width: 400px;
+    max-width: clamp(300px, 80%, 400px); /* Reduce paragraph width proportionally */
   }
+
   .item {
     width: 140px;
     height: 220px;
   }
+
+  /* Position side card and thumbnails relative to the reserved right grid column area */
   .slider .item:nth-child(3) {
-    left: 50%;
+    left: calc(100% - 180px); /* 180px = 140px card width + 40px right padding */
   }
+
   .slider .item:nth-child(4) {
-    left: calc(50% + 160px);
+    left: calc(100% - 180px + 160px);
   }
+
   .slider .item:nth-child(5) {
-    left: calc(50% + 320px);
+    left: calc(100% - 180px + 320px);
   }
+
   .slider .item:nth-child(6) {
-    left: calc(50% + 480px);
+    left: calc(100% - 180px + 480px);
+  }
+
+  .controls {
+    left: 40px;
+    width: calc(50% - 40px);
+    gap: 30px;
+  }
+
+  .bookmark {
+    width: 38px;
+    height: 38px;
+  }
+
+  .bookmark svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .discoverBtn {
+    padding: 10px 24px;
+    font-size: 12px;
+  }
+
+  .arrowBtn {
+    width: 48px;
+    height: 48px;
+  }
+
+  .arrowBtn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Smooth animations on tablet view using tablet-specific keyframe animations */
+  .next .slider .item:nth-child(2) {
+    animation: expandToFullTablet 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .prev .slider .item:nth-child(3) {
+    animation: shrinkToCardTablet 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+}
+
+/* Tablet transitions */
+@keyframes expandToFullTablet {
+  0% {
+    width: 140px;
+    height: 220px;
+    top: 50%;
+    left: calc(100% - 180px);
+    border-radius: 20px;
+    transform: translateY(-50%);
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 0;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shrinkToCardTablet {
+  0% {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 0;
+    transform: translateY(0);
+  }
+  100% {
+    width: 140px;
+    height: 220px;
+    top: 50%;
+    left: calc(100% - 180px);
+    border-radius: 20px;
+    transform: translateY(-50%);
   }
 }
 
