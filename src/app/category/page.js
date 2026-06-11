@@ -26,6 +26,38 @@ export default function CategoriesPage() {
   const timeoutId = useRef(null);
 
   const [hoveredTab, setHoveredTab] = useState(null);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [positions, setPositions] = useState([0, 1, 2]); // slots: 0=front, 1=middle, 2=back
+
+  const handleCardClick = (clickedIndex) => {
+    const currentPos = positions[clickedIndex];
+    if (currentPos === 0) return; // Already in front
+    
+    const newPositions = [...positions];
+    if (currentPos === 1) {
+      // Clicked middle card: middle -> front, front -> back, back -> middle
+      newPositions.forEach((pos, idx) => {
+        if (pos === 0) newPositions[idx] = 2;
+        else if (pos === 1) newPositions[idx] = 0;
+        else if (pos === 2) newPositions[idx] = 1;
+      });
+    } else if (currentPos === 2) {
+      // Clicked back card: back -> front, front -> middle, middle -> back
+      newPositions.forEach((pos, idx) => {
+        if (pos === 0) newPositions[idx] = 1;
+        else if (pos === 1) newPositions[idx] = 2;
+        else if (pos === 2) newPositions[idx] = 0;
+      });
+    }
+    setPositions(newPositions);
+  };
+
+  const heroSlides = [
+    { id: "fashion", title: "Bold Fashion", desc: "Upgrade your wardrobe with premium apparel and curated style edits.", img: "https://i.pinimg.com/736x/e3/c7/ba/e3c7badab8868f4740a2ab42a3546863.jpg", path: "/category/fashion" },
+    { id: "electronics", title: "Smart Electronics", desc: "Experience next-generation innovation, tech essentials, and devices.", img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070", path: "/category/electronics" },
+    { id: "home-decor", title: "Modern Home Decor", desc: "Elevate your living spaces with handpicked furniture and accents.", img: "https://i.pinimg.com/736x/3f/bd/0d/3fbd0d20660b5fd5a064c7c8f97f3d0c.jpg", path: "/category/home-decor" },
+    { id: "chocolates", title: "Luxury Treats", desc: "Indulge in sweets, gourmet chocolates, and handcrafted gift hampers.", img: "https://i.pinimg.com/1200x/50/4d/97/504d9766a2264d4b1d5ebc1069f4f004.jpg", path: "/category/chocolates" }
+  ];
 
   const handleMouseEnter = (cat) => {
     if (timeoutId.current) clearTimeout(timeoutId.current);
@@ -138,6 +170,143 @@ export default function CategoriesPage() {
               </div>
             </div>
           </div>
+
+        {/* Premium NFT-Style Interactive Hero (Tablet Only) */}
+        <div className={styles.premiumTabletHero}>
+          <div className={styles.heroLeft}>
+            <span className={styles.heroBadge}>Picky Marketplace</span>
+            <h2 className={styles.heroHeading}>
+              Discover the <br />
+              <span>Rare collections</span> <br />
+              of Picky
+            </h2>
+            <p className={styles.heroDesc}>
+              The largest and most unique curated marketplace for premium apparel, smart gadgets, and designer lifestyle essentials.
+            </p>
+            
+            <Link href="/shop" className={styles.heroBtn}>
+              Explore collection
+            </Link>
+
+            <div className={styles.metricsRow}>
+              <div className={styles.metric}>
+                <h3>500+</h3>
+                <span>Collections</span>
+              </div>
+              <div className={styles.metric}>
+                <h3>50+</h3>
+                <span>Vendors</span>
+              </div>
+              <div className={styles.metric}>
+                <h3>3-5d</h3>
+                <span>Delivery</span>
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.heroRight}>
+            <div className={styles.glowBlob}></div>
+            
+            {/* Stacked Cards */}
+            <div className={styles.cardsStack}>
+              {/* Card 1 (Front Card - Homme Shirt) */}
+              <div 
+                className={`${styles.stackedCard} ${styles.cardFront} ${styles[`pos${positions[0]}`]}`}
+                onClick={() => handleCardClick(0)}
+              >
+                <div className={styles.cardHeader}>
+                  <div className={styles.avatar}>
+                    <img src="https://i.pinimg.com/736x/e3/c7/ba/e3c7badab8868f4740a2ab42a3546863.jpg" alt="Vendor" />
+                  </div>
+                  <div className={styles.vendorInfo}>
+                    <h4>@Homme_Official</h4>
+                    <span>Verified Vendor</span>
+                  </div>
+                </div>
+                <div className={styles.cardImage}>
+                  <img src="https://i.pinimg.com/736x/e3/c7/ba/e3c7badab8868f4740a2ab42a3546863.jpg" alt="Homme Shirt" />
+                </div>
+                <div className={styles.cardBody}>
+                  <h3>Homme Polo #104</h3>
+                  <div className={styles.cardFooter}>
+                    <div className={styles.priceCol}>
+                      <label>Price</label>
+                      <span>₹4,999</span>
+                    </div>
+                    <div className={styles.timeCol}>
+                      <label>Ending In</label>
+                      <span>18h : 25m : 24s</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 2 (Middle Card - Cookies Jar) */}
+              <div 
+                className={`${styles.stackedCard} ${styles.cardMiddle} ${styles[`pos${positions[1]}`]}`}
+                onClick={() => handleCardClick(1)}
+              >
+                <div className={styles.cardHeader}>
+                  <div className={styles.avatar}>
+                    <img src="https://i.pinimg.com/1200x/50/4d/97/504d9766a2264d4b1d5ebc1069f4f004.jpg" alt="Vendor" />
+                  </div>
+                  <div className={styles.vendorInfo}>
+                    <h4>@Artisanal_Bakes</h4>
+                    <span>Verified Vendor</span>
+                  </div>
+                </div>
+                <div className={styles.cardImage}>
+                  <img src="https://i.pinimg.com/1200x/50/4d/97/504d9766a2264d4b1d5ebc1069f4f004.jpg" alt="Cookies" />
+                </div>
+                <div className={styles.cardBody}>
+                  <h3>Choco Chip Jar</h3>
+                  <div className={styles.cardFooter}>
+                    <div className={styles.priceCol}>
+                      <label>Price</label>
+                      <span>₹950</span>
+                    </div>
+                    <div className={styles.timeCol}>
+                      <label>Ending In</label>
+                      <span>12h : 10m : 05s</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 3 (Back Card - Blue Flowers Shirt) */}
+              <div 
+                className={`${styles.stackedCard} ${styles.cardBack} ${styles[`pos${positions[2]}`]}`}
+                onClick={() => handleCardClick(2)}
+              >
+                <div className={styles.cardHeader}>
+                  <div className={styles.avatar}>
+                    <img src="https://i.pinimg.com/1200x/68/ee/46/68ee4614b08856e48032757f1b961599.jpg" alt="Vendor" />
+                  </div>
+                  <div className={styles.vendorInfo}>
+                    <h4>@Floral_Wear</h4>
+                    <span>Verified Vendor</span>
+                  </div>
+                </div>
+                <div className={styles.cardImage}>
+                  <img src="https://i.pinimg.com/1200x/68/ee/46/68ee4614b08856e48032757f1b961599.jpg" alt="Blue Shirt" />
+                </div>
+                <div className={styles.cardBody}>
+                  <h3>Aura Silk Shirt</h3>
+                  <div className={styles.cardFooter}>
+                    <div className={styles.priceCol}>
+                      <label>Price</label>
+                      <span>₹2,299</span>
+                    </div>
+                    <div className={styles.timeCol}>
+                      <label>Ending In</label>
+                      <span>23h : 45m : 12s</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
       </section>
 

@@ -228,6 +228,9 @@
   .layout {
     grid-template-columns: 1fr;
   }
+  .progressContainer {
+    margin-bottom: 3.5rem !important;
+  }
 }
 
 @media (max-width: 768px) {

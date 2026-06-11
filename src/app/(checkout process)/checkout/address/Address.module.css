@@ -255,6 +255,12 @@
   border-color: var(--primary-light);
 }
 
+@media (max-width: 1024px) {
+  .progressContainer {
+    margin-bottom: 3.5rem !important;
+  }
+}
+
 @media (max-width: 768px) {
   .cols2, .cols3 {
     grid-template-columns: 1fr;

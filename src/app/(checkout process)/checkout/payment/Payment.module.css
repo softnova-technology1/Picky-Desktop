@@ -220,6 +220,12 @@
   background: var(--primary-light);
 }
 
+@media (max-width: 1024px) {
+  .progressContainer {
+    margin-bottom: 3.5rem !important;
+  }
+}
+
 @media (max-width: 768px) {
   .stepLine { width: 40px; }
   .card { padding: 1.5rem; }

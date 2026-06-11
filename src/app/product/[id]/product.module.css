@@ -637,38 +637,6 @@
   min-height: 100vh;
 }
 
-@media (max-width: 1024px) {
-  .bentoContainer {
-    grid-template-columns: 1fr;
-  }
-  .heroImageCard, .titleCard, .selectorsCard, .actionCard, .descCard {
-    grid-column: 1;
-    grid-row: auto;
-  }
-  .heroImageCard {
-    min-height: 500px;
-    padding: 20px;
-  }
-  .watermarkText {
-    font-size: 20vw;
-  }
-  .metricRow {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-  .actionCard {
-    gap: 20px;
-  }
-  .perksList {
-    flex-direction: column;
-  }
-  .reviewsWrapper {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 30px;
-  }
-}
 
 /* Complete Info Tabs Section (Matching View) */
 .completeInfoSection {
@@ -1163,4 +1131,43 @@
   margin: auto;
   width: fit-content;
   height: fit-content;
+}
+
+@media (max-width: 1024px) {
+  .bentoContainer {
+    grid-template-columns: 1fr;
+  }
+  .heroImageCard, .titleCard, .selectorsCard, .actionCard, .descCard {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .heroImageCard {
+    min-height: 500px;
+    padding: 20px;
+  }
+  .watermarkText {
+    font-size: 20vw;
+  }
+  .metricRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .actionCard {
+    gap: 20px;
+  }
+  .perksList {
+    flex-direction: column;
+  }
+  .reviewsSplit {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .writeReviewBtn {
+    width: auto !important;
+    min-width: 200px !important;
+    max-width: 260px !important;
+    margin-inline: auto !important;
+    display: block !important;
+  }
 }
