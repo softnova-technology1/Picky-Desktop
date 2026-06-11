@@ -4,11 +4,13 @@ import styles from './AuthPopup.module.css';
 import { X, Mail, Lock, User } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
+import loginImg from '@/images/ecommerce_login_pro.png';
+import signupImg from '@/images/ecommerce_signup_pro.png';
 
 /* ── Images per tab ── */
 const TAB_IMAGES = {
-  login:  '/ecommerce_login_pro.png',
-  signup: '/ecommerce_signup_pro.png',
+  login:  loginImg.src,
+  signup: signupImg.src,
 };
 
 const AuthPopup = ({ isOpen, onClose, initialTab = 'login' }) => {

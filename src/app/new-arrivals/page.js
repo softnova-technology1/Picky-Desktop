@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Filter, ChevronDown, ArrowRight } from 'lucide-react';
+import heroPurple from '@/images/new-arrivals-hero-purple.png';
 import NewArrivalsList from './NewArrivalsList';
 import styles from './NewArrivals.module.css';
 import { useCart } from '@/context/CartContext';
@@ -25,7 +26,7 @@ export default function NewArrivalsPage() {
         <section className={styles.heroSection}>
           <div className={styles.heroImageContainer}>
             <Image 
-              src="/images/new-arrivals-hero-purple.png" 
+              src={heroPurple} 
               alt="Premium Purple Collection" 
               fill
               className={styles.heroImage}

@@ -3,6 +3,12 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './FashionHero.module.css';
+import cloth from '@/images/cloth.jpg';
+import choco from '@/images/choco.jpg';
+import elct from '@/images/elct.jpg';
+import book from '@/images/book.jpg';
+import clothing from '@/images/clothing.png';
+import gifts from '@/images/gifts.jpg';
 
 const CARDS_DATA = [
   {
@@ -10,7 +16,7 @@ const CARDS_DATA = [
     subtitle: 'Classic Fashion',
     title: 'LUXURY CLOTHING',
     description: 'Explore our curated collection of high-end designer apparel. From timeless classics to modern silhouettes, experience the pinnacle of sartorial excellence and premium fabrics. Our collection features hand-stitched details, ethically sourced Italian silks, and a legacy of craftsmanship that spans three generations of master tailors.',
-    image: '/images/cloth.jpg',
+    image: cloth.src,
     link: '/category/fashion'
   },
   {
@@ -18,7 +24,7 @@ const CARDS_DATA = [
     subtitle: 'Sweet Gastronomy',
     title: 'GOURMET TREATS',
     description: 'A symphony of flavors crafted by world-class pâtissiers. Discover organic ingredients, artisanal preparation, and a dining experience that transcends the ordinary. Every creation is a masterpiece of texture and taste, using rare Criollo cocoa beans and fresh mountain dairy to create moments of pure indulgence.',
-    image: '/images/choco.jpg',
+    image: choco.src,
     link: '/category/chocolates'
   },
   {
@@ -26,7 +32,7 @@ const CARDS_DATA = [
     subtitle: 'Future Tech',
     title: 'SMART DEVICES',
     description: 'Pushing the boundaries of innovation with cutting-edge technology. Experience seamless connectivity, powerful performance, and sleek designs that define the future. Our latest ecosystem integrates artificial intelligence with neural processing to anticipate your needs before you even think of them.',
-    image: '/images/elct.jpg',
+    image: elct.src,
     link: '/category/electronics'
   },
   {
@@ -34,7 +40,7 @@ const CARDS_DATA = [
     subtitle: 'Timeless Stories',
     title: 'CLASSIC READS',
     description: 'Dive into worlds of imagination and wisdom. Our selection of premium editions and rare finds offers a tactile journey through history, philosophy, and great literature. Each volume is bound in genuine goatskin leather with 24-karat gold gilding, preserving the world\'s greatest thoughts for centuries to come.',
-    image: '/images/book.jpg',
+    image: book.src,
     link: '/category/books'
   },
   {
@@ -42,7 +48,7 @@ const CARDS_DATA = [
     subtitle: 'High-End Style',
     title: 'DESIGNER EDIT',
     description: 'Experience the art of fashion with our collection of master-crafted pieces. Luxury engineering meets timeless elegance in every intricate detail. This limited edition selection is available only to our private members, featuring avant-garde designs that challenge the conventions of modern haute couture.',
-    image: '/images/clothing.png',
+    image: clothing.src,
     link: '/category/fashion'
   },
   {
@@ -50,7 +56,7 @@ const CARDS_DATA = [
     subtitle: 'Interior Design',
     title: 'MODERN HOME',
     description: 'Transform your living space into a sanctuary of style. Our curated collection of modern furniture and minimalist decor combines functionality with aesthetic perfection to create a home that truly reflects your personality.',
-    image: '/images/gifts.jpg',
+    image: gifts.src,
     link: '/category/home-decor'
   }
 ];

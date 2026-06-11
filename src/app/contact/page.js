@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Instagram, Linkedin, Pin as Pinterest, ArrowUpRight } from 'lucide-react';
 import styles from './Contact.module.css';
+import contactDetails from '@/images/contact-details.png';
 
 export default function ContactPage() {
   const fadeIn = {
@@ -74,7 +75,7 @@ export default function ContactPage() {
         >
           <div className={styles.infoImageContainer}>
             <Image 
-              src="/images/contact-details.png" 
+              src={contactDetails} 
               alt="Editorial Still Life" 
               fill
               style={{ objectFit: 'cover' }}

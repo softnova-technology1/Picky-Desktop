@@ -3,6 +3,10 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import minimalist from '@/images/styles/minimalist.png';
+import streetwear from '@/images/styles/streetwear.png';
+import luxury from '@/images/styles/luxury.png';
+import casual from '@/images/styles/casual.png';
 import { 
   Sparkles, 
   Layers, 
@@ -31,10 +35,10 @@ const SmartFilterSidebar = () => {
   });
 
   const styles_data = [
-    { id: 'min', name: 'Minimal', desc: 'Clean, neutral, timeless', img: '/images/styles/minimalist.png' },
-    { id: 'street', name: 'Streetwear', desc: 'Urban, edgy, vibrant', img: '/images/styles/streetwear.png' },
-    { id: 'luxury', name: 'Luxury', desc: 'Elegant evening wear', img: '/images/styles/luxury.png' },
-    { id: 'casual', name: 'Casual', desc: 'Soft knitwear & denim', img: '/images/styles/casual.png' }
+    { id: 'min', name: 'Minimal', desc: 'Clean, neutral, timeless', img: minimalist },
+    { id: 'street', name: 'Streetwear', desc: 'Urban, edgy, vibrant', img: streetwear },
+    { id: 'luxury', name: 'Luxury', desc: 'Elegant evening wear', img: luxury },
+    { id: 'casual', name: 'Casual', desc: 'Soft knitwear & denim', img: casual }
   ];
 
   const colors = [
@@ -241,7 +245,7 @@ const SmartFilterSidebar = () => {
         </div>
         <div className={styles.recItem}>
            <div className={styles.recImg}>
-             <Image src="/images/styles/minimalist.png" alt="Rec" width={60} height={60} style={{borderRadius: 12, objectFit: 'cover'}} />
+             <Image src={minimalist} alt="Rec" width={60} height={60} style={{borderRadius: 12, objectFit: 'cover'}} />
            </div>
            <div className={styles.recDetails}>
              <span className={styles.recName}>Silk Satin Slip Dress</span>

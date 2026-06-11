@@ -2774,10 +2774,12 @@
 
 .blogCardVisual {
   position: relative;
+  display: block;
   height: 280px;
   border-radius: 20px;
   overflow: hidden;
   margin-bottom: 12px;
+  cursor: pointer;
 }
 
 .blogCardBody {

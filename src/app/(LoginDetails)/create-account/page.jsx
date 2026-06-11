@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import logos from '@/images/logos.png';
 import AuthBackground from '@/components/AuthBackground';
 
 import { useAuth } from '@/context/AuthContext';
@@ -45,7 +46,7 @@ const CreateAccount = () => {
                 {/* Image/Blue Side */}
                 <div className={styles.visualSide}>
                     <div className={styles.logo} style={{ display: 'flex', alignItems: 'center' }}>
-                         <Image src="/logos.png" alt="Picky Logo" width={110} height={36} priority style={{ objectFit: 'contain' }} />
+                         <Image src={logos} alt="Picky Logo" width={110} height={36} priority style={{ objectFit: 'contain' }} />
                     </div>
 
                     <div className={styles.heroContent}>
