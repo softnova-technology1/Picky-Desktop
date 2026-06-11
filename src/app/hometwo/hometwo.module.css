@@ -2773,10 +2773,12 @@
 
 .blogCardVisual {
   position: relative;
+  display: block;
   height: 280px;
   border-radius: 20px;
   overflow: hidden;
   margin-bottom: 12px;
+  cursor: pointer;
 }
 
 .blogCardBody {
@@ -3680,6 +3682,321 @@
   .newsSubmitBtnGradient {
     font-size: 20px;
     padding: 25px 60px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Category Ribbon Section Wrapper */
+  .categoryRibbon {
+    padding: 6px 10px !important;
+  }
+  .ribbonContainer {
+    padding: 0 20px !important;
+    gap: 8px !important;
+  }
+  .ribbonItem {
+    min-width: 80px !important; /* Refined visual balance */
+    padding: 6px 0 !important;
+    gap: 8px !important;
+  }
+  .ribbonIconWrapper {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 12px !important;
+  }
+  .ribbonIcon {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .ribbonName {
+    font-size: 11px !important;
+  }
+
+  /* Flash Deals Section */
+  .refFlashGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+  }
+  .refCard {
+    max-width: 340px !important; /* Slightly increased width from 320px */
+    margin-inline: auto !important;
+    border-radius: 12px !important;
+  }
+  .refImgWrapper {
+    height: 195px !important; /* Proportionately increased from 180px */
+  }
+  .refCardBody {
+    padding: 10px !important;
+  }
+  .refProdName {
+    font-size: 12.5px !important;
+    height: 36px !important;
+    margin-bottom: 6px !important;
+  }
+  .refPricing {
+    gap: 8px !important;
+    margin-bottom: 8px !important;
+  }
+  .refPriceNow {
+    font-size: 15px !important;
+  }
+  .refPriceOld {
+    font-size: 12px !important;
+  }
+  .refAddToCart {
+    padding: 8px !important;
+    font-size: 12px !important;
+  }
+
+  /* Best Sellers / Podium Section */
+  .podiumGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+  }
+  .podiumHeroCard {
+    height: 380px !important;
+    border-radius: 20px !important;
+    max-width: 340px !important;
+    margin-inline: auto !important;
+  }
+  .podiumVisual {
+    height: 180px !important;
+  }
+  .podiumRankDigit {
+    font-size: 60px !important;
+    top: 15px !important;
+    right: 15px !important;
+  }
+  .podiumBadge {
+    top: 15px !important;
+    left: 15px !important;
+    padding: 4px 10px !important;
+    font-size: 9px !important;
+  }
+  .podiumBody {
+    padding: 12px 15px !important;
+    gap: 3px !important;
+  }
+  .podiumReviews {
+    font-size: 11px !important;
+  }
+  .podiumTitle {
+    font-size: 14px !important;
+  }
+  .podiumDesc {
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+  }
+  .podiumPrice {
+    font-size: 14px !important;
+  }
+  .podiumAddBtn {
+    padding: 6px 12px !important;
+    font-size: 11px !important;
+  }
+  .podiumHeatArea {
+    margin-block: 2px !important;
+  }
+
+  /* Marquee automated scroll */
+  .trendingMiniCard {
+    flex: 0 0 220px !important;
+    height: 290px !important;
+    padding: 10px !important;
+    border-radius: 16px !important;
+  }
+  .trendingImgWrapper {
+    height: 140px !important;
+  }
+  .trendingInfo {
+    gap: 2px !important;
+    padding-top: 8px !important;
+  }
+  .tProdName {
+    font-size: 13px !important;
+  }
+  .tProdDesc {
+    font-size: 10px !important;
+    line-height: 1.3 !important;
+  }
+  .tPrice {
+    font-size: 13px !important;
+  }
+  .tQuickBtn {
+    font-size: 11px !important;
+    padding: 6px 10px !important;
+  }
+
+  /* Limited Time Deals / Mini Card Sections */
+  .spCardsGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+  }
+  .spMiniCard {
+    border-radius: 20px !important;
+    max-width: 340px !important; /* Slightly increased width from 320px */
+    margin-inline: auto !important;
+  }
+  .spMiniVisual {
+    height: 150px !important; /* Adjusted height */
+  }
+  .spMiniBody {
+    padding: 10px !important;
+  }
+  .spMiniTitle {
+    font-size: 13px !important;
+  }
+  .spMiniDesc {
+    font-size: 10.5px !important;
+    margin-bottom: 6px !important;
+  }
+  .spMiniBtn {
+    padding: 6px 8px !important;
+    font-size: 12px !important;
+  }
+
+  /* Promotional Banners */
+  .refBannerGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+  }
+  .refBannerItem {
+    height: 220px !important;
+  }
+  .bannerOverlay {
+    padding: 20px !important;
+  }
+  .bannerOverlay h3 {
+    font-size: 20px !important;
+  }
+  .bannerOverlay p {
+    font-size: 12px !important;
+  }
+
+  /* Trust Badges - Enhanced Visual Footprint & Presence */
+  .trustGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+  }
+  .trustPod {
+    padding: 20px 25px !important; /* Increased padding */
+    background: #fcfbfe !important; /* Premium light visual presence background */
+    border: 1px solid rgba(93, 45, 145, 0.08) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 20px rgba(93, 45, 145, 0.02) !important;
+  }
+  .trustTitle {
+    font-size: 16px !important;
+  }
+  .trustDesc {
+    font-size: 11.5px !important;
+  }
+
+  /* Blog Grid */
+  .blogGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+  }
+  .blogCardVisual {
+    height: 200px !important;
+  }
+  .blogTitle {
+    font-size: 16px !important;
+  }
+  .blogSnippet {
+    font-size: 11px !important;
+  }
+
+  /* General section spacing - Tightened Spacing Audit */
+  .refFlashSection,
+  .refBannerSection,
+  .specialDealsMaster,
+  .magArrivalsMaster,
+  .spotlightMaster,
+  .blogSectionMaster,
+  .reviewSectionMaster {
+    padding-block: 18px !important; /* Tighter padding for vertical rhythm from 25px */
+  }
+  
+  .newsSectionMaster {
+    margin-bottom: -30px !important;
+  }
+  
+  .spHeader {
+    margin-bottom: 20px !important;
+  }
+  .spTitleHeader {
+    margin-bottom: 12px !important;
+  }
+  .magMainHeading {
+    margin-bottom: 12px !important;
+  }
+  .magSidebarDesc {
+    margin-bottom: 20px !important;
+  }
+  .magSideBanner {
+    margin-top: 15px !important;
+  }
+  .reviewHeader {
+    margin-bottom: 30px !important;
+  }
+  .trustSectionMaster {
+    margin-top: 25px !important;
+  }
+
+  /* General Typography */
+  .title {
+    font-size: 2rem !important;
+  }
+  .sectionTitle {
+    font-size: 1.8rem !important;
+    margin-bottom: 20px !important;
+  }
+  .refFlashTitle {
+    font-size: 22px !important;
+  }
+  .spMainTitle {
+    font-size: 26px !important;
+  }
+  .magMainHeading {
+    font-size: 28px !important;
+  }
+  .revHeading {
+    font-size: 30px !important;
+  }
+  .newsHeroHeading {
+    font-size: 22px !important;
+  }
+
+  /* Category Ribbon Scroll Alignment */
+  .ribbonContainer {
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .ribbonContainer::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* Force New Arrivals Product Grid to 2-Column Rows */
+  .magProductFlowMedium {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+  }
+  .magLayoutSplit {
+    flex-direction: column !important;
+    gap: 30px !important;
+  }
+  .magTitleSidebar {
+    flex: 0 0 auto !important;
+    text-align: center !important;
+  }
+
+  /* Remove max-height cap to resolve trust section overlapping */
+  .spotlightMaster {
+    max-height: none !important;
+    height: auto !important;
   }
 }
 

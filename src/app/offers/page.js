@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Zap, Filter, ChevronDown, ArrowRight, Mail } from 'lucide-react';
 import Image from 'next/image';
+import offersHero from '@/images/offers-hero.png';
 import OfferCard from './OfferCard';
 import { offersData } from './offersData';
 import styles from './Offers.module.css';
@@ -70,7 +71,7 @@ export default function OffersPage() {
 
           <div className={styles.heroImageContainer}>
             <Image 
-              src="/images/offers-hero.png" 
+              src={offersHero} 
               alt="Premium Offers" 
               width={600} 
               height={600}

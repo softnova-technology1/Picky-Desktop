@@ -637,180 +637,6 @@
   min-height: 100vh;
 }
 
-@media (max-width: 1023px) {
-  .bentoContainer {
-    grid-template-columns: 1fr;
-  }
-  .heroImageCard, .titleCard, .selectorsCard, .actionCard, .descCard {
-    grid-column: 1;
-    grid-row: auto;
-  }
-  .heroImageCard {
-    min-height: 380px;
-    padding: 20px;
-  }
-  .watermarkText {
-    font-size: 20vw;
-  }
-  .metricRow {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-  .actionCard {
-    gap: 20px;
-  }
-  .perksList {
-    flex-direction: column;
-  }
-  .reviewsWrapper {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    padding: 30px;
-  }
-
-  .reviewsSplit {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .descSplitLayout {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .completeInfoSection {
-    padding: 25px;
-  }
-
-  .bottomTabsHeader {
-    gap: 20px;
-    overflow-x: auto;
-    justify-content: flex-start;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-
-/* ── Tablet-only: 768px – 1023px ── */
-@media (min-width: 768px) and (max-width: 1023px) {
-
-  .cinemaWrapper {
-    padding: 40px 40px;      /* Consistent with Navbar, Footer, and Hero padding */
-    overflow-x: hidden;
-  }
-
-  /* Hide the divider in tablet view as requested */
-  .verticalDivider {
-    display: none;
-  }
-
-  /* Bento container: single column stacking */
-  .bentoContainer {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  /* Hero Image Card — reduce excessive height, prevent overflow */
-  .heroImageCard {
-    min-height: 320px;
-    max-height: 450px;
-    overflow: hidden;
-  }
-
-  .mainImageWrapper {
-    min-height: 300px;
-  }
-
-  /* Thumbnail lane — allow scroll, prevent overflow */
-  .thumbnailLane {
-    overflow-x: auto;
-    padding: 0 20px 20px;
-    justify-content: center;
-    scrollbar-width: none;
-  }
-
-  .thumbnailLane::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Title sizing */
-  .bentoTitle {
-    font-size: 1.8rem;
-  }
-
-  /* Dynamic section wrapper */
-  .dynamicSectionWrapper {
-    margin: 40px auto 0;
-  }
-
-  .dynamicBentoRow {
-    grid-template-columns: 1fr;
-  }
-
-  /* Complete info section — proportional padding */
-  .completeInfoSection {
-    padding: 30px;
-    margin: 60px auto 0;
-  }
-
-  /* Tabs scroll horizontally on tablet */
-  .bottomTabsHeader {
-    gap: 20px;
-    overflow-x: auto;
-    justify-content: flex-start;
-    padding-bottom: 8px;
-    -webkit-overflow-scrolling: touch;
-    max-width: 100%;
-    border-bottom: none;
-  }
-
-  /* Reviews split — single column, no cramping */
-  .reviewsSplit {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .writeReviewBox {
-    padding: 24px;
-  }
-
-  /* Related products section - 2 columns per row for tablet */
-  .cinemaRelated {
-    margin: 100px auto 0;
-  }
-
-  .relatedHeadline {
-    margin-bottom: 30px;
-  }
-
-  .relatedHeadline h2 {
-    font-size: 1.8rem;
-  }
-
-  .cinemaScroller {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-    overflow-x: visible;
-    padding-bottom: 0;
-  }
-
-  .cinemaProductItem {
-    min-width: 0;
-    width: 100%;
-  }
-
-  /* Perk badges — wrap on tablet */
-  .perksList {
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  .perkBadge {
-    font-size: 0.8rem;
-    padding: 12px 16px;
-  }
-}
 
 /* Complete Info Tabs Section (Matching View) */
 .completeInfoSection {
@@ -1305,4 +1131,43 @@
   margin: auto;
   width: fit-content;
   height: fit-content;
+}
+
+@media (max-width: 1024px) {
+  .bentoContainer {
+    grid-template-columns: 1fr;
+  }
+  .heroImageCard, .titleCard, .selectorsCard, .actionCard, .descCard {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .heroImageCard {
+    min-height: 500px;
+    padding: 20px;
+  }
+  .watermarkText {
+    font-size: 20vw;
+  }
+  .metricRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .actionCard {
+    gap: 20px;
+  }
+  .perksList {
+    flex-direction: column;
+  }
+  .reviewsSplit {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .writeReviewBtn {
+    width: auto !important;
+    min-width: 200px !important;
+    max-width: 260px !important;
+    margin-inline: auto !important;
+    display: block !important;
+  }
 }

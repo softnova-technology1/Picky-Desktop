@@ -29,12 +29,14 @@
 }
 
 .imageWrapper {
+    display: block;
     position: relative;
     width: 100%;
     aspect-ratio: 4 / 2.8;
     border-radius: 20px;
     overflow: hidden;
     margin-bottom: 20px;
+    cursor: pointer;
     /* Standardized spacing below image */
 }
 

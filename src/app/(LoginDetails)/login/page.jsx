@@ -1,10 +1,12 @@
 "use client"
 import styles from './Login.module.css';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import AuthBackground from '@/components/AuthBackground';
+import logos from '@/images/logos.png';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -41,7 +43,7 @@ const Login = () => {
             <div className={styles.card}>
                 <header className={styles.header}>
                     <Link href="/" className={styles.logo} style={{ display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>
-                        <Image src="/logos.png" alt="Picky Logo" width={120} height={40} priority style={{ objectFit: 'contain' }} />
+                        <Image src={logos} alt="Picky Logo" width={120} height={40} priority style={{ objectFit: 'contain' }} />
                     </Link>
                     <h1 className={styles.title}>Welcome Back</h1>
                     <p className={styles.subtitle}>Sign in to your account to continue.</p>

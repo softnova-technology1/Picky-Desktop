@@ -242,10 +242,7 @@
   /* 7a. Progress container — center and prevent overflow */
   .progressContainer {
     padding: 0 0.5rem;
-    overflow-x: auto;          /* Fallback if labels still collide */
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    justify-content: flex-start;
+    justify-content: center;
     flex-wrap: nowrap;
     margin-bottom: 2rem;
   }
@@ -270,13 +267,7 @@
     flex-shrink: 0;
   }
 
-  /* 7d. Step label — prevent collision */
-  .stepLabel {
-    font-size: 0.65rem;        /* Smaller to prevent overlap */
-    top: 50px;
-    white-space: nowrap;
-    letter-spacing: 0.02em;
-  }
+
 
   /* Step wrapper gives each step breathing room */
   .stepWrapper {
@@ -292,6 +283,9 @@
   .card,
   .summaryCard {
     padding: 1.75rem;
+  }
+  .progressContainer {
+    margin-bottom: 3.5rem !important;
   }
 }
 

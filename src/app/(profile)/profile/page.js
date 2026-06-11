@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import styles from './profile.module.css';
+import amber from '@/images/amber.png';
 import { 
   Camera, 
   Sparkles, 
@@ -56,7 +57,7 @@ export default function ProfilePage() {
         <section className={styles.photoSection}>
           <div className={styles.profilePhotoWrapper}>
             <div className={styles.profilePhoto} style={{ 
-              backgroundImage: 'url("/images/amber.png")',
+              backgroundImage: `url("${amber.src}")`,
               backgroundSize: 'cover',
               backgroundPosition: 'center'
             }}></div>

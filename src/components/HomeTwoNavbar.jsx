@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import {
-
   ChevronDown,
   Search,
   Heart,
@@ -23,6 +22,8 @@ import { useCart } from "@/context/CartContext";
 import AuthPopup from "@/components/AuthPopup";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import logos from '@/images/logos.png';
+import amber from '@/images/amber.png';
 
 export default function HomeTwoNavbar() {
   const { user, logout } = useAuth();
@@ -124,7 +125,7 @@ export default function HomeTwoNavbar() {
       <nav className={styles.navbar}>
         <div className={styles.leftSection}>
           <Link href="/" className={styles.logo}>
-            <Image src="/logos.png" alt="Picky Logo" width={120} height={36} priority className={styles.logoImg} />
+            <Image src={logos} alt="Picky Logo" width={120} height={36} priority className={styles.logoImg} />
           </Link>
           <div className={styles.navLinks}>
             <Link href="/" className={`${styles.navLink} ${isActive('/') ? styles.active : ''}`}>HOME</Link>
@@ -274,7 +275,7 @@ export default function HomeTwoNavbar() {
                     <div className={styles.dropdownHeader}>
                       <div className={styles.headerTop}>
                         <div className={styles.miniAvatar}>
-                          <Image src="/images/amber.png" alt="User" width={50} height={50} />
+                          <Image src={amber} alt="User" width={50} height={50} />
                         </div>
                         <div className={styles.headerInfo}>
                           <span className={styles.dropdownWelcome}>{userName}</span>

@@ -64,6 +64,14 @@
   width: 100%;
 }
 
+@media (min-width: 1024px) {
+  .departmentBar {
+    position: relative !important;
+    top: auto !important;
+  }
+}
+
+
 .navInner {
   display: flex;
   justify-content: center;
@@ -1633,6 +1641,10 @@
   transform: translate(5px, -5px);
 }
 
+.premiumTabletHero {
+  display: none;
+}
+
 @media (max-width: 1200px) {
   .heroTitleMain { font-size: 3.5rem; }
   .heroGrid { height: 500px; }
@@ -1643,4 +1655,445 @@
   .heroTitleMain { font-size: 2.5rem; }
   .heroGrid { flex-wrap: wrap; height: auto; }
   .gridCol { flex: none; width: calc(50% - 10px); height: 300px; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Sticky Department Bar scroll scroll overflow styles */
+  .departmentBar {
+    padding-block: 8px !important; /* Reduced visual height */
+    top: 75px !important; /* Fits scrolled navbar precisely, closing the background gap */
+  }
+  .navInner {
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    scrollbar-width: none !important;
+    padding-inline: 20px !important;
+    gap: 15px !important;
+    padding: 4px 0 !important; /* Reduced vertical padding */
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .navInner::-webkit-scrollbar {
+    display: none !important;
+  }
+  .navItemWrapper {
+    flex-shrink: 0 !important;
+  }
+  .navItemPill {
+    padding: 10px 20px !important;
+    font-size: 0.9rem !important;
+    min-width: 170px !important; /* Refined Visual Balance: Uniform widths */
+    justify-content: center !important; /* Centered content inside pills */
+  }
+
+  /* Hero Section wrapper & layout elements */
+  .elevateHero {
+    background-color: #f8f8fa !important;
+    padding-block: 50px 30px !important;
+    margin-bottom: -30px !important;
+  }
+  .heroTopRow,
+  .heroGrid {
+    display: none !important;
+  }
+
+  /* Premium NFT-Style Interactive Hero (Tablet Only) Styles */
+  .premiumTabletHero {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 30px !important;
+    width: 100% !important;
+    min-height: 480px !important;
+    position: relative !important;
+    overflow: visible !important;
+  }
+  
+  .heroLeft {
+    flex: 1 !important;
+    max-width: 420px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    z-index: 10 !important;
+  }
+  
+  .heroBadge {
+    color: #643d97 !important;
+    font-weight: 800 !important;
+    font-size: 0.85rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    margin-bottom: 12px !important;
+    font-family: var(--font-heading) !important;
+  }
+  
+  .heroHeading {
+    font-size: 2.5rem !important;
+    font-weight: 900 !important;
+    line-height: 1.15 !important;
+    color: #1d1830 !important;
+    margin-bottom: 15px !important;
+    letter-spacing: -0.5px !important;
+    font-family: var(--font-heading) !important;
+  }
+  
+  .heroHeading span {
+    color: #643d97 !important;
+  }
+  
+  .heroDesc {
+    font-size: 0.95rem !important;
+    color: #555 !important;
+    line-height: 1.5 !important;
+    margin-bottom: 25px !important;
+    font-family: var(--font-body) !important;
+  }
+  
+  .heroBtn {
+    display: inline-flex !important;
+    background: #5a0d99 !important;
+    color: white !important;
+    padding: 15px 35px !important;
+    border-radius: 12px !important;
+    font-weight: 800 !important;
+    font-size: 0.95rem !important;
+    text-decoration: none !important;
+    box-shadow: 0 10px 20px rgba(90, 13, 153, 0.15) !important;
+    transition: all 0.3s !important;
+    font-family: var(--font-heading) !important;
+  }
+  
+  .heroBtn:hover {
+    transform: translateY(-3px) !important;
+    background: #000 !important;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  .metricsRow {
+    display: flex !important;
+    gap: 30px !important;
+    margin-top: 35px !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+    padding-top: 20px !important;
+    width: 100% !important;
+  }
+  
+  .metric h3 {
+    font-size: 1.5rem !important;
+    font-weight: 900 !important;
+    color: #1d1830 !important;
+    margin-bottom: 2px !important;
+    font-family: var(--font-heading) !important;
+  }
+  
+  .metric span {
+    font-size: 0.75rem !important;
+    color: #777 !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    font-family: var(--font-body) !important;
+  }
+  
+  .heroRight {
+    flex: 1.1 !important;
+    position: relative !important;
+    height: 440px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: visible !important;
+  }
+  
+  .glowBlob {
+    position: absolute !important;
+    width: 280px !important;
+    height: 280px !important;
+    background: radial-gradient(circle, rgba(228, 177, 240, 0.4) 0%, rgba(126, 96, 191, 0.2) 50%, transparent 100%) !important;
+    filter: blur(35px) !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+  }
+  
+  .cardsStack {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: visible !important;
+  }
+  
+  .stackedCard {
+    position: absolute !important;
+    width: 220px !important;
+    background: white !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04) !important;
+    padding: 12px !important;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  
+  .cardHeader {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .avatar {
+    width: 24px !important;
+    height: 24px !important;
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+  }
+  
+  .avatar img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  
+  .vendorInfo {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  
+  .vendorInfo h4 {
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    color: #1a1a1a !important;
+    margin: 0 !important;
+  }
+  
+  .vendorInfo span {
+    font-size: 0.55rem !important;
+    color: #999 !important;
+  }
+  
+  .cardImage {
+    width: 100% !important;
+    height: 140px !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .cardImage img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  
+  .cardBody h3 {
+    font-size: 0.95rem !important;
+    font-weight: 850 !important;
+    color: #1d1830 !important;
+    margin-bottom: 8px !important;
+    text-align: left !important;
+    font-family: var(--font-heading) !important;
+  }
+  
+  .cardFooter {
+    display: flex !important;
+    justify-content: space-between !important;
+    border-top: 1px solid #f5f5f5 !important;
+    padding-top: 8px !important;
+    text-align: left !important;
+  }
+  
+  .priceCol label,
+  .timeCol label {
+    font-size: 0.55rem !important;
+    color: #999 !important;
+    text-transform: uppercase !important;
+    font-weight: 600 !important;
+    display: block !important;
+    margin-bottom: 2px !important;
+  }
+  
+  .priceCol span {
+    font-size: 0.85rem !important;
+    font-weight: 900 !important;
+    color: #5a0d99 !important;
+  }
+  
+  .timeCol span {
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    color: #1a1a1a !important;
+  }
+  
+  /* Card Stack Rotations - Default state fanned out slightly so all 3 cards are visible */
+  /* Dynamic position classes for interactive 3D card carousel stack */
+  .pos0 {
+    transform: translate(-10px, 0px) rotate(-4deg) scale(1.05) !important;
+    z-index: 10 !important;
+    opacity: 1 !important;
+    cursor: default !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08) !important;
+  }
+  .pos0:hover {
+    transform: translate(-10px, -20px) scale(1.1) rotate(-2deg) !important;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  .pos1 {
+    transform: translate(45px, -10px) rotate(6deg) scale(0.95) !important;
+    z-index: 8 !important;
+    opacity: 0.85 !important;
+    cursor: pointer !important;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05) !important;
+  }
+  .pos1:hover {
+    transform: translate(45px, -20px) rotate(6deg) scale(0.98) !important;
+    opacity: 0.95 !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .pos2 {
+    transform: translate(100px, -20px) rotate(12deg) scale(0.85) !important;
+    z-index: 6 !important;
+    opacity: 0.65 !important;
+    cursor: pointer !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.03) !important;
+  }
+  .pos2:hover {
+    transform: translate(100px, -30px) rotate(12deg) scale(0.88) !important;
+    opacity: 0.75 !important;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  /* Shared Product Grid layout and wrapper styling */
+  .productGrid {
+    grid-template-columns: repeat(2, minmax(0, 260px)) !important; /* Refined visual card scale */
+    gap: 15px !important;
+    margin: 20px auto !important; /* Reduced margin */
+  }
+  .recommendedSection [class*="ProductCard_card"] [class*="ProductCard_imageWrapper"],
+  .famousProductsSection [class*="ProductCard_card"] [class*="ProductCard_imageWrapper"],
+  .recentlyAddedSection [class*="ProductCard_card"] [class*="ProductCard_imageWrapper"] {
+    height: 200px !important; /* Proportionately balanced image height */
+    min-height: 200px !important;
+    max-height: 240px !important;
+  }
+
+  /* Spotlight 2x2 grids and card banners */
+  .spotlightGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+  }
+  .spotBanner {
+    min-height: 280px !important;
+    padding: 20px !important;
+    border-radius: 16px !important;
+  }
+  .spotTitle {
+    font-size: 1.3rem !important;
+  }
+  .spotDiscount {
+    font-size: 0.85rem !important;
+  }
+  .spotBtn {
+    padding: 0 16px !important;
+    font-size: 0.75rem !important;
+    height: 32px !important;
+  }
+
+  /* Featured collections rows styles */
+  .featuredGrid {
+    gap: 20px !important;
+  }
+  .featuredCard {
+    height: 240px !important;
+    border-radius: 24px !important;
+    padding: 15px !important;
+  }
+  .featuredContent {
+    padding: 15px !important;
+    border-radius: 20px !important;
+  }
+  .featuredContent h3 {
+    font-size: 1.2rem !important;
+  }
+
+  /* Spacing rhythm standard padding specs - Spacing Audit Refined */
+  .magazineSection,
+  .collectionSection,
+  .topCollectionSection,
+  .spotlightSection,
+  .recommendedSection,
+  .famousProductsSection,
+  .featuredCollectionsSection,
+  .recentlyAddedSection {
+    padding-block: 18px !important; /* Tighter padding for vertical rhythm from 25px */
+  }
+
+  .topCollectionSection {
+    margin-top: 0 !important; /* Remove negative margins to prevent header titles clipping */
+  }
+  .spotlightSection {
+    margin: 0 !important; /* Remove negative margins to prevent header titles clipping */
+  }
+
+  .innovativeHeader {
+    margin-bottom: 25px !important;
+  }
+  .sectionHeader {
+    margin-bottom: 25px !important;
+  }
+  .topCollectionSection .sectionTitleTop {
+    margin-bottom: 15px !important;
+  }
+  .featureBarWrapper {
+    margin-block: 20px !important;
+  }
+
+  /* Feature Benefits Bar - 2x2 Grid for Tablet View */
+  .featureBar {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 200px)) !important;
+    justify-content: center !important;
+    gap: 15px 40px !important;
+    padding: 25px 35px !important;
+    border-radius: 35px !important;
+    background: white !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05) !important;
+    width: fit-content !important;
+    max-width: 100% !important;
+    margin-inline: auto !important;
+  }
+
+  /* Typography scale */
+  .sectionTitleTop, .recommendTitle {
+    font-size: 1.8rem !important;
+    margin-bottom: 15px !important;
+  }
+  .recommendHeader {
+    margin-bottom: 0 !important; /* Remove negative margin to prevent overlap */
+  }
+  .recommendSub {
+    margin-bottom: 10px !important;
+  }
+  .springTitle {
+    font-size: 3.5rem !important;
+  }
+  .collectionsTitle {
+    font-size: 1.8rem !important;
+  }
+  .availableSubtitle {
+    font-size: 1.2rem !important;
+  }
+  .headerBanner {
+    height: 300px !important;
+  }
+  .bannerContent {
+    padding-left: 40px !important;
+  }
 }

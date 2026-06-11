@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import styles from './OrderAIChat.module.css';
+import pickyAi from '@/images/picky-ai-v2.png';
 import {
   MessageSquare,
   X,
@@ -93,7 +94,7 @@ const OrderAIChat = () => {
         <div className={styles.chatPanel}>
           <div className={styles.header}>
             <div className={styles.avatar}>
-              <img src="/picky-ai-v2.png" alt="Picky AI" className={styles.botIcon} />
+              <img src={pickyAi.src} alt="Picky AI" className={styles.botIcon} />
               <div className={styles.statusDot} />
             </div>
             <div className={styles.headerInfo}>
